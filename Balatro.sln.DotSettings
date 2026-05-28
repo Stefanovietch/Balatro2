@@ -113,4 +113,5 @@ public class $CLASS$() : Balatro.BalatroCode.Powers.BalatroPower {
     public override MegaCrit.Sts2.Core.Entities.Powers.PowerStackType StackType =&gt; MegaCrit.Sts2.Core.Entities.Powers.PowerStackType.Counter;
     
     $END$
-}</s:String></wpf:ResourceDictionary>
+}</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=balatro/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

@@ -7,7 +7,7 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <AppOutputBase>$(MSBuildProjectDirectory)\</AppOutputBase>
         <PathMap>$(AppOutputBase)=.\</PathMap>
-        <GodotDisabledSourceGenerators>GodotPluginsInitializer</GodotDisabledSourceGenerators>
+        <GodotDisabledSourceGenerators>GodotPluginsInitializer;ScriptPathAttributeGenerator</GodotDisabledSourceGenerators>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -35,6 +35,7 @@
         <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All"/>
         <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All"/>
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
+        
         <!-- Generates a .pck file when building if only using simple assets. May not work on all setups. Uncomment to test. -->
         <!-- <PackageReference Include="BSchneppe.StS2.PckPacker" Version="0.1.1" PrivateAssets="All" /> -->
         <AdditionalFiles Include="Balatro/localization/**/*.json"/> <!-- Used by analyzer -->
@@ -62,7 +63,6 @@
     <ItemGroup>
         <Folder Include="Balatro\images\card_portraits\big\"/>
         <Folder Include="Balatro\images\powers\big\"/>
-        <Folder Include="Balatro\images\relics\big\"/>
     </ItemGroup>
 
     <Target Name="CheckDependencyPaths">
