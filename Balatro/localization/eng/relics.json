@@ -5,59 +5,59 @@
 
   "BALATRO-HEADS_UP.title": "Heads Up",
   "BALATRO-HEADS_UP.flavor": "Losing is for suckers.",
-  "BALATRO-HEADS_UP.description": "Gain [E] at the start of your turn.",
+  "BALATRO-HEADS_UP.description": "Gain {Energy:energyIcons()} at the start of your turn.",
 
   "BALATRO-NEST_EGG.title": "Nest Egg",
   "BALATRO-NEST_EGG.flavor": "Some extra cash for on the way.",
-  "BALATRO-NEST_EGG.description": "Gain #b300 #yGold at the start of the run.",
+  "BALATRO-NEST_EGG.description": "Gain [blue]300[/blue] [gold]Gold[/gold] at the start of the run.",
 
   "BALATRO-YOU_GET_WHAT_YOU_GET.title": "You Get What You Get",
   "BALATRO-YOU_GET_WHAT_YOU_GET.flavor": "There no free handouts.",
-  "BALATRO-YOU_GET_WHAT_YOU_GET.description": "At the end of the turn gain #b2 #yGold for each card in hand. Gain no #yGold in combat rewards.",
+  "BALATRO-YOU_GET_WHAT_YOU_GET.description": "At the end of the turn gain [blue]2[/blue] [gold]Gold[/gold] for each card in hand. Gain no [gold]Gold[/gold] in combat rewards.",
 
   "BALATRO-ROYALE.title": "Royale",
   "BALATRO-ROYALE.flavor": "Is this the reward you are looking for?",
-  "BALATRO-ROYALE.description": "On Card Reward screens you have #b2 additional cards to choose from. Lose [E] at the start of your turn.",
+  "BALATRO-ROYALE.description": "On Card Reward screens you have [blue]2[/blue] additional cards to choose from. Lose {Energy:energyIcons()} at the start of your turn.",
 
   "BALATRO-CRYSTAL_BALL.title": "Crystal Ball",
   "BALATRO-CRYSTAL_BALL.flavor": "Everybody needs a little bit of magic.",
-  "BALATRO-CRYSTAL_BALL.description": "Gain an extra #yPotion slot and #b2 #yDuplication #yPotions.",
+  "BALATRO-CRYSTAL_BALL.description": "Gain an extra [yellow]Potion[/yellow] slot and [blue]2[/blue] [yellow]Duplication Potions[/yellow].",
 
   "BALATRO-ASTRONOMY.title": "Astronomy",
   "BALATRO-ASTRONOMY.flavor": "You'll end up grading everything with stickers.",
-  "BALATRO-ASTRONOMY.description": "After you play a card, #yUpgrade it for this combat. Lose a #yPotion slot.",
+  "BALATRO-ASTRONOMY.description": "After you play a card, [yellow]Upgrade[/yellow] it for this combat. Lose a [yellow]Potion[/yellow] slot.",
 
   "BALATRO-CLAIRVOYANCE.title": "Clairvoyance",
   "BALATRO-CLAIRVOYANCE.flavor": "Don't turn as gray as a ghost.",
-  "BALATRO-CLAIRVOYANCE.description": "Combat rewards can now contain #yColorless cards. Choose a #yRare #yColorless card at the start of the run.",
+  "BALATRO-CLAIRVOYANCE.description": "Combat rewards can now contain [yellow]Colorless[/yellow] cards. Choose a [yellow]Rare Colorless[/yellow] card at the start of the run.",
 
   "BALATRO-FLUSHED.title": "Flushed",
   "BALATRO-FLUSHED.flavor": "",
-  "BALATRO-FLUSHED.description": "If you have not played any #yPowers during your turn, gain an extra [E][E] next turn.",
+  "BALATRO-FLUSHED.description": "If you have not played any [yellow]Powers[/yellow] during your turn, gain an extra {Energy:energyIcons()} next turn.",
 
   "BALATRO-RETROGRADE.title": "Retrograde",
   "BALATRO-RETROGRADE.flavor": "Quick check if everything is ready.",
-  "BALATRO-RETROGRADE.description": "#yUpgrade half of your deck at start of combat.",
+  "BALATRO-RETROGRADE.description": "[yellow]Upgrade[/yellow] half of your deck at start of combat.",
 
   "BALATRO-R_O_I.title": "ROI",
   "BALATRO-R_O_I.flavor": "Lift the shop to new heights.",
-  "BALATRO-R_O_I.description": "Cards in shops are #yUpgraded. #yPotions in the shops are at least #yUncommon. Guarantee one #yRare card in the shop.",
+  "BALATRO-R_O_I.description": "Cards in shops are [yellow]Upgraded[/yellow]. [yellow]Potions[/yellow] in the shops are at least [yellow]Uncommon[/yellow]. Guarantee one [yellow]Rare[/yellow] card in the shop.",
 
   "BALATRO-BIG_HANDS.title": "Big Hands",
   "BALATRO-BIG_HANDS.flavor": "Believe in the hands of fate.",
-  "BALATRO-BIG_HANDS.description": "Draw #b2 additional cards each turn. On Card Reward screens, you have #b1 less card to choose from.",
+  "BALATRO-BIG_HANDS.description": "Draw [blue]2[/blue] additional cards each turn. On Card Reward screens, you have [blue]1[/blue] less card to choose from.",
 
   "BALATRO-HIGH_STAKES.title": "High Stakes",
   "BALATRO-HIGH_STAKES.flavor": "Not quite seeing double.",
-  "BALATRO-HIGH_STAKES.description": "After selecting a Boss relic, gain another random Boss relic.",
+  "BALATRO-HIGH_STAKES.description": "After selecting an Ancient relic, gain another random relic from that Ancient.",
 
   "BALATRO-RULE_BENDER.title": "Rule Bender",
   "BALATRO-RULE_BENDER.flavor": "How balanced will this be?.",
-  "BALATRO-RULE_BENDER.description": "Whenever an #yAttack is played, gain half of the damage as #yBlock. #bALL enemies have double their health.",
+  "BALATRO-RULE_BENDER.description": "Whenever an [yellow]Attack[/yellow] is played, gain half of the damage as [yellow]Block[/yellow]. [blue]ALL[/blue] enemies have double their health.",
 
   "BALATRO-SHATTERED.title": "Shattered",
   "BALATRO-SHATTERED.flavor": "It broke.",
-  "BALATRO-SHATTERED.description": "Start with a random deck of #b20 cards.",
+  "BALATRO-SHATTERED.description": "Start with a random deck of [blue]20[/blue] cards.",
   "BALATRO-SHATTERED.description2": "Your shattered deck.",
 
   "BALATRO-OVERSTOCK_PLUS.title": "Overstock Plus",
@@ -65,64 +65,63 @@
   "BALATRO-OVERSTOCK_PLUS.description": "Future shops have three additional relics.",
 
   "BALATRO-LIQUIDATION.title": "Liquidation",
-  "BALATRO-LIQUIDATION.flavor": "Don't be too greedy.",
-  "BALATRO-LIQUIDATION.description": "#b50% discount on all products!",
+  "BALATRO-LIQUIDATION.flavor": "Don't ask how I got this money.",
+  "BALATRO-LIQUIDATION.description": "Gain [blue]150[/blue] [gold]Gold[/gold] when entering a shop!",
 
   "BALATRO-GLOW_UP.title": "Glow Up",
-  "BALATRO-GLOW_UP.flavor": "Don't be too greedy.",
-  "BALATRO-GLOW_UP.description": "Add a random #yLegendary card to your deck.",
+  "BALATRO-GLOW_UP.flavor": "What a beauty.",
+  "BALATRO-GLOW_UP.description": "Add a random [yellow]Legendary[yellow] card to your deck.",
 
   "BALATRO-REROLL_GLUT.title": "Reroll Glut",
-  "BALATRO-REROLL_GLUT.flavor": "Don't be too greedy.",
-  "BALATRO-REROLL_GLUT.description": "Click to reroll the cards in the shop, costs #b50 #yGold per roll.",
+  "BALATRO-REROLL_GLUT.flavor": "The secret to a big deck.",
+  "BALATRO-REROLL_GLUT.description": "Click to reroll the cards in the shop, costs [blue]50[/blue] [gold]Gold[/gold] per roll.",
 
   "BALATRO-OMEN_GLOBE.title": "Omen Globe",
-  "BALATRO-OMEN_GLOBE.flavor": "Don't be too greedy.",
-  "BALATRO-OMEN_GLOBE.description": "Whenever you use a potion in combat, get a random #yColorless card.",
+  "BALATRO-OMEN_GLOBE.flavor": "All this drinking is making me see things.",
+  "BALATRO-OMEN_GLOBE.description": "Whenever you use a potion in combat, create a random [yellow]Colorless[/yellow] card.",
 
   "BALATRO-OBSERVATORY.title": "Observatory",
-  "BALATRO-OBSERVATORY.flavor": "Don't be too greedy.",
-  "BALATRO-OBSERVATORY.description": "Upgrade #b4 cards.",
-  "BALATRO-OBSERVATORY.description2": "Choose 4 cards for ",
+  "BALATRO-OBSERVATORY.flavor": "Only the best get to go twice.",
+  "BALATRO-OBSERVATORY.description": "The first upgraded card you play each combat is played an extra time.",
 
   "BALATRO-NACHO_TONG.title": "Nacho Tong",
-  "BALATRO-NACHO_TONG.flavor": "Don't be too greedy.",
-  "BALATRO-NACHO_TONG.description": "Gain [E] at the start of each turn.",
+  "BALATRO-NACHO_TONG.flavor": "Remember what you sacrificed.",
+  "BALATRO-NACHO_TONG.description": "Gain {Energy:energyIcons()} at the start of each turn.",
 
   "BALATRO-RECYCLOMANCY.title": "Recyclomancy",
-  "BALATRO-RECYCLOMANCY.flavor": "Don't be too greedy.",
-  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard #b7 cards, gain #b1 #yStrength.",
+  "BALATRO-RECYCLOMANCY.flavor": "Ignore the imperfections makes perfect.",
+  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard [blue]7[/blue] cards, gain [blue]2[/blue] [yellow]Strength[/yellow].",
 
   "BALATRO-TAROT_TYCOON.title": "Tarot Tycoon",
-  "BALATRO-TAROT_TYCOON.flavor": "Don't be too greedy.",
-  "BALATRO-TAROT_TYCOON.description": "Whenever you obtain a potion, gain #b1 maximum Health.",
+  "BALATRO-TAROT_TYCOON.flavor": "Drink and grow forever, little one.",
+  "BALATRO-TAROT_TYCOON.description": "Whenever you obtain a potion, gain [blue]1[/blue] maximum Health.",
 
   "BALATRO-PLANET_TYCOON.title": "Planet Tycoon",
-  "BALATRO-PLANET_TYCOON.flavor": "Don't be too greedy.",
-  "BALATRO-PLANET_TYCOON.description": "Whenever you add a #yCommon card to your deck, it is #yUpgraded.",
+  "BALATRO-PLANET_TYCOON.flavor": "Rarity doesn't determine somethings usefulness.",
+  "BALATRO-PLANET_TYCOON.description": "Whenever you add a [yellow]Common[/yellow] card to your deck, it is [yellow]Upgraded[/yellow].",
 
   "BALATRO-MONEY_TREE.title": "Money Tree",
   "BALATRO-MONEY_TREE.flavor": "You believed them when they said money doesn't grow on trees?",
-  "BALATRO-MONEY_TREE.description": "Increase the maximum combat Gold to #b400.",
+  "BALATRO-MONEY_TREE.description": "Increase the maximum combat [gold]Gold[/gold] to [blue]400[/blue].",
 
   "BALATRO-ANTIMATTER.title": "Antimatter",
   "BALATRO-ANTIMATTER.flavor": "Maybe this one looks better than that one.",
-  "BALATRO-ANTIMATTER.description": "Future card rewards have #b1 additional card to choose from.",
+  "BALATRO-ANTIMATTER.description": "Future card rewards have [blue]1[/blue] additional card to choose from.",
 
   "BALATRO-ILLUSION.title": "Illusion",
-  "BALATRO-ILLUSION.flavor": "Don't be too greedy.",
-  "BALATRO-ILLUSION.description": "Choose and add a #yCommon, #yUncommon and #yRare card to your deck.",
+  "BALATRO-ILLUSION.flavor": "Your reality is an illusion for others.",
+  "BALATRO-ILLUSION.description": "Choose and add a [yellow]Common, Uncommon[/yellow] and [yellow]Rare[/yellow] card to your deck.",
   "BALATRO-ILLUSION.description2": "Magic!",
 
   "BALATRO-PETROGLYPH.title": "Petroglyph",
-  "BALATRO-PETROGLYPH.flavor": "Don't be too greedy.",
-  "BALATRO-PETROGLYPH.description": "Reduce the max health of all enemies by #b10%.",
+  "BALATRO-PETROGLYPH.flavor": "Study your enemies like they know your every move.",
+  "BALATRO-PETROGLYPH.description": "Reduce the max health of all enemies by [blue]10%.[/blue]",
 
   "BALATRO-RETCON.title": "Retcon",
-  "BALATRO-RETCON.flavor": "Don't be too greedy.",
-  "BALATRO-RETCON.description": "Click to reroll a Blind, costs #b50 #yGold per roll. (Only usable on first turn before playing a card)",
+  "BALATRO-RETCON.flavor": "Predicting your enemy is half the battle.",
+  "BALATRO-RETCON.description": "Click to reroll a Blind, costs [blue]50[/blue] [gold]Gold[/gold] per roll. (Only usable on first turn before playing a card)",
 
   "BALATRO-PALETTE.title": "Palette",
-  "BALATRO-PALETTE.flavor": "Don't be too greedy.",
-  "BALATRO-PALETTE.description": "At the start of your turn, draw #b1 additional card."
+  "BALATRO-PALETTE.flavor": "Remember what you sacrificed.",
+  "BALATRO-PALETTE.description": "At the start of your turn, draw [blue]1[/blue] additional card."
 }

@@ -6,7 +6,6 @@ namespace Balatro.BalatroCode.Relics;
 public class RerollGlut() : BalatroRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Starter;
-
+        RelicRarity.Shop;
     
 }

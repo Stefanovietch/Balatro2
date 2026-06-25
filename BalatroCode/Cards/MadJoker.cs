@@ -1,0 +1,40 @@
+﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
+
+namespace Balatro.BalatroCode.Cards;
+
+public class MadJoker() : BalatroCard(1,
+    CardType.Attack, CardRarity.Basic,
+    TargetType.AnyEnemy)
+{
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar(12, ValueProp.Move)
+    ];
+
+    protected override async Task OnPlay(
+        PlayerChoiceContext choiceContext,
+        CardPlay play)
+    {
+        ArgumentNullException.ThrowIfNull(play.Target);
+        if (!LastCardIsAttack()) return;
+        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+    }
+
+    protected override void OnUpgrade()
+    {
+        this.DynamicVars.Damage.UpgradeValueBy(4);
+    }
+
+    protected override bool ShouldGlowGoldInternal => LastCardIsAttack();
+
+    private bool LastCardIsAttack()
+    {
+        int playPileSize = PileType.Play.GetPile(this.Owner).Cards.Count;
+        if (playPileSize <= 1) return false;
+        return PileType.Play.GetPile(this.Owner).Cards.ElementAt(playPileSize - 2).Type == CardType.Attack;
+    }
+}

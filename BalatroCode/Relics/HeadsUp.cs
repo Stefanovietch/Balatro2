@@ -10,8 +10,12 @@ public class HeadsUp() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
     
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new EnergyVar(1)
+    ];
+    
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        return player != this.Owner ? amount : amount + 1;
+        return player != this.Owner ? amount : amount + this.DynamicVars.Energy.BaseValue;
     }
 }

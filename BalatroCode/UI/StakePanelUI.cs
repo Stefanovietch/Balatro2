@@ -19,9 +19,9 @@ public static class StakePanelUI
     { 
         try
         {
-            if (_stakePanel != null)
+            if (_stakePanel != null && GodotObject.IsInstanceValid(_stakePanel) && _stakePanel.IsInsideTree())
             {
-                MainFile.Logger.Info("overlay already attached and in tree; skipping re-attach");
+                MainFile.Logger.Info("Overlay already attached");
                 return;
             }
 

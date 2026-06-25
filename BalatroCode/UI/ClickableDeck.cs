@@ -30,7 +30,7 @@ public partial class ClickableDeck : NButton
         _image.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
         _image.ExpandMode = TextureRect.ExpandModeEnum.KeepSize;
         _image.CustomMinimumSize = new Vector2(32, 64f);
-        _image.Texture = GD.Load<Texture2D>("res://Balatro/images/ui/decks/"+this.Name+".png");
+        _image.Texture = GD.Load<Texture2D>("res://Balatro/images/decks/small/"+this.Name+".png");
         _image.SetAnchorsPreset(Control.LayoutPreset.Center);
         AddChild(_image);
         

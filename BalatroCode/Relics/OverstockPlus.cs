@@ -6,7 +6,7 @@ namespace Balatro.BalatroCode.Relics;
 public class OverstockPlus() : BalatroRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Starter;
+        RelicRarity.Rare;
 
     
 }

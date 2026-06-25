@@ -14,6 +14,7 @@ public static class DeckPanelUI
 {
     private static Control? _deckPanel;
     private static TextureRect? _relicIcon;
+    private static TextureRect? _relicIconOutline;
     private static MegaRichTextLabel? _relicTitle;
     private static MegaRichTextLabel? _relicDescription;
 
@@ -26,12 +27,12 @@ public static class DeckPanelUI
     { 
         try
         {
-            if (_deckPanel != null)
+            if (_deckPanel != null && GodotObject.IsInstanceValid(_deckPanel) && _deckPanel.IsInsideTree())
             {
-                MainFile.Logger.Info("overlay already attached and in tree; skipping re-attach");
+                MainFile.Logger.Info("Overlay already attached");
                 return;
             }
-
+            
             _deckPanel = new GridContainer
             {
                 CustomMinimumSize = new Vector2(420, 56),
@@ -45,7 +46,6 @@ public static class DeckPanelUI
             _deckPanel.AddChild(new ClickableDeck("blue"));
             _deckPanel.AddChild(new ClickableDeck("yellow"));
             _deckPanel.AddChild(new ClickableDeck("green"));
-            
             _deckPanel.AddChild(new ClickableDeck("black"));
             _deckPanel.AddChild(new ClickableDeck("magic"));
             _deckPanel.AddChild(new ClickableDeck("nebula"));
@@ -65,6 +65,7 @@ public static class DeckPanelUI
             _relicIcon = screen.GetNode<TextureRect>("InfoPanel/VBoxContainer/Relic/Icon");
             _relicTitle = screen.GetNode<MegaRichTextLabel>((NodePath) "InfoPanel/VBoxContainer/Relic/Name/RichTextLabel");
             _relicDescription = screen.GetNode<MegaRichTextLabel>((NodePath) "InfoPanel/VBoxContainer/Relic/Description");
+            _relicIconOutline = screen.GetNode<TextureRect>("InfoPanel/VBoxContainer/Relic/Icon/Outline");
             
             LoadSelectDeck(BalatroConfig.SelectedDeck);
             UpdateRelic(BalatroConfig.SelectedDeck);
@@ -155,28 +156,11 @@ public static class DeckPanelUI
 
     private static void UpdateRelic(string deckName)
     {
-        RelicModel relic = deckName switch
-        {
-            "redDeck" => ModelDb.Relic<LowStakes>(),
-            "blueDeck" => ModelDb.Relic<HeadsUp>(),
-            "yellowDeck" => ModelDb.Relic<NestEgg>(),
-            "greenDeck" => ModelDb.Relic<BagOfPreparation>(),
-            "blackDeck" => ModelDb.Relic<BigHat>(),
-            "magicDeck" => ModelDb.Relic<BurningBlood>(),
-            "nebulaDeck" => ModelDb.Relic<BurningBlood>(),
-            "ghostDeck" => ModelDb.Relic<BurningBlood>(),
-            "abandonedDeck" => ModelDb.Relic<BurningBlood>(),
-            "checkeredDeck" => ModelDb.Relic<BurningBlood>(),
-            "zodiacDeck" => ModelDb.Relic<BurningBlood>(),
-            "paintedDeck" => ModelDb.Relic<BurningBlood>(),
-            "anaglyphDeck" => ModelDb.Relic<BurningBlood>(),
-            "plasmaDeck" => ModelDb.Relic<BurningBlood>(),
-            "erraticDeck" => ModelDb.Relic<BurningBlood>(),
-            _ => ModelDb.Relic<Lantern>()
-        };
+        RelicModel relic = MainFile.GetRelic(deckName);
 
-        if (_relicIcon == null || _relicTitle == null || _relicDescription == null) return;
+        if (_relicIcon == null || _relicTitle == null || _relicDescription == null || _relicIconOutline == null) return;
         _relicIcon.Texture = relic.Icon;
+        _relicIconOutline.Texture = relic.IconOutline;
         _relicTitle.Text = relic.Title.GetFormattedText();
         _relicDescription.Text = relic.DynamicDescription.GetFormattedText();
     }

@@ -1,3 +1,13 @@
 {
-  
+  "BALATRO-ARROWHEAD_POWER.title": "Arrowhead",
+  "BALATRO-ARROWHEAD_POWER.description": "At the start of your turn, add [yellow]Finesses[/yellow] into your hand and discard cards}",
+  "BALATRO-ARROWHEAD_POWER.smartDescription": "At the start of your turn, add {Amount:plural:[yellow]Finesse[/yellow]|[blue]{}[/blue] [yellow]Finesses[/yellow]} into your hand and discard {Amount:plural:card|[blue]{}[/blue] cards}",
+
+  "BALATRO-ASTRONOMER_POWER.title": "Astronomer",
+  "BALATRO-ASTRONOMER_POWER.description": "Your next upgraded card costs [blue]0[/blue].",
+  "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next {Amount:plural:upgraded card|[blue]{}[/blue] upgraded cards} costs 0.",
+
+  "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
+  "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
+  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue]."
 }

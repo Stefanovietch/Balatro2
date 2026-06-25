@@ -14,7 +14,7 @@ public class CharacterSelectScreenPatches
     [HarmonyPatch(typeof(NCharacterSelectScreen), "_Ready")]
     public static class CharacterSelectScreenReadyPatch
     {
-        
+        [HarmonyPostfix]
         public static void Postfix(NCharacterSelectScreen __instance)
         {
             try

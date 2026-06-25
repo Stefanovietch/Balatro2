@@ -1,22 +1,30 @@
-﻿using BaseLib.Abstracts;
+﻿using Balatro.BalatroCode.Cards;
+using BaseLib.Abstracts;
 using BaseLib.Utils.NodeFactories;
 using Balatro.BalatroCode.Extensions;
 using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
+using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
+using MegaCrit.Sts2.Core.Rooms;
 
 namespace Balatro.BalatroCode.Character;
 public class Balatro : PlaceholderCharacterModel
 {
     public const string CharacterId = "Balatro";
     
-    public static readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "cards_removed");
+    //public static readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
+    public static readonly SavedSpireField<Balatro, int> RestSitesVisited = new(() => 0, "rest_sites_visited");
 
-    public string SelectedDeck = "redDeck";
+    public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
+    public readonly SavedSpireField<Balatro, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
     
+    public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
+
     public static readonly Color Color = new("ffffff");
 
     public override Color NameColor => Color;
@@ -25,16 +33,16 @@ public class Balatro : PlaceholderCharacterModel
 
     public override IEnumerable<CardModel> StartingDeck =>
     [
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<StrikeIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>(),
-        ModelDb.Card<DefendIronclad>()
+        ModelDb.Card<JollyJoker>(),
+        ModelDb.Card<JollyJoker>(),
+        ModelDb.Card<JollyJoker>(),
+        ModelDb.Card<JollyJoker>(),
+        ModelDb.Card<SlyJoker>(),
+        ModelDb.Card<SlyJoker>(),
+        ModelDb.Card<SlyJoker>(),
+        ModelDb.Card<SlyJoker>(),
+        ModelDb.Card<MadJoker>(),
+        ModelDb.Card<CleverJoker>()
     ];
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
@@ -58,6 +66,50 @@ public class Balatro : PlaceholderCharacterModel
             icon.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.FullRect);
             return icon;
         }
+    }
+
+    public override decimal ModifyGoldGained(Player player, decimal amount)
+    {
+        if (player.PlayerCombatState == null || player.Character is not Balatro balatro || !BalatroConfig.GoldCap) return base.ModifyGoldGained(player, amount);
+            
+        var maxCombatGold = MaxCombatGold.Get(balatro);
+        var earned = CombatGoldEarned.Get(player.PlayerCombatState);
+        var remaining = maxCombatGold - earned;
+
+        if (remaining <= 0) return base.ModifyGoldGained(player, 0);
+        var goldToGain = Math.Min(amount, remaining);
+        CombatGoldEarned.Set(player.PlayerCombatState, earned + (int) goldToGain);
+        return base.ModifyGoldGained(player, goldToGain);
+    }
+    
+    // Should maybe be in a general and not in character
+    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    {
+        if (player.PlayerCombatState != null) CardsDiscardedThisTurn.Set(player.PlayerCombatState, 0);
+        player.PlayerCombatState?.AllCards
+            .OfType<IRandomType>()
+            .ToList()
+            .ForEach(card => card.SetRandomType());
+        return base.AfterPlayerTurnStart(choiceContext, player);
+    }
+
+    public override Task AfterRoomEntered(AbstractRoom room)
+    {
+        if (room is RestSiteRoom) RestSitesVisited.Set(this, RestSitesVisited.Get(this) + 1);
+        return base.AfterRoomEntered(room);
+    }
+
+    public override Task AfterActEntered()
+    {
+        RestSitesVisited.Set(this, 0);
+        return base.AfterActEntered();
+    }
+
+    public override Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
+    {
+        if (card.Owner.PlayerCombatState != null) CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
+
+        return base.AfterCardDiscarded(choiceContext, card);
     }
 
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
