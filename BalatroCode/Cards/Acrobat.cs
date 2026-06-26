@@ -38,8 +38,8 @@ public class Acrobat() : BalatroCard(1,
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
         CardModel? cardSource)
     {
-        if (PileType.Hand.GetPile(this.Owner).Cards.Count <= 1) return amount * 3;
-        return amount;
+        if (cardSource != this || PileType.Hand.GetPile(this.Owner).Cards.Count > 1) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return 3;
     }
 
     protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(this.Owner).Cards.Count <= 1;
