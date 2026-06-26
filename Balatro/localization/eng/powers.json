@@ -9,5 +9,9 @@
 
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
   "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
-  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue]."
+  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue].",
+
+  "BALATRO-EGG_POWER.title": "Egg",
+  "BALATRO-EGG_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
+  "BALATRO-EGG_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue]."
 }

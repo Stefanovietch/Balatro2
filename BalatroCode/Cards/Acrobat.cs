@@ -18,15 +18,15 @@ public class Acrobat() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9, ValueProp.Move),
-        ..MakeCalculatedDamage(this.DynamicVars.Damage.IntValue, (card, target) => card.DynamicVars.Damage.BaseValue * (PileType.Hand.GetPile(card.Owner).Cards.Count <= 1 ? 2 : 0))
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
+        if (PileType.Hand.GetPile(this.Owner).IsEmpty) ModifyDamageMultiplicative(play.Target,3,ValueProp.Move,this.Owner.Creature, this);
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

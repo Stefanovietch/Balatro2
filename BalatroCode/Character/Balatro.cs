@@ -17,7 +17,7 @@ public class Balatro : PlaceholderCharacterModel
 {
     public const string CharacterId = "Balatro";
     
-    //public static readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
+    public static readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
     public static readonly SavedSpireField<Balatro, int> RestSitesVisited = new(() => 0, "rest_sites_visited");
 
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
