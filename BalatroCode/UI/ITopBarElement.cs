@@ -50,6 +50,11 @@ internal static class TopBarElementRegistry
 
         return results;
     }
+    
+    internal static ITopBarElement CreateInstance(Type type)
+    {
+        return (ITopBarElement)Activator.CreateInstance(type)!;
+    }
 
     internal static (string scenePath, Func<Player, bool> canUse, float width) ReadMetadata(Type type)
     {

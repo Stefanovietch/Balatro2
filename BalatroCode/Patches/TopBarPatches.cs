@@ -31,13 +31,10 @@ public class TopBarPatches
 
             foreach (var type in TopBarElementRegistry.Types)
             {
-                var (scenePath, canUse, width) = TopBarElementRegistry.ReadMetadata(type);
+                var (_, canUse, width) = TopBarElementRegistry.ReadMetadata(type);
                 if (!canUse(localPlayer)) continue;
 
-                var scene = ResourceLoader.Load<PackedScene>(scenePath);
-                if (scene == null) continue;
-
-                var node = scene.Instantiate<Control>();
+                var node = (Control)TopBarElementRegistry.CreateInstance(type);
                 node.CustomMinimumSize = new Vector2(width, 0);
                 node.SizeFlagsHorizontal = Control.SizeFlags.ShrinkBegin;
 
