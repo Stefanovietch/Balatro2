@@ -12,7 +12,7 @@ public class Campfire() : BalatroCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<StrengthPower>(this.Owner.Character is Character.Balatro balatro ? Character.Balatro.RestSitesVisited.Get(balatro) : 0 + (this.IsUpgraded ? 1 : 0))
+        new PowerVar<StrengthPower>(this.Owner.Character is Character.Balatro balatro ? balatro.RestSitesVisited.Get(balatro) : 0 + (this.IsUpgraded ? 1 : 0))
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
