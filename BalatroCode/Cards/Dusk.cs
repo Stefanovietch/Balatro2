@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -19,9 +20,9 @@ public class Dusk() : BalatroCard(3,
         CardPlay play)
     {
         if (!PileType.Hand.GetPile(this.Owner).IsEmpty) return;
-        foreach (var cardPlayed in PileType.Play.GetPile(this.Owner).Cards.Where(c => c.Id != this.Id))
+        foreach (var cardPlayed in CombatManager.Instance.History.CardPlaysFinished.Where(c => c.CardPlay.Card.Id != this.Id && c.HappenedThisTurn(play.Card.CombatState) && c.CardPlay.Card.Owner == play.Card.Owner))
         {
-            await CardCmd.AutoPlay(choiceContext, cardPlayed, null);
+            await CardCmd.AutoPlay(choiceContext, cardPlayed.CardPlay.Card, null);
         }
     }
 

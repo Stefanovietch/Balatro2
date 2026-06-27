@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Extensions;
@@ -18,9 +19,9 @@ public class DNA() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (PileType.Play.GetPile(this.Owner).Cards.Count > 1)
+        if (CanPlay())
         {
-            CardModel newCard = PileType.Play.GetPile(this.Owner).Cards.ElementAt(PileType.Play.GetPile(this.Owner).Cards.Count - 2);
+            CardModel newCard = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
             CardModel thisCard = PileType.Deck.GetPile(this.Owner).Cards.Single(c => c.Id == this.Id);
             await CardCmd.Transform(thisCard, newCard.CreateClone());
         }
@@ -37,6 +38,6 @@ public class DNA() : BalatroCard(1,
 
     private new bool CanPlay()
     {
-        return !PileType.Play.GetPile(this.Owner).IsEmpty;
+        return CombatManager.Instance.History.CardPlaysFinished.Any();
     }
 }

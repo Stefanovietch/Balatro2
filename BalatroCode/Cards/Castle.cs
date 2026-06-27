@@ -18,7 +18,7 @@ public class Castle() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(5, ValueProp.Move),
         new DynamicVar("Increase", 2),
-        new DisplayVar<AncientJoker>("type", card =>  ((IRandomType) card).GetTypeString())
+        new DisplayVar<AncientJoker>("Type", card =>  ((IRandomType) card).GetTypeString())
 
     ];
 

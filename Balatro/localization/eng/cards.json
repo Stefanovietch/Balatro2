@@ -1,10 +1,10 @@
 {
   "BALATRO-ABSTRACT_JOKER.title": "Abstract Joker",
-  "BALATRO-ABSTRACT_JOKER.description": "Deal {Damage:diff()} for each card in hand.",
+  "BALATRO-ABSTRACT_JOKER.description": "Deal {Damage:diff()} for each card in your Hand.",
   "BALATRO-ACROBAT.title": "Acrobat",
   "BALATRO-ACROBAT.description": "Deals {Damage:diff()} damage.\nIf this is the last card in your hand, deal triple the damage.",
   "BALATRO-ANCIENT_JOKER.title": "Ancient Joker",
-  "BALATRO-ANCIENT_JOKER.description": "Deal {Damage:diff()} damage.\nIncreased by x1.5 for each {Type:diff()} played this turn. Changes at the end of each turn.",
+  "BALATRO-ANCIENT_JOKER.description": "Deal {Damage:diff()} damage.\nIncreased by x1.5 for each {Type} you played this turn. Changes at the end of each turn.",
   "BALATRO-ARROWHEAD.title": "Arrowhead",
   "BALATRO-ARROWHEAD.description": "At the start of your turn, add {ArrowheadPower:diff()} Finesse{IfUpgraded:show:s|} into your hand and discard {ArrowheadPower:diff()} card{IfUpgraded:show:s|}.",
   "BALATRO-ASTRONOMER.title": "Astronomer",
@@ -14,7 +14,7 @@
   "BALATRO-BARON.title": "Baron",
   "BALATRO-BARON.description": "Deal {Damage:diff()} damage, increased by 1.5x for each Attack in your hand.",
   "BALATRO-BASEBALL_CARD.title": "Baseball Card",
-  "BALATRO-BASEBALL_CARD.description": "All Uncommon cards damage is increased by x1.5.",
+  "BALATRO-BASEBALL_CARD.description": "All your Uncommon cards damage is increased by x1.5.",
   "BALATRO-BLACKBOARD.title": "Blackboard",
   "BALATRO-BLACKBOARD.description": "Apply {VulnerablePower:diff()} Vulnerable.\nIf all cards in your hand are Common or Uncommon, triple the Vulnerable.",
   
@@ -48,7 +48,7 @@
   "BALATRO-CARTOMANCER.title": "Cartomancer",
   "BALATRO-CARTOMANCER.description": "Gain a random common potion.",
   "BALATRO-CASTLE.title": "Castle",
-  "BALATRO-CASTLE.description": "Gain {Block:diff()} Block.\nIncreased by {Increase:diff()} for this combat when discarding a {type}. Changes at the end of each turn.",
+  "BALATRO-CASTLE.description": "Gain {Block:diff()} Block.\nIncreased by {Increase:diff()} for this combat when you discard a {Type}. Changes at the end of each turn.",
   
   "BALATRO-CAVENDISH.title": "Cavendish",
   "BALATRO-CAVENDISH.description": "Your next Attack deals triple damage.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to be removed from the deck.",
@@ -62,11 +62,11 @@
   "BALATRO-CHICOT.title": "Chicot",
   "BALATRO-CHICOT.description": "Stun the Boss(es).",
   "BALATRO-CLEVER_JOKER.title": "Clever Joker",
-  "BALATRO-CLEVER_JOKER.description": "If the last card played this combat was a Skill, gain {Block:diff()} Block.",
+  "BALATRO-CLEVER_JOKER.description": "If the last card you played this combat was a Skill, gain {Block:diff()} Block.",
   "BALATRO-CLOUD9.title": "Cloud 9",
   "BALATRO-CLOUD9.description": "Next turn, gain {Energy:energyIcons()}.\nGain 3 Gold for each cost 3 card in your deck.",
   "BALATRO-CONSTELLATION.title": "Constellation",
-  "BALATRO-CONSTELLATION.description": "Deal {Damage:diff()} Damage.\nIncreased by +10% for each upgraded card played this combat.",
+  "BALATRO-CONSTELLATION.description": "Deal {Damage:diff()} Damage.\nIncreased by +10% for each upgraded card you played this combat.",
   "BALATRO-CREDIT_CARD.title": "Credit Card",
   "BALATRO-CREDIT_CARD.description": "Gain {Gold:diff()} Gold.\nDraw 1 card.",
   "BALATRO-DELAYED_GRATIFICATION.title": "Delayed Gratification",
@@ -80,7 +80,7 @@
   "BALATRO-DRUNKARD.title": "Drunkard",
   "BALATRO-DRUNKARD.description": "Discard any amount of cards, then draw that many.",
   "BALATRO-DUSK.title": "Dusk",
-  "BALATRO-DUSK.description": "If this is the last card in your hand, replay all cards played this turn.",
+  "BALATRO-DUSK.description": "If this is the last card in your hand, replay all cards you played this turn.",
   
   "BALATRO-E_BALL.title": "8 Ball",
   "BALATRO-E_BALL.description": "Enemy loses !M! Strength this turn.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain a random Potion.",
@@ -89,7 +89,8 @@
   "BALATRO-EGG.description": "Gain {EggPower:diff()} Gold at the end of the turn if you didn't take damage.",
   "BALATRO-EROSION.title": "Erosion",
   "BALATRO-EROSION.description": "Deal {Damage:diff()} damage, repeat for each card removed from your deck. {InCombat:\n({CardsRemoved:diff()} {CardsRemoved:plural:card|cards} removed)|}",
-  
+  "BALATRO-EVEN_STEVEN.title": "Even Steven",
+  "BALATRO-EVEN_STEVEN.description": "Deal {Damage:diff()} damage for each even cost card played this turn.",
   
   
   
@@ -137,8 +138,6 @@
   "BALATRO-PAREIDOLIA.upgrade_description": "Innate.\nAll cards are considered Powers.",
   "BALATRO-GROS_MICHEL.title": "Gros Michel",
   "BALATRO-GROS_MICHEL.description": "Deal {Damage:diff()} damage to ALL enemies.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to be removed from the deck.",
-  "BALATRO-EVEN_STEVEN.title": "Even Steven",
-  "BALATRO-EVEN_STEVEN.description": "Deal {Damage:diff()} damage for each even cost card played this turn.",
   "BALATRO-ODD_TODD.title": "Odd Todd",
   "BALATRO-ODD_TODD.description": "Gain {Block:diff()} Block for each odd cost card played this turn.",
   "BALATRO-SCHOLAR.title": "Scholar",

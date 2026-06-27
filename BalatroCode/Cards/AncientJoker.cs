@@ -2,6 +2,7 @@
 using Balatro.BalatroCode.Character;
 using BaseLib.Cards.Variables;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -40,7 +41,7 @@ public class AncientJoker() : BalatroCard(0,
         CardModel? cardSource)
     {
         if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return (decimal) Math.Pow(1.5, PileType.Hand.GetPile(this.Owner).Cards.Count(c => c.Type == CurrentType));
+        return (decimal) Math.Pow(1.5, CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(cardSource.CombatState) && c.CardPlay.Card.Type == CardType.Attack && c.CardPlay.Card.Owner == cardSource.Owner));
     }
 
     public CardType CurrentType { get; set; } = CardType.None;

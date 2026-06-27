@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -32,8 +33,7 @@ public class CleverJoker() : BalatroCard(1,
 
     private bool LastCardIsSkill()
     {
-        int playPileSize = PileType.Play.GetPile(this.Owner).Cards.Count;
-        if (playPileSize <= 1) return false;
-        return PileType.Play.GetPile(this.Owner).Cards.ElementAt(playPileSize - 2).Type == CardType.Skill;
+        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card.Owner == this.Owner);
+        return yourCardPlayed.CardPlay.Card.Type == CardType.Skill;
     }
 }
