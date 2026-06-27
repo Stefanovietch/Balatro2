@@ -20,7 +20,7 @@ public class AncientJoker() : BalatroCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4, ValueProp.Move),
-        new DisplayVar<AncientJoker>("type", card =>  ((IRandomType) card).GetTypeString())
+        new DisplayVar<AncientJoker>("Type", card =>  ((IRandomType) card).GetTypeString())
     ];
 
     protected override async Task OnPlay(
