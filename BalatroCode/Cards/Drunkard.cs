@@ -19,8 +19,8 @@ public class Drunkard() : BalatroCard(1,
         CardPlay play)
     {
         List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,0, 10), null, this)).ToList();
-        await CardCmd.Discard(choiceContext, cards);
-        await CardPileCmd.Draw(choiceContext, cards.Count, this.Owner);
+        await CardCmd.DiscardAndDraw(choiceContext, cards, cards.Count);
+        //await CardPileCmd.Draw(choiceContext, cards.Count, this.Owner);
     }
 
     protected override void OnUpgrade()

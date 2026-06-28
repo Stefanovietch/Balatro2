@@ -23,7 +23,10 @@ public class Bootstraps() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+            .Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
         await PlayerCmd.LoseGold(this.DynamicVars["GoldLose"].BaseValue, this.Owner);
     }
 

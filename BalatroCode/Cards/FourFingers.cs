@@ -1,25 +1,53 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Events;
+using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
 
 public class FourFingers() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
-    TargetType.Self)
+    CardType.Attack, CardRarity.Uncommon,
+    TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DamageVar("Damage1", 1, ValueProp.Move),
+        new DamageVar("Damage2", 2, ValueProp.Move),
+        new DamageVar("Damage3", 3, ValueProp.Move),
+        new DamageVar("Damage4", 4, ValueProp.Move),
+    ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
-    {
-        
+    {                
+        ArgumentNullException.ThrowIfNull(this.CombatState);
+        ArgumentNullException.ThrowIfNull(play.Target);
+
+        foreach (var damageVar in CanonicalVars.OfType<DamageVar>())
+        {
+            if (IsUpgraded)
+            {
+                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
+                    .Targeting(play.Target)
+                    .WithHitFx("vfx/vfx_attack_slash")
+                    .Execute(choiceContext);
+            }
+            else
+            {
+                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
+                    .TargetingRandomOpponents(this.CombatState)
+                    .WithHitFx("vfx/vfx_attack_slash")
+                    .Execute(choiceContext);
+            }
+        }
     }
+
+    public override TargetType TargetType => this.IsUpgraded ? TargetType.AnyEnemy : TargetType.RandomEnemy;
 
     protected override void OnUpgrade()
     {
-
     }
 }

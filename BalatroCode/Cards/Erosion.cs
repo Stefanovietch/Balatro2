@@ -18,12 +18,12 @@ public class Erosion() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4, ValueProp.Move),
-        new CalculationBaseVar(0),
+        new CalculationBaseVar(1),
         new CalculationExtraVar(1),
         new CalculatedVar("CardsRemoved").WithMultiplier(delegate
         {
             if (this.Owner.Character is not Character.Balatro balatro) return 0;
-            return balatro.RestSitesVisited.Get(balatro);
+            return balatro.CardsRemoved.Get(balatro);
         })
     ];
 
@@ -32,8 +32,9 @@ public class Erosion() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount((int)((CalculatedVar)base.DynamicVars["CardsRemoved"]).Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
+            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CardsRemoved"]).Calculate(play.Target))
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }

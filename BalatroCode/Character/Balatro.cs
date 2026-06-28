@@ -5,6 +5,7 @@ using Balatro.BalatroCode.Extensions;
 using BaseLib.Utils;
 using Godot;
 using MegaCrit.Sts2.Core.Entities.Characters;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -18,7 +19,7 @@ public class Balatro : PlaceholderCharacterModel
     public const string CharacterId = "Balatro";
     
     public readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
-    
+    public readonly SavedSpireField<Balatro, int> PotionsUsed = new(() => 0, "balatro_potions_used");
     public readonly SavedSpireField<Balatro, int> RestSitesVisited = new(() => 0, "rest_sites_visited");
 
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
@@ -92,6 +93,12 @@ public class Balatro : PlaceholderCharacterModel
             .ToList()
             .ForEach(card => card.SetRandomType());
         return base.AfterPlayerTurnStart(choiceContext, player);
+    }
+
+    public override Task AfterPotionUsed(PotionModel potion, Creature? target)
+    {
+        PotionsUsed.Set(this, PotionsUsed.Get(this) + 1);
+        return base.AfterPotionUsed(potion, target);
     }
 
     public override Task AfterRoomEntered(AbstractRoom room)

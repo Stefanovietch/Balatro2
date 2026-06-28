@@ -22,9 +22,9 @@ public class BurntJoker() : BalatroCard(1,
         CardPlay play)
     {
         List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,0, 10), null, this)).ToList();
-        await CardCmd.Discard(choiceContext, cards);
+        await CardCmd.DiscardAndDraw(choiceContext, cards, this.DynamicVars.Cards.IntValue);
         cards.ForEach(card => { if (card.IsUpgradable) CardCmd.Upgrade(card); });
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
+        //await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
     }
 
     protected override void OnUpgrade()
