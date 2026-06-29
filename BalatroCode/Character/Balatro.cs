@@ -4,6 +4,7 @@ using BaseLib.Utils.NodeFactories;
 using Balatro.BalatroCode.Extensions;
 using BaseLib.Utils;
 using Godot;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -19,12 +20,12 @@ public class Balatro : PlaceholderCharacterModel
     public const string CharacterId = "Balatro";
     
     public readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
+    public readonly SavedSpireField<Balatro, int> CardsAdded = new(() => 0, "balatro_cards_added");
     public readonly SavedSpireField<Balatro, int> PotionsUsed = new(() => 0, "balatro_potions_used");
     public readonly SavedSpireField<Balatro, int> RestSitesVisited = new(() => 0, "rest_sites_visited");
+    public readonly SavedSpireField<Balatro, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
 
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
-    public readonly SavedSpireField<Balatro, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
-    
     public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
 
     public static readonly Color Color = new("ffffff");
@@ -94,6 +95,23 @@ public class Balatro : PlaceholderCharacterModel
             .ForEach(card => card.SetRandomType());
         return base.AfterPlayerTurnStart(choiceContext, player);
     }
+
+    public override Task BeforeCardRemoved(CardModel card)
+    {
+        CardsRemoved.Set(this, CardsRemoved.Get(this) + 1);
+        return base.BeforeCardRemoved(card);
+    }
+
+    public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
+    {
+        CardPile? pile = card.Pile;
+        if (pile is { Type: PileType.Deck })
+        {
+            CardsAdded.Set(this, CardsAdded.Get(this) + 1);
+        }
+        return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
+    }
+
 
     public override Task AfterPotionUsed(PotionModel potion, Creature? target)
     {

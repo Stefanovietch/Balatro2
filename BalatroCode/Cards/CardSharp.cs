@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -28,7 +29,7 @@ public class CardSharp() : BalatroCard(3,
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource != this || PileType.Play.GetPile(this.Owner).Cards.Count(c => c.EnergyCost.Canonical == 3) == 0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource != this || CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Resources.EnergySpent == 3) == 0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
         return 3;
     }
 

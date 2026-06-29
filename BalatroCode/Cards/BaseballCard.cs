@@ -19,7 +19,7 @@ public class BaseballCard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        BaseballCardPower? astronomerPower = await PowerCmd.Apply<BaseballCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars["BaseballCardPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<BaseballCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars["BaseballCardPower"].BaseValue, this.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

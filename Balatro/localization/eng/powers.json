@@ -13,5 +13,9 @@
 
   "BALATRO-EGG_POWER.title": "Egg",
   "BALATRO-EGG_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
-  "BALATRO-EGG_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue]."
+  "BALATRO-EGG_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue].",
+
+  "BALATRO-GIFT_CARD_POWER.title": "GiftCardPower",
+  "BALATRO-GIFT_CARD_POWER.description": "Increase card [yellow]Rarity[/yellow] for this combat reward",
+  "BALATRO-GIFT_CARD_POWER.smartDescription": ""
 }
