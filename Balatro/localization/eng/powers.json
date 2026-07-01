@@ -1,21 +1,29 @@
 {
   "BALATRO-ARROWHEAD_POWER.title": "Arrowhead",
   "BALATRO-ARROWHEAD_POWER.description": "At the start of your turn, add [yellow]Finesses[/yellow] into your hand and discard cards}",
-  "BALATRO-ARROWHEAD_POWER.smartDescription": "At the start of your turn, add {Amount:plural:[yellow]Finesse[/yellow]|[blue]{}[/blue] [yellow]Finesses[/yellow]} into your hand and discard {Amount:plural:card|[blue]{}[/blue] cards}",
+  "BALATRO-ARROWHEAD_POWER.smartDescription": "At the start of your turn, discard [blue]{AmountDisplay}[/blue] {Amount:plural:card|cards} and add [blue]{AmountDisplay}[/blue] [yellow]{Amount:plural:Stone Card|Stone Cards}[/yellow] into your hand.",
 
   "BALATRO-ASTRONOMER_POWER.title": "Astronomer",
   "BALATRO-ASTRONOMER_POWER.description": "Your next upgraded card costs [blue]0[/blue].",
-  "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next {Amount:plural:upgraded card|[blue]{}[/blue] upgraded cards} costs 0.",
+  "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next [blue]{AmountDisplay}[/blue] upgraded {Amount:plural:card|cards} costs 0.",
 
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
   "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
   "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue].",
 
   "BALATRO-EGG_POWER.title": "Egg",
-  "BALATRO-EGG_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
-  "BALATRO-EGG_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue].",
+  "BALATRO-EGG_POWER.description": "Gain [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
+  "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{AmountDisplay}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
 
-  "BALATRO-GIFT_CARD_POWER.title": "GiftCardPower",
+  "BALATRO-GIFT_CARD_POWER.title": "Gift Card",
   "BALATRO-GIFT_CARD_POWER.description": "Increase card [yellow]Rarity[/yellow] for this combat reward",
-  "BALATRO-GIFT_CARD_POWER.smartDescription": ""
+  "BALATRO-GIFT_CARD_POWER.smartDescription": "Increase card [yellow]Rarity[/yellow] for this combat reward",
+
+  "BALATRO-JUGGLER_POWER.title": "Juggler",
+  "BALATRO-JUGGLER_POWER.description": "Draw more cards at the start of your turn",
+  "BALATRO-JUGGLER_POWER.smartDescription": "At the start of your turn, draw [blue]{AmountDisplay}[/blue] additional {Amount:plural:card|cards}.",
+
+  "BALATRO-LOYALTY_CARD_POWER.title": "Loyalty Card",
+  "BALATRO-LOYALTY_CARD_POWER.description": "Every 6th card deals quadruple damage.",
+  "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Every 6th card deals quadruple damage."
 }

@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
@@ -17,8 +18,31 @@ public class CeremonialDagger() : BalatroCard(1,
     private int _currentDmg = 7;
     private int _increasedDmg;
     
+    [SavedProperty]
+    public int CurrentDamage
+    {
+        get => this._currentDmg;
+        set
+        {
+            this.AssertMutable();
+            this._currentDmg = value;
+            this.DynamicVars.Damage.BaseValue = this._currentDmg;
+        }
+    }
+
+    [SavedProperty]
+    public int IncreasedDamage
+    {
+        get => this._increasedDmg;
+        set
+        {
+            this.AssertMutable();
+            this._increasedDmg = value;
+        }
+    }
+    
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(this._currentDmg, ValueProp.Move),
+        new DamageVar(this.CurrentDamage, ValueProp.Move),
     ];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -51,7 +75,7 @@ public class CeremonialDagger() : BalatroCard(1,
         int intValue;
         if (card.HasStarCostX) intValue = card.ResolveEnergyXValue();
         else intValue = card.EnergyCost.Canonical;
-        this.BuffFromExhaust(intValue);
+        this.BuffFromExhaust(intValue * 2);
         if (!(this.DeckVersion is CeremonialDagger deckVersion))
             return;
         deckVersion.BuffFromExhaust(intValue);
@@ -64,9 +88,9 @@ public class CeremonialDagger() : BalatroCard(1,
     
     private void BuffFromExhaust(int extradmg)
     {
-        this._increasedDmg += extradmg;
+        this.IncreasedDamage += extradmg;
         this.UpdateDmg();
     }
 
-    private void UpdateDmg() => this._currentDmg = 1 + this._increasedDmg;
+    private void UpdateDmg() => this.CurrentDamage = 7 + this.IncreasedDamage;
 }
