@@ -23,8 +23,9 @@ public class Luchador() : BalatroCard(2,
         ArgumentNullException.ThrowIfNull(play.Target);
         await PowerCmd.Apply<StrengthPower>(choiceContext, play.Target, -this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
         await CardPileCmd.RemoveFromCombat(this);
-        CardModel thisCard = PileType.Deck.GetPile(this.Owner).Cards.Single(c => c.Id == this.Id);
-        await CardPileCmd.RemoveFromDeck(thisCard);
+        if (this.DeckVersion is not Luchador deckVersion)
+            return;
+        await CardPileCmd.RemoveFromDeck(deckVersion);
     }
 
     protected override void OnUpgrade()

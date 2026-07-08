@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class OnyxAgatePower : TemporaryStrengthPower, ICustomPower
+public class RaisedFistPower : TemporaryStrengthPower, ICustomPower
 {
-    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<OnyxAgate>();
+    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<RaisedFist>();
 }

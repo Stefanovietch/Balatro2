@@ -95,7 +95,10 @@ public class Obelisk() : BalatroCard(2,
                         .Execute(choiceContext);
                     break;
                 case Enhance:
-                    Buff();
+                    this.Buff();
+                    if (this.DeckVersion is not Obelisk deckVersion)
+                        return;
+                    deckVersion.Buff();
                     break;
             }
         }

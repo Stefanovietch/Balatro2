@@ -59,24 +59,19 @@ public class CeremonialDagger() : BalatroCard(1,
         {
             CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
             card = (await CardSelectCmd.FromHand(choiceContext, this.Owner, prefs, null, this)).FirstOrDefault();
-            if (card == null)
-                return;
-            await CardCmd.Exhaust(choiceContext, card);
         }
         else
         {
             CardPile pile = PileType.Hand.GetPile(this.Owner);
             card = this.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
-            if (card == null)
-                return;
-            await CardCmd.Exhaust(choiceContext, card);
         }
-
-        int intValue;
-        if (card.HasStarCostX) intValue = card.ResolveEnergyXValue();
-        else intValue = card.EnergyCost.Canonical;
+        if (card == null)
+            return;
+        await CardCmd.Exhaust(choiceContext, card);
+            
+        int intValue = card.EnergyCost.GetAmountToSpend();
         this.BuffFromExhaust(intValue * 2);
-        if (!(this.DeckVersion is CeremonialDagger deckVersion))
+        if (this.DeckVersion is not CeremonialDagger deckVersion)
             return;
         deckVersion.BuffFromExhaust(intValue);
     }

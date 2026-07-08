@@ -181,7 +181,7 @@
   "BALATRO-ODD_TODD.title": "Odd Todd",
   "BALATRO-ODD_TODD.description": "Gain {Block:diff()} Block for each odd cost card you played this turn.{InCombat:\n({OddCostPlayed:diff()} odd {OddCostPlayed:plural:card|cards} played)}",
   "BALATRO-ONYX_AGATE.title": "Onyx Agate",
-  "BALATRO-ONYX_AGATE.description": "Gain {StrengthPower:diff()} Strength.\nAt the end of this turn lose {StrengthPower:diff()} Strength.",
+  "BALATRO-ONYX_AGATE.description": "Gain {OnyxAgatePower:diff()} Strength.\nAt the end of this turn lose {StrengthPower:diff()} Strength.",
 
   "BALATRO-OOPS_ALL6S.title": "Oops! All 6s",
   "BALATRO-OOPS_ALL6S.description": "Doubles all listed probabilities.",
@@ -195,15 +195,29 @@
   "BALATRO-PHOTOGRAPH.description": "Your next Power card is played twice.",
   "BALATRO-POPCORN.title": "Popcorn",
   "BALATRO-POPCORN.description": "Deal {Damage:diff()} damage, reduced by {Reduction:diff()} after every turn.",
-
-
-
-
-
-
   "BALATRO-RAISED_FIST.title": "Raised Fist",
   "BALATRO-RAISED_FIST.description": "Gain temporary Strength equal to twice your lowest cost card in your hand.",
-  "BALATRO-RAISED_FIST.upgrade_description": "Retain.\nGain temporary Strength equal to twice your lowest cost card in your hand.",
+  "BALATRO-RAMEN.title": "Ramen",
+  "BALATRO-RAMEN.description": "Deal {Damage:diff()} damage to ALL enemies twice. Reduced by 1 for each card played while in hand.",
+  "BALATRO-RED_CARD.title": "Red Card",
+  "BALATRO-RED_CARD.description": "Apply {VulnerablePower:diff()} Vulnerable to ALL enemies.",
+
+  "BALATRO-RESERVED_PARKING.title": "Reserved Parking",
+  "BALATRO-RESERVED_PARKING.description": "Put !M! random Power from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
+  "BALATRO-RESERVED_PARKING.upgrade_description": "Put !M! random Powers from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
+
+  "BALATRO-RIDE_THE_BUS.title": "Ride the Bus",
+  "BALATRO-RIDE_THE_BUS.description": "Deal {Damage:diff()} damage.\nIncreased by {ExtraDamage:diff()} for each card you played this combat without playing a Power.",
+  "BALATRO-RIFF_RAFF.title": "Riff-Raff",
+  "BALATRO-RIFF_RAFF.description": "Add {Cards:diff()} random Common cards to your hand, they cost 0 this turn.",
+  "BALATRO-ROCKET.title": "Rocket",
+  "BALATRO-ROCKET.description": "ALL enemies lose {RocketPower:diff()} Strength this turn.\nGain Gold equal to the current floor.",
+  "BALATRO-ROUGH_GEM.title": "Rough Gem",
+  "BALATRO-ROUGH_GEM.description": "Gain {Block:diff()} Block.\nGain 2 Gold for each {GoldPerBlock:diff()} Block you have.",
+  
+  
+
+
   "BALATRO-STEEL_JOKER.title": "Steel Joker",
   "BALATRO-STEEL_JOKER.description": "Ethereal.\nGain plated armor equal to your amount of upgraded cards in your deck.\nExhaust.",
   "BALATRO-STEEL_JOKER.upgrade_description": "Gain plated armor equal to your amount of upgraded cards in your deck.\nExhaust.",
@@ -214,8 +228,6 @@
   "BALATRO-SUPERNOVA.title": "Supernova",
   "BALATRO-SUPERNOVA.description": "Apply X Weak.\nGain X Regeneration.\nExhaust.",
   "BALATRO-SUPERNOVA.upgrade_description": "Apply X+1 Weak.\nGain X+1 Regeneration.\nExhaust.",
-  "BALATRO-RIDE_THE_BUS.title": "Ride the Bus",
-  "BALATRO-RIDE_THE_BUS.description": "Deal {Damage:diff()} damage.\nIncreased by !M! for each card played this combat without playing a Power.",
   "BALATRO-SPACE_JOKER.title": "Space Joker",
   "BALATRO-SPACE_JOKER.description": "Draw !M! cards.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to Upgrade cards in your hand.",
   "BALATRO-RUNNER.title": "Runner",
@@ -230,14 +242,10 @@
   "BALATRO-SUPERPOSITION.description": "If you are holding a cost 0, 1, 2 and 3 card, obtain a random potion.",
   "BALATRO-TO_DO_LIST.title": "To Do List",
   "BALATRO-TO_DO_LIST.description": "Gain !M! Gold whenever a [Skill/Attack/Power] is played. Changes at the end of each turn.",
-  "BALATRO-RED_CARD.title": "Red Card",
-  "BALATRO-RED_CARD.description": "Unplayable.\nWhen discarded apply !M! Vulnerable to ALL enemies.",
   "BALATRO-SQUARE_JOKER.title": "Square Joker",
   "BALATRO-SQUARE_JOKER.description": "Gain {Block:diff()} Block.\nIf you have played exactly 4 cards this turn, permanently increase this card's Block by !M!.",
   "BALATRO-SEANCE.title": "Séance",
-  "BALATRO-SEANCE.description": "If every card in your hand is a Skill, add !M! random Colorless Skills to your hand.",
-  "BALATRO-RIFF_RAFF.title": "Riff-Raff",
-  "BALATRO-RIFF_RAFF.description": "Add !M! random Common cards to your hand, they cost 0 this turn.",
+  "BALATRO-SEANCE.description": "If every card in your hand is a Skill, add 2 random Colorless Skills to your hand. They're free to play this combat.",
   "BALATRO-VAMPIRE.title": "Vampire",
   "BALATRO-VAMPIRE.description": "Enemy loses X Strength.\nGain X Strength.\nExhaust.",
   "BALATRO-VAMPIRE.upgrade_description": "Enemy loses X+1 Strength.\nGain X+1 Strength. Exhaust.",
@@ -246,14 +254,9 @@
   "BALATRO-VAGABOND.title": "Vagabond",
   "BALATRO-VAGABOND.description": "Draw !M! card.\nIf you have less then 100 Gold, obtain a random potion.\nExhaust.",
   "BALATRO-VAGABOND.upgrade_description": "Draw !M! cards.\nIf you have less then 100 Gold, obtain a random potion.\nExhaust.",
-  "BALATRO-ROCKET.title": "Rocket",
-  "BALATRO-ROCKET.description": "ALL enemies lose !M! Strength this turn.\nGain Gold equal to the current floor.\nExhaust.",
   "BALATRO-TURTLE_BEAN.title": "Turtle Bean",
   "BALATRO-TURTLE_BEAN.description": "Draw !M! cards.\nReduce this card's draw by 1 this combat.",
   "BALATRO-TURTLE_BEAN.upgrade_description": "Draw !M! cards.\nReduce this card's draw by 1 this combat. Can't be lower than 1.",
-  "BALATRO-RESERVED_PARKING.title": "Reserved Parking",
-  "BALATRO-RESERVED_PARKING.description": "Put !M! random Power from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
-  "BALATRO-RESERVED_PARKING.upgrade_description": "Put !M! random Powers from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
   "BALATRO-TO_THE_MOON.title": "To the Moon",
   "BALATRO-TO_THE_MOON.description": "Gain !M! Metallicize.\nGain 1 Gold for each 10 Gold you have.\nExhaust.",
   "BALATRO-STONE_JOKER.title": "Stone Joker",
@@ -262,8 +265,6 @@
   "BALATRO-TRADING_CARD.description": "At the start of your turn, Exhaust 1 card and gain !M! Gold.",
   "BALATRO-SPARE_TROUSERS.title": "Spare Trousers",
   "BALATRO-SPARE_TROUSERS.description": "Deal {Damage:diff()} damage to two random enemies. Permanently increased by !M! if either is Fatal.",
-  "BALATRO-RAMEN.title": "Ramen",
-  "BALATRO-RAMEN.description": "Deal {Damage:diff()} damage twice. Reduced by 1 for each card played while in hand.",
   "BALATRO-WALKIE_TALKIE.title": "Walkie Talkie",
   "BALATRO-WALKIE_TALKIE.description": "When playing a cost 1 Card gain !M! Block and deal !M! damage to a random enemy.",
   "BALATRO-SELTZER.title": "Seltzer",
@@ -282,8 +283,6 @@
   "BALATRO-THROWBACK.description": "Apply Vulnerable and Weak for each ? room entered this run.\nExhaust.",
   "BALATRO-THROWBACK.upgrade_description": "Apply Vulnerable and Weak for each ? room entered this run + 1.\nExhaust.",
   "BALATRO-THROWBACK.extended_description": "\n(Total !M!)",
-  "BALATRO-ROUGH_GEM.title": "Rough Gem",
-  "BALATRO-ROUGH_GEM.description": "Gain {Block:diff()} Block.\nGain 2 Gold for each !M! Block you have.\nExhaust.",
   "BALATRO-SHOWMAN.title": "Showman",
   "BALATRO-SHOWMAN.description": "Select 1 card from your draw pile and put all copies of it into your hand.\nExhaust.",
   "BALATRO-WEE_JOKER.title": "Wee Joker",

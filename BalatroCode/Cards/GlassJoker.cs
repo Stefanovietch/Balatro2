@@ -32,9 +32,10 @@ public class GlassJoker() : BalatroCard(1,
         if (attackCommand.Results.SelectMany(r => r).Any(r =>
                 r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))
         {
-            CardModel thisCard = PileType.Deck.GetPile(this.Owner).Cards.Single(c => c.Id == this.Id);
-            await CardPileCmd.RemoveFromDeck(thisCard);
             await CardPileCmd.RemoveFromCombat(this);
+            if (this.DeckVersion is not GlassJoker deckVersion)
+                return;
+            await CardPileCmd.RemoveFromDeck(deckVersion);
         }
     }
     

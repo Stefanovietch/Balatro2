@@ -14,18 +14,18 @@ public class OnyxAgate() : BalatroCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<StrengthPower>(7M)
+        new PowerVar<OnyxAgatePower>(7M)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<OnyxAgatePower>(choiceContext, this.Owner.Creature, this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<OnyxAgatePower>(choiceContext, this.Owner.Creature, this.DynamicVars["OnyxAgatePower"].BaseValue, this.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Strength.UpgradeValueBy(2M);
+        this.DynamicVars["OnyxAgatePower"].UpgradeValueBy(2M);
     }
 }

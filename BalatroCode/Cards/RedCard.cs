@@ -1,25 +1,37 @@
 ﻿using Balatro.BalatroCode.Cards;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class RedCard() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+public class RedCard() : BalatroCard(3,
+    CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new PowerVar<VulnerablePower>(2)
+    ];
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Sly];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        
+        ArgumentNullException.ThrowIfNull(this.CombatState);
+        foreach (Creature enemy in this.CombatState.HittableEnemies)
+        {
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, this.DynamicVars.Vulnerable.BaseValue, this.Owner.Creature, this);
+        }
     }
 
     protected override void OnUpgrade()
     {
-
+        this.DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }

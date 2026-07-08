@@ -23,8 +23,9 @@ public class DNA() : BalatroCard(1,
         if (CanPlay())
         {
             CardModel newCard = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
-            CardModel thisCard = PileType.Deck.GetPile(this.Owner).Cards.Single(c => c.Id == this.Id);
-            await CardCmd.Transform(thisCard, newCard.CreateClone());
+            if (this.DeckVersion is not DNA deckVersion)
+                return;
+            await CardCmd.Transform(deckVersion, newCard.CreateClone());
         }
     }
 
