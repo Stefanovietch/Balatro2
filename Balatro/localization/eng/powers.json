@@ -5,15 +5,15 @@
 
   "BALATRO-ASTRONOMER_POWER.title": "Astronomer",
   "BALATRO-ASTRONOMER_POWER.description": "Your next upgraded card costs [blue]0[/blue].",
-  "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next [blue]{AmountDisplay}[/blue] upgraded {Amount:plural:card|cards} costs 0.",
+  "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next [blue]{Amount}[/blue] upgraded {Amount:plural:card|cards} costs 0.",
 
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
   "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
-  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{AmountDisplay}[/blue].",
+  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{Amount}[/blue].",
 
   "BALATRO-EGG_POWER.title": "Egg",
   "BALATRO-EGG_POWER.description": "Gain [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
-  "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{AmountDisplay}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
+  "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
 
   "BALATRO-GIFT_CARD_POWER.title": "Gift Card",
   "BALATRO-GIFT_CARD_POWER.description": "Increase card [yellow]Rarity[/yellow] for this combat reward",
@@ -21,9 +21,25 @@
 
   "BALATRO-JUGGLER_POWER.title": "Juggler",
   "BALATRO-JUGGLER_POWER.description": "Draw more cards at the start of your turn",
-  "BALATRO-JUGGLER_POWER.smartDescription": "At the start of your turn, draw [blue]{AmountDisplay}[/blue] additional {Amount:plural:card|cards}.",
+  "BALATRO-JUGGLER_POWER.smartDescription": "At the start of your turn, draw [blue]{Amount}[/blue] additional {Amount:plural:card|cards}.",
 
   "BALATRO-LOYALTY_CARD_POWER.title": "Loyalty Card",
   "BALATRO-LOYALTY_CARD_POWER.description": "Every 6th card deals quadruple damage.",
-  "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Every 6th card deals quadruple damage."
+  "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Your {Amount:plural:next|[blue]{Amount}{Amount:2:nd|th}[/blue]} card deals quadruple damage.",
+
+  "BALATRO-MR_BONES_POWER.title": "Mr. Bones",
+  "BALATRO-MR_BONES_POWER.description": "Revive with 50% health when taking Fatal damage, then remove this from your deck.",
+  "BALATRO-MR_BONES_POWER.smartDescription": "Revive with 50% health when taking Fatal damage, then remove this from your deck.",
+  
+  "BALATRO-ONYX_AGATE_POWER.title": "Onyx Agate",
+  
+  "BALATRO-PAREIDOLIA_POWER.title": "Pareidolia",
+  "BALATRO-PAREIDOLIA_POWER.description": "All cards are considered Powers.",
+  "BALATRO-PAREIDOLIA_POWER.smartDescription": "All cards are considered Powers.",
+  
+  "BALATRO-PHOTOGRAPH_POWER.title": "Photograph",
+  "BALATRO-PHOTOGRAPH_POWER.description": "Your next Power card is played twice.",
+  "BALATRO-PHOTOGRAPH_POWER.smartDescription": "Your next{Amount:plural:| [blue]{Amount}[/blue]} Power card is played twice."
+  
+
 }

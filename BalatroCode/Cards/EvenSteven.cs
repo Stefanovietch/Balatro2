@@ -19,7 +19,8 @@ public class EvenSteven() : BalatroCard(2,
         new DamageVar(10M, ValueProp.Move),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
-        new CalculatedVar("EvenCostPlayed").WithMultiplier((card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 0 && c.CardPlay.Card.Owner == card.Owner))];
+        new CalculatedVar("EvenCostPlayed").WithMultiplier((card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 0 && c.CardPlay.Card.Owner == card.Owner))
+    ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

@@ -25,9 +25,9 @@ public class DriversLicense() : BalatroCard(1,
         if (HasRareCards())
         {
             await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature,
-                this.DynamicVars["StrengthPower"].BaseValue, this.Owner.Creature, this);
+                this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
             await PowerCmd.Apply<DexterityPower>(choiceContext, this.Owner.Creature,
-                this.DynamicVars["DexterityPower"].BaseValue, this.Owner.Creature, this);
+                this.DynamicVars.Dexterity.BaseValue, this.Owner.Creature, this);
         }
     }
 
@@ -35,8 +35,8 @@ public class DriversLicense() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["StrengthPower"].UpgradeValueBy(1M);
-        this.DynamicVars["DexterityPower"].UpgradeValueBy(1M);
+        this.DynamicVars.Strength.UpgradeValueBy(1M);
+        this.DynamicVars.Dexterity.UpgradeValueBy(1M);
     }
 
     private bool HasRareCards()

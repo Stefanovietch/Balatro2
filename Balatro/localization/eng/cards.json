@@ -172,15 +172,35 @@
   "BALATRO-MIME.description": "Play and Exhaust all cards in your hand randomly.",
   "BALATRO-MISPRINT.title": "Misprint",
   "BALATRO-MISPRINT.description": "Deal between 1 and {Damage:diff()} damage.",
-  
-  
-  
-  
-  
-  
-  
+  "BALATRO-MR_BONES.title": "Mr. Bones",
+  "BALATRO-MR_BONES.description": "Revive with 50% health when taking Fatal damage, then remove this from your deck.",
   "BALATRO-MYSTIC_SUMMIT.title": "Mystic Summit",
-  "BALATRO-MYSTIC_SUMMIT.description": "If there are no cards in your discard pile, deal {Damage:diff()} damage.\nExhaust.",
+  "BALATRO-MYSTIC_SUMMIT.description": "If there are no cards in your discard pile, deal {Damage:diff()} damage.",
+  "BALATRO-OBELISK.title": "Obelisk",
+  "BALATRO-OBELISK.description": "Choose twice:\nGain {Block:diff()} Block, deal {Damage:diff()} damage to ALL enemies or permanently increase block by {BlockIncrease:diff()} and damage by {DamageIncrease:diff()}.",
+  "BALATRO-ODD_TODD.title": "Odd Todd",
+  "BALATRO-ODD_TODD.description": "Gain {Block:diff()} Block for each odd cost card you played this turn.{InCombat:\n({OddCostPlayed:diff()} odd {OddCostPlayed:plural:card|cards} played)}",
+  "BALATRO-ONYX_AGATE.title": "Onyx Agate",
+  "BALATRO-ONYX_AGATE.description": "Gain {StrengthPower:diff()} Strength.\nAt the end of this turn lose {StrengthPower:diff()} Strength.",
+
+  "BALATRO-OOPS_ALL6S.title": "Oops! All 6s",
+  "BALATRO-OOPS_ALL6S.description": "Doubles all listed probabilities.",
+  "BALATRO-OOPS_ALL6S.upgrade_description": "Doubles all listed probabilities.\nAdds an extra chance for a Potion as a combat Reward.",
+
+  "BALATRO-PAREIDOLIA.title": "Pareidolia",
+  "BALATRO-PAREIDOLIA.description": "All cards are considered Powers.",
+  "BALATRO-PERKEO.title": "Perkeo",
+  "BALATRO-PERKEO.description": "Gain an additional card reward in this combat's rewards.",
+  "BALATRO-PHOTOGRAPH.title": "Photograph",
+  "BALATRO-PHOTOGRAPH.description": "Your next Power card is played twice.",
+  "BALATRO-POPCORN.title": "Popcorn",
+  "BALATRO-POPCORN.description": "Deal {Damage:diff()} damage, reduced by {Reduction:diff()} after every turn.",
+
+
+
+
+
+
   "BALATRO-RAISED_FIST.title": "Raised Fist",
   "BALATRO-RAISED_FIST.description": "Gain temporary Strength equal to twice your lowest cost card in your hand.",
   "BALATRO-RAISED_FIST.upgrade_description": "Retain.\nGain temporary Strength equal to twice your lowest cost card in your hand.",
@@ -189,11 +209,6 @@
   "BALATRO-STEEL_JOKER.upgrade_description": "Gain plated armor equal to your amount of upgraded cards in your deck.\nExhaust.",
   "BALATRO-SCARY_FACE.title": "Scary Face",
   "BALATRO-SCARY_FACE.description": "Whenever you play a Power, gain !M! Block.",
-  "BALATRO-PAREIDOLIA.title": "Pareidolia",
-  "BALATRO-PAREIDOLIA.description": "All cards are considered Powers.",
-  "BALATRO-PAREIDOLIA.upgrade_description": "Innate.\nAll cards are considered Powers.",
-  "BALATRO-ODD_TODD.title": "Odd Todd",
-  "BALATRO-ODD_TODD.description": "Gain {Block:diff()} Block for each odd cost card played this turn.",
   "BALATRO-SCHOLAR.title": "Scholar",
   "BALATRO-SCHOLAR.description": "Gain {Block:diff()} Block.\nDeal {Damage:diff()} damage.\nDraw 1 card.",
   "BALATRO-SUPERNOVA.title": "Supernova",
@@ -233,11 +248,6 @@
   "BALATRO-VAGABOND.upgrade_description": "Draw !M! cards.\nIf you have less then 100 Gold, obtain a random potion.\nExhaust.",
   "BALATRO-ROCKET.title": "Rocket",
   "BALATRO-ROCKET.description": "ALL enemies lose !M! Strength this turn.\nGain Gold equal to the current floor.\nExhaust.",
-  "BALATRO-OBELISK.title": "Obelisk",
-  "BALATRO-OBELISK.description": "Choose twice:\nGain {Block:diff()} Block, deal {Damage:diff()} damage to ALL enemies or permanently increase block by 2 and damage by 1.\nExhaust.",
-  "BALATRO-OBELISK.upgrade_description": "Choose twice:\nGain {Block:diff()} Block, deal {Damage:diff()} damage to ALL enemies or permanently increase block by 2 and damage by 1.\nExhaust.",
-  "BALATRO-PHOTOGRAPH.title": "Photograph",
-  "BALATRO-PHOTOGRAPH.description": "Your next Power card is played twice.",
   "BALATRO-TURTLE_BEAN.title": "Turtle Bean",
   "BALATRO-TURTLE_BEAN.description": "Draw !M! cards.\nReduce this card's draw by 1 this combat.",
   "BALATRO-TURTLE_BEAN.upgrade_description": "Draw !M! cards.\nReduce this card's draw by 1 this combat. Can't be lower than 1.",
@@ -250,8 +260,6 @@
   "BALATRO-STONE_JOKER.description": "Gain {Block:diff()} Block for each Safety in your hand, draw, discard and exhaust pile.",
   "BALATRO-TRADING_CARD.title": "Trading Card",
   "BALATRO-TRADING_CARD.description": "At the start of your turn, Exhaust 1 card and gain !M! Gold.",
-  "BALATRO-POPCORN.title": "Popcorn",
-  "BALATRO-POPCORN.description": "Deal {Damage:diff()} damage, reduced by !M! after every turn.",
   "BALATRO-SPARE_TROUSERS.title": "Spare Trousers",
   "BALATRO-SPARE_TROUSERS.description": "Deal {Damage:diff()} damage to two random enemies. Permanently increased by !M! if either is Fatal.",
   "BALATRO-RAMEN.title": "Ramen",
@@ -262,9 +270,6 @@
   "BALATRO-SELTZER.description": "Replay the next !M! cards.",
   "BALATRO-SMILEY_FACE.title": "Smiley Face",
   "BALATRO-SMILEY_FACE.description": "Deals {Damage:diff()} for each Power played this combat.",
-  "BALATRO-MR_BONES.title": "Mr. Bones",
-  "BALATRO-MR_BONES.description": "Ethereal.\nRevives with 25% health when taking Fatal damage, then removes this from your deck.",
-  "BALATRO-MR_BONES.upgrade_description": "Revives with 25% health when taking Fatal damage, then removes this from your deck.",
   "BALATRO-SOCK_AND_BUSKIN.title": "Sock and Buskin",
   "BALATRO-SOCK_AND_BUSKIN.description": "Trigger all your start and end of turn Power effects.",
   "BALATRO-SWASHBUCKLER.title": "Swashbuckler",
@@ -279,16 +284,11 @@
   "BALATRO-THROWBACK.extended_description": "\n(Total !M!)",
   "BALATRO-ROUGH_GEM.title": "Rough Gem",
   "BALATRO-ROUGH_GEM.description": "Gain {Block:diff()} Block.\nGain 2 Gold for each !M! Block you have.\nExhaust.",
-  "BALATRO-ONYX_AGATE.title": "Onyx Agate",
-  "BALATRO-ONYX_AGATE.description": "Gain !M! Strength.\nAt the end of this turn lose !M! Strength.",
   "BALATRO-SHOWMAN.title": "Showman",
   "BALATRO-SHOWMAN.description": "Select 1 card from your draw pile and put all copies of it into your hand.\nExhaust.",
   "BALATRO-WEE_JOKER.title": "Wee Joker",
   "BALATRO-WEE_JOKER.description": "Gain {Block:diff()} Block for each cost 0 card played this combat.",
   "BALATRO-WEE_JOKER.extended_description": "\n(Total !M!)",
-  "BALATRO-OOPS_ALL6S.title": "Oops! All 6s",
-  "BALATRO-OOPS_ALL6S.description": "Doubles all listed probabilities.",
-  "BALATRO-OOPS_ALL6S.upgrade_description": "Doubles all listed probabilities.\nAdds an extra chance for a Potion as a combat Reward.",
   "BALATRO-THE_IDOL.title": "The Idol",
   "BALATRO-THE_IDOL.description": "Draw a cost [1,2,3] [Skill/Attack/Power]. It costs 0 this turn. Changes at the end of each turn.",
   "BALATRO-THE_IDOL.upgrade_description": "Retain.\nDraw a cost [1,2,3] [Skill/Attack/Power]. It costs 0 this turn. Changes at the end of each turn.",
@@ -318,8 +318,6 @@
   "BALATRO-TRIBOULET.upgrade_description": "Innate.\nDouble the damage and Block of all 2 Cost cards.",
   "BALATRO-YORICK.title": "Yorick",
   "BALATRO-YORICK.description": "Deal {Damage:diff()} damage.\nIncreased by +100% for every !M! cards manually discarded this combat.",
-  "BALATRO-PERKEO.title": "Perkeo",
-  "BALATRO-PERKEO.description": "Gain an additional card reward in this combat's rewards.\nExhaust.",
 
   "BALATRO-STONE_CARD.title": "Stone Card",
   "BALATRO-STONE_CARD.description": "Gain {Block:diff()} Block.",
@@ -328,9 +326,9 @@
   "BALATRO-DILATION.description": "When you draw this card, add a copy to your hand.\nExhaust.",
   
   "BALATRO-BLOCKADE.title": "Blockade",
-  "BALATRO-BLOCKADE.description": "Gain {Block:diff()} Block.",
+  "BALATRO-BLOCKADE.description": "Gain Block.",
   "BALATRO-ASSAULT.title": "Assault",
-  "BALATRO-ASSAULT.description": "Deal {Damage:diff()} damage to ALL enemies.",
+  "BALATRO-ASSAULT.description": "Deal damage to ALL enemies.",
   "BALATRO-ENHANCE.title": "Enhance",
-  "BALATRO-ENHANCE.description": "Permanently increase block by 2 and damage by 1."
+  "BALATRO-ENHANCE.description": "Permanently increase damage and block."
 }

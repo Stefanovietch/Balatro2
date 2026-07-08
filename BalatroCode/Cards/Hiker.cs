@@ -19,11 +19,11 @@ public class Hiker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-       await PowerCmd.Apply<DexterityPower>(choiceContext, this.Owner.Creature, this.DynamicVars["DexterityPower"].BaseValue, this.Owner.Creature, this);
+       await PowerCmd.Apply<DexterityPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Dexterity.BaseValue, this.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["DexterityPower"].UpgradeValueBy(1);
+        this.DynamicVars.Dexterity.UpgradeValueBy(1);
     }
 }

@@ -26,6 +26,6 @@ public class Campfire() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        this.DynamicVars.Strength.UpgradeValueBy(1);
     }
 }

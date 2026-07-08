@@ -24,11 +24,11 @@ public class Madness() : BalatroCard(1,
     {
         CardModel? card = this.Owner.RunState.Rng.CombatCardSelection.NextItem(PileType.Hand.GetPile(this.Owner).Cards);
         if (card != null) await CardCmd.Exhaust(choiceContext, card);
-        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature, this.DynamicVars["StrengthPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        this.DynamicVars.Strength.UpgradeValueBy(1);
     }
 }

@@ -25,7 +25,11 @@ public class AbstractJoker() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         ArgumentNullException.ThrowIfNull(play.Card.Owner.PlayerCombatState);
         int hitAmount = PileType.Hand.GetPile(this.Owner).Cards.Count;
-        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).WithHitCount(hitAmount).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount(hitAmount)
+            .Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
