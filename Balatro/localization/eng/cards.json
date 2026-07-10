@@ -214,15 +214,20 @@
   "BALATRO-ROCKET.description": "ALL enemies lose {RocketPower:diff()} Strength this turn.\nGain Gold equal to the current floor.",
   "BALATRO-ROUGH_GEM.title": "Rough Gem",
   "BALATRO-ROUGH_GEM.description": "Gain {Block:diff()} Block.\nGain 2 Gold for each {GoldPerBlock:diff()} Block you have.",
+  "BALATRO-RUNNER.title": "Runner",
+  "BALATRO-RUNNER.description": "Gain {Block:diff()} Block. If you are holding a cost 0, 1 and 2 card, permanently increase this card's Block by {BlockIncrease:diff()}.",
+  "BALATRO-SATELLITE.title": "Satellite",
+  "BALATRO-SATELLITE.description": "Upgrade a random card in your deck permanently.\nGain {GoldPerCard:diff()} Gold for each upgraded card in your deck.\nExhaust.",
+  "BALATRO-SCARY_FACE.title": "Scary Face",
+  "BALATRO-SCARY_FACE.description": "Whenever you play a Power, gain {ScaryFacePower:diff()} Block.",
   
   
-
+  
+  
 
   "BALATRO-STEEL_JOKER.title": "Steel Joker",
   "BALATRO-STEEL_JOKER.description": "Ethereal.\nGain plated armor equal to your amount of upgraded cards in your deck.\nExhaust.",
   "BALATRO-STEEL_JOKER.upgrade_description": "Gain plated armor equal to your amount of upgraded cards in your deck.\nExhaust.",
-  "BALATRO-SCARY_FACE.title": "Scary Face",
-  "BALATRO-SCARY_FACE.description": "Whenever you play a Power, gain !M! Block.",
   "BALATRO-SCHOLAR.title": "Scholar",
   "BALATRO-SCHOLAR.description": "Gain {Block:diff()} Block.\nDeal {Damage:diff()} damage.\nDraw 1 card.",
   "BALATRO-SUPERNOVA.title": "Supernova",
@@ -230,8 +235,6 @@
   "BALATRO-SUPERNOVA.upgrade_description": "Apply X+1 Weak.\nGain X+1 Regeneration.\nExhaust.",
   "BALATRO-SPACE_JOKER.title": "Space Joker",
   "BALATRO-SPACE_JOKER.description": "Draw !M! cards.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to Upgrade cards in your hand.",
-  "BALATRO-RUNNER.title": "Runner",
-  "BALATRO-RUNNER.description": "Gain {Block:diff()} Block. If you are holding a cost 0, 1 and 2 card, permanently increase this card's Block by !M!.",
   "BALATRO-SPLASH.title": "Splash",
   "BALATRO-SPLASH.description": "Cleanse !M! random debuff.\nExhaust.",
   "BALATRO-SPLASH.upgrade_description": "Cleanse !M! random debuffs.\nExhaust.",
@@ -308,8 +311,6 @@
   "BALATRO-THE_TRIBE.description": "Deal {Damage:diff()} damage.\nIf you are only holding Attacks, double the damage.",
   "BALATRO-STUNTMAN.title": "Stuntman",
   "BALATRO-STUNTMAN.description": "Gain {Block:diff()} Block.\nDraw 1 less card next 2 turns.",
-  "BALATRO-SATELLITE.title": "Satellite",
-  "BALATRO-SATELLITE.description": "Upgrade a random card in your deck permanently.\nGain !M! Gold for each upgraded card in your deck.\nExhaust.",
   "BALATRO-SHOOT_THE_MOON.title": "Shoot the Moon",
   "BALATRO-SHOOT_THE_MOON.description": "Deal {Damage:diff()} damage for each Skill in your hand.",
   "BALATRO-TRIBOULET.title": "Triboulet",

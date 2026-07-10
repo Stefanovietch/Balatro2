@@ -43,5 +43,9 @@
 
   "BALATRO-RAISED_FIST_POWER.title": "Raised Fist",
 
-  "BALATRO-ROCKET_POWER.title": "Rocket"
+  "BALATRO-ROCKET_POWER.title": "Rocket",
+
+  "BALATRO-SCARY_FACE_POWER.title": "Scary Face",
+  "BALATRO-SCARY_FACE_POWER.description": "Whenever you play a Power, gain Block",
+  "BALATRO-SCARY_FACE_POWER.smartDescription": "Whenever you play a Power, gain {Amount} Block"
 }
