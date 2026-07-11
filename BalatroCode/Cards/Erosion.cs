@@ -23,7 +23,7 @@ public class Erosion() : BalatroCard(1,
         new CalculatedVar("CardsRemoved").WithMultiplier(delegate
         {
             if (this.Owner.Character is not Character.Balatro balatro) return 0;
-            return balatro.CardsRemoved.Get(balatro);
+            return balatro.CardsRemoved.Get(this.Owner);
         })
     ];
 

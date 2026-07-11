@@ -7,11 +7,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Balatro.BalatroCode.Cards;
 
 public class Blockade() : BalatroCard(1,
-    CardType.Skill, CardRarity.Token,
+    CardType.Skill, CardRarity.None,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(

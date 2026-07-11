@@ -4,6 +4,7 @@ using BaseLib.Utils.NodeFactories;
 using Balatro.BalatroCode.Extensions;
 using BaseLib.Utils;
 using Godot;
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -12,18 +13,20 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
+using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Rooms;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Character;
 public class Balatro : PlaceholderCharacterModel
 {
     public const string CharacterId = "Balatro";
     
-    public readonly SavedSpireField<Balatro, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
-    public readonly SavedSpireField<Balatro, int> CardsAdded = new(() => 0, "balatro_cards_added");
-    public readonly SavedSpireField<Balatro, int> PotionsUsed = new(() => 0, "balatro_potions_used");
-    public readonly SavedSpireField<Balatro, int> RestSitesVisited = new(() => 0, "rest_sites_visited");
-    public readonly SavedSpireField<Balatro, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
+    public readonly SavedSpireField<Player, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
+    public readonly SavedSpireField<Player, int> CardsAdded = new(() => 0, "balatro_cards_added");
+    public readonly SavedSpireField<Player, int> PotionsUsed = new(() => 0, "balatro_potions_used");
+    public readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
+    public readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
 
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
@@ -73,9 +76,9 @@ public class Balatro : PlaceholderCharacterModel
 
     public override decimal ModifyGoldGained(Player player, decimal amount)
     {
-        if (player.PlayerCombatState == null || player.Character is not Balatro balatro || !BalatroConfig.GoldCap) return base.ModifyGoldGained(player, amount);
+        if (player.PlayerCombatState == null || !BalatroConfig.GoldCap) return base.ModifyGoldGained(player, amount);
             
-        var maxCombatGold = MaxCombatGold.Get(balatro);
+        var maxCombatGold = MaxCombatGold.Get(player);
         var earned = CombatGoldEarned.Get(player.PlayerCombatState);
         var remaining = maxCombatGold - earned;
 
@@ -98,7 +101,7 @@ public class Balatro : PlaceholderCharacterModel
 
     public override Task BeforeCardRemoved(CardModel card)
     {
-        CardsRemoved.Set(this, CardsRemoved.Get(this) + 1);
+        CardsRemoved.Set(card.Owner, CardsRemoved.Get(card.Owner) + 1);
         return base.BeforeCardRemoved(card);
     }
 
@@ -107,7 +110,7 @@ public class Balatro : PlaceholderCharacterModel
         CardPile? pile = card.Pile;
         if (pile is { Type: PileType.Deck })
         {
-            CardsAdded.Set(this, CardsAdded.Get(this) + 1);
+            CardsAdded.Set(card.Owner, CardsAdded.Get(card.Owner) + 1);
         }
         return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
     }
@@ -115,19 +118,31 @@ public class Balatro : PlaceholderCharacterModel
 
     public override Task AfterPotionUsed(PotionModel potion, Creature? target)
     {
-        PotionsUsed.Set(this, PotionsUsed.Get(this) + 1);
+        PotionsUsed.Set(potion.Owner, PotionsUsed.Get(potion.Owner) + 1);
         return base.AfterPotionUsed(potion, target);
     }
 
     public override Task AfterRoomEntered(AbstractRoom room)
     {
-        if (room is RestSiteRoom) RestSitesVisited.Set(this, RestSitesVisited.Get(this) + 1);
+        var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
+        if (room is not RestSiteRoom || state == null) return base.AfterRoomEntered(room);
+        foreach (var player in state.Players)
+        {
+            if (player.Character == this)
+                RestSitesVisitedThisAct.Set(player, RestSitesVisitedThisAct.Get(player) + 1);
+        }
         return base.AfterRoomEntered(room);
     }
 
     public override Task AfterActEntered()
     {
-        RestSitesVisited.Set(this, 0);
+        var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
+        if (state == null) return base.AfterActEntered();
+        foreach (var player in state.Players)
+        {
+            if (player.Character == this)
+                RestSitesVisitedThisAct.Set(player, 0);
+        }
         return base.AfterActEntered();
     }
 

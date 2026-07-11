@@ -54,6 +54,6 @@ public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
     protected override int? GetMaxGold()
     {
         if (Player?.Character is not Character.Balatro balatro) return null;
-        return balatro.MaxCombatGold.Get(balatro);
+        return balatro.MaxCombatGold.Get(Player);
     }
 }

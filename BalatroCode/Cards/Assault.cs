@@ -7,11 +7,10 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Balatro.BalatroCode.Cards;
 
 public class Assault() : BalatroCard(1,
-    CardType.Attack, CardRarity.Token,
+    CardType.Attack, CardRarity.None,
     TargetType.AllEnemies)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(5,ValueProp.Move)
     ];
 
     protected override async Task OnPlay(

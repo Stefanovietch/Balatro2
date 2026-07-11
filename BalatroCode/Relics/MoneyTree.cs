@@ -18,7 +18,7 @@ public class MoneyTree() : BalatroRelic
     public override Task AfterObtained()
     {
         if (this.Owner.Character is not Character.Balatro balatro) return Task.CompletedTask;
-        balatro.MaxCombatGold.Set(balatro, 400);
+        balatro.MaxCombatGold.Set(this.Owner, 400);
         return Task.CompletedTask;
     }
 }

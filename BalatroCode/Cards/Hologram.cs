@@ -32,7 +32,7 @@ public class Hologram() : BalatroCard(1,
         CardModel? cardSource)
     {
         if (cardSource != this || this.Owner.Character is not Character.Balatro balatro) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return 1M + balatro.CardsAdded.Get(balatro) * 0.25M;
+        return 1M + balatro.CardsAdded.Get(this.Owner) * 0.25M;
     }
 
     protected override void OnUpgrade()

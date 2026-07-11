@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace Balatro.BalatroCode.Cards;
 
 public class Enhance() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Attack, CardRarity.None,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];

@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -14,7 +15,9 @@ public class MailInRebate() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(2),
-        new GoldVar(10)
+        new GoldVar(10),
+        new DisplayVar<AncientJoker>("Type", card =>  ((IRandomType) card).GetTypeString())
+
     ];
 
     protected override async Task OnPlay(
