@@ -27,7 +27,8 @@ public class EvenSteven() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).WithHitCount((int)((CalculatedVar)base.DynamicVars["EvenCostPlayed"]).Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount((int)((CalculatedVar)base.DynamicVars["EvenCostPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);

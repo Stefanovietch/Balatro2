@@ -5,8 +5,8 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class Stuntman() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+public class Stuntman() : BalatroCard(2,
+    CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];

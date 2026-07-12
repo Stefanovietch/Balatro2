@@ -23,7 +23,7 @@ public class OddTodd() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        for (var _ = 0; _ < this.DynamicVars["OddCostPlayed"].BaseValue; _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        for (var _ = 0; _ < (int)((CalculatedVar)base.DynamicVars["OddCostPlayed"]).Calculate(play.Target); _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()

@@ -39,7 +39,7 @@
   
   "BALATRO-PHOTOGRAPH_POWER.title": "Photograph",
   "BALATRO-PHOTOGRAPH_POWER.description": "Your next Power card is played twice.",
-  "BALATRO-PHOTOGRAPH_POWER.smartDescription": "Your next{Amount:plural:| [blue]{Amount}[/blue]} Power card is played twice.",
+  "BALATRO-PHOTOGRAPH_POWER.smartDescription": "Your next {Amount:plural:Power is| [blue]{Amount}[/blue] Powers are} played twice.",
 
   "BALATRO-RAISED_FIST_POWER.title": "Raised Fist",
 
@@ -47,5 +47,15 @@
 
   "BALATRO-SCARY_FACE_POWER.title": "Scary Face",
   "BALATRO-SCARY_FACE_POWER.description": "Whenever you play a Power, gain Block",
-  "BALATRO-SCARY_FACE_POWER.smartDescription": "Whenever you play a Power, gain {Amount} Block"
+  "BALATRO-SCARY_FACE_POWER.smartDescription": "Whenever you play a Power, gain {Amount} Block",
+  
+  "BALATRO-SEEING_DOUBLE_POWER.title": "Seeing Double",
+  "BALATRO-SEEING_DOUBLE_POWER.description": "Deal double damage",
+  "BALATRO-SEEING_DOUBLE_POWER.smartDescription": "Deal double damage",
+
+  "BALATRO-SELTZER_POWER.title": "Seltzer",
+  "BALATRO-SELTZER_POWER.description": "Your next card is played twice.",
+  "BALATRO-SELTZER_POWER.smartDescription": "Your next {Amount:plural:card is|[blue]{Amount}[/blue] cards are} played twice."
+  
+  
 }
