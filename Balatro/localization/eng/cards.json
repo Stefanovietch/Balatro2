@@ -257,17 +257,18 @@
   "BALATRO-STONE_JOKER.title": "Stone Joker",
   "BALATRO-STONE_JOKER.description": "Add a Stone Card into your Hand.\nGain {Block:diff()} Block for each Stone Card in your Hand, Draw, Discard and Exhaust pile.{InCombat:\n({StoneCards:diff()} {StoneCards:plural:Stone Card|Stone Cards})|}",
   "BALATRO-STUNTMAN.title": "Stuntman",
-  "BALATRO-STUNTMAN.description": "Gain {Block:diff()} Block.\nDraw 1 less card next 2 turns.",
-  
-  
-  
-  
-  
+  "BALATRO-STUNTMAN.description": "Gain {Block:diff()} Block.\nDraw 2 less card next turn.",
   "BALATRO-SUPERNOVA.title": "Supernova",
-  "BALATRO-SUPERNOVA.description": "Apply X Weak.\nGain X Regeneration.\nExhaust.",
-  "BALATRO-SUPERNOVA.upgrade_description": "Apply X+1 Weak.\nGain X+1 Regeneration.\nExhaust.",
+  "BALATRO-SUPERNOVA.description": "Apply X{IfUpgraded:show:+1|} Weak.\nGain X{IfUpgraded:show:+1|} Regeneration.",
   "BALATRO-SUPERPOSITION.title": "Superposition",
-  "BALATRO-SUPERPOSITION.description": "If you are holding a cost 0, 1, 2 and 3 card, obtain a random potion.",
+  "BALATRO-SUPERPOSITION.description": "Draw {Cards:diff()} cards.\nIf you are holding a cost 0, 1, 2 and 3 card, obtain a random potion.",
+  "BALATRO-SWASHBUCKLER.title": "Swashbuckler",
+  "BALATRO-SWASHBUCKLER.description": "Deal {Damage:diff()} Damage.\nWhen you draw a card, increase the damage equal to its cost this combat.",
+
+
+
+
+
   "BALATRO-TO_DO_LIST.title": "To Do List",
   "BALATRO-TO_DO_LIST.description": "Gain !M! Gold whenever a [Skill/Attack/Power] is played. Changes at the end of each turn.",
   "BALATRO-VAMPIRE.title": "Vampire",
@@ -285,8 +286,6 @@
   "BALATRO-TRADING_CARD.description": "At the start of your turn, Exhaust 1 card and gain !M! Gold.",
   "BALATRO-WALKIE_TALKIE.title": "Walkie Talkie",
   "BALATRO-WALKIE_TALKIE.description": "When playing a cost 1 Card gain !M! Block and deal !M! damage to a random enemy.",
-  "BALATRO-SWASHBUCKLER.title": "Swashbuckler",
-  "BALATRO-SWASHBUCKLER.description": "Retain.\nDeal {Damage:diff()} Damage.\nWhen you draw a card, increase the damage equal to its cost this combat.",
   "BALATRO-TROUBADOUR.title": "Troubadour",
   "BALATRO-TROUBADOUR.description": "Draw !M! cards.\nNext turn lose {Energy:energyIcons()}.",
   "BALATRO-THROWBACK.title": "Throwback",

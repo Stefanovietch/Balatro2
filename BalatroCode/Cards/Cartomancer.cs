@@ -22,7 +22,7 @@ public class Cartomancer() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        PotionProcureResult procure = await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration, this.Owner.Character.PotionPool.GetUnlockedPotions(this.Owner.UnlockState).Concat<PotionModel>(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(this.Owner.UnlockState)).Where(c => c.Rarity != PotionRarity.Common)).ToMutable(), this.Owner);
+        await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration, this.Owner.Character.PotionPool.GetUnlockedPotions(this.Owner.UnlockState).Concat<PotionModel>(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(this.Owner.UnlockState)).Where(c => c.Rarity != PotionRarity.Common)).ToMutable(), this.Owner);
     }
 
     protected override void OnUpgrade()
