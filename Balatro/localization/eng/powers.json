@@ -55,7 +55,23 @@
 
   "BALATRO-SELTZER_POWER.title": "Seltzer",
   "BALATRO-SELTZER_POWER.description": "Your next card is played twice.",
-  "BALATRO-SELTZER_POWER.smartDescription": "Your next {Amount:plural:card is|[blue]{Amount}[/blue] cards are} played twice."
+  "BALATRO-SELTZER_POWER.smartDescription": "Your next {Amount:plural:card is|[blue]{Amount}[/blue] cards are} played twice.",
+
+  "BALATRO-TO_DO_LIST_POWER.title": "To Do List",
+  "BALATRO-TO_DO_LIST_POWER.description": "Gain Gold whenever a [Skill/Attack/Power] is played. Changes at the end of each turn.",
+  "BALATRO-TO_DO_LIST_POWER.smartDescription": "Gain {Amount} Gold whenever a {Type} is played. Changes at the end of each turn.",
   
+  "BALATRO-TRADING_CARD_POWER.title": "Trading Card",
+  "BALATRO-TRADING_CARD_POWER.description": "At the start of your turn, Exhaust a card and gain Gold.",
+  "BALATRO-TRADING_CARD_POWER.smartDescription": "At the start of your turn, Exhaust a card and gain {TradingCardPower:diff()} Gold.",
   
+  "BALATRO-TRIBOULET_POWER.title": "Triboulet",
+  "BALATRO-TRIBOULET_POWER.description": "Double the damage and Block of all 2 Cost cards.",
+  "BALATRO-TRIBOULET_POWER.smartDescription": "Double the damage and Block of all 2 Cost cards.",
+
+  "BALATRO-WALKIE_TALKIE_POWER.title": "WalkieTalkiePower",
+  "BALATRO-WALKIE_TALKIE_POWER.description": "When playing a cost 1 Card gain Block and deal damage to a random enemy.",
+  "BALATRO-WALKIE_TALKIE_POWER.smartDescription": "When playing a cost 1 Card gain {Amount} Block and deal {Amount} damage to a random enemy."
+  
+
 }

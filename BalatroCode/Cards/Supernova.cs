@@ -31,9 +31,4 @@ public class Supernova() : BalatroCard(-1,
         await PowerCmd.Apply<RegenPower>(choiceContext, this.Owner.Creature, count, this.Owner.Creature, this);
 
     }
-
-    protected override void OnUpgrade()
-    {
-
-    }
 }

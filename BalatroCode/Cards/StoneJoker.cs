@@ -27,7 +27,7 @@ public class StoneJoker() : BalatroCard(1,
     {
         ArgumentNullException.ThrowIfNull(this.CombatState);
         await StoneCard.CreateInHand(this.Owner, 1, this.CombatState);
-        for (var _ = 0; _ < (int)((CalculatedVar)base.DynamicVars["PlatingPower"]).Calculate(play.Target); _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        for (var _ = 0; _ < (int)((CalculatedVar)base.DynamicVars["PlatingPower"]).Calculate(null); _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()

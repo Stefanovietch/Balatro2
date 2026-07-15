@@ -28,7 +28,7 @@ public class Castle() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()

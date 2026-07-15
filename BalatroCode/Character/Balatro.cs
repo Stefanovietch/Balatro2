@@ -26,10 +26,12 @@ public class Balatro : PlaceholderCharacterModel
     public readonly SavedSpireField<Player, int> CardsAdded = new(() => 0, "balatro_cards_added");
     public readonly SavedSpireField<Player, int> PotionsUsed = new(() => 0, "balatro_potions_used");
     public readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
+    public readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
     public readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
 
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
+    public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
 
     public static readonly Color Color = new("ffffff");
 
@@ -125,11 +127,14 @@ public class Balatro : PlaceholderCharacterModel
     public override Task AfterRoomEntered(AbstractRoom room)
     {
         var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
-        if (room is not RestSiteRoom || state == null) return base.AfterRoomEntered(room);
-        foreach (var player in state.Players)
+        if (state == null || room is not RestSiteRoom || room is not EventRoom) return base.AfterRoomEntered(room);
         {
-            if (player.Character == this)
-                RestSitesVisitedThisAct.Set(player, RestSitesVisitedThisAct.Get(player) + 1);
+            var counter = room is RestSiteRoom ? RestSitesVisitedThisAct : QuestionMarksVisited;
+            foreach (var player in state.Players)
+            {
+                if (player.Character == this)
+                    counter.Set(player, counter.Get(player) + 1);
+            }
         }
         return base.AfterRoomEntered(room);
     }
@@ -148,7 +153,11 @@ public class Balatro : PlaceholderCharacterModel
 
     public override Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
     {
-        if (card.Owner.PlayerCombatState != null) CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
+        if (card.Owner.PlayerCombatState != null)
+        {
+            CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
+            CardsDiscardedThisCombat.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisCombat.Get(card.Owner.PlayerCombatState));
+        }
 
         return base.AfterCardDiscarded(choiceContext, card);
     }
