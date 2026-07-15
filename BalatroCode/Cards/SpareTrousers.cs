@@ -12,7 +12,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Balatro.BalatroCode.Cards;
 
 public class SpareTrousers() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Attack, CardRarity.Uncommon,
     TargetType.Self)
 {
     

@@ -14,7 +14,7 @@ public class Troubadour() : BalatroCard(0,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(2),
-        new PowerVar<EnergyNextTurnPower>(-1)
+        new EnergyVar(1)
     ];
 
     protected override async Task OnPlay(
@@ -22,7 +22,7 @@ public class Troubadour() : BalatroCard(0,
         CardPlay play)
     {
         await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<EnergyNextTurnPower>().BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, this.Owner.Creature, -this.DynamicVars.Energy.BaseValue, this.Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

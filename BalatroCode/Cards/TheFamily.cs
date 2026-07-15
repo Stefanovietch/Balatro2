@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Balatro.BalatroCode.Cards;
 
 public class TheFamily() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Attack, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [

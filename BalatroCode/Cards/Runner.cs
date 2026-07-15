@@ -41,7 +41,7 @@ public class Runner() : BalatroCard(1,
     
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new BlockVar(this.CurrentBlock, ValueProp.Move),
-        new IntVar("BlockIncrease", 3M),
+        new IntVar("BlockIncrease", 2M),
     ];
 
     
@@ -60,7 +60,7 @@ public class Runner() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["BlockIncrease"].UpgradeValueBy(1);
+        this.DynamicVars["BlockIncrease"].UpgradeValueBy(2);
     }
 
     protected override bool ShouldGlowGoldInternal => HasCost012Cards();

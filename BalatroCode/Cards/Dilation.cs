@@ -6,7 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace Balatro.BalatroCode.Cards;
 
 public class Dilation() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Skill, CardRarity.Curse,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];

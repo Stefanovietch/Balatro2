@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace Balatro.BalatroCode.Cards;
 
 public class Seance() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [

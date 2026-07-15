@@ -16,7 +16,7 @@ public class MailInRebate() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(2),
         new GoldVar(10),
-        new DisplayVar<AncientJoker>("Type", card =>  ((IRandomType) card).GetTypeString())
+        new DisplayVar<MailInRebate>("Type", card =>  ((IRandomType) card).GetTypeString())
 
     ];
 
