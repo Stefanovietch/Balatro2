@@ -10,7 +10,17 @@
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
   "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
   "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{Amount}[/blue].",
+  
+  "BALATRO-BUSINESS_CARD_POWER.title": "Business Card",
+  "BALATRO-BUSINESS_CARD_POWER.description": "Whenever you play a Power, you have a Chance to gain Gold.",
+  "BALATRO-BUSINESS_CARD_POWER.smartDescription": "Whenever you play a Power, you have a {Numerator} in 4 Chance to gain {Amount} Gold.",
 
+  "BALATRO-CAVENDISH_POWER.title": "CavendishPower",
+  "BALATRO-CAVENDISH_POWER.description": "",
+  "BALATRO-CAVENDISH_POWER.smartDescription": "",
+  
+  "BALATRO-E_BALL_POWER.title": "8 Ball",
+  
   "BALATRO-EGG_POWER.title": "Egg",
   "BALATRO-EGG_POWER.description": "Gain [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
   "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
@@ -26,12 +36,20 @@
   "BALATRO-LOYALTY_CARD_POWER.title": "Loyalty Card",
   "BALATRO-LOYALTY_CARD_POWER.description": "Every 6th card deals quadruple damage.",
   "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Your {Amount:plural:next|[blue]{Amount}{Amount:2:nd|th}[/blue]} card deals quadruple damage.",
-
+  
+  "BALATRO-LUCKY_CAT_POWER.title": "LuckyCatPower",
+  "BALATRO-LUCKY_CAT_POWER.description": "At start of your turn have a Chance to gain Block and a Chance to deal damage to ALL enemies.",
+  "BALATRO-LUCKY_CAT_POWER.smartDescription": "At start of your turn, {Numerator} in 4 Chance to gain {Amount} Block and {Numerator} in 4 Chance to deal {Amount} damage to ALL enemies.",
+  
   "BALATRO-MR_BONES_POWER.title": "Mr. Bones",
   "BALATRO-MR_BONES_POWER.description": "Revive with 50% health when taking Fatal damage, then remove this from your deck.",
   "BALATRO-MR_BONES_POWER.smartDescription": "Revive with 50% health when taking Fatal damage, then remove this from your deck.",
   
   "BALATRO-ONYX_AGATE_POWER.title": "Onyx Agate",
+  
+  "BALATRO-OOPS_ALL6_POWER.title": "Oops! All 6's",
+  "BALATRO-OOPS_ALL6_POWER.description": "Doubles all listed probabilities.",
+  "BALATRO-OOPS_ALL6_POWER.smartDescription": "Doubles all listed probabilities.",
   
   "BALATRO-PAREIDOLIA_POWER.title": "Pareidolia",
   "BALATRO-PAREIDOLIA_POWER.description": "All cards are considered Powers.",

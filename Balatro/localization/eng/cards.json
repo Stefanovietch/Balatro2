@@ -26,10 +26,8 @@
   "BALATRO-BASEBALL_CARD.description": "All your Uncommon cards damage is increased by x1.5.",
   "BALATRO-BLACKBOARD.title": "Blackboard",
   "BALATRO-BLACKBOARD.description": "Apply {VulnerablePower:diff()} Vulnerable.\nIf all cards in your hand are Common or Uncommon, triple the Vulnerable.",
-  
   "BALATRO-BLOODSTONE.title": "Bloodstone",
-  "BALATRO-BLOODSTONE.description": "Replay each Attack played this turn with a !${modID}:probability! in !${modID}:chance! ${modID}:Chance.",
-
+  "BALATRO-BLOODSTONE.description": "Replay each Attack played this turn with a {Numerator} in {Chance:diff()} Chance.",
   "BALATRO-BLUE_JOKER.title": "Blue Joker",
   "BALATRO-BLUE_JOKER.description": "Gain Block equal to the number of cards in your draw pile{IfUpgraded:show: + 4|}.",
   "BALATRO-BLUEPRINT.title": "Blueprint",
@@ -44,10 +42,8 @@
   "BALATRO-BURGLAR.description": "Draw 3 Cards.",
   "BALATRO-BURNT_JOKER.title": "Burnt Joker",
   "BALATRO-BURNT_JOKER.description": "Discard any amount of cards and upgrade them.\nDraw {Cards:diff()} cards.",
-
   "BALATRO-BUSINESS_CARD.title": "Business Card",
-  "BALATRO-BUSINESS_CARD.description": "Whenever you play a Power, you have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain !M! Gold.",
-
+  "BALATRO-BUSINESS_CARD.description": "Whenever you play a Power, you have a {Numerator} in {Chance:diff()} Chance to gain {BusinessCardPower:diff()} Gold.",
   "BALATRO-CAMPFIRE.title": "Campfire",
   "BALATRO-CAMPFIRE.description": "Gain {StrengthPower:diff()} Strength.\nIncreased by 1 for each Rest Site visited this Act.",
   "BALATRO-CANIO.title": "Canio",
@@ -58,10 +54,8 @@
   "BALATRO-CARTOMANCER.description": "Gain a random common potion.",
   "BALATRO-CASTLE.title": "Castle",
   "BALATRO-CASTLE.description": "Gain {Block:diff()} Block.\nIncreased by {Increase:diff()} for this combat when you discard a {Type}. Changes at the end of each turn.",
-  
   "BALATRO-CAVENDISH.title": "Cavendish",
-  "BALATRO-CAVENDISH.description": "Your next Attack deals triple damage.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to be removed from the deck.",
-
+  "BALATRO-CAVENDISH.description": "Your next Attack deals triple damage.\n{Numerator} in {Chance:diff()} Chance to be removed from the deck.",
   "BALATRO-CEREMONIAL_DAGGER.title": "Ceremonial Dagger",
   "BALATRO-CEREMONIAL_DAGGER.description": "Deal {Damage:diff()} damage. Exhaust a {IfUpgraded:show:|random }card and permanently increase this card's damage by twice it's cost.",
   "BALATRO-CERTIFICATE.title": "Certificate",
@@ -88,10 +82,8 @@
   "BALATRO-DRUNKARD.description": "Discard any amount of cards, then draw that many.",
   "BALATRO-DUSK.title": "Dusk",
   "BALATRO-DUSK.description": "If this is the last card in your hand, replay all cards you played this turn.",
-  
   "BALATRO-E_BALL.title": "8 Ball",
-  "BALATRO-E_BALL.description": "Enemy loses !M! Strength this turn.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain a random Potion.",
-
+  "BALATRO-E_BALL.description": "Enemy loses {EBallPower:diff()} Strength this turn.\n{Numerator} in {Chance:diff()} Chance to gain a random Potion.",
   "BALATRO-EGG.title": "Egg",
   "BALATRO-EGG.description": "Gain {EggPower:diff()} Gold at the end of the turn if you didn't take damage.",
   "BALATRO-EROSION.title": "Erosion",
@@ -120,18 +112,14 @@
   "BALATRO-GOLDEN_TICKET.description": "Add a random Rare card to your hand.\nGain {Gold:diff()} Gold for each Rare card in your deck.",
   "BALATRO-GREEN_JOKER.title": "Green Joker",
   "BALATRO-GREEN_JOKER.description": "Deal {Damage:diff()} damage.\nIncrease the damage by {Bonus:diff()} for this combat.\nDecreased by {Bonus:diff()} instead when discarded.",
-
   "BALATRO-GROS_MICHEL.title": "Gros Michel",
-  "BALATRO-GROS_MICHEL.description": "Deal {Damage:diff()} damage to ALL enemies.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to be removed from the deck.",
-
+  "BALATRO-GROS_MICHEL.description": "Deal {Damage:diff()} damage to ALL enemies.\n{Numerator} in {Chance:diff()} Chance to be removed from the deck.",
   "BALATRO-HACK.title": "Hack",
   "BALATRO-HACK.description": "Put all cost 0 cards from your Draw pile into your hand.",
   "BALATRO-HALF_JOKER.title": "Half Joker",
   "BALATRO-HALF_JOKER.description": "If you have 3 or less cards in your hand, deal {Damage:diff()} damage.",
-  
   "BALATRO-HALLUCINATION.title": "Hallucination",
-  "BALATRO-HALLUCINATION.description": "Apply !M! Weak.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to add a random potion to this combat reward.\nExhaust.",
-
+  "BALATRO-HALLUCINATION.description": "Apply {WeakPower:diff()} Weak.\n{Numerator} in {Chance:diff()} Chance to add a random potion to this combat reward.",
   "BALATRO-HANGING_CHAD.title": "Hanging Chad",
   "BALATRO-HANGING_CHAD.description": "Play the top card of your Draw pile {Repeat:diff()} times and Exhaust it.",
   "BALATRO-HIKER.title": "Hiker",
@@ -152,10 +140,8 @@
   "BALATRO-LOYALTY_CARD.description": "Every 6th card deals quadruple damage.",
   "BALATRO-LUCHADOR.title": "Luchador",
   "BALATRO-LUCHADOR.description": "Enemy loses {StrengthPower:diff()} Strength.\nRemoved from deck when played.",
-
   "BALATRO-LUCKY_CAT.title": "Lucky Cat",
-  "BALATRO-LUCKY_CAT.description": "At start of your turn, !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain !M! Block and !${modID}:probability! in !${modID}:chance! ${modID}:Chance to deal !M! damage to ALL enemies.",
-
+  "BALATRO-LUCKY_CAT.description": "At start of your turn, {Numerator} in {Chance:diff()} Chance to gain {LuckyCatPower:diff()} Block and {Numerator} in {Chance:diff()} Chance to deal {LuckyCatPower:diff()} damage to ALL enemies.",
   "BALATRO-MADNESS.title": "Madness",
   "BALATRO-MADNESS.description": "Exhaust a random card and gain {StrengthPower:diff()} Strength.",
   "BALATRO-MAIL_IN_REBATE.title": "Mail-In Rebate",
@@ -182,11 +168,8 @@
   "BALATRO-ODD_TODD.description": "Gain {Block:diff()} Block for each odd cost card you played this turn.{InCombat:\n({OddCostPlayed:diff()} odd {OddCostPlayed:plural:card|cards} played)|}",
   "BALATRO-ONYX_AGATE.title": "Onyx Agate",
   "BALATRO-ONYX_AGATE.description": "Gain {OnyxAgatePower:diff()} Strength.\nAt the end of this turn lose {OnyxAgatePower:diff()} Strength.",
-
-  "BALATRO-OOPS_ALL6S.title": "Oops! All 6s",
-  "BALATRO-OOPS_ALL6S.description": "Doubles all listed probabilities.",
-  "BALATRO-OOPS_ALL6S.upgrade_description": "Doubles all listed probabilities.\nAdds an extra chance for a Potion as a combat Reward.",
-
+  "BALATRO-OOPS_ALL6S.title": "Oops! All 6's",
+  "BALATRO-OOPS_ALL6S.description": "Doubles all listed probabilities.{IfUpgraded:show:\nAdds an extra chance for a Potion as a combat Reward.|}",
   "BALATRO-PAREIDOLIA.title": "Pareidolia",
   "BALATRO-PAREIDOLIA.description": "All cards are considered Powers.",
   "BALATRO-PERKEO.title": "Perkeo",
@@ -201,11 +184,8 @@
   "BALATRO-RAMEN.description": "Deal {CalculatedDamage:diff()} damage to ALL enemies twice. Reduced by 1 for each card played while in hand.",
   "BALATRO-RED_CARD.title": "Red Card",
   "BALATRO-RED_CARD.description": "Apply {VulnerablePower:diff()} Vulnerable to ALL enemies.",
-
   "BALATRO-RESERVED_PARKING.title": "Reserved Parking",
-  "BALATRO-RESERVED_PARKING.description": "Put !M! random Power from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
-  "BALATRO-RESERVED_PARKING.upgrade_description": "Put !M! random Powers from your draw pile into your hand, have a !${modID}:probability! in !${modID}:chance! ${modID}:Chance to gain 10 Gold for each Power in hand.",
-
+  "BALATRO-RESERVED_PARKING.description": "Put {Cards:diff()} random {Cards:plural:Power|Powers} from your draw pile into your hand, have a {Numerator} in {Chance:diff()} Chance to gain 10 Gold for each Power in hand.",
   "BALATRO-RIDE_THE_BUS.title": "Ride the Bus",
   "BALATRO-RIDE_THE_BUS.description": "Deal {CalculatedDamage:diff()} damage.\nIncreased by {ExtraDamage:diff()} for each card you played this combat without playing a Power.",
   "BALATRO-RIFF_RAFF.title": "Riff-Raff",
@@ -242,10 +222,8 @@
   "BALATRO-SMILEY_FACE.description": "Deals {Damage:diff()} for each Power played this combat.{InCombat:\n({PowersPlayed:diff()} {PowersPlayed:plural:Power|Powers} played)|}",
   "BALATRO-SOCK_AND_BUSKIN.title": "Sock and Buskin",
   "BALATRO-SOCK_AND_BUSKIN.description": "Trigger all your Power's start and end of turn effects.",
-  
   "BALATRO-SPACE_JOKER.title": "Space Joker",
-  "BALATRO-SPACE_JOKER.description": "Draw !M! cards.\n!${modID}:probability! in !${modID}:chance! ${modID}:Chance to Upgrade cards in your hand.",
-
+  "BALATRO-SPACE_JOKER.description": "Draw {Cards:diff()} cards.\n{Numerator} in {Chance:diff()} Chance to Upgrade cards in your hand.",
   "BALATRO-SPARE_TROUSERS.title": "Spare Trousers",
   "BALATRO-SPARE_TROUSERS.description": "Deal {Damage:diff()} damage to two random enemies. Permanently increased by {DamageIncrease:diff()} if either is Fatal.",
   "BALATRO-SPLASH.title": "Splash",

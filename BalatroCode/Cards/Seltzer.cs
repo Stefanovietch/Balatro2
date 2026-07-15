@@ -13,7 +13,7 @@ public class Seltzer() : BalatroCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<SeltzerPower>(2)
+        new PowerVar<SeltzerPower>(1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

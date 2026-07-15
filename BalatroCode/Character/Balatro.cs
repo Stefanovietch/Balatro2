@@ -2,6 +2,8 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils.NodeFactories;
 using Balatro.BalatroCode.Extensions;
+using Balatro.BalatroCode.Powers;
+using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
 using HarmonyLib;
@@ -28,7 +30,7 @@ public class Balatro : PlaceholderCharacterModel
     public readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
     public readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
     public readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
-
+    
     public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
     public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
