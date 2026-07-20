@@ -20,7 +20,8 @@ public class Hallucination() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 6),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<Hallucination>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<WeakPower>(1)
     ];
 

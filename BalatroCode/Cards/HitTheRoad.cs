@@ -8,17 +8,17 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace Balatro.BalatroCode.Cards;
 
 public class HitTheRoad() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Attack, CardRarity.Rare,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
-        new CalculatedVar("StrengthPower").WithMultiplier(delegate
+        new CalculatedVar("StrengthPower").WithMultiplier((c, _) =>
         {
-            if (this.Owner.PlayerCombatState == null) return 0;
-            if (this.Owner.Character is not Character.Balatro balatro) return 0;
-            return balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState);
+            if (c.Owner.PlayerCombatState == null) return 0;
+            if (c.Owner.Character is not Character.Balatro balatro) return 0;
+            return balatro.CardsDiscardedThisTurn.Get(c.Owner.PlayerCombatState);
         })
     ];
 

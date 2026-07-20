@@ -21,7 +21,7 @@ public class LuckyCatPower() : BalatroPower, IChance
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<LuckyCatPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString()),
     ];
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)

@@ -14,7 +14,7 @@ public class SteelJoker() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CalculationBaseVar(0),
-        new CalculationBaseVar(1),
+        new CalculationExtraVar(1),
         new CalculatedVar("PlatingPower").WithMultiplier((card, _) => PileType.Deck.GetPile(card.Owner).Cards.Count(c => c.IsUpgraded))
     ];
     

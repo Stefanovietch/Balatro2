@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 namespace Balatro.BalatroCode.Cards;
 
 public class Blockade() : BalatroCard(1,
-    CardType.Skill, CardRarity.None,
+    CardType.Skill, CardRarity.Token,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [

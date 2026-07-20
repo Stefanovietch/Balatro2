@@ -15,7 +15,8 @@ public class Cavendish() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 1000),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString())
+        new DisplayVar<Cavendish>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];

@@ -17,7 +17,8 @@ public class ReservedParking() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new CardsVar(1),
         new DynamicVar("Chance", 2),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<ReservedParking>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
     ];
 
     protected override async Task OnPlay(

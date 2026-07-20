@@ -14,7 +14,8 @@ public class Bloodstone() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 2),
-        new DisplayVar<Bloodstone>("Numerator", card => card.GetNumerator(card.Owner).ToString())
+        new DisplayVar<Bloodstone>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];

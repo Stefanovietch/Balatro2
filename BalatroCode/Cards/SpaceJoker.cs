@@ -12,8 +12,10 @@ public class SpaceJoker() : BalatroCard(1,
     TargetType.Self), IChance
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new CardsVar(1),
         new DynamicVar("Chance", 4),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<SpaceJoker>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
     ];
 
     protected override async Task OnPlay(

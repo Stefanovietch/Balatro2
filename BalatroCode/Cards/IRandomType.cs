@@ -21,7 +21,7 @@ public interface IRandomType
 
    public string GetTypeString()
    {
-      if (CurrentType == CardType.None) return "[Skill/Attack/Power]";
+      if (CurrentType == CardType.None) return "(Skill|Attack|Power)";
       return CurrentType.ToString();
    }
 }

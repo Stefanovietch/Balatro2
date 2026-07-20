@@ -11,9 +11,9 @@ public interface IChance {}
 
 public static class ChanceExtensions
 {
-    public static int GetNumerator(this IChance _, Player player)
+    public static int GetNumerator(this IChance _, Player? player)
     {
-        var power = player.Creature.GetPower<OopsAll6Power>();
+        var power = player?.Creature.GetPower<OopsAll6Power>();
         if (power == null) return 1;
         return (int) Math.Pow(2, power.Amount);
     }

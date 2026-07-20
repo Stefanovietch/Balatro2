@@ -13,18 +13,18 @@ public class Banner() : BalatroCard(2,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedBlock(24, (card, target) => -PileType.Discard.GetPile(card.Owner).Cards.Count)
+        ..MakeCalculatedBlock(24, (card, _) => -PileType.Discard.GetPile(card.Owner).Cards.Count)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(this.Owner.Creature), ValueProp.Move , play);
+        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(null), ValueProp.Move , play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(7);
+        this.DynamicVars.CalculationBase.UpgradeValueBy(7);
     }
 }

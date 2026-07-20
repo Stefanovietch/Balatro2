@@ -12,7 +12,7 @@ public class Throwback() : BalatroCard(1,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedVar("QuestionMarks", 0, (c, _) => this.Owner.Character is Character.Balatro balatro ? balatro.QuestionMarksVisited.Get(this.Owner) : 0)
+        ..MakeCalculatedVar("QuestionMarks", 0, (c, _) => c.Owner.Character is Character.Balatro balatro ? balatro.QuestionMarksVisited.Get(c.Owner) : 0)
     ];
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -30,6 +30,6 @@ public class Throwback() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculationBase.UpgradeValueBy(1);
+        this.DynamicVars["QuestionMarks"].UpgradeValueBy(1);
     }
 }

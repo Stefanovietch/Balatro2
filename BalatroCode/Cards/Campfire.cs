@@ -12,7 +12,7 @@ public class Campfire() : BalatroCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedVar("StrengthPower", 0, (c, _) => this.Owner.Character is Character.Balatro balatro ? balatro.RestSitesVisitedThisAct.Get(this.Owner) : 0)
+        ..MakeCalculatedVar("StrengthPower", 0, (c, _) => c.Owner.Character is Character.Balatro balatro ? balatro.RestSitesVisitedThisAct.Get(c.Owner) : 0)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -26,6 +26,6 @@ public class Campfire() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculationBase.UpgradeValueBy(1);
+        this.DynamicVars["StrengthPower"].UpgradeValueBy(1);
     }
 }

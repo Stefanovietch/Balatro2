@@ -19,7 +19,8 @@ public class EBall() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 4),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<EBall>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<EBallPower>(8)
     ];
 

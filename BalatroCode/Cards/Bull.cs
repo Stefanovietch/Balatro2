@@ -13,7 +13,7 @@ public class Bull() : BalatroCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("blockPerGold", 10),
-        ..MakeCalculatedBlock(0, (card, target) => card.Owner.Gold / this.DynamicVars["blockPerGold"].BaseValue)
+        ..MakeCalculatedBlock(0, (card, target) => card.Owner.Gold / card.DynamicVars["blockPerGold"].BaseValue)
     ];
 
     protected override async Task OnPlay(

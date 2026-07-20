@@ -13,7 +13,7 @@ public class Fibonacci() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DisplayVar<Fibonacci>("Turn",f => f.Owner.PlayerCombatState?.TurnNumber.ToString() ?? ""),
-        ..MakeCalculatedDamage(0,(card, creature) => Fib(card.Owner.PlayerCombatState?.TurnNumber ?? 0))
+        ..MakeCalculatedDamage(0,(card, _) => Fib(card.Owner.PlayerCombatState?.TurnNumber ?? 0))
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -34,7 +34,7 @@ public class Fibonacci() : BalatroCard(1,
         this.RemoveKeyword(CardKeyword.Exhaust);
     }
     
-    private int Fib(int n) {
+    private static int Fib(int n) {
         return (n < 2)? n : Fib(n - 1) + Fib(n - 2);
     }
 }

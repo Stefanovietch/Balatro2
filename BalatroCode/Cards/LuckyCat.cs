@@ -11,11 +11,12 @@ namespace Balatro.BalatroCode.Cards;
 
 public class LuckyCat() : BalatroCard(2,
     CardType.Power, CardRarity.Uncommon,
-    TargetType.Self)
+    TargetType.Self), IChance
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 4),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<LuckyCat>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<LuckyCatPower>(10)
     ];
 

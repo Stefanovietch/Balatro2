@@ -10,12 +10,13 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 namespace Balatro.BalatroCode.Cards;
 
 public class BusinessCard() : BalatroCard(1,
-    CardType.Attack, CardRarity.Basic,
+    CardType.Power, CardRarity.Common,
     TargetType.Self), IChance
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Chance", 4),
-        new DisplayVar<BusinessCard>("Numerator", card => card.GetNumerator(card.Owner).ToString()),
+        new DisplayVar<BusinessCard>("Numerator", card => card
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<BusinessCardPower>(20)
     ];
 

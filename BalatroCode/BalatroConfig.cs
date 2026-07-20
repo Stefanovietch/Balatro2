@@ -30,12 +30,13 @@ internal class BalatroConfig : SimpleModConfig {
     
     // the new value is written to disk.
     [ConfigHideInUI]
-    public static StringName SelectedDeck { get; set; } = "redDeck";
+    public static string SelectedDeck { get; set; } = "redDeck";
     
     [ConfigHideInUI]
-    public static StringName SelectedStake { get; set; } = "whiteStake";
+    public static string SelectedStake { get; set; } = "whiteStake";
 
-    [ConfigHideInUI] 
+    [ConfigHideInUI]
+    [System.ComponentModel.TypeConverter(typeof(DictionaryJsonConverter))]
     public static Dictionary<string, int> Stakes { get; set; } = new()
     {
         { "redDeck", 4 }, { "blueDeck", 2 }, { "yellowDeck", 0 },
@@ -45,4 +46,23 @@ internal class BalatroConfig : SimpleModConfig {
         { "anaglyphDeck", 0 }, { "plasmaDeck", 0 }, { "erraticDeck", 0 }
     };
 
+    private sealed class DictionaryJsonConverter : System.ComponentModel.TypeConverter
+    {
+        public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, Type sourceType)
+            => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+
+        public override object? ConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object value)
+            => value is string s
+                ? JsonSerializer.Deserialize<Dictionary<string, int>>(s)
+                : base.ConvertFrom(context, culture, value);
+
+        public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext? context, Type? destinationType)
+            => destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
+
+        public override object? ConvertTo(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object? value, Type destinationType)
+            => destinationType == typeof(string) && value is Dictionary<string, int> dict
+                ? JsonSerializer.Serialize(dict)
+                : base.ConvertTo(context, culture, value, destinationType);
+    }
 }
+
