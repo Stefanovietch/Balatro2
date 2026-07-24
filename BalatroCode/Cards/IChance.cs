@@ -9,7 +9,7 @@ namespace Balatro.BalatroCode.Cards;
 
 public interface IChance {}
 
-public static class ChanceExtensions
+public static class ChanceMethods
 {
     public static int GetNumerator(this IChance _, Player? player)
     {

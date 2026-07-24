@@ -7,6 +7,8 @@ using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -18,6 +20,7 @@ using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
+using static MegaCrit.Sts2.Core.Rooms.RoomType;
 
 namespace Balatro.BalatroCode.Character;
 public class Balatro : PlaceholderCharacterModel
@@ -162,6 +165,16 @@ public class Balatro : PlaceholderCharacterModel
         }
 
         return base.AfterCardDiscarded(choiceContext, card);
+    }
+
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants,
+        ICombatState combatState)
+    {
+        var enemy = combatState.Enemies.FirstOrDefault(creature => creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false});
+        if (enemy == null) return;
+        RoomType? roomType = combatState.RunState.CurrentRoom?.RoomType;
+        if (roomType is Elite or Boss)
+            await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null, null);
     }
 
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
