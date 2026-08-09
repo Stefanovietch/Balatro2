@@ -1,5 +1,6 @@
 using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Models;
 
@@ -14,5 +15,10 @@ public class TheManaclePower() : BalatroPower, IBlindPower
         PowerStackType.Single;
     
     public BlindType BlindType => BlindType.TheManacle;
+    
+    public override Decimal ModifyHandDraw(Player player, Decimal count)
+    {
+        return player.Character is Character.Balatro ? count : count - 1;
+    }
 
 }

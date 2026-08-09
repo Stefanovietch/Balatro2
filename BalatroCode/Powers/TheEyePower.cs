@@ -19,12 +19,13 @@ public class TheEyePower() : BalatroPower, IBlindPower
     
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
-        return this._lastCardTypePlayed != card.Type;
+        if (card.Owner.Character is Character.Balatro) return this._lastCardTypePlayed != card.Type;
+        return base.ShouldPlay(card, autoPlayType);
     }
 
     public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        this._lastCardTypePlayed = cardPlay.Card.Type;
+        if (cardPlay.Card.Owner.Character is Character.Balatro)  this._lastCardTypePlayed = cardPlay.Card.Type;
         return base.AfterCardPlayed(choiceContext, cardPlay);
     }
 }

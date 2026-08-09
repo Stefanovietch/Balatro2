@@ -15,4 +15,17 @@ public class TheMarkPower() : BalatroPower, IBlindPower
     
     public BlindType BlindType => BlindType.TheMark;
 
+    public override bool TryModifyEnergyCostInCombat(
+        CardModel card,
+        Decimal originalCost,
+        out Decimal modifiedCost)
+    {
+        if (card.Owner.Character is not Character.Balatro || card.Type != CardType.Power)
+        {
+            modifiedCost = originalCost;
+            return false;
+        }
+        modifiedCost = 3;
+        return true;
+    }
 }

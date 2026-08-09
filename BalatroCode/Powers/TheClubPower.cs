@@ -23,7 +23,7 @@ public class TheClubPower() : BalatroPower, IBlindPower
     {
         var enumerable = participants.ToList();
         if (!enumerable.Contains(this.Owner) || side != CombatSide.Player) return;
-        foreach (var p in enumerable.Where(c => c.IsPlayer && c.IsAlive))
+        foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
             if (p.Player != null) CardCmd.PreviewCardPileAdd(
                     await CardPileCmd.AddGeneratedCardToCombat(this.CombatState.CreateCard<Wound>(p.Player), PileType.Draw, null));

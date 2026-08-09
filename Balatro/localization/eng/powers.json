@@ -116,7 +116,7 @@
   "BALATRO-THE_GOAD_POWER.smartDescription": "",
 
   "BALATRO-THE_HEAD_POWER.title": "The Head",
-  "BALATRO-THE_HEAD_POWER.description": "You take 10% more damage for each card played this turn.",
+  "BALATRO-THE_HEAD_POWER.description": "You take 10% more damage for each card you played this turn.",
   "BALATRO-THE_HEAD_POWER.smartDescription": "",
 
   "BALATRO-THE_HOOK_POWER.title": "The Hook",
@@ -141,7 +141,7 @@
 
   "BALATRO-THE_NEEDLE_POWER.title": "The Needle",
   "BALATRO-THE_NEEDLE_POWER.description": "You die after 10 turns.",
-  "BALATRO-THE_NEEDLE_POWER.smartDescription": "",
+  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {Amount} turns.",
 
   "BALATRO-THE_OX_POWER.title": "The Ox",
   "BALATRO-THE_OX_POWER.description": "At the start of your turn, makes one card in hand set your Gold to 0.",
@@ -152,8 +152,8 @@
   "BALATRO-THE_PLANT_POWER.smartDescription": "",
 
   "BALATRO-THE_PSYCHIC_POWER.title": "The Psychic",
-  "BALATRO-THE_PSYCHIC_POWER.description": "You can't play more than 5 cards each turn.",
-  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "",
+  "BALATRO-THE_PSYCHIC_POWER.description": "Can't play more than 5 cards each turn.",
+  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {Amount} cards each turn.",
 
   "BALATRO-THE_SERPENT_POWER.title": "The Serpent",
   "BALATRO-THE_SERPENT_POWER.description": "Cannot be Debuffed.",
@@ -173,7 +173,7 @@
 
   "BALATRO-THE_WHEEL_POWER.title": "The Wheel",
   "BALATRO-THE_WHEEL_POWER.description": "When drawing a card have 1 in 7 Chance to set its cost to 3 for the turn.",
-  "BALATRO-THE_WHEEL_POWER.smartDescription": "",
+  "BALATRO-THE_WHEEL_POWER.smartDescription": "When drawing a card have {Numerator} in 7 Chance to set its cost to 3 for the turn.",
 
   "BALATRO-THE_WINDOW_POWER.title": "The Window",
   "BALATRO-THE_WINDOW_POWER.description": "Has 4 Thorns.",

@@ -166,10 +166,11 @@ public class Balatro : PlaceholderCharacterModel
 
         return base.AfterCardDiscarded(choiceContext, card);
     }
-
+    
     public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
+        if (combatState.RoundNumber > 1 || side != CombatSide.Player) return;
         var enemy = combatState.Enemies.FirstOrDefault(creature => creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false});
         if (enemy == null) return;
         RoomType? roomType = combatState.RunState.CurrentRoom?.RoomType;

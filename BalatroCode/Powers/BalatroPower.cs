@@ -2,6 +2,7 @@
 using BaseLib.Extensions;
 using Balatro.BalatroCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
@@ -28,4 +29,6 @@ public abstract class BalatroPower : CustomPowerModel
     /// Single, but you're suggested to use Single as it is more explicit about how it will work.
     /// </summary>
     public abstract override PowerStackType StackType { get; }
+    
+    public virtual bool ShouldDiscard(CardModel card) => true;
 }
