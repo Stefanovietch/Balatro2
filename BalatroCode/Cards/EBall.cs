@@ -31,10 +31,10 @@ public class EBall() : BalatroCard(1,
         CardPlay play)
     { 
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<EBallPower>(choiceContext, play.Target, this.DynamicVars.Power<EBallPower>().BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<EBallPower>(choiceContext, play.Target, this.DynamicVars.Power<EBallPower>().BaseValue, play.Card.Owner.Creature, this);
         if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
         {
-            await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration, this.Owner.Character.PotionPool.GetUnlockedPotions(this.Owner.UnlockState).Concat(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(this.Owner.UnlockState))).ToMutable(), this.Owner);
+            await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
         }
     }
 
