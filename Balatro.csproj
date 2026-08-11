@@ -60,10 +60,6 @@
         <None Include="Balatro/**"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Balatro\images\powers\big\"/>
-    </ItemGroup>
-
     <Target Name="CheckDependencyPaths">
         <Error
                 Text=" Slay the Spire 2 data not found at path '$(Sts2DataDir)'"
