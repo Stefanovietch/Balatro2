@@ -184,8 +184,8 @@
   "BALATRO-AMBER_ACORN_POWER.smartDescription": "At the end of your turn, shuffle your discard pile into your draw pile.",
   
   "BALATRO-VERDANT_LEAF_POWER.title": "Verdant Leaf",
-  "BALATRO-VERDANT_LEAF_POWER.description": "At the start of your turn, Exhaust a card.",
-  "BALATRO-VERDANT_LEAF_POWER.smartDescription": "At the start of your turn, Exhaust a card.",
+  "BALATRO-VERDANT_LEAF_POWER.description": "At the start of your turn, Exhaust a random card.",
+  "BALATRO-VERDANT_LEAF_POWER.smartDescription": "At the start of your turn, Exhaust a random card.",
 
   "BALATRO-VIOLET_VESSEL_POWER.title": "Violet Vessel",
   "BALATRO-VIOLET_VESSEL_POWER.description": "Has triple the Health.",
