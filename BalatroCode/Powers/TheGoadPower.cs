@@ -28,7 +28,7 @@ public class TheGoadPower() : BalatroPower, IBlindPower
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         var enumerable = participants.ToList();
-        if (!enumerable.Contains(this.Owner) || side != CombatSide.Player) return;
+        if (side != CombatSide.Enemy) return;
         foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
             if (p.Player != null) await CreatureCmd.Damage(choiceContext, p, this.DynamicVars.Damage, p);

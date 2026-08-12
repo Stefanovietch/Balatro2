@@ -33,7 +33,7 @@ public class CleverJoker() : BalatroCard(1,
 
     private bool LastCardIsSkill()
     {
-        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card.Owner == this.Owner);
+        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.CardPlay.Card.Owner == this.Owner);
         return yourCardPlayed.CardPlay.Card.Type == CardType.Skill;
     }
 }

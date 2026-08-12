@@ -1,15 +1,15 @@
 {
   "BALATRO-ARROWHEAD_POWER.title": "Arrowhead",
-  "BALATRO-ARROWHEAD_POWER.description": "At the start of your turn, add [yellow]Finesses[/yellow] into your hand and discard cards}",
-  "BALATRO-ARROWHEAD_POWER.smartDescription": "At the start of your turn, discard [blue]{AmountDisplay}[/blue] {Amount:plural:card|cards} and add [blue]{AmountDisplay}[/blue] [yellow]{Amount:plural:Stone Card|Stone Cards}[/yellow] into your hand.",
+  "BALATRO-ARROWHEAD_POWER.description": "At the start of your turn, discard cards and add [gold]Finesses[/gold] into your hand.",
+  "BALATRO-ARROWHEAD_POWER.smartDescription": "At the start of your turn, discard [blue]{Amount}[/blue] {Amount:plural:card|cards} and add [blue]{Amount}[/blue] [gold]{Amount:plural:Stone Card|Stone Cards}[/gold] into your hand.",
 
   "BALATRO-ASTRONOMER_POWER.title": "Astronomer",
   "BALATRO-ASTRONOMER_POWER.description": "Your next upgraded card costs [blue]0[/blue].",
   "BALATRO-ASTRONOMER_POWER.smartDescription": "Your next [blue]{Amount}[/blue] upgraded {Amount:plural:card|cards} costs 0.",
 
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
-  "BALATRO-BASEBALL_CARD_POWER.description": "All [yellow]Uncommon[/yellow] card's damage is increased.",
-  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [yellow]Uncommon[/yellow] card's damage is increased by x[blue]{Amount}[/blue].",
+  "BALATRO-BASEBALL_CARD_POWER.description": "All [gold]Uncommon[/gold] card's damage is increased.",
+  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [gold]Uncommon[/gold] card's damage is increased by x[blue]{Amount}[/blue].",
   
   "BALATRO-BUSINESS_CARD_POWER.title": "Business Card",
   "BALATRO-BUSINESS_CARD_POWER.description": "Whenever you play a Power, you have a Chance to gain Gold.",
@@ -26,8 +26,8 @@
   "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
 
   "BALATRO-GIFT_CARD_POWER.title": "Gift Card",
-  "BALATRO-GIFT_CARD_POWER.description": "Increase card [yellow]Rarity[/yellow] for this combat reward",
-  "BALATRO-GIFT_CARD_POWER.smartDescription": "Increase card [yellow]Rarity[/yellow] for this combat reward",
+  "BALATRO-GIFT_CARD_POWER.description": "Increase card [gold]Rarity[/gold] for this combat reward",
+  "BALATRO-GIFT_CARD_POWER.smartDescription": "Increase card [gold]Rarity[/gold] for this combat reward",
 
   "BALATRO-JUGGLER_POWER.title": "Juggler",
   "BALATRO-JUGGLER_POWER.description": "Draw more cards at the start of your turn",
@@ -93,83 +93,83 @@
   
   "BALATRO-THE_ARM_POWER.title": "The Arm",
   "BALATRO-THE_ARM_POWER.description": "Your upgraded cards cost 1 more this fight.",
-  "BALATRO-THE_ARM_POWER.smartDescription": "",
+  "BALATRO-THE_ARM_POWER.smartDescription": "Your upgraded cards cost 1 more this fight.",
 
   "BALATRO-THE_CLUB_POWER.title": "The Club",
   "BALATRO-THE_CLUB_POWER.description": "At the end of your turn, shuffle a Wound into your draw pile.",
-  "BALATRO-THE_CLUB_POWER.smartDescription": "",
+  "BALATRO-THE_CLUB_POWER.smartDescription": "At the end of your turn, shuffle a Wound into your draw pile.",
 
   "BALATRO-THE_EYE_POWER.title": "The Eye",
   "BALATRO-THE_EYE_POWER.description": "You can't play the same card type consecutively.",
-  "BALATRO-THE_EYE_POWER.smartDescription": "",
+  "BALATRO-THE_EYE_POWER.smartDescription": "You can't play the same card type consecutively.",
 
   "BALATRO-THE_FISH_POWER.title": "The Fish",
   "BALATRO-THE_FISH_POWER.description": "Cards drawn during your turn cost 3 for that turn.",
-  "BALATRO-THE_FISH_POWER.smartDescription": "",
+  "BALATRO-THE_FISH_POWER.smartDescription": "Cards drawn during your turn cost 3 for that turn.",
 
   "BALATRO-THE_FLINT_POWER.title": "The Flint",
   "BALATRO-THE_FLINT_POWER.description": "You are always Weak and Vulnerable.",
-  "BALATRO-THE_FLINT_POWER.smartDescription": "",
+  "BALATRO-THE_FLINT_POWER.smartDescription": "You are always Weak and Vulnerable.",
 
   "BALATRO-THE_GOAD_POWER.title": "The Goad",
   "BALATRO-THE_GOAD_POWER.description": "At the end of your turn, lose 2 HP.",
-  "BALATRO-THE_GOAD_POWER.smartDescription": "",
+  "BALATRO-THE_GOAD_POWER.smartDescription": "At the end of your turn, lose 2 HP.",
 
   "BALATRO-THE_HEAD_POWER.title": "The Head",
   "BALATRO-THE_HEAD_POWER.description": "You take 10% more damage for each card you played this turn.",
-  "BALATRO-THE_HEAD_POWER.smartDescription": "",
+  "BALATRO-THE_HEAD_POWER.smartDescription": "You take 10% more damage for each card you played this turn.",
 
   "BALATRO-THE_HOOK_POWER.title": "The Hook",
   "BALATRO-THE_HOOK_POWER.description": "Start of your turn, discard 2 cards.",
-  "BALATRO-THE_HOOK_POWER.smartDescription": "",
+  "BALATRO-THE_HOOK_POWER.smartDescription": "Start of your turn, discard 2 cards.",
 
   "BALATRO-THE_HOUSE_POWER.title": "The House",
   "BALATRO-THE_HOUSE_POWER.description": "All cards in your first hand cost 3 for the turn.",
-  "BALATRO-THE_HOUSE_POWER.smartDescription": "",
+  "BALATRO-THE_HOUSE_POWER.smartDescription": "All cards in your first hand cost 3 for the turn.",
 
   "BALATRO-THE_MANACLE_POWER.title": "The Manacle",
   "BALATRO-THE_MANACLE_POWER.description": "You draw 1 card less each turn.",
-  "BALATRO-THE_MANACLE_POWER.smartDescription": "",
+  "BALATRO-THE_MANACLE_POWER.smartDescription": "You draw 1 card less each turn.",
 
   "BALATRO-THE_MARK_POWER.title": "The Mark",
   "BALATRO-THE_MARK_POWER.description": "All your Powers cost 3.",
-  "BALATRO-THE_MARK_POWER.smartDescription": "",
+  "BALATRO-THE_MARK_POWER.smartDescription": "All your Powers cost 3.",
 
   "BALATRO-THE_MOUTH_POWER.title": "The Mouth",
   "BALATRO-THE_MOUTH_POWER.description": "You can only play two card types each turn.",
-  "BALATRO-THE_MOUTH_POWER.smartDescription": "",
+  "BALATRO-THE_MOUTH_POWER.smartDescription": "You can only play two card types each turn.",
 
   "BALATRO-THE_NEEDLE_POWER.title": "The Needle",
   "BALATRO-THE_NEEDLE_POWER.description": "You die after 10 turns.",
-  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {Amount} turns.",
+  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {DisplayAmount} turns.",
 
   "BALATRO-THE_OX_POWER.title": "The Ox",
   "BALATRO-THE_OX_POWER.description": "At the start of your turn, makes one card in hand set your Gold to 0.",
-  "BALATRO-THE_OX_POWER.smartDescription": "",
+  "BALATRO-THE_OX_POWER.smartDescription": "At the start of your turn, makes one card in hand set your Gold to 0.",
 
   "BALATRO-THE_PLANT_POWER.title": "The Plant",
   "BALATRO-THE_PLANT_POWER.description": "All Powers have ethereal.",
-  "BALATRO-THE_PLANT_POWER.smartDescription": "",
+  "BALATRO-THE_PLANT_POWER.smartDescription": "All Powers have ethereal.",
 
   "BALATRO-THE_PSYCHIC_POWER.title": "The Psychic",
   "BALATRO-THE_PSYCHIC_POWER.description": "Can't play more than 5 cards each turn.",
-  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {Amount} cards each turn.",
+  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {DisplayAmount} cards each turn.",
 
   "BALATRO-THE_SERPENT_POWER.title": "The Serpent",
   "BALATRO-THE_SERPENT_POWER.description": "Cannot be Debuffed.",
-  "BALATRO-THE_SERPENT_POWER.smartDescription": "",
+  "BALATRO-THE_SERPENT_POWER.smartDescription": "Cannot be Debuffed.",
 
   "BALATRO-THE_TOOTH_POWER.title": "The Tooth",
   "BALATRO-THE_TOOTH_POWER.description": "Whenever you play a card, lose 10 Gold.",
-  "BALATRO-THE_TOOTH_POWER.smartDescription": "",
+  "BALATRO-THE_TOOTH_POWER.smartDescription": "Whenever you play a card, lose 10 Gold.",
 
   "BALATRO-THE_WALL_POWER.title": "The Wall",
   "BALATRO-THE_WALL_POWER.description": "Has double the Health.",
-  "BALATRO-THE_WALL_POWER.smartDescription": "",
+  "BALATRO-THE_WALL_POWER.smartDescription": "Has double the Health.",
 
   "BALATRO-THE_WATER_POWER.title": "The Water",
   "BALATRO-THE_WATER_POWER.description": "You are unable to manually discard cards.",
-  "BALATRO-THE_WATER_POWER.smartDescription": "",
+  "BALATRO-THE_WATER_POWER.smartDescription": "You are unable to manually discard cards.",
 
   "BALATRO-THE_WHEEL_POWER.title": "The Wheel",
   "BALATRO-THE_WHEEL_POWER.description": "When drawing a card have 1 in 7 Chance to set its cost to 3 for the turn.",
@@ -177,27 +177,36 @@
 
   "BALATRO-THE_WINDOW_POWER.title": "The Window",
   "BALATRO-THE_WINDOW_POWER.description": "Has 4 Thorns.",
-  "BALATRO-THE_WINDOW_POWER.smartDescription": "",
+  "BALATRO-THE_WINDOW_POWER.smartDescription": "Has 4 Thorns.",
   
   "BALATRO-AMBER_ACORN_POWER.title": "Amber Acorn",
   "BALATRO-AMBER_ACORN_POWER.description": "At the end of your turn, shuffle your discard pile into your draw pile.",
-  "BALATRO-AMBER_ACORN_POWER.smartDescription": "",
+  "BALATRO-AMBER_ACORN_POWER.smartDescription": "At the end of your turn, shuffle your discard pile into your draw pile.",
   
   "BALATRO-VERDANT_LEAF_POWER.title": "Verdant Leaf",
   "BALATRO-VERDANT_LEAF_POWER.description": "At the start of your turn, Exhaust a card.",
-  "BALATRO-VERDANT_LEAF_POWER.smartDescription": "",
+  "BALATRO-VERDANT_LEAF_POWER.smartDescription": "At the start of your turn, Exhaust a card.",
 
   "BALATRO-VIOLET_VESSEL_POWER.title": "Violet Vessel",
   "BALATRO-VIOLET_VESSEL_POWER.description": "Has triple the Health.",
-  "BALATRO-VIOLET_VESSEL_POWER.smartDescription": "",
+  "BALATRO-VIOLET_VESSEL_POWER.smartDescription": "Has triple the Health.",
 
   "BALATRO-CRIMSON_HEART_POWER.title": "Crimson Heart",
   "BALATRO-CRIMSON_HEART_POWER.description": "At the start of your turn, discard a random card.",
-  "BALATRO-CRIMSON_HEART_POWER.smartDescription": "",
+  "BALATRO-CRIMSON_HEART_POWER.smartDescription": "At the start of your turn, discard a random card.",
 
   "BALATRO-CERULEAN_BELL_POWER.title": "Cerulean Bell",
   "BALATRO-CERULEAN_BELL_POWER.description": "At the start of your turn, play a random card.",
-  "BALATRO-CERULEAN_BELL_POWER.smartDescription": ""
+  "BALATRO-CERULEAN_BELL_POWER.smartDescription": "At the start of your turn, play a random card.",
+
+
+  "BALATRO-FLINT_VULNERABLE_POWER.title": "Vulnerable",
+  "BALATRO-FLINT_VULNERABLE_POWER.description": "Receive 50% more damage from Attacks.",
+  "BALATRO-FLINT_VULNERABLE_POWER.smartDescription": "Receive 50% more damage from Attacks.",
   
+  "BALATRO-FLINT_WEAK_POWER.title": "Weak",
+  "BALATRO-FLINT_WEAK_POWER.description": "Attacks deal 25% less damage.",
+  "BALATRO-FLINT_WEAK_POWER.smartDescription": "Attacks deal 25% less damage."
+
 
 }

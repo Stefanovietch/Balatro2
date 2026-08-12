@@ -25,14 +25,14 @@ public class TheNeedlePower() : BalatroPower, IBlindPower
         await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 10, applier, cardSource, true);
     }
 
-    public override async Task AfterSideTurnStartLate(
+    public override async Task AfterSideTurnEnd(
+        PlayerChoiceContext choiceContext,
         CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState)
+        IEnumerable<Creature> participants)
     {
         var enumerable = participants.ToList();
-        if (!enumerable.Contains(this.Owner) || side != CombatSide.Player) return;
-        await PowerCmd.Decrement( this);
+        if (side != CombatSide.Player) return;
+        await PowerCmd.TickDownDuration(this);
         if (this.Amount <= 1)
         {
             foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))

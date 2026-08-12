@@ -44,7 +44,7 @@ public class StoneCard() : BalatroCard(1,
             return Array.Empty<CardModel>();
         List<CardModel> stoneCards = new List<CardModel>();
         for (int index = 0; index < count; ++index)
-            stoneCards.Add(combatState.CreateCard<Shiv>(owner));
+            stoneCards.Add(combatState.CreateCard<StoneCard>(owner));
         IReadOnlyList<CardPileAddResult> combat = await CardPileCmd.AddGeneratedCardsToCombat(stoneCards, PileType.Hand, owner);
         return stoneCards;
     }

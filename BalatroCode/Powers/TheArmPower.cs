@@ -20,18 +20,23 @@ public class TheArmPower() : BalatroPower, IBlindPower
     
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var playerPlayerCombatState = this.Owner.Player?.PlayerCombatState;
-        if (playerPlayerCombatState is not null && this.Owner.Player?.Character is Character.Balatro)
+        var players = this.Owner.CombatState?.RunState.Players;
+        if (players is null) return;
+        foreach (var player in players)
+        {
+            var playerPlayerCombatState = player.PlayerCombatState;
+            if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
             foreach (CardModel card in playerPlayerCombatState.AllCards)
             {
                 if (!card.IsUpgraded) continue;
                 await CardCmd.Afflict<Armed>(card, 1M);
             }
+        }
     }
 
     public override async Task AfterCardEnteredCombat(CardModel card)
     {
-        if (this.Owner.Player?.Character is not Character.Balatro || card.Affliction != null || !card.IsUpgraded)
+        if (card.Owner.Character is not Character.Balatro || card.Affliction != null || !card.IsUpgraded)
             return;
         await CardCmd.Afflict<Armed>(card, 1M);
     }
@@ -41,7 +46,7 @@ public class TheArmPower() : BalatroPower, IBlindPower
         Decimal originalCost,
         out Decimal modifiedCost)
     {
-        if (card.Affliction is not Armed || card.Owner != this.Owner.Player)
+        if (card.Affliction is not Armed)
         {
             modifiedCost = originalCost;
             return false;

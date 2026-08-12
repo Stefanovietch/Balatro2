@@ -33,7 +33,7 @@ public class Baron() : BalatroCard(2,
         CardModel? cardSource)
     {
         if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return (decimal) Math.Pow(1.5, PileType.Hand.GetPile(this.Owner).Cards.Count(c => c.Type == CardType.Attack));
+        return (decimal) Math.Pow(1.5, PileType.Hand.GetPile(this.Owner).Cards.Count(c => c.Type == CardType.Attack && !c.Equals(this)));
     }
 
     protected override void OnUpgrade()

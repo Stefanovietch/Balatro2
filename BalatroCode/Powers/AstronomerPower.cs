@@ -18,12 +18,13 @@ public class AstronomerPower() : BalatroPower
 
     public override bool TryModifyEnergyCostInCombat(CardModel card, decimal originalCost, out decimal modifiedCost)
     {
-        modifiedCost = originalCost;
         if (card.Owner.Creature != this.Owner || !card.IsUpgraded)
+        {
+            modifiedCost = originalCost;
             return false;
-        if (card.Pile?.Type is PileType.Hand or PileType.Play)
-            modifiedCost = 0M;
-        return base.TryModifyEnergyCostInCombat(card, originalCost, out modifiedCost);
+        }
+        modifiedCost = 0M;
+        return true;
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)

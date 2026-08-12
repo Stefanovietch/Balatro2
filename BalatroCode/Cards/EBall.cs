@@ -34,8 +34,7 @@ public class EBall() : BalatroCard(1,
         await PowerCmd.Apply<EBallPower>(choiceContext, play.Target, this.DynamicVars.Power<EBallPower>().BaseValue, this.Owner.Creature, this);
         if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
         {
-            await PlayerCmd.GainGold(11, this.Owner);
-            //await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration, this.Owner.Character.PotionPool.GetUnlockedPotions(this.Owner.UnlockState).Concat(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(this.Owner.UnlockState))).ToMutable(), this.Owner);
+            await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
         }
     }
 

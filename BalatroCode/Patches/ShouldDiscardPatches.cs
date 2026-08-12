@@ -13,8 +13,7 @@ public class ShouldDiscardPatches
         static void Prefix(ref IEnumerable<CardModel> cardsToDiscard)
         {
             cardsToDiscard = cardsToDiscard.Where(card =>
-                card.Owner.Creature.Powers.OfType<BalatroPower>()
-                    .All(p => p.ShouldDiscard(card))
+                card.CombatState != null && card.CombatState.Creatures.All(c => c.Powers.OfType<BalatroPower>().All(p => p.ShouldDiscard(card)))
             ).ToList();
         }
     }
