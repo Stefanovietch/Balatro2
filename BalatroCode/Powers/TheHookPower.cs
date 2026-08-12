@@ -27,7 +27,7 @@ public class TheHookPower() : BalatroPower, IBlindPower
         ICombatState combatState)
     {
         var enumerable = participants.ToList();
-        if (!enumerable.Contains(this.Owner) || side != CombatSide.Player) return;
+        if (side != CombatSide.Enemy) return;
         foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
             if (p.Player == null) continue;

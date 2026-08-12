@@ -26,9 +26,9 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
 
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (this.Owner.Player?.Character is Character.Balatro)
+        if (card.Owner.Character is Character.Balatro)
         {
-            if (this.RollChance(this.Owner.Player, 7))
+            if (this.RollChance(card.Owner, 7))
             {
                 card.EnergyCost.SetThisTurnOrUntilPlayed(3);
             }

@@ -20,10 +20,10 @@ public class EggPower() : BalatroPower
 
     private bool TookDamage;
 
-    public override Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
+        if (player == this.Owner.Player && !TookDamage) await PlayerCmd.GainGold(this.Amount, this.Owner.Player);
         TookDamage = false;
-        return base.AfterPlayerTurnStartEarly(choiceContext, player);
     }
 
     public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props,
@@ -32,11 +32,5 @@ public class EggPower() : BalatroPower
         if (!CombatManager.Instance.IsInProgress || target != this.Owner || result.UnblockedDamage <= 0) return Task.CompletedTask;
         TookDamage = true;
         return Task.CompletedTask;
-    }
-
-    public override async Task AfterSideTurnEndLate(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
-    {
-        if (this.Owner.Player == null) return;
-        if (side == CombatSide.Player && !TookDamage) await PlayerCmd.GainGold(this.Amount, this.Owner.Player);
     }
 }

@@ -18,7 +18,7 @@ public class TheManaclePower() : BalatroPower, IBlindPower
     
     public override Decimal ModifyHandDraw(Player player, Decimal count)
     {
-        return player.Character is Character.Balatro ? count : count - 1;
+        return player.Character is Character.Balatro ? count - 1 : count;
     }
 
 }

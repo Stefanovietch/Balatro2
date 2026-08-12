@@ -41,7 +41,7 @@ public class AncientJoker() : BalatroCard(0,
         CardModel? cardSource)
     {
         if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return (decimal) Math.Pow(1.5, CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(cardSource.CombatState) && c.CardPlay.Card.Type == CardType.Attack && c.CardPlay.Card.Owner == cardSource.Owner));
+        return (decimal) Math.Pow(1.5, CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(cardSource.CombatState) && c.CardPlay.Card.Type == CurrentType && c.CardPlay.Card.Owner == cardSource.Owner));
     }
 
     public CardType CurrentType { get; set; } = CardType.None;

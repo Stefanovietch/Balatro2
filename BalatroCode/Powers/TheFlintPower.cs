@@ -1,6 +1,7 @@
 using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -19,24 +20,15 @@ public class TheFlintPower() : BalatroPower, IBlindPower
     
     public BlindType BlindType => BlindType.TheFlint;
 
-    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        if (player.Character is Character.Balatro)
+        var players = this.Owner.CombatState?.RunState.Players;
+        if (players is null) return;
+        foreach (var player in players)
         {
-            var vulnerablePower = new VulnerablePower();
-            var prop = vulnerablePower.GetType().GetProperty(nameof(vulnerablePower.Type));
-            prop?.SetValue(vulnerablePower, PowerType.Buff);
-            var prop2 = vulnerablePower.GetType().GetProperty(nameof(vulnerablePower.StackType));
-            prop2?.SetValue(vulnerablePower, PowerStackType.Single);
-            PowerCmd.Apply(choiceContext, vulnerablePower, player.Creature, 1, null, null);
-            
-            var weakPower = new WeakPower();
-            var prop3 = weakPower.GetType().GetProperty(nameof(weakPower.Type));
-            prop3?.SetValue(weakPower, PowerType.Buff);
-            var prop4 = weakPower.GetType().GetProperty(nameof(weakPower.StackType));
-            prop4?.SetValue(weakPower, PowerStackType.Single);
-            PowerCmd.Apply(choiceContext, weakPower, player.Creature, 1, null, null);
-        }
-        return base.AfterPlayerTurnStart(choiceContext, player);
+            if (player.Character is not Character.Balatro) continue;
+            await PowerCmd.Apply<FlintVulnerablePower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
+            await PowerCmd.Apply<FlintWeakPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
+        } 
     }
 }
