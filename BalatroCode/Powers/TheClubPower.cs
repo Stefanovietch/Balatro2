@@ -22,7 +22,7 @@ public class TheClubPower() : BalatroPower, IBlindPower
     public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         var enumerable = participants.ToList();
-        if (side != CombatSide.Enemy) return;
+        if (side != CombatSide.Player) return;
         foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
             if (p.Player != null) CardCmd.PreviewCardPileAdd(

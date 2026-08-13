@@ -1,4 +1,5 @@
 using Balatro.BalatroCode.Powers;
+using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -28,19 +29,19 @@ public class ThePlantPower() : BalatroPower, IBlindPower
             foreach (CardModel card in playerPlayerCombatState.AllCards)
             {
                 if (card.Type != CardType.Power) continue;
-                await CardCmd.Afflict<Planted>(card, 1M);
+                await CardCmd.Afflict<BalatroPlanted>(card, 1M);
             }
         }
     }
     public override async Task AfterCardEnteredCombat(CardModel card)
     {
         if (card.Owner.Character is not Character.Balatro || card.Type != CardType.Power) return;
-        await CardCmd.Afflict<Planted>(card, 1);
+        await CardCmd.Afflict<BalatroPlanted>(card, 1);
     }
     
     public override bool TryModifyKeywordsInCombat(CardModel card, ISet<CardKeyword> keywords)
     {
-        return card.Affliction is Planted && keywords.Add(CardKeyword.Ethereal);
+        return card.Affliction is BalatroPlanted && keywords.Add(CardKeyword.Ethereal);
     }
 
     public override Task AfterRemoved(Creature oldOwner)
@@ -51,13 +52,13 @@ public class ThePlantPower() : BalatroPower, IBlindPower
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is Planted))
+            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroPlanted))
                 CardCmd.ClearAffliction(card);
         }
         return Task.CompletedTask;
     }
 }
 
-public sealed class Planted : AfflictionModel
+public sealed class BalatroPlanted : BalatroAfflictions
 {
 }

@@ -19,7 +19,7 @@ public class FortuneTeller() : BalatroCard(1,
         new CalculatedVar("PotionsUsed").WithMultiplier((c, _) =>
         {
             if (c.Owner.Character is not Character.Balatro balatro) return 0;
-            return balatro.PotionsUsed.Get(c.Owner);
+            return Character.Balatro.PotionsUsed.Get(c.Owner);
         })
     ];
 

@@ -33,10 +33,10 @@ public class FlintWeakPower() : BalatroPower
         if (dealer != this.Owner || !props.IsPoweredAttack())
             return 1M;
         Decimal amount1 = this.DynamicVars["DamageDecrease"].BaseValue;
-        PaperKrane relic = target?.Player?.GetRelic<PaperKrane>();
-        if (relic != null)
+        var relic = target?.Player?.GetRelic<PaperKrane>();
+        if (relic != null && target != null)
             amount1 = relic.ModifyWeakMultiplier(target, amount1, props, dealer, cardSource);
-        DebilitatePower power = dealer.GetPower<DebilitatePower>();
+        var power = dealer.GetPower<DebilitatePower>();
         if (power != null)
             amount1 = power.ModifyWeakMultiplier(dealer, amount1, props, dealer, cardSource);
         return amount1;

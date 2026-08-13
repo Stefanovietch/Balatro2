@@ -24,7 +24,7 @@ public class SquareJoker() : BalatroCard(1,
         {
             this.AssertMutable();
             this._currentBlock = value;
-            this.DynamicVars.Damage.BaseValue = this._currentBlock;
+            this.DynamicVars.Block.BaseValue = this._currentBlock;
         }
     }
 
@@ -69,13 +69,13 @@ public class SquareJoker() : BalatroCard(1,
 
     protected override bool ShouldGlowGoldInternal => Is4thPlay();
 
-    protected override void AfterDowngraded() => this.UpdateDamage();
+    protected override void AfterDowngraded() => this.UpdateBlock();
 
     private void BuffFrom4thPlay(int extraBlock)
     {
         this.IncreasedBlock += extraBlock;
-        this.UpdateDamage();
+        this.UpdateBlock();
     }
 
-    private void UpdateDamage() => this.CurrentBlock = 4 + this.IncreasedBlock;
+    private void UpdateBlock() => this.CurrentBlock = 4 + this.IncreasedBlock;
 }

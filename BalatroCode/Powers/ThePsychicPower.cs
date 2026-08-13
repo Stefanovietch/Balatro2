@@ -38,7 +38,7 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
 
     public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
     {
-        if (side != CombatSide.Enemy) return;
+        if (side != CombatSide.Player) return;
         var countBalatro = participants.Count(c => c.Player?.Character is Character.Balatro && c.IsAlive);
         if (countBalatro == 0) return;
         await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro, null, null, true);

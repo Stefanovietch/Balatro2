@@ -33,7 +33,7 @@ public class Yorick() : BalatroCard(1,
         CardModel? cardSource)
     {
         if (cardSource != this || this.Owner.PlayerCombatState == null || this.Owner.Character is not Character.Balatro balatro) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);;
-        return 1 + Math.Floor(balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState) / this.DynamicVars["CardsToDiscard"].BaseValue);
+        return 1 + Math.Floor(Character.Balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState) / this.DynamicVars["CardsToDiscard"].BaseValue);
     }
 
     protected override void OnUpgrade()

@@ -12,7 +12,7 @@ namespace Balatro.BalatroCode.Cards;
 
 public class Canio() : BalatroCard(1,
     CardType.Attack, CardRarity.Ancient,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(10, ValueProp.Move),

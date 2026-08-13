@@ -25,7 +25,7 @@ public class Vagabond() : BalatroCard(1,
     {
         await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
         if (this.Owner.Character is not Character.Balatro balatro || this.Owner.PlayerCombatState == null) return;
-        if (balatro.CombatGoldEarned.Get(this.Owner.PlayerCombatState) <= 100) await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
+        if (Character.Balatro.CombatGoldEarned.Get(this.Owner.PlayerCombatState) <= 100) await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
     }
 
     protected override void OnUpgrade()

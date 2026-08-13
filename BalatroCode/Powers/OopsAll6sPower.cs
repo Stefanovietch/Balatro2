@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class OopsAll6Power() : BalatroPower
+public class OopsAll6sPower() : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;

@@ -24,7 +24,7 @@ public class DelayedGratification() : BalatroCard(-1,
     public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != CombatSide.Player || this.Owner.PlayerCombatState == null || this.Owner.Character is not Character.Balatro balatro) return;
-        if (balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState) != 0) return;
+        if (Character.Balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState) != 0) return;
         await PlayerCmd.GainGold(this.DynamicVars.Gold.BaseValue, this.Owner);
     }
 

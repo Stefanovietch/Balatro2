@@ -1,11 +1,13 @@
 using Balatro.BalatroCode.Cards;
 using Balatro.BalatroCode.Powers;
+using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
@@ -19,7 +21,10 @@ public class ToDoListPower() : BalatroPower, IRandomType
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public CardType CurrentType { get; set; }
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new DisplayVar<AncientJoker>("Type", card =>  ((IRandomType) card).GetTypeString())
+    ];
+    public CardType CurrentType { get; set; } = CardType.None;
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

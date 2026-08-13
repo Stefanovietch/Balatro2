@@ -19,8 +19,8 @@ public class Blueprint() : BalatroCard(1,
     {
         if (this.Owner.PlayerCombatState?.PlayPile.Cards.Count > 1)
         {
-            var card = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
-            await CardCmd.AutoPlay(choiceContext, card, null);
+            var card = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
+            if (card != null) await CardCmd.AutoPlay(choiceContext, card, null);
         }
     }
 
@@ -35,6 +35,6 @@ public class Blueprint() : BalatroCard(1,
 
     private new bool CanPlay()
     {
-        return !this.Owner.PlayerCombatState?.PlayPile.IsEmpty ?? false;
+        return CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(null)) != null;
     }
 }

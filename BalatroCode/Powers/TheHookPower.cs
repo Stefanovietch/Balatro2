@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -20,21 +21,13 @@ public class TheHookPower() : BalatroPower, IBlindPower
     
     public BlindType BlindType => BlindType.TheHook;
     
-    public override async Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState)
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        var enumerable = participants.ToList();
-        if (side != CombatSide.Enemy) return;
-        foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
-        {
-            if (p.Player == null) continue;
-            List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, p.Player,
-                new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();
-            if (cards.Count != 0) await CardCmd.Discard(choiceContext, cards);
-        }
+        if (player.Character is not Character.Balatro) return;
+        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();        
+        if (cards.Count == 0) return;
+        await CardCmd.Discard(choiceContext, cards);
     }
 
 }

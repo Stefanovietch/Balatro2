@@ -13,7 +13,7 @@ public static class ChanceMethods
 {
     public static int GetNumerator(this IChance _, Player? player)
     {
-        var power = player?.Creature.GetPower<OopsAll6Power>();
+        var power = player?.Creature.GetPower<OopsAll6sPower>();
         if (power == null) return 1;
         return (int) Math.Pow(2, power.Amount);
     }

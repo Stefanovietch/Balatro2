@@ -1,4 +1,5 @@
 using Balatro.BalatroCode.Powers;
+using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -28,8 +29,8 @@ public class TheHeadPower() : BalatroPower, IBlindPower
         ICombatState combatState)
     {
         var enumerable = participants.ToList();
-        if (side != CombatSide.Enemy) return;
-        await PowerCmd.Apply<SlowPower>(choiceContext, enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }), 1, this.Owner,null);
+        if (side != CombatSide.Player) return;
+        await PowerCmd.Apply<SlowPower>(choiceContext, enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro } && !c.HasPower<SlowPower>()), 1, this.Owner,null);
     }
     
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
@@ -37,5 +38,16 @@ public class TheHeadPower() : BalatroPower, IBlindPower
         var players = this.Owner.CombatState?.RunState.Players;
         if (players is null) return;
         await PowerCmd.Apply<SlowPower>(new ThrowingPlayerChoiceContext(), players.Where(p => p.Character is Character.Balatro).Select(p => p.Creature), 1, this.Owner, null);
+    }
+    
+    public override async Task AfterRemoved(Creature oldOwner)
+    {
+        var players = this.Owner.CombatState?.RunState.Players;
+        if (players is null) return;
+        foreach (var player in players)
+        {
+            if (player.Character is not Character.Balatro) continue;
+            await PowerCmd.Remove<SlowPower>(player.Creature);
+        }
     }
 }

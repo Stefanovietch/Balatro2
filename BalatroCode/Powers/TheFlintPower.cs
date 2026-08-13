@@ -31,4 +31,16 @@ public class TheFlintPower() : BalatroPower, IBlindPower
             await PowerCmd.Apply<FlintWeakPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
         } 
     }
+    
+    public override async Task AfterRemoved(Creature oldOwner)
+    {
+        var players = this.Owner.CombatState?.RunState.Players;
+        if (players is null) return;
+        foreach (var player in players)
+        {
+            if (player.Character is not Character.Balatro) continue;
+            await PowerCmd.Remove<FlintVulnerablePower>(player.Creature);
+            await PowerCmd.Remove<FlintWeakPower>(player.Creature);
+        }
+    }
 }

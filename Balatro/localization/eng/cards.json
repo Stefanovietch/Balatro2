@@ -33,7 +33,7 @@
   "BALATRO-BLUEPRINT.title": "Blueprint",
   "BALATRO-BLUEPRINT.description": "Replay the last card played this turn.",
   "BALATRO-BOOTSTRAPS.title": "Bootstraps",
-  "BALATRO-BOOTSTRAPS.description": "Deals damage equal to your Gold.\nLose {GoldLose:diff()} Gold. {InCombat:\n({Damage:diff()} damage)|}",
+  "BALATRO-BOOTSTRAPS.description": "Deals damage equal to your Gold.\nLose {GoldLose:diff()} Gold. {InCombat:\n({CalculatedDamage:diff()} damage)|}",
   "BALATRO-BRAINSTORM.title": "Brainstorm",
   "BALATRO-BRAINSTORM.description": "Replay the first card played this turn.",
   "BALATRO-BULL.title": "Bull",

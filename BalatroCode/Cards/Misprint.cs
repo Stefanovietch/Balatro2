@@ -21,24 +21,12 @@ public class Misprint() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(this.Owner.RunState.Rng.Niche.NextInt(1, this.DynamicVars.Damage.IntValue)).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
-
-    public override Task BeforeAttack(AttackCommand command)
-    {
-        var attack = command.Results.First().FirstOrDefault();
-        if (attack != null)
-        {
-            var newDmg = this.Owner.RunState.Rng.Niche.NextInt(1, attack.TotalDamage);
-            var prop = attack.GetType().GetProperty(nameof(attack.TotalDamage));
-            prop?.SetValue(attack, newDmg);
-        }
-        return base.BeforeAttack(command);
-    }
-
+    
     protected override void OnUpgrade()
     {
         this.DynamicVars.Damage.UpgradeValueBy(11);

@@ -60,7 +60,8 @@ public partial class ClickableStake : NButton
             tween.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.1);
         }
 
-        NHoverTipSet.CreateAndShow((Godot.Control) this, (IHoverTip) _hoverTip).GlobalPosition = this.GlobalPosition + new Vector2(-32f, - this.Size.Y - 20f);
+        var hoverTip = NHoverTipSet.CreateAndShow(this, _hoverTip);
+        if (hoverTip != null) hoverTip.GlobalPosition = this.GlobalPosition + new Vector2(-32f, - this.Size.Y - 20f);
     }
 
     protected override void OnUnfocus()

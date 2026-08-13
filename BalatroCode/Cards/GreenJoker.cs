@@ -19,6 +19,16 @@ public class GreenJoker() : BalatroCard(1,
         new DamageVar(8, ValueProp.Move),
         new DynamicVar("Bonus", 3),
     ];
+    
+    private Decimal ExtraDamageFromPlays
+    {
+        get => this._bonus;
+        set
+        {
+            this.AssertMutable();
+            this._bonus = value;
+        }
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -33,7 +43,7 @@ public class GreenJoker() : BalatroCard(1,
     
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
-        if (card.Pile?.Type == PileType.Discard)
+        if (card.Pile?.Type == PileType.Discard && card.Equals(this))
         {
             if(oldPileType == PileType.Play) Buff(this.DynamicVars["Bonus"].BaseValue);
             else Buff(-this.DynamicVars["Bonus"].BaseValue);
@@ -50,13 +60,13 @@ public class GreenJoker() : BalatroCard(1,
     {
         base.AfterDowngraded();
         DamageVar damage = this.DynamicVars.Damage;
-        damage.BaseValue = damage.BaseValue + this._bonus;
+        damage.BaseValue = damage.BaseValue + this.ExtraDamageFromPlays;
     }
     
     private void Buff(Decimal bonus)
     {
         DamageVar damage = this.DynamicVars.Damage;
         damage.BaseValue = damage.BaseValue + bonus;
-        this._bonus += bonus;
+        this.ExtraDamageFromPlays += bonus;
     }
 }

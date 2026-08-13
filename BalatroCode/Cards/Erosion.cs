@@ -18,12 +18,12 @@ public class Erosion() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(4, ValueProp.Move),
-        new CalculationBaseVar(1),
+        new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedVar("CardsRemoved").WithMultiplier((c, _) =>
         {
             if (c.Owner.Character is not Character.Balatro balatro) return 0;
-            return balatro.CardsRemoved.Get(c.Owner);
+            return Character.Balatro.CardsRemoved.Get(c.Owner);
         })
     ];
 

@@ -27,16 +27,16 @@ public class Balatro : PlaceholderCharacterModel
 {
     public const string CharacterId = "Balatro";
     
-    public readonly SavedSpireField<Player, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
-    public readonly SavedSpireField<Player, int> CardsAdded = new(() => 0, "balatro_cards_added");
-    public readonly SavedSpireField<Player, int> PotionsUsed = new(() => 0, "balatro_potions_used");
-    public readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
-    public readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
-    public readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
+    public static readonly SavedSpireField<Player, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
+    public static readonly SavedSpireField<Player, int> CardsAdded = new(() => 0, "balatro_cards_added");
+    public static readonly SavedSpireField<Player, int> PotionsUsed = new(() => 0, "balatro_potions_used");
+    public static readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
+    public static readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
+    public static readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
     
-    public readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
-    public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
-    public readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
+    public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
 
     public static readonly Color Color = new("ffffff");
 
@@ -132,7 +132,7 @@ public class Balatro : PlaceholderCharacterModel
     public override Task AfterRoomEntered(AbstractRoom room)
     {
         var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
-        if (state == null || room is not RestSiteRoom || room is not EventRoom) return base.AfterRoomEntered(room);
+        if (state == null || room is not (RestSiteRoom or EventRoom)) return base.AfterRoomEntered(room);
         {
             var counter = room is RestSiteRoom ? RestSitesVisitedThisAct : QuestionMarksVisited;
             foreach (var player in state.Players)
@@ -171,11 +171,11 @@ public class Balatro : PlaceholderCharacterModel
         ICombatState combatState)
     {
         if (combatState.RoundNumber > 1 || side != CombatSide.Player) return;
+        RoomType? roomType = combatState.RunState.CurrentRoom?.RoomType;
+        if (roomType is not (Elite or Boss)) return;
         var enemy = combatState.Enemies.FirstOrDefault(creature => creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false});
         if (enemy == null) return;
-        RoomType? roomType = combatState.RunState.CurrentRoom?.RoomType;
-        if (roomType is Elite or Boss)
-            await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null, null);
+        await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null, null);
     }
 
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();

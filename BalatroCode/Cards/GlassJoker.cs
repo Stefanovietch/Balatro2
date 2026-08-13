@@ -43,7 +43,7 @@ public class GlassJoker() : BalatroCard(1,
         CardModel? cardSource)
     {
         if (cardSource != this || this.Owner.Character is not Character.Balatro balatro) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return 1M + balatro.CardsRemoved.Get(this.Owner) * 0.75M;
+        return 1M + Character.Balatro.CardsRemoved.Get(this.Owner) * 0.75M;
     }
 
     protected override void OnUpgrade()

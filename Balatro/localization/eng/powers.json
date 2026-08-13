@@ -35,7 +35,7 @@
 
   "BALATRO-LOYALTY_CARD_POWER.title": "Loyalty Card",
   "BALATRO-LOYALTY_CARD_POWER.description": "Every 6th card deals quadruple damage.",
-  "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Your {Amount:plural:next|[blue]{Amount}{Amount:2:nd|th}[/blue]} card deals quadruple damage.",
+  "BALATRO-LOYALTY_CARD_POWER.smartDescription": "Your {Amount:plural:next|[blue]{Amount}th[/blue]} card deals quadruple damage.",
   
   "BALATRO-LUCKY_CAT_POWER.title": "LuckyCatPower",
   "BALATRO-LUCKY_CAT_POWER.description": "At start of your turn have a Chance to gain Block and a Chance to deal damage to ALL enemies.",
@@ -47,9 +47,9 @@
   
   "BALATRO-ONYX_AGATE_POWER.title": "Onyx Agate",
   
-  "BALATRO-OOPS_ALL6_POWER.title": "Oops! All 6's",
-  "BALATRO-OOPS_ALL6_POWER.description": "Doubles all listed probabilities.",
-  "BALATRO-OOPS_ALL6_POWER.smartDescription": "Doubles all listed probabilities.",
+  "BALATRO-OOPS_ALL6S_POWER.title": "Oops! All 6's",
+  "BALATRO-OOPS_ALL6S_POWER.description": "Doubles all listed probabilities.",
+  "BALATRO-OOPS_ALL6S_POWER.smartDescription": "Doubles all listed probabilities.",
   
   "BALATRO-PAREIDOLIA_POWER.title": "Pareidolia",
   "BALATRO-PAREIDOLIA_POWER.description": "All cards are considered Powers.",
@@ -81,7 +81,7 @@
   
   "BALATRO-TRADING_CARD_POWER.title": "Trading Card",
   "BALATRO-TRADING_CARD_POWER.description": "At the start of your turn, Exhaust a card and gain Gold.",
-  "BALATRO-TRADING_CARD_POWER.smartDescription": "At the start of your turn, Exhaust a card and gain {TradingCardPower:diff()} Gold.",
+  "BALATRO-TRADING_CARD_POWER.smartDescription": "At the start of your turn, Exhaust a card and gain {Amount} Gold.",
   
   "BALATRO-TRIBOULET_POWER.title": "Triboulet",
   "BALATRO-TRIBOULET_POWER.description": "Double the damage and Block of all 2 Cost cards.",
@@ -141,7 +141,7 @@
 
   "BALATRO-THE_NEEDLE_POWER.title": "The Needle",
   "BALATRO-THE_NEEDLE_POWER.description": "You die after 10 turns.",
-  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {DisplayAmount} turns.",
+  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {Amount - 1} turns.",
 
   "BALATRO-THE_OX_POWER.title": "The Ox",
   "BALATRO-THE_OX_POWER.description": "At the start of your turn, makes one card in hand set your Gold to 0.",
@@ -153,7 +153,7 @@
 
   "BALATRO-THE_PSYCHIC_POWER.title": "The Psychic",
   "BALATRO-THE_PSYCHIC_POWER.description": "Can't play more than 5 cards each turn.",
-  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {DisplayAmount} cards each turn.",
+  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {Amount - 1} cards each turn.",
 
   "BALATRO-THE_SERPENT_POWER.title": "The Serpent",
   "BALATRO-THE_SERPENT_POWER.description": "Cannot be Debuffed.",

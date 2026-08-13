@@ -11,7 +11,7 @@ namespace Balatro.BalatroCode.Cards;
 
 public class TheFamily() : BalatroCard(1,
     CardType.Attack, CardRarity.Rare,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(9, ValueProp.Move)

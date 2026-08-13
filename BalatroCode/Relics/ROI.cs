@@ -52,8 +52,7 @@ public class ROI() : BalatroRelic
             {
                 var fieldCharacterCardEntries = typeof(MerchantInventory)
                     .GetField("_characterCardEntries", BindingFlags.NonPublic | BindingFlags.Instance);
-                var fieldCardList =
-                    (List<MerchantCardEntry>)fieldCharacterCardEntries!.GetValue(inventory);
+                var fieldCardList = (List<MerchantCardEntry>?) fieldCharacterCardEntries?.GetValue(inventory);
 
                 List<CardModel> cardList = this.Owner.Character.CardPool
                     .GetUnlockedCards(this.Owner.UnlockState, this.Owner.RunState.CardMultiplayerConstraint)
@@ -98,7 +97,7 @@ public class ROI() : BalatroRelic
         {
             var fieldPotionEntries = typeof(MerchantInventory)
                 .GetField("_potionEntries", BindingFlags.NonPublic | BindingFlags.Instance);
-            var potionList = (List<MerchantPotionEntry>)fieldPotionEntries!.GetValue(inventory);
+            var potionList = (List<MerchantPotionEntry>?) fieldPotionEntries!.GetValue(inventory);
             if (potionList != null)
             {
                 potionList.Clear();

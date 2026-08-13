@@ -78,10 +78,14 @@ public class Obelisk() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(this.CombatState);
-        IReadOnlyList<CardModel> options = [new Blockade(), new Assault(), new Enhance()];
+        IReadOnlyList<CardModel> options = [    
+            ModelDb.Card<Blockade>(),
+            ModelDb.Card<Assault>(),
+            ModelDb.Card<Enhance>()
+        ];
         var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, this.Owner);
         var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, this.Owner);
-        foreach (var option in (List<CardModel>) [option1, option2])
+        foreach (var option in (List<CardModel?>) [option1, option2])
         {
             switch (option)
             {
