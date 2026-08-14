@@ -15,11 +15,15 @@ public class EvenSteven() : BalatroCard(2,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(10M, ValueProp.Move),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
-        new CalculatedVar("EvenCostPlayed").WithMultiplier((card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 0 && c.CardPlay.Card.Owner == card.Owner))
+        new CalculatedVar("EvenCostPlayed").WithMultiplier((card, _) =>
+            CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 0 &&
+                c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
@@ -27,8 +31,8 @@ public class EvenSteven() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["EvenCostPlayed"]).Calculate(play.Target))
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount((int)((CalculatedVar)DynamicVars["EvenCostPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
@@ -36,6 +40,6 @@ public class EvenSteven() : BalatroCard(2,
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

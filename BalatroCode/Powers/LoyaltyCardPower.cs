@@ -21,19 +21,17 @@ public class LoyaltyCardPower() : BalatroPower
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (this.Amount > 1)
-        {
+        if (Amount > 1)
             await PowerCmd.Decrement(this);
-        }
         else
-        {
             await PowerCmd.ModifyAmount(choiceContext, this, 5, null, null);
-        }
     }
 
     public override Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if(this.Amount <= 1 && cardPlay.Card.Type == CardType.Attack) cardPlay.Card.ModifyDamageMultiplicative(cardPlay.Target, 4, cardPlay.Card.DynamicVars.Damage.Props, this.Owner, cardPlay.Card);
+        if (Amount <= 1 && cardPlay.Card.Type == CardType.Attack)
+            cardPlay.Card.ModifyDamageMultiplicative(cardPlay.Target, 4, cardPlay.Card.DynamicVars.Damage.Props, Owner,
+                cardPlay.Card);
         return base.BeforeCardPlayed(cardPlay);
     }
 }

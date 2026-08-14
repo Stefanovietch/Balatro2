@@ -7,6 +7,4 @@ public class Shattered() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
-
-    
 }

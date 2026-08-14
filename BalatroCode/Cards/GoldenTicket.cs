@@ -12,7 +12,8 @@ public class GoldenTicket() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new GoldVar(4)
     ];
 
@@ -22,18 +23,18 @@ public class GoldenTicket() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var card = CardFactory.GetForCombat(this.Owner, 
-            this.Owner.Character.CardPool.GetUnlockedCards(this.Owner.UnlockState, this.Owner.RunState.CardMultiplayerConstraint)
-                .Where(c => c.Rarity == CardRarity.Rare), 
-            1, this.Owner.RunState.Rng.CombatCardGeneration).First();
-        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, this.Owner);
-        
-        var amountRareCards = PileType.Deck.GetPile(this.Owner).Cards.Count(c => c.Rarity == CardRarity.Rare);
-        await PlayerCmd.GainGold(amountRareCards * this.DynamicVars.Gold.BaseValue, this.Owner);
+        var card = CardFactory.GetForCombat(Owner,
+            Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint)
+                .Where(c => c.Rarity == CardRarity.Rare),
+            1, Owner.RunState.Rng.CombatCardGeneration).First();
+        await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+
+        var amountRareCards = PileType.Deck.GetPile(Owner).Cards.Count(c => c.Rarity == CardRarity.Rare);
+        await PlayerCmd.GainGold(amountRareCards * DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Gold.UpgradeValueBy(2);
+        DynamicVars.Gold.UpgradeValueBy(2);
     }
 }

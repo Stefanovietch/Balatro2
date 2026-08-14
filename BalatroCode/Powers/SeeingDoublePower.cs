@@ -14,10 +14,11 @@ public class SeeingDoublePower() : BalatroPower
     public override PowerStackType StackType =>
         PowerStackType.Single;
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (dealer == this.Owner) return 2;
+        if (dealer == Owner) return 2;
         return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
     }
 }

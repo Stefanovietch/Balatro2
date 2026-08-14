@@ -15,53 +15,56 @@ public class Flushed() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new EnergyVar(2)
     ];
 
     private bool AnyPowersPlayedLastTurn;
     private bool AnyPowersPlayedThisTurn;
-    
+
     public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (this.Owner != cardPlay.Card.Owner || !CombatManager.Instance.IsInProgress || cardPlay.Card.Type != CardType.Power || this.AnyPowersPlayedThisTurn)
+        if (Owner != cardPlay.Card.Owner || !CombatManager.Instance.IsInProgress ||
+            cardPlay.Card.Type != CardType.Power || AnyPowersPlayedThisTurn)
             return Task.CompletedTask;
-        this.Status = RelicStatus.Normal;
-        this.AnyPowersPlayedThisTurn = true;
+        Status = RelicStatus.Normal;
+        AnyPowersPlayedThisTurn = true;
         return Task.CompletedTask;
     }
 
-    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
-        if (side != this.Owner.Creature.Side)
+        if (side != Owner.Creature.Side)
             return Task.CompletedTask;
-        this.AnyPowersPlayedLastTurn = this.AnyPowersPlayedThisTurn;
-        this.AnyPowersPlayedThisTurn = false;
+        AnyPowersPlayedLastTurn = AnyPowersPlayedThisTurn;
+        AnyPowersPlayedThisTurn = false;
         return Task.CompletedTask;
     }
-    
+
     public override async Task AfterEnergyReset(Player player)
     {
-        if (player != this.Owner) return;
-        this.Status = RelicStatus.Active;
-        if (this.Owner.Creature.CombatState?.RoundNumber <= 1)
+        if (player != Owner) return;
+        Status = RelicStatus.Active;
+        if (Owner.Creature.CombatState?.RoundNumber <= 1)
             return;
-        if (!this.AnyPowersPlayedLastTurn)
+        if (!AnyPowersPlayedLastTurn)
         {
-            this.Flash();
-            await PlayerCmd.GainEnergy(this.DynamicVars.Energy.BaseValue, this.Owner);
+            Flash();
+            await PlayerCmd.GainEnergy(DynamicVars.Energy.BaseValue, Owner);
         }
-        this.AnyPowersPlayedLastTurn = false;
-        this.AnyPowersPlayedThisTurn = false;
-    }
-    
-    public override Task AfterCombatEnd(CombatRoom _)
-    {
-        this.Status = RelicStatus.Normal;
-        this.AnyPowersPlayedLastTurn = false;
-        this.AnyPowersPlayedThisTurn = false;
-        return Task.CompletedTask;
+
+        AnyPowersPlayedLastTurn = false;
+        AnyPowersPlayedThisTurn = false;
     }
 
+    public override Task AfterCombatEnd(CombatRoom _)
+    {
+        Status = RelicStatus.Normal;
+        AnyPowersPlayedLastTurn = false;
+        AnyPowersPlayedThisTurn = false;
+        return Task.CompletedTask;
+    }
 }

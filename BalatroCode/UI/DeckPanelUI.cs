@@ -24,7 +24,7 @@ public static class DeckPanelUI
     }
 
     private static void DoAttach(Node screen)
-    { 
+    {
         try
         {
             if (_deckPanel != null && GodotObject.IsInstanceValid(_deckPanel) && _deckPanel.IsInsideTree())
@@ -32,15 +32,15 @@ public static class DeckPanelUI
                 MainFile.Logger.Info("Overlay already attached");
                 return;
             }
-            
+
             _deckPanel = new GridContainer
             {
                 CustomMinimumSize = new Vector2(420, 56),
-                Columns = 8,
+                Columns = 8
             };
             _deckPanel.AddThemeConstantOverride("h_separation", 20);
             _deckPanel.AddThemeConstantOverride("v_separation", 20);
-            
+
             PositionHbox(_deckPanel);
             _deckPanel.AddChild(new ClickableDeck("red"));
             _deckPanel.AddChild(new ClickableDeck("blue"));
@@ -57,16 +57,18 @@ public static class DeckPanelUI
             _deckPanel.AddChild(new ClickableDeck("anaglyph"));
             _deckPanel.AddChild(new ClickableDeck("plasma"));
             _deckPanel.AddChild(new ClickableDeck("erratic"));
-            
+
             LayoutDecks();
-            
+
             screen.AddChild(_deckPanel);
-            
+
             _relicIcon = screen.GetNode<TextureRect>("InfoPanel/VBoxContainer/Relic/Icon");
-            _relicTitle = screen.GetNode<MegaRichTextLabel>((NodePath) "InfoPanel/VBoxContainer/Relic/Name/RichTextLabel");
-            _relicDescription = screen.GetNode<MegaRichTextLabel>((NodePath) "InfoPanel/VBoxContainer/Relic/Description");
+            _relicTitle =
+                screen.GetNode<MegaRichTextLabel>((NodePath)"InfoPanel/VBoxContainer/Relic/Name/RichTextLabel");
+            _relicDescription =
+                screen.GetNode<MegaRichTextLabel>((NodePath)"InfoPanel/VBoxContainer/Relic/Description");
             _relicIconOutline = screen.GetNode<TextureRect>("InfoPanel/VBoxContainer/Relic/Icon/Outline");
-            
+
             LoadSelectDeck(BalatroConfig.SelectedDeck);
             UpdateRelic(BalatroConfig.SelectedDeck);
         }
@@ -75,8 +77,9 @@ public static class DeckPanelUI
             MainFile.Logger.Warn($"overlay attach failed: {ex.Message}");
         }
     }
-    
-    private static void PositionHbox(Control c, int width = 8*84, int  height = 2*84, int offsetRight = 300, int offsetTop = 350)
+
+    private static void PositionHbox(Control c, int width = 8 * 84, int height = 2 * 84, int offsetRight = 300,
+        int offsetTop = 350)
     {
         c.AnchorLeft = 1f;
         c.AnchorRight = 1f;
@@ -89,21 +92,22 @@ public static class DeckPanelUI
         c.GrowHorizontal = Control.GrowDirection.Begin;
         c.GrowVertical = Control.GrowDirection.End;
     }
-    
-    private static void LayoutDecks() 
+
+    private static void LayoutDecks()
     {
         if (_deckPanel == null)
         {
             MainFile.Logger.Warn($"No deckPanel");
             return;
         }
+
         foreach (var node in _deckPanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableDeck deck) continue;
             deck.SetPanel(_deckPanel);
         }
     }
-    
+
     public static void SelectDeck(ClickableDeck selected)
     {
         if (_deckPanel == null)
@@ -111,6 +115,7 @@ public static class DeckPanelUI
             MainFile.Logger.Warn($"{selected} not in deckPanel");
             return;
         }
+
         foreach (var node in _deckPanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableDeck deck) continue;
@@ -131,7 +136,7 @@ public static class DeckPanelUI
 
         UpdateRelic(selected.Name);
     }
-    
+
     private static void LoadSelectDeck(StringName selected)
     {
         if (_deckPanel == null)
@@ -139,6 +144,7 @@ public static class DeckPanelUI
             MainFile.Logger.Warn($"Could not load selected deck");
             return;
         }
+
         foreach (var node in _deckPanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableDeck deck) continue;
@@ -156,7 +162,7 @@ public static class DeckPanelUI
 
     private static void UpdateRelic(string deckName)
     {
-        RelicModel relic = MainFile.GetRelic(deckName);
+        var relic = MainFile.GetRelic(deckName);
 
         if (_relicIcon == null || _relicTitle == null || _relicDescription == null || _relicIconOutline == null) return;
         _relicIcon.Texture = relic.Icon;

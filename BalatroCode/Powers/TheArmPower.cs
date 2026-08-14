@@ -16,18 +16,18 @@ public class TheArmPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheArm;
-    
+
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards)
+            foreach (var card in playerPlayerCombatState.AllCards)
             {
                 if (!card.IsUpgraded) continue;
                 await CardCmd.Afflict<BalatroArmed>(card, 1M);
@@ -41,32 +41,34 @@ public class TheArmPower() : BalatroPower, IBlindPower
             return;
         await CardCmd.Afflict<BalatroArmed>(card, 1M);
     }
-    
+
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
-        Decimal originalCost,
-        out Decimal modifiedCost)
+        decimal originalCost,
+        out decimal modifiedCost)
     {
         if (card.Affliction is not BalatroArmed)
         {
             modifiedCost = originalCost;
             return false;
         }
+
         modifiedCost = originalCost + 1;
         return true;
     }
-    
+
     public override Task AfterRemoved(Creature oldOwner)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return Task.CompletedTask;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroArmed))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroArmed))
                 CardCmd.ClearAffliction(card);
         }
+
         return Task.CompletedTask;
     }
 }

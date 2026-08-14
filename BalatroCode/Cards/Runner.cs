@@ -15,70 +15,77 @@ public class Runner() : BalatroCard(1,
     private int _currentBlock = 4;
 
     private int _increasedBlock;
-    
+
     [SavedProperty]
     public int CurrentBlock
     {
-        get => this._currentBlock;
+        get => _currentBlock;
         set
         {
-            this.AssertMutable();
-            this._currentBlock = value;
-            this.DynamicVars.Block.BaseValue = this._currentBlock;
+            AssertMutable();
+            _currentBlock = value;
+            DynamicVars.Block.BaseValue = _currentBlock;
         }
     }
 
     [SavedProperty]
     public int IncreasedBlock
     {
-        get => this._increasedBlock;
+        get => _increasedBlock;
         set
         {
-            this.AssertMutable();
-            this._increasedBlock = value;
+            AssertMutable();
+            _increasedBlock = value;
         }
     }
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(this.CurrentBlock, ValueProp.Move),
-        new IntVar("BlockIncrease", 2M),
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new BlockVar(CurrentBlock, ValueProp.Move),
+        new IntVar("BlockIncrease", 2M)
     ];
 
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        if (!HasCost012Cards()) 
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        if (!HasCost012Cards())
             return;
-        this.BuffFromPlay();
-        if (this.DeckVersion is not Runner deckVersion)
+        BuffFromPlay();
+        if (DeckVersion is not Runner deckVersion)
             return;
         deckVersion.BuffFromPlay();
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["BlockIncrease"].UpgradeValueBy(2);
+        DynamicVars["BlockIncrease"].UpgradeValueBy(2);
     }
 
     protected override bool ShouldGlowGoldInternal => HasCost012Cards();
 
     private bool HasCost012Cards()
     {
-        var amountList = PileType.Hand.GetPile(this.Owner).Cards.Where(c => !c.Equals(this))
+        var amountList = PileType.Hand.GetPile(Owner).Cards.Where(c => !c.Equals(this))
             .Select(c => c.EnergyCost.GetAmountToSpend()).ToList();
         return amountList.Contains(0) && amountList.Contains(1) && amountList.Contains(2);
     }
-    
-    protected override void AfterDowngraded() => this.UpdateBlock();
-    
+
+    protected override void AfterDowngraded()
+    {
+        UpdateBlock();
+    }
+
     private void BuffFromPlay()
     {
-        this.IncreasedBlock += this.DynamicVars["BlockIncrease"].IntValue;
-        this.UpdateBlock();
+        IncreasedBlock += DynamicVars["BlockIncrease"].IntValue;
+        UpdateBlock();
     }
-    
-    private void UpdateBlock() => this.CurrentBlock = 1 + this.IncreasedBlock;
+
+    private void UpdateBlock()
+    {
+        CurrentBlock = 1 + IncreasedBlock;
+    }
 }

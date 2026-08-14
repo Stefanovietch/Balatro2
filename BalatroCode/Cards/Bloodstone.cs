@@ -12,8 +12,9 @@ public class Bloodstone() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.RandomEnemy), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 2),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 2),
         new DisplayVar<Bloodstone>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())
     ];
@@ -25,22 +26,18 @@ public class Bloodstone() : BalatroCard(1,
         CardPlay play)
     {
         var attacksThisTurn = CombatManager.Instance.History.CardPlaysFinished
-            .Where(c => c.CardPlay.Card.Owner == this.Owner && c.HappenedThisTurn(this.CombatState) &&
+            .Where(c => c.CardPlay.Card.Owner == Owner && c.HappenedThisTurn(CombatState) &&
                         c.CardPlay.Card.Type == CardType.Attack)
             .Select(c => c.CardPlay.Card)
             .ToList();
 
-        foreach (var card in attacksThisTurn)        
-        {
-            if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
-            {
+        foreach (var card in attacksThisTurn)
+            if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
                 await CardCmd.AutoPlay(choiceContext, card, null);
-            }
-        }
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Exhaust);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

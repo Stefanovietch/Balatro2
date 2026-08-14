@@ -14,11 +14,11 @@ public class CrystalBall() : BalatroRelic
 
     public override Task AfterObtained()
     {
-        this.Owner.AddToMaxPotionCount(1);
+        Owner.AddToMaxPotionCount(1);
 
-        this.Owner.Potions.AddItem(new Duplicator());
-        this.Owner.Potions.AddItem(new Duplicator());
-        
+        Owner.Potions.AddItem(new Duplicator());
+        Owner.Potions.AddItem(new Duplicator());
+
         return Task.CompletedTask;
     }
 }

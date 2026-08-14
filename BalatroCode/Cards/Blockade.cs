@@ -10,18 +10,17 @@ public class Blockade() : BalatroCard(1,
     CardType.Skill, CardRarity.Token,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        
     }
 
     protected override void OnUpgrade()
     {
-
     }
 }

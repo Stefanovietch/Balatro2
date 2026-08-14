@@ -16,7 +16,7 @@ public static class StakePanelUI
     }
 
     private static void DoAttach(Node screen)
-    { 
+    {
         try
         {
             if (_stakePanel != null && GodotObject.IsInstanceValid(_stakePanel) && _stakePanel.IsInsideTree())
@@ -28,13 +28,13 @@ public static class StakePanelUI
             _stakePanel = new GridContainer
             {
                 CustomMinimumSize = new Vector2(420, 56),
-                Columns = 8,
+                Columns = 8
             };
             _stakePanel.AddThemeConstantOverride("h_separation", 20);
             _stakePanel.AddThemeConstantOverride("v_separation", 20);
-            
+
             PositionHbox(_stakePanel);
-            
+
             _stakePanel.AddChild(new ClickableStake("white", 0));
             _stakePanel.AddChild(new ClickableStake("red", 1));
             _stakePanel.AddChild(new ClickableStake("green", 2));
@@ -43,11 +43,11 @@ public static class StakePanelUI
             _stakePanel.AddChild(new ClickableStake("purple", 5));
             _stakePanel.AddChild(new ClickableStake("orange", 6));
             _stakePanel.AddChild(new ClickableStake("gold", 7));
-            
+
             LayoutDecks();
-            
+
             screen.AddChild(_stakePanel);
-            
+
             LoadStakes(BalatroConfig.SelectedStake);
         }
         catch (Exception ex)
@@ -55,8 +55,9 @@ public static class StakePanelUI
             MainFile.Logger.Warn($"overlay attach failed: {ex.Message}");
         }
     }
-    
-    public static void PositionHbox(Control c, int width = 8*84, int  height = 1*84, int offsetRight = 300, int offsetTop = 550)
+
+    public static void PositionHbox(Control c, int width = 8 * 84, int height = 1 * 84, int offsetRight = 300,
+        int offsetTop = 550)
     {
         c.AnchorLeft = 1f;
         c.AnchorRight = 1f;
@@ -69,21 +70,22 @@ public static class StakePanelUI
         c.GrowHorizontal = Control.GrowDirection.Begin;
         c.GrowVertical = Control.GrowDirection.End;
     }
-    
-    private static void LayoutDecks() 
+
+    private static void LayoutDecks()
     {
         if (_stakePanel == null)
         {
             MainFile.Logger.Warn($"No deckPanel");
             return;
         }
+
         foreach (var node in _stakePanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableStake stake) continue;
             stake.SetPanel(_stakePanel);
         }
     }
-    
+
     public static void SelectStake(ClickableStake selected)
     {
         if (_stakePanel == null)
@@ -91,6 +93,7 @@ public static class StakePanelUI
             MainFile.Logger.Warn($"{selected} not in stakePanel");
             return;
         }
+
         foreach (var node in _stakePanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableStake stake) continue;
@@ -108,7 +111,7 @@ public static class StakePanelUI
             }
         }
     }
-    
+
     public static void LoadStakes(StringName selectedStake)
     {
         if (_stakePanel == null)
@@ -116,11 +119,12 @@ public static class StakePanelUI
             MainFile.Logger.Warn($"could not load stakePanel");
             return;
         }
+
         foreach (var node in _stakePanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableStake stake) continue;
             stake.LoadStakeState();
-            
+
             if (stake.Name != selectedStake) continue;
             if (stake.Unlocked)
             {

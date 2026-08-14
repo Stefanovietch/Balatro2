@@ -11,5 +11,5 @@ public class OopsAll6sPower() : BalatroPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public override int DisplayAmount => (int) Math.Pow(2, Amount);
+    public override int DisplayAmount => (int)Math.Pow(2, Amount);
 }

@@ -14,27 +14,32 @@ public class CardSharp() : BalatroCard(3,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(12, ValueProp.Move),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(12, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(this.CombatState).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).TargetingAllOpponents(CombatState)
+            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
-    
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource != this || CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Resources.EnergySpent == 3) == 0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource != this || CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.HappenedThisTurn(CombatState) && c.CardPlay.Resources.EnergySpent == 3) ==
+            0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
         return 3;
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

@@ -15,63 +15,62 @@ public partial class ClickableDeck : NButton
     public bool Selected;
     private Control? _containingPanel;
     private TextureRect? _selectedTexture;
-    
+
     public ClickableDeck(string deckName)
     {
-        this.Name = (StringName) (deckName + "Deck");
-        this.CustomMinimumSize = new Vector2(64, 64);
-        this._hoverTip = new HoverTip(new LocString("static_hover_tips", "BALATRO-BALATRO."+this.Name+".title"), new LocString("static_hover_tips", "BALATRO-BALATRO."+this.Name+".description"));
+        Name = (StringName)(deckName + "Deck");
+        CustomMinimumSize = new Vector2(64, 64);
+        _hoverTip = new HoverTip(new LocString("static_hover_tips", "BALATRO-BALATRO." + Name + ".title"),
+            new LocString("static_hover_tips", "BALATRO-BALATRO." + Name + ".description"));
     }
 
     public override void _Ready()
     {
         _image = new TextureRect();
-        _image.Name = (StringName) "Image";
+        _image.Name = (StringName)"Image";
         _image.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
         _image.ExpandMode = TextureRect.ExpandModeEnum.KeepSize;
         _image.CustomMinimumSize = new Vector2(32, 64f);
-        _image.Texture = GD.Load<Texture2D>("res://Balatro/images/decks/small/"+this.Name+".png");
-        _image.SetAnchorsPreset(Control.LayoutPreset.Center);
+        _image.Texture = GD.Load<Texture2D>("res://Balatro/images/decks/small/" + Name + ".png");
+        _image.SetAnchorsPreset(LayoutPreset.Center);
         AddChild(_image);
-        
+
         _selectedTexture = new TextureRect();
         _selectedTexture.Texture = GD.Load<Texture2D>("res://Balatro/images/ui/tiny_star.png");
         _selectedTexture.CustomMinimumSize = new Vector2(40, 40);
-        _selectedTexture.SetAnchorsPreset(Control.LayoutPreset.TopLeft);
+        _selectedTexture.SetAnchorsPreset(LayoutPreset.TopLeft);
         _selectedTexture.Position = new Vector2(20, 20);
         _selectedTexture.Visible = false;
-        _selectedTexture.MouseFilter = Control.MouseFilterEnum.Ignore;
+        _selectedTexture.MouseFilter = MouseFilterEnum.Ignore;
         AddChild(_selectedTexture);
-        
-        this.Selected = false;
-        this.PivotOffset = this.Size;
 
-        this.ConnectSignals();
+        Selected = false;
+        PivotOffset = Size;
+
+        ConnectSignals();
     }
 
     protected override void OnFocus()
 
     {
-        Tween tween = CreateTween();
+        var tween = CreateTween();
         tween.TweenProperty(this, "scale", new Vector2(1.2f, 1.2f), 0.1);
-        
+
         var hoverTip = NHoverTipSet.CreateAndShow(this, _hoverTip);
-        if (hoverTip != null) hoverTip.GlobalPosition = this.GlobalPosition + new Vector2(-32f, - this.Size.Y - 20f);
+        if (hoverTip != null) hoverTip.GlobalPosition = GlobalPosition + new Vector2(-32f, -Size.Y - 20f);
     }
 
     protected override void OnUnfocus()
     {
-        Tween tween = CreateTween();
+        var tween = CreateTween();
         tween.TweenProperty(this, "scale", new Vector2(1f, 1f), 0.1);
-        
-        NHoverTipSet.Remove((Godot.Control) this);
+
+        NHoverTipSet.Remove((Control)this);
     }
-    
+
     protected override void OnPress()
     {
-        if (!Selected) {
-            DeckPanelUI.SelectDeck(this);
-        }
+        if (!Selected) DeckPanelUI.SelectDeck(this);
     }
 
     public void OnSelect()
@@ -83,8 +82,9 @@ public partial class ClickableDeck : NButton
     {
         if (_selectedTexture != null) _selectedTexture.Visible = false;
     }
-    
-    public void SetPanel(Control panel) {
-        this._containingPanel = panel;
+
+    public void SetPanel(Control panel)
+    {
+        _containingPanel = panel;
     }
 }

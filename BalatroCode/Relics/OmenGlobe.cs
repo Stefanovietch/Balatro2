@@ -18,10 +18,13 @@ public class OmenGlobe() : BalatroRelic
 
     public override async Task AfterPotionUsed(PotionModel potion, Creature? target)
     {
-        if (potion.Owner != this.Owner || !CombatManager.Instance.IsInProgress)
+        if (potion.Owner != Owner || !CombatManager.Instance.IsInProgress)
             return;
-        this.Flash();
-        List<CardModel> list = CardFactory.GetDistinctForCombat(this.Owner, ModelDb.CardPool<ColorlessCardPool>().GetUnlockedCards(this.Owner.UnlockState, this.Owner.RunState.CardMultiplayerConstraint), 1, this.Owner.RunState.Rng.CombatCardGeneration).ToList<CardModel>();
-        IReadOnlyList<CardPileAddResult> combat = await CardPileCmd.AddGeneratedCardsToCombat((IEnumerable<CardModel>) list, PileType.Hand, this.Owner);
+        Flash();
+        var list = CardFactory.GetDistinctForCombat(Owner,
+            ModelDb.CardPool<ColorlessCardPool>()
+                .GetUnlockedCards(Owner.UnlockState, Owner.RunState.CardMultiplayerConstraint), 1,
+            Owner.RunState.Rng.CombatCardGeneration).ToList<CardModel>();
+        var combat = await CardPileCmd.AddGeneratedCardsToCombat((IEnumerable<CardModel>)list, PileType.Hand, Owner);
     }
 }

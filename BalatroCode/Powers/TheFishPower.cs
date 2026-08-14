@@ -13,7 +13,7 @@ public class TheFishPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheFish;
 
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)

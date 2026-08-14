@@ -11,11 +11,12 @@ public class Bootstraps() : BalatroCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         ..MakeCalculatedDamage(0, (card, target) => card.Owner.Gold),
-        new DynamicVar("GoldLose", 100)
+        new("GoldLose", 100)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(
@@ -23,15 +24,15 @@ public class Bootstraps() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        await PlayerCmd.LoseGold(this.DynamicVars["GoldLose"].BaseValue, this.Owner);
+        await PlayerCmd.LoseGold(DynamicVars["GoldLose"].BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["GoldLose"].UpgradeValueBy(-20);
+        DynamicVars["GoldLose"].UpgradeValueBy(-20);
     }
 }

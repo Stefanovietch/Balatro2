@@ -16,18 +16,20 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
+
     public BlindType BlindType => BlindType.ThePsychic;
-    
+
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var countBalatro = this.Owner.CombatState?.Players.Count(p => p.Character is Character.Balatro && p.Creature.IsAlive) ?? 1;
-        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro, applier, cardSource, true);
+        var countBalatro =
+            Owner.CombatState?.Players.Count(p => p.Character is Character.Balatro && p.Creature.IsAlive) ?? 1;
+        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro, applier, cardSource,
+            true);
     }
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
-        if (this.Amount <= 2) return false;
+        if (Amount <= 2) return false;
         return base.ShouldPlay(card, autoPlayType);
     }
 
@@ -36,7 +38,8 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
         if (cardPlay.Card.Owner.Character is Character.Balatro) await PowerCmd.Decrement(this);
     }
 
-    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants,
+        ICombatState combatState)
     {
         if (side != CombatSide.Player) return;
         var countBalatro = participants.Count(c => c.Player?.Character is Character.Balatro && c.IsAlive);
@@ -44,5 +47,5 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
         await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro, null, null, true);
     }
 
-    public override int DisplayAmount => this.Amount - 1;
+    public override int DisplayAmount => Amount - 1;
 }

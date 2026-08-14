@@ -20,19 +20,18 @@ public class Showman() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(this.SelectionScreenPrompt, 1);
-        CardModel? card = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Draw.GetPile(this.Owner), this.Owner, prefs)).FirstOrDefault();
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
+        var card = (await CardSelectCmd.FromCombatPile(choiceContext, PileType.Draw.GetPile(Owner), Owner, prefs))
+            .FirstOrDefault();
         if (card == null)
             return;
         await CardPileCmd.Add(card, PileType.Hand);
-        foreach (var sameCard in PileType.Draw.GetPile(this.Owner).Cards.Where(c => c.GetType() == card.GetType()).ToList())
-        {
+        foreach (var sameCard in PileType.Draw.GetPile(Owner).Cards.Where(c => c.GetType() == card.GetType()).ToList())
             await CardPileCmd.Add(sameCard, PileType.Hand);
-        }
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Exhaust);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

@@ -12,7 +12,8 @@ public class FortuneTeller() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(2, ValueProp.Move),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
@@ -27,16 +28,16 @@ public class FortuneTeller() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["PotionsUsed"]).Calculate(play.Target))
-            .TargetingRandomOpponents(this.CombatState)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount((int)((CalculatedVar)DynamicVars["PotionsUsed"]).Calculate(play.Target))
+            .TargetingRandomOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(1);
+        DynamicVars.Damage.UpgradeValueBy(1);
     }
 }

@@ -28,8 +28,8 @@ public class CharacterSelectScreenPatches
             }
         }
     }
-    
-    
+
+
     [HarmonyPatch(typeof(NCharacterSelectScreen), "SelectCharacter")]
     public static class CharacterSelectScreenSelectPatch
     {
@@ -39,7 +39,7 @@ public class CharacterSelectScreenPatches
             {
                 var id = characterModel?.Id?.Entry;
                 if (string.IsNullOrEmpty(id)) return;
-                
+
                 var isBalatro = id is "BALATRO-BALATRO";
                 DeckPanelUI.SetVisibility(isBalatro);
                 StakePanelUI.SetVisibility(isBalatro);

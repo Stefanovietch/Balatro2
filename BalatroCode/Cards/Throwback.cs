@@ -11,10 +11,14 @@ public class Throwback() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedVar("QuestionMarks", 0, (c, _) => c.Owner.Character is Character.Balatro balatro ? Character.Balatro.QuestionMarksVisited.Get(c.Owner) : 0)
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        ..MakeCalculatedVar("QuestionMarks", 0,
+            (c, _) => c.Owner.Character is Character.Balatro balatro
+                ? Character.Balatro.QuestionMarksVisited.Get(c.Owner)
+                : 0)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
 
@@ -23,13 +27,14 @@ public class Throwback() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, this.DynamicVars["QuestionMarks"].BaseValue, this.Owner.Creature,  this);
-        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, this.DynamicVars["QuestionMarks"].BaseValue, this.Owner.Creature,  this);
-
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, DynamicVars["QuestionMarks"].BaseValue,
+            Owner.Creature, this);
+        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, DynamicVars["QuestionMarks"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["QuestionMarks"].UpgradeValueBy(1);
+        DynamicVars["QuestionMarks"].UpgradeValueBy(1);
     }
 }

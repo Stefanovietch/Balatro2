@@ -13,21 +13,22 @@ public class TheSerpentPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheSerpent;
 
     public override bool TryModifyPowerAmountReceived(
         PowerModel canonicalPower,
         Creature target,
-        Decimal amount,
+        decimal amount,
         Creature? _,
-        out Decimal modifiedAmount)
+        out decimal modifiedAmount)
     {
-        if (target != this.Owner || canonicalPower.GetTypeForAmount(amount) != PowerType.Debuff || !canonicalPower.IsVisible)
+        if (target != Owner || canonicalPower.GetTypeForAmount(amount) != PowerType.Debuff || !canonicalPower.IsVisible)
         {
             modifiedAmount = amount;
             return false;
         }
+
         modifiedAmount = 0M;
         return true;
     }

@@ -18,14 +18,14 @@ public class BigHands() : BalatroRelic
         List<CardCreationResult> options,
         CardCreationOptions creationOptions)
     {
-        if (this.Owner != player) return false;
+        if (Owner != player) return false;
         if (options.Count < 1) return false;
         options.RemoveAt(0);
         return true;
     }
-    
-    public override Decimal ModifyHandDraw(Player player, Decimal count)
+
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        return player != this.Owner ? count : count + 2;
+        return player != Owner ? count : count + 2;
     }
 }

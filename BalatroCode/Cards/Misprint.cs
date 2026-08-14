@@ -12,7 +12,8 @@ public class Misprint() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(21, ValueProp.Move)
     ];
 
@@ -21,14 +22,14 @@ public class Misprint() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.Owner.RunState.Rng.Niche.NextInt(1, this.DynamicVars.Damage.IntValue)).FromCard(this)
+        await DamageCmd.Attack(Owner.RunState.Rng.Niche.NextInt(1, DynamicVars.Damage.IntValue)).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
-    
+
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(11);
+        DynamicVars.Damage.UpgradeValueBy(11);
     }
 }

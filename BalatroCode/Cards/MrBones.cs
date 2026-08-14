@@ -11,7 +11,8 @@ public class MrBones() : BalatroCard(2,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<MrBonesPower>(1)
     ];
 
@@ -23,12 +24,12 @@ public class MrBones() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<MrBonesPower>(choiceContext, this.Owner.Creature, this.DynamicVars["MrBonesPower"].BaseValue, this.Owner.Creature, this);
-        
+        await PowerCmd.Apply<MrBonesPower>(choiceContext, Owner.Creature, DynamicVars["MrBonesPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Ethereal);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

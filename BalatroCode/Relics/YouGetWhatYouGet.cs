@@ -17,19 +17,17 @@ public class YouGetWhatYouGet() : BalatroRelic
 
     public override bool TryModifyRewards(Player player, List<Reward> rewards, AbstractRoom? room)
     {
-        if (this.Owner != player || room is not { RoomType: (RoomType.Monster or RoomType.Elite or RoomType.Boss) })
+        if (Owner != player || room is not { RoomType: RoomType.Monster or RoomType.Elite or RoomType.Boss })
             return base.TryModifyRewards(player, rewards, room);
-        foreach (var reward in rewards.ToList().OfType<GoldReward>())
-        {
-            rewards.Remove(reward);
-        }
+        foreach (var reward in rewards.ToList().OfType<GoldReward>()) rewards.Remove(reward);
         return base.TryModifyRewards(player, rewards, room);
     }
 
-    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
-        if (side != CombatSide.Player || this.Owner.PlayerCombatState == null) return;
-        decimal goldAmount = this.Owner.PlayerCombatState.Hand.Cards.Count * 2; 
-        await PlayerCmd.GainGold(goldAmount, this.Owner);
+        if (side != CombatSide.Player || Owner.PlayerCombatState == null) return;
+        decimal goldAmount = Owner.PlayerCombatState.Hand.Cards.Count * 2;
+        await PlayerCmd.GainGold(goldAmount, Owner);
     }
 }

@@ -11,9 +11,9 @@ public class LoyaltyCard() : BalatroCard(2,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<LoyaltyCardPower>(6)
-
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal];
@@ -22,12 +22,12 @@ public class LoyaltyCard() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<LoyaltyCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars["LoyaltyCardPower"].BaseValue, this.Owner.Creature, this);
-
+        await PowerCmd.Apply<LoyaltyCardPower>(choiceContext, Owner.Creature, DynamicVars["LoyaltyCardPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Ethereal);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

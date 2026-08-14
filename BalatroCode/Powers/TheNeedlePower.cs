@@ -17,9 +17,9 @@ public class TheNeedlePower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
+
     public BlindType BlindType => BlindType.TheNeedle;
-    
+
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 10, applier, cardSource, true);
@@ -33,15 +33,14 @@ public class TheNeedlePower() : BalatroPower, IBlindPower
         var enumerable = participants.ToList();
         if (side != CombatSide.Player) return;
         await PowerCmd.TickDownDuration(this);
-        if (this.Amount <= 1)
-        {
-            foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
+        if (Amount <= 1)
+            foreach (var p in enumerable.Where(c => c is
+                         { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
             {
                 if (p.Player == null) continue;
                 await CreatureCmd.Kill(p.Player.Creature, true);
             }
-        }
     }
 
-    public override int DisplayAmount => this.Amount - 1;
+    public override int DisplayAmount => Amount - 1;
 }

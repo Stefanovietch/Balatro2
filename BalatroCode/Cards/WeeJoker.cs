@@ -12,20 +12,24 @@ public class WeeJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(2, ValueProp.Move),
-        ..MakeCalculatedVar("ZeroCostCards", 0, (card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.EnergyCost.Canonical == 0 && c.CardPlay.Card.Owner == card.Owner))
+        ..MakeCalculatedVar("ZeroCostCards", 0,
+            (card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.CardPlay.Card.EnergyCost.Canonical == 0 && c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        for (var _ = 0; _ < (int)((CalculatedVar)base.DynamicVars["ZeroCostCards"]).Calculate(null); _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        for (var _ = 0; _ < (int)((CalculatedVar)DynamicVars["ZeroCostCards"]).Calculate(null); _++)
+            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(1);
     }
 }

@@ -12,19 +12,23 @@ public class IceCream() : BalatroCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedBlock(25, (card, creature) => -CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.Owner == card.Owner))
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        ..MakeCalculatedBlock(25,
+            (card, creature) =>
+                -CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(this.Owner.Creature), ValueProp.Move , play);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.CalculatedBlock.Calculate(Owner.Creature),
+            ValueProp.Move, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculatedBlock.UpgradeValueBy(5);
+        DynamicVars.CalculatedBlock.UpgradeValueBy(5);
     }
 }

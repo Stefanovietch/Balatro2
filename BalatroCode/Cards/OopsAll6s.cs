@@ -22,13 +22,13 @@ public class OopsAll6s() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<OopsAll6sPower>(choiceContext, this.Owner.Creature, 1, this.Owner.Creature, this);
-        if (IsUpgraded && this.Owner.RunState.CurrentRoom is CombatRoom room)
+        await PowerCmd.Apply<OopsAll6sPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+        if (IsUpgraded && Owner.RunState.CurrentRoom is CombatRoom room)
         {
-            if (!this.Owner.PlayerOdds.PotionReward.Roll(this.Owner, RunManager.Instance.AscensionManager, room.RoomType)) return;
-            var potionReward = new PotionReward(this.Owner);
+            if (!Owner.PlayerOdds.PotionReward.Roll(Owner, RunManager.Instance.AscensionManager, room.RoomType)) return;
+            var potionReward = new PotionReward(Owner);
             potionReward.Populate();
-            room.AddExtraReward(this.Owner, potionReward);
+            room.AddExtraReward(Owner, potionReward);
         }
     }
 }

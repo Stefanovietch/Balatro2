@@ -14,8 +14,9 @@ public class Canio() : BalatroCard(1,
     CardType.Attack, CardRarity.Ancient,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(10, ValueProp.Move),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(10, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
@@ -23,18 +24,20 @@ public class Canio() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
         if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return PileType.Discard.GetPile(this.Owner).Cards.Count(c => c.Type == CardType.Power) + 1M;
+        return PileType.Discard.GetPile(Owner).Cards.Count(c => c.Type == CardType.Power) + 1M;
     }
-    
+
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

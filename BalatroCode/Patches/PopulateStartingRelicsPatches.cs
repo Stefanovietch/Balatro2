@@ -17,11 +17,11 @@ public class PopulateStartingRelicsPatches
         public static bool Prefix(Player __instance)
         {
             if (__instance.Character is not Character.Balatro balatro) return true;
-            
+
             try
             {
-                RelicModel relic = MainFile.GetRelic(BalatroConfig.SelectedDeck);
-                
+                var relic = MainFile.GetRelic(BalatroConfig.SelectedDeck);
+
                 var mutable = relic.ToMutable();
                 mutable.FloorAddedToDeck = 1;
                 SaveManager.Instance.MarkRelicAsSeen(mutable);

@@ -17,18 +17,18 @@ public class Chicot() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal,CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Ethereal, CardKeyword.Exhaust];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await CreatureCmd.TriggerAnim(this.Owner.Creature, "Cast", this.Owner.Character.CastAnimDelay);
-        VfxCmd.PlayOnCreatureCenter(this.Owner.Creature, "vfx/vfx_flying_slash");
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
+        VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_flying_slash");
 
-        if (this.Owner.Creature.CombatState?.Encounter?.RoomType != RoomType.Boss) return;
-        foreach (Creature enemy in (IEnumerable<Creature>) this.CombatState.HittableEnemies)
+        if (Owner.Creature.CombatState?.Encounter?.RoomType != RoomType.Boss) return;
+        foreach (var enemy in (IEnumerable<Creature>)CombatState.HittableEnemies)
         {
             if (enemy.IsPet) continue;
             await CreatureCmd.Stun(enemy);
@@ -37,7 +37,6 @@ public class Chicot() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Ethereal);
-
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

@@ -12,8 +12,9 @@ public class GrosMichel() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AllEnemies), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 6),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 6),
         new DisplayVar<GrosMichel>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new DamageVar(6, ValueProp.Move)
@@ -23,15 +24,15 @@ public class GrosMichel() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
-            .TargetingAllOpponents(this.CombatState)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
+        if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
         {
             await CardPileCmd.RemoveFromCombat(this);
-            if (this.DeckVersion is not Cavendish deckVersion)
+            if (DeckVersion is not Cavendish deckVersion)
                 return;
             await CardPileCmd.RemoveFromDeck(deckVersion);
         }
@@ -39,6 +40,6 @@ public class GrosMichel() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 }

@@ -12,40 +12,35 @@ public class FourFingers() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.RandomEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar("Damage1", 1, ValueProp.Move),
         new DamageVar("Damage2", 2, ValueProp.Move),
         new DamageVar("Damage3", 3, ValueProp.Move),
-        new DamageVar("Damage4", 4, ValueProp.Move),
+        new DamageVar("Damage4", 4, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
-    {                
-        ArgumentNullException.ThrowIfNull(this.CombatState);
+    {
+        ArgumentNullException.ThrowIfNull(CombatState);
         ArgumentNullException.ThrowIfNull(play.Target);
 
         foreach (var damageVar in CanonicalVars.OfType<DamageVar>())
-        {
             if (IsUpgraded)
-            {
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
                     .Targeting(play.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
-            }
             else
-            {
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
-                    .TargetingRandomOpponents(this.CombatState)
+                    .TargetingRandomOpponents(CombatState)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
-            }
-        }
     }
 
-    public override TargetType TargetType => this.IsUpgraded ? TargetType.AnyEnemy : TargetType.RandomEnemy;
+    public override TargetType TargetType => IsUpgraded ? TargetType.AnyEnemy : TargetType.RandomEnemy;
 
     protected override void OnUpgrade()
     {

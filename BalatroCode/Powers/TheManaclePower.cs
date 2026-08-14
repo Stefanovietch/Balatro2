@@ -13,12 +13,11 @@ public class TheManaclePower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheManacle;
-    
-    public override Decimal ModifyHandDraw(Player player, Decimal count)
+
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
         return player.Character is Character.Balatro ? count - 1 : count;
     }
-
 }

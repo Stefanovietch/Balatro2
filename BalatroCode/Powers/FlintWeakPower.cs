@@ -20,19 +20,19 @@ public class FlintWeakPower() : BalatroPower
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("DamageDecrease", 0.75M),
+        new("DamageDecrease", 0.75M)
     ];
 
-    public override Decimal ModifyDamageMultiplicative(
+    public override decimal ModifyDamageMultiplicative(
         Creature? target,
-        Decimal amount,
+        decimal amount,
         ValueProp props,
         Creature? dealer,
         CardModel? cardSource)
     {
-        if (dealer != this.Owner || !props.IsPoweredAttack())
+        if (dealer != Owner || !props.IsPoweredAttack())
             return 1M;
-        Decimal amount1 = this.DynamicVars["DamageDecrease"].BaseValue;
+        var amount1 = DynamicVars["DamageDecrease"].BaseValue;
         var relic = target?.Player?.GetRelic<PaperKrane>();
         if (relic != null && target != null)
             amount1 = relic.ModifyWeakMultiplier(target, amount1, props, dealer, cardSource);
@@ -41,25 +41,26 @@ public class FlintWeakPower() : BalatroPower
             amount1 = power.ModifyWeakMultiplier(dealer, amount1, props, dealer, cardSource);
         return amount1;
     }
-    
+
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var power = this.Owner.GetPower<WeakPower>();
+        var power = Owner.GetPower<WeakPower>();
         if (power != null) await PowerCmd.Remove(power);
     }
 
     public override bool TryModifyPowerAmountReceived(
         PowerModel canonicalPower,
         Creature target,
-        Decimal amount,
+        decimal amount,
         Creature? _,
-        out Decimal modifiedAmount)
+        out decimal modifiedAmount)
     {
-        if (target != this.Owner || canonicalPower is not WeakPower || !canonicalPower.IsVisible)
+        if (target != Owner || canonicalPower is not WeakPower || !canonicalPower.IsVisible)
         {
             modifiedAmount = amount;
             return false;
         }
+
         modifiedAmount = 0M;
         return true;
     }

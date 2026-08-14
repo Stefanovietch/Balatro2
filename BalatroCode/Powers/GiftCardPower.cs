@@ -15,5 +15,4 @@ public class GiftCardPower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
 }

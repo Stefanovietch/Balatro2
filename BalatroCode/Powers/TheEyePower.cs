@@ -13,19 +13,20 @@ public class TheEyePower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
+
     public BlindType BlindType => BlindType.TheEye;
-    
-    private CardType _lastCardTypePlayed =  CardType.None;
-    
+
+    private CardType _lastCardTypePlayed = CardType.None;
+
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
-        if (card.Owner.Character is Character.Balatro) return this._lastCardTypePlayed != card.Type;
+        if (card.Owner.Character is Character.Balatro) return _lastCardTypePlayed != card.Type;
         return base.ShouldPlay(card, autoPlayType);
     }
 
     public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner.Character is Character.Balatro)  this._lastCardTypePlayed = cardPlay.Card.Type;
+        if (cardPlay.Card.Owner.Character is Character.Balatro) _lastCardTypePlayed = cardPlay.Card.Type;
         return base.AfterCardPlayed(choiceContext, cardPlay);
     }
 }

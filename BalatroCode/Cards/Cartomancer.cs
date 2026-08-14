@@ -22,11 +22,15 @@ public class Cartomancer() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration, this.Owner.Character.PotionPool.GetUnlockedPotions(this.Owner.UnlockState).Concat<PotionModel>(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(this.Owner.UnlockState)).Where(c => c.Rarity != PotionRarity.Common)).ToMutable(), this.Owner);
+        await PotionCmd.TryToProcure(
+            PotionFactory.CreateRandomPotionInCombat(Owner, Owner.RunState.Rng.CombatPotionGeneration,
+                Owner.Character.PotionPool.GetUnlockedPotions(Owner.UnlockState)
+                    .Concat<PotionModel>(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(Owner.UnlockState))
+                    .Where(c => c.Rarity != PotionRarity.Common)).ToMutable(), Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
 }

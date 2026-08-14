@@ -12,7 +12,8 @@ public class Stuntman() : BalatroCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(40, ValueProp.Move),
         new PowerVar<DrawCardsNextTurnPower>(2)
     ];
@@ -21,12 +22,13 @@ public class Stuntman() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, this.Owner.Creature, -this.DynamicVars["DrawCardsNextTurnPower"].BaseValue, this.Owner.Creature, this);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature,
+            -DynamicVars["DrawCardsNextTurnPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(10);
+        DynamicVars.Block.UpgradeValueBy(10);
     }
 }

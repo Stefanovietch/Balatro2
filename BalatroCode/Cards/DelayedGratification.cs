@@ -15,21 +15,24 @@ public class DelayedGratification() : BalatroCard(-1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new GoldVar(20)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Unplayable];
 
-    public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task BeforeSideTurnEndEarly(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
-        if (side != CombatSide.Player || this.Owner.PlayerCombatState == null || this.Owner.Character is not Character.Balatro balatro) return;
-        if (Character.Balatro.CardsDiscardedThisTurn.Get(this.Owner.PlayerCombatState) != 0) return;
-        await PlayerCmd.GainGold(this.DynamicVars.Gold.BaseValue, this.Owner);
+        if (side != CombatSide.Player || Owner.PlayerCombatState == null ||
+            Owner.Character is not Character.Balatro balatro) return;
+        if (Character.Balatro.CardsDiscardedThisTurn.Get(Owner.PlayerCombatState) != 0) return;
+        await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Gold.UpgradeValueBy(10);
+        DynamicVars.Gold.UpgradeValueBy(10);
     }
 }

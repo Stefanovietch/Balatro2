@@ -19,51 +19,47 @@ public class TheHousePower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheHouse;
-    
+
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber == 1)
-        {
             foreach (var card in PileType.Hand.GetPile(player).Cards)
-            {
                 await CardCmd.Afflict<BalatroHoused>(card, 3M);
-            }
-        }
 
         if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber > 1)
-        {
-            foreach (CardModel card in player.PlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
+            foreach (var card in player.PlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
                 CardCmd.ClearAffliction(card);
-        }
     }
-    
+
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
-        Decimal originalCost,
-        out Decimal modifiedCost)
+        decimal originalCost,
+        out decimal modifiedCost)
     {
         if (card.Affliction is not BalatroHoused)
         {
             modifiedCost = originalCost;
             return false;
         }
+
         modifiedCost = card.Affliction.Amount;
         return true;
     }
-    
+
     public override Task AfterRemoved(Creature oldOwner)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return Task.CompletedTask;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
                 CardCmd.ClearAffliction(card);
         }
+
         return Task.CompletedTask;
     }
 }

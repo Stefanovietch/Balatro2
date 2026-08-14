@@ -9,9 +9,9 @@ public class Palette() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Event;
 
-    
-    public override Decimal ModifyHandDraw(Player player, Decimal count)
+
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        return player != this.Owner ? count : count + 1;
+        return player != Owner ? count : count + 1;
     }
 }

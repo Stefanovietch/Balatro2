@@ -21,11 +21,11 @@ public class Vampire() : BalatroCard(-1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        int count = this.ResolveEnergyXValue();
-        if (this.IsUpgraded)
+        var count = ResolveEnergyXValue();
+        if (IsUpgraded)
             ++count;
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<StrengthPower>(choiceContext, play.Target, -count, this.Owner.Creature, this);
-        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature, count, this.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, play.Target, -count, Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, count, Owner.Creature, this);
     }
 }

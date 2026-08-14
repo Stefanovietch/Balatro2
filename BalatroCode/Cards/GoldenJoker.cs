@@ -10,10 +10,11 @@ public class GoldenJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new GoldVar(40)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
 
 
@@ -21,11 +22,11 @@ public class GoldenJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PlayerCmd.GainGold(this.DynamicVars.Gold.BaseValue, this.Owner);
+        await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Gold.UpgradeValueBy(10);
+        DynamicVars.Gold.UpgradeValueBy(10);
     }
 }

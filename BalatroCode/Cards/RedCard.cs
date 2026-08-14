@@ -13,7 +13,8 @@ public class RedCard() : BalatroCard(3,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<VulnerablePower>(2)
     ];
 
@@ -23,15 +24,14 @@ public class RedCard() : BalatroCard(3,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        foreach (Creature enemy in this.CombatState.HittableEnemies)
-        {
-            await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, this.DynamicVars.Vulnerable.BaseValue, this.Owner.Creature, this);
-        }
+        ArgumentNullException.ThrowIfNull(CombatState);
+        foreach (var enemy in CombatState.HittableEnemies)
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, enemy, DynamicVars.Vulnerable.BaseValue,
+                Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Vulnerable.UpgradeValueBy(1);
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 }

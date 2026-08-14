@@ -11,22 +11,25 @@ public class Satellite() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("GoldPerCard", 2)
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("GoldPerCard", 2)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var cardToUpgrade = PileType.Deck.GetPile(this.Owner).Cards.Where(c => !c.IsUpgraded).TakeRandom(1, this.Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
+        var cardToUpgrade = PileType.Deck.GetPile(Owner).Cards.Where(c => !c.IsUpgraded)
+            .TakeRandom(1, Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
         if (cardToUpgrade != null)
             CardCmd.Upgrade(cardToUpgrade);
-        await PlayerCmd.GainGold(PileType.Deck.GetPile(this.Owner).Cards.Count(c => c.IsUpgraded) * this.DynamicVars["GoldPerCard"].BaseValue, this.Owner);
+        await PlayerCmd.GainGold(
+            PileType.Deck.GetPile(Owner).Cards.Count(c => c.IsUpgraded) * DynamicVars["GoldPerCard"].BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["GoldPerCard"].UpgradeValueBy(1);
+        DynamicVars["GoldPerCard"].UpgradeValueBy(1);
     }
 }

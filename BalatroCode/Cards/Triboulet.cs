@@ -12,7 +12,8 @@ public class Triboulet() : BalatroCard(2,
     CardType.Power, CardRarity.Ancient,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<TribouletPower>(1)
     ];
 
@@ -20,11 +21,12 @@ public class Triboulet() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<TribouletPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<TribouletPower>().BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<TribouletPower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<TribouletPower>().BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

@@ -13,13 +13,13 @@ public class Castle() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self), IRandomType
 {
-    private Decimal _extraBlockFromDiscard;
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(5, ValueProp.Move),
-        new DynamicVar("Increase", 2),
-        new DisplayVar<Castle>("Type", card =>  ((IRandomType) card).GetTypeString())
+    private decimal _extraBlockFromDiscard;
 
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new BlockVar(5, ValueProp.Move),
+        new("Increase", 2),
+        new DisplayVar<Castle>("Type", card => ((IRandomType)card).GetTypeString())
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
@@ -28,36 +28,37 @@ public class Castle() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["Increase"].UpgradeValueBy(1);
+        DynamicVars["Increase"].UpgradeValueBy(1);
     }
-    
+
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        BlockVar block = this.DynamicVars.Block;
-        block.BaseValue = block.BaseValue + this._extraBlockFromDiscard;
+        var block = DynamicVars.Block;
+        block.BaseValue = block.BaseValue + _extraBlockFromDiscard;
     }
 
     public override Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
     {
         if (card.Type == CurrentType)
         {
-            Decimal baseValue = card.DynamicVars["Increase"].BaseValue;
-            this.BuffFromDiscard(baseValue);
+            var baseValue = card.DynamicVars["Increase"].BaseValue;
+            BuffFromDiscard(baseValue);
         }
+
         return base.AfterCardDiscarded(choiceContext, card);
     }
-    
-    private void BuffFromDiscard(Decimal extraBlock)
+
+    private void BuffFromDiscard(decimal extraBlock)
     {
-        BlockVar block = this.DynamicVars.Block;
+        var block = DynamicVars.Block;
         block.BaseValue = block.BaseValue + extraBlock;
-        this._extraBlockFromDiscard += extraBlock;
+        _extraBlockFromDiscard += extraBlock;
     }
 
     public CardType CurrentType { get; set; } = CardType.None;

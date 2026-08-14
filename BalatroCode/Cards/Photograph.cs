@@ -11,7 +11,8 @@ public class Photograph() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<PhotographPower>(1)
     ];
 
@@ -19,11 +20,12 @@ public class Photograph() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<PhotographPower>(choiceContext, this.Owner.Creature, this.DynamicVars["PhotographPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<PhotographPower>(choiceContext, Owner.Creature, DynamicVars["PhotographPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

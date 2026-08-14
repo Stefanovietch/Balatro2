@@ -13,7 +13,8 @@ public class TheDuo() : BalatroCard(1,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(9, ValueProp.Move)
     ];
 
@@ -22,7 +23,7 @@ public class TheDuo() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
@@ -30,10 +31,11 @@ public class TheDuo() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(3);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
         if (cardSource == this && HasOtherAttack()) return 2;
@@ -44,7 +46,7 @@ public class TheDuo() : BalatroCard(1,
 
     private bool HasOtherAttack()
     {
-        return PileType.Hand.GetPile(this.Owner).Cards.Where(c => !c.Equals(this))
+        return PileType.Hand.GetPile(Owner).Cards.Where(c => !c.Equals(this))
             .Count(c => c.Type == CardType.Attack) >= 1;
     }
 }

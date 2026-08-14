@@ -3,10 +3,13 @@ using Balatro.BalatroCode.UI;
 using BaseLib.Config;
 using Godot;
 using HarmonyLib;
+using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode;
 
@@ -25,17 +28,37 @@ public partial class MainFile : Node
         Harmony harmony = new(ModId);
 
         harmony.PatchAll();
+
+        ModHelper.SubscribeForRunStateHooks(
+            ModId,
+            GetRunStateHooks
+        );
+
+        ModHelper.SubscribeForCombatStateHooks(
+            ModId,
+            GetCombatStateHooks
+        );
+
         Run();
     }
 
     private static void Run()
     {
-
     }
 
-    public void BeginRun()
+    private static IEnumerable<AbstractModel> GetRunStateHooks(RunState runState)
     {
-        
+        foreach (var player in runState.Players)
+            if (player.Character is Character.Balatro balatro)
+                yield return balatro;
+    }
+
+    private static IEnumerable<AbstractModel> GetCombatStateHooks(
+        CombatState combatState)
+    {
+        foreach (var player in combatState.Players)
+            if (player.Character is Character.Balatro balatro)
+                yield return balatro;
     }
 
     public static RelicModel GetRelic(string deckName)

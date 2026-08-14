@@ -28,11 +28,9 @@ public class AncientEventModelPatches
                 if (__instance.Owner == null) return;
                 if (!__instance.Owner.Relics.Contains(ModelDb.Relic<HighStakes>())) return;
                 IEnumerable<EventOption> options = __instance.AllPossibleOptions.ToList();
-                RelicModel? relic = options.ElementAt(Random.Shared.Next(0, options.Count())).Relic;
+                var relic = options.ElementAt(Random.Shared.Next(0, options.Count())).Relic;
                 while (__instance.Owner.Relics.Contains(relic) || relic == null)
-                {
                     relic = options.ElementAt(Random.Shared.Next(0, options.Count())).Relic;
-                }
                 await RelicCmd.Obtain(relic, __instance.Owner);
             }
             catch (Exception ex)

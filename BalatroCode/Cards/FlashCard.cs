@@ -13,7 +13,8 @@ public class FlashCard() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(3)
     ];
 
@@ -21,16 +22,17 @@ public class FlashCard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(this.SelectionScreenPrompt, 0, this.DynamicVars.Cards.IntValue);
-        var drawPile = PileType.Draw.GetPile(this.Owner);
-        var firstX = drawPile.Cards.Take(this.DynamicVars.Cards.IntValue).ToHashSet();
-        var cardsToDiscard = (await CardSelectCmd.FromCombatPile(choiceContext, drawPile, this.Owner, prefs, firstX.Contains)).ToList();
-        if (cardsToDiscard.Count == 0) await CardPileCmd.Draw(choiceContext, this.Owner);
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, DynamicVars.Cards.IntValue);
+        var drawPile = PileType.Draw.GetPile(Owner);
+        var firstX = drawPile.Cards.Take(DynamicVars.Cards.IntValue).ToHashSet();
+        var cardsToDiscard =
+            (await CardSelectCmd.FromCombatPile(choiceContext, drawPile, Owner, prefs, firstX.Contains)).ToList();
+        if (cardsToDiscard.Count == 0) await CardPileCmd.Draw(choiceContext, Owner);
         else await CardCmd.DiscardAndDraw(choiceContext, cardsToDiscard, 1);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(2);
+        DynamicVars.Cards.UpgradeValueBy(2);
     }
 }

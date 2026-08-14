@@ -11,18 +11,20 @@ public class TurtleBean() : BalatroCard(1,
     TargetType.Self)
 {
     private int _currentDraw = 5;
-    
+
     private int CurrentDraw
     {
-        get => this._currentDraw;
+        get => _currentDraw;
         set
         {
-            this.AssertMutable();
-            if ((this.IsUpgraded ? 1 : 0) <= value) this._currentDraw = value;
-            this.DynamicVars.Cards.BaseValue = value;
+            AssertMutable();
+            if ((IsUpgraded ? 1 : 0) <= value) _currentDraw = value;
+            DynamicVars.Cards.BaseValue = value;
         }
     }
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(5)
     ];
 
@@ -30,8 +32,8 @@ public class TurtleBean() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        this.CurrentDraw -= 1;
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        CurrentDraw -= 1;
     }
 
     protected override void OnUpgrade()

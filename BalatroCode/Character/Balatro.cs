@@ -23,17 +23,21 @@ using MegaCrit.Sts2.Core.Runs;
 using static MegaCrit.Sts2.Core.Rooms.RoomType;
 
 namespace Balatro.BalatroCode.Character;
+
 public class Balatro : PlaceholderCharacterModel
 {
     public const string CharacterId = "Balatro";
-    
+
     public static readonly SavedSpireField<Player, int> CardsRemoved = new(() => 0, "balatro_cards_removed");
     public static readonly SavedSpireField<Player, int> CardsAdded = new(() => 0, "balatro_cards_added");
     public static readonly SavedSpireField<Player, int> PotionsUsed = new(() => 0, "balatro_potions_used");
-    public static readonly SavedSpireField<Player, int> RestSitesVisitedThisAct = new(() => 0, "rest_sites_visited_this_act");
+
+    public static readonly SavedSpireField<Player, int> RestSitesVisitedThisAct =
+        new(() => 0, "rest_sites_visited_this_act");
+
     public static readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
     public static readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
-    
+
     public static readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
@@ -60,7 +64,7 @@ public class Balatro : PlaceholderCharacterModel
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
-        ModelDb.Relic<BurningBlood>(),
+        ModelDb.Relic<BurningBlood>()
     ];
 
     public override CardPoolModel CardPool => ModelDb.CardPool<BalatroCardPool>();
@@ -84,18 +88,18 @@ public class Balatro : PlaceholderCharacterModel
     public override decimal ModifyGoldGained(Player player, decimal amount)
     {
         if (player.PlayerCombatState == null || !BalatroConfig.GoldCap) return base.ModifyGoldGained(player, amount);
-            
+
         var maxCombatGold = MaxCombatGold.Get(player);
         var earned = CombatGoldEarned.Get(player.PlayerCombatState);
         var remaining = maxCombatGold - earned;
 
         if (remaining <= 0) return base.ModifyGoldGained(player, 0);
         var goldToGain = Math.Min(amount, remaining);
-        CombatGoldEarned.Set(player.PlayerCombatState, earned + (int) goldToGain);
+        CombatGoldEarned.Set(player.PlayerCombatState, earned + (int)goldToGain);
         return base.ModifyGoldGained(player, goldToGain);
     }
-    
-    // Should maybe be in a general and not in character
+
+
     public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player.PlayerCombatState != null) CardsDiscardedThisTurn.Set(player.PlayerCombatState, 0);
@@ -114,11 +118,8 @@ public class Balatro : PlaceholderCharacterModel
 
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
-        CardPile? pile = card.Pile;
-        if (pile is { Type: PileType.Deck })
-        {
-            CardsAdded.Set(card.Owner, CardsAdded.Get(card.Owner) + 1);
-        }
+        var pile = card.Pile;
+        if (pile is { Type: PileType.Deck }) CardsAdded.Set(card.Owner, CardsAdded.Get(card.Owner) + 1);
         return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
     }
 
@@ -136,10 +137,8 @@ public class Balatro : PlaceholderCharacterModel
         {
             var counter = room is RestSiteRoom ? RestSitesVisitedThisAct : QuestionMarksVisited;
             foreach (var player in state.Players)
-            {
                 if (player.Character == this)
                     counter.Set(player, counter.Get(player) + 1);
-            }
         }
         return base.AfterRoomEntered(room);
     }
@@ -149,10 +148,8 @@ public class Balatro : PlaceholderCharacterModel
         var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
         if (state == null) return base.AfterActEntered();
         foreach (var player in state.Players)
-        {
             if (player.Character == this)
                 RestSitesVisitedThisAct.Set(player, 0);
-        }
         return base.AfterActEntered();
     }
 
@@ -160,22 +157,27 @@ public class Balatro : PlaceholderCharacterModel
     {
         if (card.Owner.PlayerCombatState != null)
         {
-            CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
-            CardsDiscardedThisCombat.Set(card.Owner.PlayerCombatState, 1 + CardsDiscardedThisCombat.Get(card.Owner.PlayerCombatState));
+            CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState,
+                1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
+            CardsDiscardedThisCombat.Set(card.Owner.PlayerCombatState,
+                1 + CardsDiscardedThisCombat.Get(card.Owner.PlayerCombatState));
         }
 
         return base.AfterCardDiscarded(choiceContext, card);
     }
-    
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants,
+
+    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
+        IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
         if (combatState.RoundNumber > 1 || side != CombatSide.Player) return;
-        RoomType? roomType = combatState.RunState.CurrentRoom?.RoomType;
+        var roomType = combatState.RunState.CurrentRoom?.RoomType;
         if (roomType is not (Elite or Boss)) return;
-        var enemy = combatState.Enemies.FirstOrDefault(creature => creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false});
+        var enemy = combatState.Enemies.FirstOrDefault(creature =>
+            creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
         if (enemy == null) return;
-        await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null, null);
+        await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null,
+            null);
     }
 
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();

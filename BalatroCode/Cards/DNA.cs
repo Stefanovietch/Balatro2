@@ -16,14 +16,16 @@ public class DNA() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override bool CanBeGeneratedInCombat => false;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         if (CanPlay())
         {
-            CardModel newCard = CombatManager.Instance.History.CardPlaysFinished.Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
-            if (this.DeckVersion is not DNA deckVersion)
+            var newCard = CombatManager.Instance.History.CardPlaysFinished
+                .Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
+            if (DeckVersion is not DNA deckVersion)
                 return;
             await CardCmd.Transform(deckVersion, newCard.CreateClone());
         }
@@ -31,9 +33,9 @@ public class DNA() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
-    
+
     protected override bool IsPlayable => CanPlay();
 
     protected override bool ShouldGlowGoldInternal => CanPlay();

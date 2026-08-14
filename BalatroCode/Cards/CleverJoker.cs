@@ -12,8 +12,9 @@ public class CleverJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Basic,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(10,ValueProp.Move)
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new BlockVar(10, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
@@ -21,19 +22,20 @@ public class CleverJoker() : BalatroCard(1,
         CardPlay play)
     {
         if (!LastCardIsSkill()) return;
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(4);
+        DynamicVars.Block.UpgradeValueBy(4);
     }
 
     protected override bool ShouldGlowGoldInternal => LastCardIsSkill();
 
     private bool LastCardIsSkill()
     {
-        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card.Owner == this.Owner);
+        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c =>
+            c.HappenedThisTurn(CombatState) && c.CardPlay.Card.Owner == Owner);
         return yourCardPlayed?.CardPlay.Card.Type == CardType.Skill;
     }
 }

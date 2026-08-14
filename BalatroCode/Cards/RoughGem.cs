@@ -11,23 +11,24 @@ public class RoughGem() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(8, ValueProp.Move),
-        new DynamicVar("GoldPerBlock", 4)
+        new("GoldPerBlock", 4)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        var gold = 2 * this.Owner.Creature.Block / this.DynamicVars["GoldPerBlock"].BaseValue;
-        await PlayerCmd.GainGold(gold, this.Owner);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        var gold = 2 * Owner.Creature.Block / DynamicVars["GoldPerBlock"].BaseValue;
+        await PlayerCmd.GainGold(gold, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(1);
-        this.DynamicVars["GoldPerBlock"].UpgradeValueBy(-1);
+        DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars["GoldPerBlock"].UpgradeValueBy(-1);
     }
 }

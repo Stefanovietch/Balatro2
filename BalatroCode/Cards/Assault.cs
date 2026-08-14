@@ -10,18 +10,17 @@ public class Assault() : BalatroCard(1,
     CardType.Attack, CardRarity.Token,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        
     }
 
     protected override void OnUpgrade()
     {
-
     }
 }

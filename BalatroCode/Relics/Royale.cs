@@ -16,43 +16,49 @@ public class Royale() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new EnergyVar(1)
     ];
 
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        return player != this.Owner ? amount : amount - this.DynamicVars.Energy.BaseValue;
+        return player != Owner ? amount : amount - DynamicVars.Energy.BaseValue;
     }
+
     public override bool TryModifyCardRewardOptions(
         Player player,
         List<CardCreationResult> options,
         CardCreationOptions creationOptions)
     {
-        if (this.Owner != player) return false;
-        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c => options.TrueForAll((Predicate<CardCreationResult>) (o => o.originalCard.Id != c.Id))).ToArray();
+        if (Owner != player) return false;
+        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c =>
+            options.TrueForAll((Predicate<CardCreationResult>)(o => o.originalCard.Id != c.Id))).ToArray();
         if (!cardModels.Any()) cardModels = creationOptions.GetPossibleCards(player).ToArray();
         if (!cardModels.Any()) return false;
-        IEnumerable<CardCreationResult> cards = CardFactory.CreateForReward(this.Owner, 2, new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications));
-        foreach (CardCreationResult card in cards)
+        var cards = CardFactory.CreateForReward(Owner, 2,
+            new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
+                CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications));
+        foreach (var card in cards)
         {
-            CardCreationResult cardCreationResult = new CardCreationResult(card.Card);
+            var cardCreationResult = new CardCreationResult(card.Card);
             cardCreationResult.ModifyCard(card.Card, this);
             options.Add(cardCreationResult);
         }
+
         return true;
     }
-    
+
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        TaskHelper.RunSafely(this.ActivateVisuals());
+        TaskHelper.RunSafely(ActivateVisuals());
         return Task.CompletedTask;
     }
-    
+
     private async Task ActivateVisuals()
     {
-        this.Flash();
+        Flash();
         await Cmd.Wait(1f);
     }
 }

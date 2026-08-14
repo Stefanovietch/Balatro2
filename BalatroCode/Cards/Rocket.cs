@@ -13,8 +13,9 @@ public class Rocket() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new PowerVar<RocketPower>(4),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new PowerVar<RocketPower>(4)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -23,18 +24,16 @@ public class Rocket() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        foreach (Creature hittableEnemy in (IEnumerable<Creature>) this.CombatState.HittableEnemies)
-        {
-            await PowerCmd.Apply<RocketPower>(choiceContext, hittableEnemy, this.DynamicVars["RocketPower"].BaseValue, this.Owner.Creature, this);
-        }
+        ArgumentNullException.ThrowIfNull(CombatState);
+        foreach (var hittableEnemy in (IEnumerable<Creature>)CombatState.HittableEnemies)
+            await PowerCmd.Apply<RocketPower>(choiceContext, hittableEnemy, DynamicVars["RocketPower"].BaseValue,
+                Owner.Creature, this);
 
-        await PlayerCmd.GainGold(this.Owner.RunState.TotalFloor, this.Owner);
-
+        await PlayerCmd.GainGold(Owner.RunState.TotalFloor, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["RocketPower"].UpgradeValueBy(2M);
+        DynamicVars["RocketPower"].UpgradeValueBy(2M);
     }
 }

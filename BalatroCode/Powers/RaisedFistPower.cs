@@ -8,5 +8,5 @@ namespace Balatro.BalatroCode.Powers;
 
 public class RaisedFistPower : TemporaryStrengthPower, ICustomPower
 {
-    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<RaisedFist>();
+    public override AbstractModel OriginModel => (AbstractModel)ModelDb.Card<RaisedFist>();
 }

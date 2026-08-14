@@ -13,21 +13,22 @@ public class RaisedFist() : BalatroCard(0,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var amountList = PileType.Hand.GetPile(this.Owner).Cards.Where(c => !c.Equals(this))
+        var amountList = PileType.Hand.GetPile(Owner).Cards.Where(c => !c.Equals(this))
             .Select(c => c.EnergyCost.GetAmountToSpend()).ToList();
         var amount = 2 * (amountList.Count != 0 ? amountList.Min() : 0);
-        await PowerCmd.Apply<RaisedFistPower>(choiceContext, this.Owner.Creature, amount, this.Owner.Creature, this);
+        await PowerCmd.Apply<RaisedFistPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
 }

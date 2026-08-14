@@ -17,38 +17,49 @@ public class CavendishPower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
-    protected override object InitInternalData() => new Data();
+
+    protected override object InitInternalData()
+    {
+        return new Data();
+    }
 
     public override Task BeforeAttack(AttackCommand command)
     {
-        if (command.Attacker != this.Owner || !command.DamageProps.IsPoweredAttack())
+        if (command.Attacker != Owner || !command.DamageProps.IsPoweredAttack())
             return Task.CompletedTask;
-        Data internalData = this.GetInternalData<Data>();
-        if (internalData.commandToModify != null || command.ModelSource != null && !(command.ModelSource is CardModel) || !command.DamageProps.IsPoweredAttack())
+        var internalData = GetInternalData<Data>();
+        if (internalData.commandToModify != null ||
+            (command.ModelSource != null && !(command.ModelSource is CardModel)) ||
+            !command.DamageProps.IsPoweredAttack())
             return Task.CompletedTask;
         internalData.commandToModify = command;
-        internalData.amountWhenAttackStarted = this.Amount;
+        internalData.amountWhenAttackStarted = Amount;
         return Task.CompletedTask;
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (this.Owner != dealer || !props.IsPoweredAttack())
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);;
-        Data internalData = this.GetInternalData<Data>();
-        return internalData.commandToModify != null && cardSource != null && cardSource != internalData.commandToModify.ModelSource || internalData.commandToModify != null && internalData.commandToModify.Attacker != dealer ? 1M : this.Amount;
+        if (Owner != dealer || !props.IsPoweredAttack())
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        ;
+        var internalData = GetInternalData<Data>();
+        return (internalData.commandToModify != null && cardSource != null &&
+                cardSource != internalData.commandToModify.ModelSource) ||
+               (internalData.commandToModify != null && internalData.commandToModify.Attacker != dealer)
+            ? 1M
+            : Amount;
     }
 
     public override async Task AfterAttack(PlayerChoiceContext choiceContext, AttackCommand command)
     {
-        Data internalData = this.GetInternalData<CavendishPower.Data>();
+        var internalData = GetInternalData<Data>();
         if (command != internalData.commandToModify)
             return;
-        int num = await PowerCmd.ModifyAmount(choiceContext, this, -internalData.amountWhenAttackStarted, null, null);
+        var num = await PowerCmd.ModifyAmount(choiceContext, this, -internalData.amountWhenAttackStarted, null, null);
     }
-    
+
     private class Data
     {
         public AttackCommand? commandToModify;

@@ -11,11 +11,13 @@ public class SlyJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Basic,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(5, ValueProp.Move)
     ];
-    
-    protected override HashSet<CardTag> CanonicalTags => [
+
+    protected override HashSet<CardTag> CanonicalTags =>
+    [
         CardTag.Defend
     ];
 
@@ -23,11 +25,11 @@ public class SlyJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(3);
+        DynamicVars.Block.UpgradeValueBy(3);
     }
 }

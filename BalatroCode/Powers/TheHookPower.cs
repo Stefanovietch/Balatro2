@@ -18,16 +18,15 @@ public class TheHookPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheHook;
-    
+
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player.Character is not Character.Balatro) return;
-        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player,
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();        
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();
         if (cards.Count == 0) return;
         await CardCmd.Discard(choiceContext, cards);
     }
-
 }

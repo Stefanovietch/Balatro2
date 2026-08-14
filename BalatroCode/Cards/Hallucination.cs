@@ -18,34 +18,34 @@ public class Hallucination() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.AnyEnemy), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 6),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 6),
         new DisplayVar<Hallucination>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<WeakPower>(1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, this.DynamicVars.Power<WeakPower>().BaseValue, this.Owner.Creature, this);
-        if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
-        {
-            if (this.Owner.RunState.CurrentRoom is CombatRoom room)
+        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, DynamicVars.Power<WeakPower>().BaseValue,
+            Owner.Creature, this);
+        if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
+            if (Owner.RunState.CurrentRoom is CombatRoom room)
             {
-                var potionReward = new PotionReward(this.Owner);
+                var potionReward = new PotionReward(Owner);
                 potionReward.Populate();
-                room.AddExtraReward(this.Owner, potionReward);
+                room.AddExtraReward(Owner, potionReward);
             }
-        }
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Power<WeakPower>().UpgradeValueBy(1);
+        DynamicVars.Power<WeakPower>().UpgradeValueBy(1);
     }
 }

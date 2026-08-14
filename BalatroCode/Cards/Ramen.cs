@@ -14,26 +14,29 @@ public class Ramen() : BalatroCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CalculationBaseVar(10M),
         new ExtraDamageVar(-1),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.Owner == card.Owner))
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) =>
+            CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .WithHitCount(2)
-            .TargetingAllOpponents(this.CombatState)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculationBase.UpgradeValueBy(3);
+        DynamicVars.CalculationBase.UpgradeValueBy(3);
     }
 }

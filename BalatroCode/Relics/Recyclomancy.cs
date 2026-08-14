@@ -12,19 +12,18 @@ public class Recyclomancy() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Uncommon;
-    
+
     private int _cardsDiscarded;
 
     public override bool ShowCounter => CombatManager.Instance.IsInProgress;
 
-    public override int DisplayAmount => !this.IsCanonical ? this._cardsDiscarded : 0;
+    public override int DisplayAmount => !IsCanonical ? _cardsDiscarded : 0;
 
     public override async Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
     {
-        if (card.Owner == this.Owner) ++this._cardsDiscarded;
-        if (this._cardsDiscarded < 7) return;
-        this._cardsDiscarded = 0;
-        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature,2, this.Owner.Creature,  null);
-
+        if (card.Owner == Owner) ++_cardsDiscarded;
+        if (_cardsDiscarded < 7) return;
+        _cardsDiscarded = 0;
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
     }
 }

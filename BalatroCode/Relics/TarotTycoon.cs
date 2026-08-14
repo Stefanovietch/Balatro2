@@ -14,6 +14,6 @@ public class TarotTycoon() : BalatroRelic
 
     public override async Task AfterPotionProcured(PotionModel potion)
     {
-        await CreatureCmd.GainMaxHp(this.Owner.Creature, 1);
+        await CreatureCmd.GainMaxHp(Owner.Creature, 1);
     }
 }

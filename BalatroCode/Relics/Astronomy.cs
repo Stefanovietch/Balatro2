@@ -15,14 +15,14 @@ public class Astronomy() : BalatroRelic
 
     public override Task AfterObtained()
     {
-        this.Owner.SubtractFromMaxPotionCount(1);
-        this.Owner.RelicGrabBag.Remove(ModelDb.Relic<RazorTooth>());
+        Owner.SubtractFromMaxPotionCount(1);
+        Owner.RelicGrabBag.Remove(ModelDb.Relic<RazorTooth>());
         return Task.CompletedTask;
     }
-  
+
     public override Task AfterCardPlayed(PlayerChoiceContext context, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner != this.Owner || !cardPlay.Card.IsUpgradable) 
+        if (cardPlay.Card.Owner != Owner || !cardPlay.Card.IsUpgradable)
             return Task.CompletedTask;
         CardCmd.Upgrade(cardPlay.Card);
         return Task.CompletedTask;

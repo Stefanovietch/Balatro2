@@ -17,8 +17,8 @@ public class TradingCardPower() : BalatroPower
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (this.Owner.Player != player) return;
-        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+        if (Owner.Player != player) return;
+        var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
         var card = (await CardSelectCmd.FromHand(choiceContext, player, prefs, null, this)).FirstOrDefault();
         if (card != null) await CardCmd.Exhaust(choiceContext, card);
         await PlayerCmd.GainGold(Amount, player);

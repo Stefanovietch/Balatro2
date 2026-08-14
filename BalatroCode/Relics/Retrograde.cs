@@ -18,9 +18,10 @@ public class Retrograde() : BalatroRelic
     {
         if (!(room is CombatRoom))
             return;
-        this.Flash();
-        int cardsToUpgrade = this.Owner.Deck.Cards.Count / 2;
-        List<CardModel> list = PileType.Draw.GetPile(this.Owner).Cards.Where(c => c.IsUpgradable).ToList().StableShuffle(this.Owner.RunState.Rng.CombatCardSelection).Take(cardsToUpgrade).ToList();
+        Flash();
+        var cardsToUpgrade = Owner.Deck.Cards.Count / 2;
+        var list = PileType.Draw.GetPile(Owner).Cards.Where(c => c.IsUpgradable).ToList()
+            .StableShuffle(Owner.RunState.Rng.CombatCardSelection).Take(cardsToUpgrade).ToList();
         CardCmd.Upgrade(list, CardPreviewStyle.HorizontalLayout);
         CardCmd.Preview(list);
         await Cmd.CustomScaledWait(0.5f, 1f);

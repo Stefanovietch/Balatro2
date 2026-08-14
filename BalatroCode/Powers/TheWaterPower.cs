@@ -15,7 +15,7 @@ public class TheWaterPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheWater;
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)

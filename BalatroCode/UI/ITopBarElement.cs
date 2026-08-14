@@ -50,7 +50,7 @@ internal static class TopBarElementRegistry
 
         return results;
     }
-    
+
     internal static ITopBarElement CreateInstance(Type type)
     {
         return (ITopBarElement)Activator.CreateInstance(type)!;

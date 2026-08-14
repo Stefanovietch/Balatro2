@@ -17,12 +17,11 @@ public class Hack() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Add(PileType.Draw.GetPile(this.Owner).Cards.Where(c => c.CurrentStarCost == 0), PileType.Hand);
-
+        await CardPileCmd.Add(PileType.Draw.GetPile(Owner).Cards.Where(c => c.CurrentStarCost == 0), PileType.Hand);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

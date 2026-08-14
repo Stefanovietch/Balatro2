@@ -15,18 +15,18 @@ public class TheMarkPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheMark;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards)
+            foreach (var card in playerPlayerCombatState.AllCards)
             {
                 if (card.Type != CardType.Power) continue;
                 await CardCmd.Afflict<BalatroMarked>(card, 3M);
@@ -43,29 +43,31 @@ public class TheMarkPower() : BalatroPower, IBlindPower
 
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
-        Decimal originalCost,
-        out Decimal modifiedCost)
+        decimal originalCost,
+        out decimal modifiedCost)
     {
         if (card.Affliction is not BalatroMarked)
         {
             modifiedCost = originalCost;
             return false;
         }
+
         modifiedCost = card.Affliction.Amount;
         return true;
     }
-    
+
     public override Task AfterRemoved(Creature oldOwner)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return Task.CompletedTask;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroMarked))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroMarked))
                 CardCmd.ClearAffliction(card);
         }
+
         return Task.CompletedTask;
     }
 }

@@ -22,21 +22,23 @@ public class SixthSense() : BalatroCard(-1,
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Innate);
+        RemoveKeyword(CardKeyword.Innate);
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (this._cardPlayed) return;
+        if (_cardPlayed) return;
         var card = cardPlay.Card;
         await CardPileCmd.RemoveFromCombat(card);
         if (card.DeckVersion == null) return;
         await CardPileCmd.RemoveFromDeck(card.DeckVersion);
-        
-        if(this.Owner.RunState.CurrentRoom is CombatRoom room)
-            room.AddExtraReward(this.Owner, new CardReward(new CardCreationOptions(ModelDb.CardPool<ColorlessCardPool>().AllCards, CardCreationSource.Encounter, CardRarityOddsType.Uniform), 3, this.Owner));
-        
-        this._cardPlayed = true;
-        
+
+        if (Owner.RunState.CurrentRoom is CombatRoom room)
+            room.AddExtraReward(Owner,
+                new CardReward(
+                    new CardCreationOptions(ModelDb.CardPool<ColorlessCardPool>().AllCards,
+                        CardCreationSource.Encounter, CardRarityOddsType.Uniform), 3, Owner));
+
+        _cardPlayed = true;
     }
 }

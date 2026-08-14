@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace Balatro.BalatroCode.Powers;
+
 public class ArrowheadPower() : BalatroPower
 {
     public override PowerType Type =>
@@ -18,16 +19,18 @@ public class ArrowheadPower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
         HoverTipFactory.FromCard<StoneCard>()
     ];
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (this.Owner.Player != player) return;
-        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,2), null, this)).ToList();
+        if (Owner.Player != player) return;
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();
         if (cards.Count != 0) await CardCmd.Discard(choiceContext, cards);
-        await StoneCard.CreateInHand(player, this.Amount, this.CombatState);
+        await StoneCard.CreateInHand(player, Amount, CombatState);
     }
 }

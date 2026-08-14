@@ -12,8 +12,8 @@ public class JugglerPower() : BalatroPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public override Decimal ModifyHandDraw(Player player, Decimal count)
+    public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        return player != this.Owner.Player ? count : count + this.Amount;
+        return player != Owner.Player ? count : count + Amount;
     }
 }

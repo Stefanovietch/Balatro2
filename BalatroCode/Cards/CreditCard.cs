@@ -10,22 +10,23 @@ public class CreditCard() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new GoldVar(15)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PlayerCmd.GainGold(this.DynamicVars.Gold.BaseValue, this.Owner);
-        await CardPileCmd.Draw(choiceContext, this.Owner);
+        await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        await CardPileCmd.Draw(choiceContext, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Gold.UpgradeValueBy(5);
+        DynamicVars.Gold.UpgradeValueBy(5);
     }
 }

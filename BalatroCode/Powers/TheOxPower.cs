@@ -20,17 +20,20 @@ public class TheOxPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheOx;
 
-    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants, ICombatState combatState)
+    public override async Task AfterSideTurnStart(CombatSide side, IReadOnlyList<Creature> participants,
+        ICombatState combatState)
     {
         var enumerable = participants.ToList();
         if (side != CombatSide.Player) return;
-        foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
+        foreach (var p in enumerable.Where(c => c is
+                     { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
             if (p.Player == null) continue;
-            var card = PileType.Hand.GetPile(p.Player).Cards.TakeRandom(1, p.Player.RunState.Rng.CombatCardSelection).FirstOrDefault();
+            var card = PileType.Hand.GetPile(p.Player).Cards.TakeRandom(1, p.Player.RunState.Rng.CombatCardSelection)
+                .FirstOrDefault();
             if (card == null) continue;
             await CardCmd.AfflictAndPreview<BalatroOxed>([card], 1, CardPreviewStyle.None);
         }
@@ -44,18 +47,19 @@ public class TheOxPower() : BalatroPower, IBlindPower
             CardCmd.ClearAffliction(cardPlay.Card);
         }
     }
-    
+
     public override Task AfterRemoved(Creature oldOwner)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return Task.CompletedTask;
         foreach (var player in players)
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (CardModel card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroOxed))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroOxed))
                 CardCmd.ClearAffliction(card);
         }
+
         return Task.CompletedTask;
     }
 }

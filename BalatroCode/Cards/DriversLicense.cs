@@ -11,7 +11,8 @@ public class DriversLicense() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<StrengthPower>(3),
         new PowerVar<DexterityPower>(3)
     ];
@@ -24,10 +25,10 @@ public class DriversLicense() : BalatroCard(1,
     {
         if (HasRareCards())
         {
-            await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature,
-                this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
-            await PowerCmd.Apply<DexterityPower>(choiceContext, this.Owner.Creature,
-                this.DynamicVars.Dexterity.BaseValue, this.Owner.Creature, this);
+            await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,
+                DynamicVars.Strength.BaseValue, Owner.Creature, this);
+            await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature,
+                DynamicVars.Dexterity.BaseValue, Owner.Creature, this);
         }
     }
 
@@ -35,12 +36,12 @@ public class DriversLicense() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Strength.UpgradeValueBy(1M);
-        this.DynamicVars.Dexterity.UpgradeValueBy(1M);
+        DynamicVars.Strength.UpgradeValueBy(1M);
+        DynamicVars.Dexterity.UpgradeValueBy(1M);
     }
 
     private bool HasRareCards()
     {
-        return PileType.Deck.GetPile(this.Owner).Cards.Count(c => c.Rarity == CardRarity.Rare) >= 4;
+        return PileType.Deck.GetPile(Owner).Cards.Count(c => c.Rarity == CardRarity.Rare) >= 4;
     }
 }

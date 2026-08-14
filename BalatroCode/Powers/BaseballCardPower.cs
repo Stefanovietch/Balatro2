@@ -16,12 +16,14 @@ public class BaseballCardPower() : BalatroPower
     public override PowerStackType StackType =>
         PowerStackType.None;
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource?.Rarity != CardRarity.Uncommon) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource?.Rarity != CardRarity.Uncommon)
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
 
-        var multiplier = (decimal)(this.Amount * 0.1);
+        var multiplier = (decimal)(Amount * 0.1);
         return base.ModifyDamageMultiplicative(target, amount * multiplier, props, dealer, cardSource);
     }
 

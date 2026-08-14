@@ -15,7 +15,8 @@ public class Popcorn() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CalculationBaseVar(20M),
         new ExtraDamageVar(3),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((c, _) => -c.Owner.PlayerCombatState?.TurnNumber ?? 0)
@@ -26,15 +27,14 @@ public class Popcorn() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx(tmpSfx: "heavy_attack.mp3")
             .Execute(choiceContext);
-
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.ExtraDamage.UpgradeValueBy(-1);
+        DynamicVars.ExtraDamage.UpgradeValueBy(-1);
     }
 }

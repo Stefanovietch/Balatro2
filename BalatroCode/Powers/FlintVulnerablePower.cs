@@ -20,19 +20,19 @@ public class FlintVulnerablePower : BalatroPower
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DynamicVar("DamageIncrease", 1.5M),
+        new("DamageIncrease", 1.5M)
     ];
-    
-    public override Decimal ModifyDamageMultiplicative(
+
+    public override decimal ModifyDamageMultiplicative(
         Creature? target,
-        Decimal amount,
+        decimal amount,
         ValueProp props,
         Creature? dealer,
         CardModel? cardSource)
     {
-        if (target != this.Owner || !props.IsPoweredAttack())
+        if (target != Owner || !props.IsPoweredAttack())
             return 1M;
-        Decimal amount1 = this.DynamicVars["DamageIncrease"].BaseValue;
+        var amount1 = DynamicVars["DamageIncrease"].BaseValue;
         if (dealer != null)
         {
             var relic = dealer.Player?.GetRelic<PaperPhrog>();
@@ -42,6 +42,7 @@ public class FlintVulnerablePower : BalatroPower
             if (power != null)
                 amount1 = power.ModifyVulnerableMultiplier(target, amount1, props, dealer, cardSource);
         }
+
         var power1 = target.GetPower<DebilitatePower>();
         if (power1 != null)
             amount1 = power1.ModifyVulnerableMultiplier(target, amount1, props, dealer, cardSource);
@@ -50,22 +51,23 @@ public class FlintVulnerablePower : BalatroPower
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var power = this.Owner.GetPower<VulnerablePower>();
+        var power = Owner.GetPower<VulnerablePower>();
         if (power != null) await PowerCmd.Remove(power);
     }
 
     public override bool TryModifyPowerAmountReceived(
         PowerModel canonicalPower,
         Creature target,
-        Decimal amount,
+        decimal amount,
         Creature? _,
-        out Decimal modifiedAmount)
+        out decimal modifiedAmount)
     {
-        if (target != this.Owner || canonicalPower is not VulnerablePower || !canonicalPower.IsVisible)
+        if (target != Owner || canonicalPower is not VulnerablePower || !canonicalPower.IsVisible)
         {
             modifiedAmount = amount;
             return false;
         }
+
         modifiedAmount = 0M;
         return true;
     }

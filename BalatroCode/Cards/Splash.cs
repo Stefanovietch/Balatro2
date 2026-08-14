@@ -12,8 +12,9 @@ public class Splash() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Cleanse", 1)
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Cleanse", 1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -22,16 +23,14 @@ public class Splash() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var powersToCleanse = this.Owner.Creature.Powers.Where(p => p.Type == PowerType.Debuff).TakeRandom(this.DynamicVars["Cleanse"].IntValue, this.Owner.RunState.Rng.CombatTargets).ToList();
+        var powersToCleanse = Owner.Creature.Powers.Where(p => p.Type == PowerType.Debuff)
+            .TakeRandom(DynamicVars["Cleanse"].IntValue, Owner.RunState.Rng.CombatTargets).ToList();
         if (powersToCleanse.Count == 0) return;
-        foreach (var power in powersToCleanse)
-        {
-            await PowerCmd.Remove(power);
-        }
+        foreach (var power in powersToCleanse) await PowerCmd.Remove(power);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["Cleanse"].UpgradeValueBy(1);
+        DynamicVars["Cleanse"].UpgradeValueBy(1);
     }
 }

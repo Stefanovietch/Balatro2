@@ -12,21 +12,21 @@ public class GreenJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    
-    private Decimal _bonus;
+    private decimal _bonus;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(8, ValueProp.Move),
-        new DynamicVar("Bonus", 3),
+        new("Bonus", 3)
     ];
-    
-    private Decimal ExtraDamageFromPlays
+
+    private decimal ExtraDamageFromPlays
     {
-        get => this._bonus;
+        get => _bonus;
         set
         {
-            this.AssertMutable();
-            this._bonus = value;
+            AssertMutable();
+            _bonus = value;
         }
     }
 
@@ -35,38 +35,39 @@ public class GreenJoker() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
-    
+
     public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
         if (card.Pile?.Type == PileType.Discard && card.Equals(this))
         {
-            if(oldPileType == PileType.Play) Buff(this.DynamicVars["Bonus"].BaseValue);
-            else Buff(-this.DynamicVars["Bonus"].BaseValue);
+            if (oldPileType == PileType.Play) Buff(DynamicVars["Bonus"].BaseValue);
+            else Buff(-DynamicVars["Bonus"].BaseValue);
         }
+
         return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["Bonus"].UpgradeValueBy(3);
+        DynamicVars["Bonus"].UpgradeValueBy(3);
     }
-    
+
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        DamageVar damage = this.DynamicVars.Damage;
-        damage.BaseValue = damage.BaseValue + this.ExtraDamageFromPlays;
+        var damage = DynamicVars.Damage;
+        damage.BaseValue = damage.BaseValue + ExtraDamageFromPlays;
     }
-    
-    private void Buff(Decimal bonus)
+
+    private void Buff(decimal bonus)
     {
-        DamageVar damage = this.DynamicVars.Damage;
+        var damage = DynamicVars.Damage;
         damage.BaseValue = damage.BaseValue + bonus;
-        this.ExtraDamageFromPlays += bonus;
+        ExtraDamageFromPlays += bonus;
     }
 }

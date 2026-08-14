@@ -12,10 +12,11 @@ public class ToTheMoon() : BalatroCard(2,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<PlatingPower>(5)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
 
@@ -23,12 +24,13 @@ public class ToTheMoon() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<PlatingPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<PlatingPower>().BaseValue, this.Owner.Creature, this);
-        await PlayerCmd.GainGold(this.Owner.Gold * 0.1M, this.Owner);
+        await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, DynamicVars.Power<PlatingPower>().BaseValue,
+            Owner.Creature, this);
+        await PlayerCmd.GainGold(Owner.Gold * 0.1M, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Power<PlatingPower>().UpgradeValueBy(2);
+        DynamicVars.Power<PlatingPower>().UpgradeValueBy(2);
     }
 }

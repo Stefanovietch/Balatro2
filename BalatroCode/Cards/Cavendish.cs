@@ -13,8 +13,9 @@ public class Cavendish() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 1000),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 1000),
         new DisplayVar<Cavendish>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())
     ];
@@ -25,11 +26,11 @@ public class Cavendish() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<CavendishPower>(choiceContext, this.Owner.Creature, 3, this.Owner.Creature, this);
-        if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
+        await PowerCmd.Apply<CavendishPower>(choiceContext, Owner.Creature, 3, Owner.Creature, this);
+        if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
         {
             await CardPileCmd.RemoveFromCombat(this);
-            if (this.DeckVersion is not Cavendish deckVersion)
+            if (DeckVersion is not Cavendish deckVersion)
                 return;
             await CardPileCmd.RemoveFromDeck(deckVersion);
         }
@@ -37,6 +38,6 @@ public class Cavendish() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Ethereal);
+        RemoveKeyword(CardKeyword.Ethereal);
     }
 }

@@ -16,23 +16,20 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheWheel;
-    
+
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<TheWheelPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString()),
+        new DisplayVar<TheWheelPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString())
     ];
 
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if (card.Owner.Character is Character.Balatro)
-        {
             if (this.RollChance(card.Owner, 7))
-            {
                 card.EnergyCost.SetThisTurnOrUntilPlayed(3);
-            }
-        }
+
         return base.AfterCardDrawn(choiceContext, card, fromHandDraw);
     }
 }

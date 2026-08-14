@@ -12,7 +12,8 @@ public class Troubadour() : BalatroCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(2),
         new EnergyVar(1)
     ];
@@ -21,12 +22,13 @@ public class Troubadour() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, this.Owner.Creature, -this.DynamicVars.Energy.BaseValue, this.Owner.Creature, this);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        await PowerCmd.Apply<EnergyNextTurnPower>(choiceContext, Owner.Creature, -DynamicVars.Energy.BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

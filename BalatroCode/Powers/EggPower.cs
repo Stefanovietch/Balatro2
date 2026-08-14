@@ -22,14 +22,16 @@ public class EggPower() : BalatroPower
 
     public override async Task AfterPlayerTurnStartEarly(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player == this.Owner.Player && !TookDamage) await PlayerCmd.GainGold(this.Amount, this.Owner.Player);
+        if (player == Owner.Player && !TookDamage) await PlayerCmd.GainGold(Amount, Owner.Player);
         TookDamage = false;
     }
 
-    public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props,
+    public override Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result,
+        ValueProp props,
         Creature? dealer, CardModel? cardSource)
     {
-        if (!CombatManager.Instance.IsInProgress || target != this.Owner || result.UnblockedDamage <= 0) return Task.CompletedTask;
+        if (!CombatManager.Instance.IsInProgress || target != Owner || result.UnblockedDamage <= 0)
+            return Task.CompletedTask;
         TookDamage = true;
         return Task.CompletedTask;
     }

@@ -15,31 +15,33 @@ public class SquareJoker() : BalatroCard(1,
 {
     private int _increasedBlock;
     private int _currentBlock = 4;
-    
+
     [SavedProperty]
     public int CurrentBlock
     {
-        get => this._currentBlock;
+        get => _currentBlock;
         set
         {
-            this.AssertMutable();
-            this._currentBlock = value;
-            this.DynamicVars.Block.BaseValue = this._currentBlock;
+            AssertMutable();
+            _currentBlock = value;
+            DynamicVars.Block.BaseValue = _currentBlock;
         }
     }
 
     [SavedProperty]
     public int IncreasedBlock
     {
-        get => this._increasedBlock;
+        get => _increasedBlock;
         set
         {
-            this.AssertMutable();
-            this._increasedBlock = value;
+            AssertMutable();
+            _increasedBlock = value;
         }
     }
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(this.CurrentBlock, ValueProp.Move),
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new BlockVar(CurrentBlock, ValueProp.Move),
         new IntVar("BlockIncrease", 2)
     ];
 
@@ -47,35 +49,40 @@ public class SquareJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
-        if(!Is4thPlay()) return;
-        int intValue = this.DynamicVars["BlockIncrease"].IntValue;
-        this.BuffFrom4thPlay(intValue);
-        if (this.DeckVersion is not SquareJoker deckVersion) return;
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
+        if (!Is4thPlay()) return;
+        var intValue = DynamicVars["BlockIncrease"].IntValue;
+        BuffFrom4thPlay(intValue);
+        if (DeckVersion is not SquareJoker deckVersion) return;
         deckVersion.BuffFrom4thPlay(intValue);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["BlockIncrease"].UpgradeValueBy(2);
-
+        DynamicVars["BlockIncrease"].UpgradeValueBy(2);
     }
 
     private bool Is4thPlay()
     {
         return CombatManager.Instance.History.CardPlaysFinished.Count(c =>
-            c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card.Owner == this.Owner) == 3;
+            c.HappenedThisTurn(CombatState) && c.CardPlay.Card.Owner == Owner) == 3;
     }
 
     protected override bool ShouldGlowGoldInternal => Is4thPlay();
 
-    protected override void AfterDowngraded() => this.UpdateBlock();
+    protected override void AfterDowngraded()
+    {
+        UpdateBlock();
+    }
 
     private void BuffFrom4thPlay(int extraBlock)
     {
-        this.IncreasedBlock += extraBlock;
-        this.UpdateBlock();
+        IncreasedBlock += extraBlock;
+        UpdateBlock();
     }
 
-    private void UpdateBlock() => this.CurrentBlock = 4 + this.IncreasedBlock;
+    private void UpdateBlock()
+    {
+        CurrentBlock = 4 + IncreasedBlock;
+    }
 }

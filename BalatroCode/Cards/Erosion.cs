@@ -16,7 +16,8 @@ public class Erosion() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(4, ValueProp.Move),
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
@@ -32,15 +33,15 @@ public class Erosion() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CardsRemoved"]).Calculate(play.Target))
+            .WithHitCount((int)((CalculatedVar)DynamicVars["CardsRemoved"]).Calculate(play.Target))
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        base.DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

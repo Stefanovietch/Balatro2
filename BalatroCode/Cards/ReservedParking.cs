@@ -14,39 +14,32 @@ public class ReservedParking() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(1),
-        new DynamicVar("Chance", 2),
+        new("Chance", 2),
         new DisplayVar<ReservedParking>("Numerator", card => card
-            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
+            .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var powers = PileType.Draw.GetPile(this.Owner).Cards.Where(c => c.Type == CardType.Power).TakeRandom(2, this.Owner.RunState.Rng.CombatCardSelection).ToList();
+        var powers = PileType.Draw.GetPile(Owner).Cards.Where(c => c.Type == CardType.Power)
+            .TakeRandom(2, Owner.RunState.Rng.CombatCardSelection).ToList();
         if (powers.Count != 0)
-        {
             foreach (var power in powers)
-            {
                 await CardPileCmd.Add(power, PileType.Hand);
-            }
-        }
-        var powerCount = PileType.Hand.GetPile(this.Owner).Cards.Count(c => c.Type == CardType.Power);
+
+        var powerCount = PileType.Hand.GetPile(Owner).Cards.Count(c => c.Type == CardType.Power);
         if (powerCount != 0)
-        {
-            if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
-            {
-                await PlayerCmd.GainGold(powerCount * 10, this.Owner);
-            }
-        }
-
-
+            if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
+                await PlayerCmd.GainGold(powerCount * 10, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

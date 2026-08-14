@@ -7,21 +7,17 @@ namespace Balatro.BalatroCode.Cards;
 
 public interface IRandomType
 {
-   CardType CurrentType
-   {
-      get;
-      set;
-   }
-   
-   public void SetRandomType()
-   {
-      List<CardType> types = [CardType.Attack, CardType.Skill, CardType.Power];
-      CurrentType = types[Random.Shared.Next(types.Count)];
-   }
+    CardType CurrentType { get; set; }
 
-   public string GetTypeString()
-   {
-      if (CurrentType == CardType.None) return "(Skill|Attack|Power)";
-      return CurrentType.ToString();
-   }
+    public void SetRandomType()
+    {
+        List<CardType> types = [CardType.Attack, CardType.Skill, CardType.Power];
+        CurrentType = types[Random.Shared.Next(types.Count)];
+    }
+
+    public string GetTypeString()
+    {
+        if (CurrentType == CardType.None) return "(Skill|Attack|Power)";
+        return CurrentType.ToString();
+    }
 }

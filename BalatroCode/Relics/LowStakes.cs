@@ -16,19 +16,19 @@ public class LowStakes() : BalatroRelic
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        LowStakes source = this;
+        var source = this;
         if (source.Owner.Creature.CombatState == null) return;
         if (player != source.Owner || source.Owner.Creature.CombatState.RoundNumber > 1) return;
-        List<CardModel> list = (await CardSelectCmd.FromHandForDiscard(choiceContext, source.Owner,
-                new CardSelectorPrefs(source.SelectionScreenPrompt, 0, 999999999), null,
-                source)).ToList<CardModel>();
+        var list = (await CardSelectCmd.FromHandForDiscard(choiceContext, source.Owner,
+            new CardSelectorPrefs(source.SelectionScreenPrompt, 0, 999999999), null,
+            source)).ToList<CardModel>();
         if (list.Count == 0) return;
         await CardCmd.DiscardAndDraw(choiceContext, (IEnumerable<CardModel>)list, list.Count);
     }
 
     public override Task AfterObtained()
     {
-        LowStakes source = this;
+        var source = this;
         source.Owner.RelicGrabBag.Remove(ModelDb.Relic<GamblingChip>());
         return Task.CompletedTask;
     }

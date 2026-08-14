@@ -13,7 +13,8 @@ public class ToDoList() : BalatroCard(1,
     CardType.Power, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<ToDoListPower>(3)
     ];
 
@@ -21,10 +22,12 @@ public class ToDoList() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<ToDoListPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<ToDoListPower>().BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<ToDoListPower>(choiceContext, Owner.Creature, DynamicVars.Power<ToDoListPower>().BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Power<ToDoListPower>().UpgradeValueBy(1);
-    } }
+        DynamicVars.Power<ToDoListPower>().UpgradeValueBy(1);
+    }
+}

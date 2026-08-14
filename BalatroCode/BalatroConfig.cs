@@ -9,31 +9,30 @@ namespace Balatro.BalatroCode;
 
 public static class Stakes
 {
-    
-    public static int GetStake(string deckName) =>
-        BalatroConfig.Stakes.GetValueOrDefault(deckName, 0);
+    public static int GetStake(string deckName)
+    {
+        return BalatroConfig.Stakes.GetValueOrDefault(deckName, 0);
+    }
 
-    public static void SetStake(string deckName, int value) =>
+    public static void SetStake(string deckName, int value)
+    {
         BalatroConfig.Stakes[deckName] = value;
-    
+    }
 }
 
 [ConfigHoverTipsByDefault]
-internal class BalatroConfig : SimpleModConfig {
+internal class BalatroConfig : SimpleModConfig
+{
     // Adds a hover tip for just this property, uses .hover.desc and .hover.title (optional) suffixes
     // in localization. Not necessary with [ConfigHoverTipsByDefault] on the class.
-    [ConfigHoverTip]
-    public static bool BlindsActive { get; set; } = true;
-    
-    [ConfigHoverTip]
-    public static bool GoldCap { get; set; } = true;
-    
+    [ConfigHoverTip] public static bool BlindsActive { get; set; } = true;
+
+    [ConfigHoverTip] public static bool GoldCap { get; set; } = true;
+
     // the new value is written to disk.
-    [ConfigHideInUI]
-    public static string SelectedDeck { get; set; } = "redDeck";
-    
-    [ConfigHideInUI]
-    public static string SelectedStake { get; set; } = "whiteStake";
+    [ConfigHideInUI] public static string SelectedDeck { get; set; } = "redDeck";
+
+    [ConfigHideInUI] public static string SelectedStake { get; set; } = "whiteStake";
 
     [ConfigHideInUI]
     [System.ComponentModel.TypeConverter(typeof(DictionaryJsonConverter))]
@@ -49,20 +48,29 @@ internal class BalatroConfig : SimpleModConfig {
     private sealed class DictionaryJsonConverter : System.ComponentModel.TypeConverter
     {
         public override bool CanConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, Type sourceType)
-            => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        {
+            return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+        }
 
-        public override object? ConvertFrom(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object value)
-            => value is string s
+        public override object? ConvertFrom(System.ComponentModel.ITypeDescriptorContext? context,
+            System.Globalization.CultureInfo? culture, object value)
+        {
+            return value is string s
                 ? JsonSerializer.Deserialize<Dictionary<string, int>>(s)
                 : base.ConvertFrom(context, culture, value);
+        }
 
         public override bool CanConvertTo(System.ComponentModel.ITypeDescriptorContext? context, Type? destinationType)
-            => destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
+        {
+            return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
+        }
 
-        public override object? ConvertTo(System.ComponentModel.ITypeDescriptorContext? context, System.Globalization.CultureInfo? culture, object? value, Type destinationType)
-            => destinationType == typeof(string) && value is Dictionary<string, int> dict
+        public override object? ConvertTo(System.ComponentModel.ITypeDescriptorContext? context,
+            System.Globalization.CultureInfo? culture, object? value, Type destinationType)
+        {
+            return destinationType == typeof(string) && value is Dictionary<string, int> dict
                 ? JsonSerializer.Serialize(dict)
                 : base.ConvertTo(context, culture, value, destinationType);
+        }
     }
 }
-

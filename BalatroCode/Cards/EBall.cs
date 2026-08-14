@@ -17,8 +17,9 @@ public class EBall() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.AnyEnemy), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 4),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 4),
         new DisplayVar<EBall>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<EBallPower>(8)
@@ -29,17 +30,18 @@ public class EBall() : BalatroCard(1,
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
-    { 
+    {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<EBallPower>(choiceContext, play.Target, this.DynamicVars.Power<EBallPower>().BaseValue, play.Card.Owner.Creature, this);
-        if (this.RollChance(this.Owner, this.DynamicVars["Chance"].IntValue))
-        {
-            await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
-        }
+        await PowerCmd.Apply<EBallPower>(choiceContext, play.Target, DynamicVars.Power<EBallPower>().BaseValue,
+            play.Card.Owner.Creature, this);
+        if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
+            await PotionCmd.TryToProcure(
+                PotionFactory.CreateRandomPotionInCombat(Owner, Owner.RunState.Rng.CombatPotionGeneration).ToMutable(),
+                Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Power<EBallPower>().UpgradeValueBy(3);
+        DynamicVars.Power<EBallPower>().UpgradeValueBy(3);
     }
 }

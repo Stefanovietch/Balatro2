@@ -17,9 +17,6 @@ public class ScaryFacePower() : BalatroPower
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Type == CardType.Power)
-        {
-            await CreatureCmd.GainBlock(this.Owner, this.Amount, ValueProp.Move , cardPlay);
-        }
+        if (cardPlay.Card.Type == CardType.Power) await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, cardPlay);
     }
 }

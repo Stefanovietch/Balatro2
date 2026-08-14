@@ -15,34 +15,35 @@ public class SpareTrousers() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.Self)
 {
-    
     private int _increasedDamage;
     private int _currentDamage = 6;
-    
+
     [SavedProperty]
     public int CurrentDamage
     {
-        get => this._currentDamage;
+        get => _currentDamage;
         set
         {
-            this.AssertMutable();
-            this._currentDamage = value;
-            this.DynamicVars.Damage.BaseValue = this._currentDamage;
+            AssertMutable();
+            _currentDamage = value;
+            DynamicVars.Damage.BaseValue = _currentDamage;
         }
     }
 
     [SavedProperty]
     public int IncreasedDamage
     {
-        get => this._increasedDamage;
+        get => _increasedDamage;
         set
         {
-            this.AssertMutable();
-            this._increasedDamage = value;
+            AssertMutable();
+            _increasedDamage = value;
         }
     }
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(this.CurrentDamage, ValueProp.Move),
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(CurrentDamage, ValueProp.Move),
         new IntVar("DamageIncrease", 2)
     ];
 
@@ -50,34 +51,41 @@ public class SpareTrousers() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount(2)
-            .TargetingRandomOpponents(this.CombatState)
+            .TargetingRandomOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-        
-        if (!attackCommand.Results.SelectMany(r => r).Any(r => r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))
+
+        if (!attackCommand.Results.SelectMany(r => r).Any(r =>
+                r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))
             return;
-        int intValue = this.DynamicVars["DamageIncrease"].IntValue;
-        this.BuffFromFatal(intValue);
-        if (this.DeckVersion is not SpareTrousers deckVersion)
+        var intValue = DynamicVars["DamageIncrease"].IntValue;
+        BuffFromFatal(intValue);
+        if (DeckVersion is not SpareTrousers deckVersion)
             return;
         deckVersion.BuffFromFatal(intValue);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["DamageIncrease"].UpgradeValueBy(2);
+        DynamicVars["DamageIncrease"].UpgradeValueBy(2);
     }
-    
-    protected override void AfterDowngraded() => this.UpdateDamage();
+
+    protected override void AfterDowngraded()
+    {
+        UpdateDamage();
+    }
 
     private void BuffFromFatal(int extraDamage)
     {
-        this.IncreasedDamage += extraDamage;
-        this.UpdateDamage();
+        IncreasedDamage += extraDamage;
+        UpdateDamage();
     }
 
-    private void UpdateDamage() => this.CurrentDamage = 13 + this.IncreasedDamage;
+    private void UpdateDamage()
+    {
+        CurrentDamage = 13 + IncreasedDamage;
+    }
 }

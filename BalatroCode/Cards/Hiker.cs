@@ -11,7 +11,8 @@ public class Hiker() : BalatroCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<DexterityPower>(3)
     ];
 
@@ -19,11 +20,12 @@ public class Hiker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-       await PowerCmd.Apply<DexterityPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Dexterity.BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<DexterityPower>(choiceContext, Owner.Creature, DynamicVars.Dexterity.BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Dexterity.UpgradeValueBy(1);
+        DynamicVars.Dexterity.UpgradeValueBy(1);
     }
 }

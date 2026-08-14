@@ -12,13 +12,15 @@ public class RideTheBus() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CalculationBaseVar(4),
         new ExtraDamageVar(1),
         new CalculatedDamageVar(ValueProp.Move).WithMultiplier((card, _) =>
         {
-            var cardsPlayed= CombatManager.Instance.History.CardPlaysFinished.Where(c => c.CardPlay.Card.Owner == card.Owner).ToList();
-            int lastPowerIndex = cardsPlayed.FindLastIndex(c => c.CardPlay.Card.Type == CardType.Power);
+            var cardsPlayed = CombatManager.Instance.History.CardPlaysFinished
+                .Where(c => c.CardPlay.Card.Owner == card.Owner).ToList();
+            var lastPowerIndex = cardsPlayed.FindLastIndex(c => c.CardPlay.Card.Type == CardType.Power);
             return lastPowerIndex == -1 ? cardsPlayed.Count : cardsPlayed.Count - lastPowerIndex - 1;
         })
     ];
@@ -28,7 +30,7 @@ public class RideTheBus() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
@@ -36,6 +38,6 @@ public class RideTheBus() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.ExtraDamage.UpgradeValueBy(1M);
+        DynamicVars.ExtraDamage.UpgradeValueBy(1M);
     }
 }

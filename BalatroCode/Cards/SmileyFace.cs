@@ -12,11 +12,14 @@ public class SmileyFace() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(3, ValueProp.Move),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
-        new CalculatedVar("PowersPlayed").WithMultiplier((card, _) =>  CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.Type == CardType.Power && c.CardPlay.Card.Owner == card.Owner))
+        new CalculatedVar("PowersPlayed").WithMultiplier((card, _) =>
+            CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.CardPlay.Card.Type == CardType.Power && c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
@@ -24,8 +27,8 @@ public class SmileyFace() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["PowersPlayed"]).Calculate(play.Target))
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount((int)((CalculatedVar)DynamicVars["PowersPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx()
             .Execute(choiceContext);
@@ -33,6 +36,6 @@ public class SmileyFace() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

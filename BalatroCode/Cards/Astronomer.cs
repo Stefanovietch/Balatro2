@@ -11,7 +11,8 @@ public class Astronomer() : BalatroCard(2,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<AstronomerPower>(1)
     ];
 
@@ -21,12 +22,12 @@ public class Astronomer() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<AstronomerPower>(choiceContext, this.Owner.Creature, this.DynamicVars["AstronomerPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<AstronomerPower>(choiceContext, Owner.Creature, DynamicVars["AstronomerPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["AstronomerPower"].UpgradeValueBy(1M);
-
+        DynamicVars["AstronomerPower"].UpgradeValueBy(1M);
     }
 }

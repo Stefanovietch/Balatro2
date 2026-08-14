@@ -13,7 +13,8 @@ public class BurntJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(2)
     ];
 
@@ -21,14 +22,15 @@ public class BurntJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,0, 10), null, this)).ToList();
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 0, 10), null, this)).ToList();
         if (cards.Count == 0)
         {
-            await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
+            await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
         }
         else
         {
-            await CardCmd.DiscardAndDraw(choiceContext, cards, this.DynamicVars.Cards.IntValue);
+            await CardCmd.DiscardAndDraw(choiceContext, cards, DynamicVars.Cards.IntValue);
             cards.ForEach(card =>
             {
                 if (card.IsUpgradable) CardCmd.Upgrade(card);
@@ -38,6 +40,6 @@ public class BurntJoker() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

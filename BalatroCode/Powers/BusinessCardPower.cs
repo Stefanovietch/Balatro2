@@ -19,15 +19,12 @@ public class BusinessCardPower() : BalatroPower, IChance
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<BusinessCardPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString()),
+        new DisplayVar<BusinessCardPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString())
     ];
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Type != CardType.Power || this.Owner.Player != cardPlay.Card.Owner) return;
-        if (this.RollChance(this.Owner.Player, 4))
-        {
-            await PlayerCmd.GainGold(Amount, this.Owner.Player);
-        }
+        if (cardPlay.Card.Type != CardType.Power || Owner.Player != cardPlay.Card.Owner) return;
+        if (this.RollChance(Owner.Player, 4)) await PlayerCmd.GainGold(Amount, Owner.Player);
     }
 }

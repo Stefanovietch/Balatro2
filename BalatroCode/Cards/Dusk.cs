@@ -19,17 +19,17 @@ public class Dusk() : BalatroCard(3,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (!PileType.Hand.GetPile(this.Owner).IsEmpty) return;
-        foreach (var cardPlayed in CombatManager.Instance.History.CardPlaysFinished.Where(c => c.CardPlay.Card.Id != this.Id && c.HappenedThisTurn(play.Card.CombatState) && c.CardPlay.Card.Owner == play.Card.Owner))
-        {
+        if (!PileType.Hand.GetPile(Owner).IsEmpty) return;
+        foreach (var cardPlayed in CombatManager.Instance.History.CardPlaysFinished.Where(c =>
+                     c.CardPlay.Card.Id != Id && c.HappenedThisTurn(play.Card.CombatState) &&
+                     c.CardPlay.Card.Owner == play.Card.Owner))
             await CardCmd.AutoPlay(choiceContext, cardPlayed.CardPlay.Card, null);
-        }
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 
-    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(this.Owner).Cards.Count <= 1;
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 1;
 }

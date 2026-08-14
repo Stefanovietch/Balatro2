@@ -16,8 +16,9 @@ public class GlowUp() : BalatroRelic
 
     public override async Task AfterObtained()
     {
-        List<CardPileAddResult> results = new List<CardPileAddResult>();
-        results.Add(await CardPileCmd.Add(this.Owner.RunState.CreateCard(ModelDb.Card<SeekerStrike>(), this.Owner), PileType.Deck));
+        var results = new List<CardPileAddResult>();
+        results.Add(
+            await CardPileCmd.Add(Owner.RunState.CreateCard(ModelDb.Card<SeekerStrike>(), Owner), PileType.Deck));
         CardCmd.PreviewCardPileAdd(results, 2f);
     }
 }

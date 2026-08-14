@@ -12,12 +12,13 @@ public class ShootTheMoon() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(6, ValueProp.Move),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
-        new CalculatedVar("CalculatedHits").WithMultiplier((card, _) =>  PileType.Hand.GetPile(card.Owner).Cards.Count(c => c.Type == CardType.Skill))
-
+        new CalculatedVar("CalculatedHits").WithMultiplier((card, _) =>
+            PileType.Hand.GetPile(card.Owner).Cards.Count(c => c.Type == CardType.Skill))
     ];
 
     protected override async Task OnPlay(
@@ -25,8 +26,8 @@ public class ShootTheMoon() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(base.DynamicVars.Damage.BaseValue).FromCard(this)
-            .WithHitCount((int)((CalculatedVar)base.DynamicVars["CalculatedHits"]).Calculate(play.Target))
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .WithHitCount((int)((CalculatedVar)DynamicVars["CalculatedHits"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx(null, null, "blunt_attack.mp3")
             .Execute(choiceContext);
@@ -34,6 +35,5 @@ public class ShootTheMoon() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        
     }
 }

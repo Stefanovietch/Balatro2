@@ -10,7 +10,8 @@ public class HangingChad() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new RepeatVar(2)
     ];
 
@@ -18,15 +19,15 @@ public class HangingChad() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var card = PileType.Draw.GetPile(this.Owner).Cards.FirstOrDefault();
+        var card = PileType.Draw.GetPile(Owner).Cards.FirstOrDefault();
         if (card == null) return;
         card.ExhaustOnNextPlay = true;
-        for (int i = 0; i < this.DynamicVars.Repeat.IntValue; ++i)
+        for (var i = 0; i < DynamicVars.Repeat.IntValue; ++i)
             await CardCmd.AutoPlay(choiceContext, card, null);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Repeat.UpgradeValueBy(1);
+        DynamicVars.Repeat.UpgradeValueBy(1);
     }
 }

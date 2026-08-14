@@ -13,7 +13,8 @@ public class OnyxAgate() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<OnyxAgatePower>(7M)
     ];
 
@@ -21,11 +22,12 @@ public class OnyxAgate() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<OnyxAgatePower>(choiceContext, this.Owner.Creature, this.DynamicVars["OnyxAgatePower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<OnyxAgatePower>(choiceContext, Owner.Creature, DynamicVars["OnyxAgatePower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["OnyxAgatePower"].UpgradeValueBy(2M);
+        DynamicVars["OnyxAgatePower"].UpgradeValueBy(2M);
     }
 }

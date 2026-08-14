@@ -19,15 +19,15 @@ public class ChaosTheClown() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        IEnumerable<CardModel> cards = PileType.Hand.GetPile(this.Owner).Cards;
-        int cardsToDraw = cards.Count();
+        IEnumerable<CardModel> cards = PileType.Hand.GetPile(Owner).Cards;
+        var cardsToDraw = cards.Count();
         await CardCmd.Discard(choiceContext, cards);
-        await CardPileCmd.Shuffle(choiceContext, this.Owner);
-        await CardPileCmd.Draw(choiceContext, cardsToDraw, this.Owner);
+        await CardPileCmd.Shuffle(choiceContext, Owner);
+        await CardPileCmd.Draw(choiceContext, cardsToDraw, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Exhaust);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

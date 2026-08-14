@@ -12,25 +12,31 @@ public class Campfire() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        ..MakeCalculatedVar("StrengthPower", 0, (c, _) => c.Owner.Character is Character.Balatro balatro ? Character.Balatro.RestSitesVisitedThisAct.Get(c.Owner) : 0)
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        ..MakeCalculatedVar("StrengthPower", 0,
+            (c, _) => c.Owner.Character is Character.Balatro balatro
+                ? Character.Balatro.RestSitesVisitedThisAct.Get(c.Owner)
+                : 0)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
         HoverTipFactory.FromPower<StrengthPower>()
     ];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature, this.DynamicVars["StrengthPower"].BaseValue, this.Owner.Creature,  this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["StrengthPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars["StrengthPower"].UpgradeValueBy(1);
     }
 }

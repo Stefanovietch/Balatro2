@@ -12,7 +12,8 @@ public class Banner() : BalatroCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         ..MakeCalculatedBlock(24, (card, _) => -PileType.Discard.GetPile(card.Owner).Cards.Count)
     ];
 
@@ -20,11 +21,11 @@ public class Banner() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(null), ValueProp.Move , play);
+        await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.CalculatedBlock.Calculate(null), ValueProp.Move, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculationBase.UpgradeValueBy(7);
+        DynamicVars.CalculationBase.UpgradeValueBy(7);
     }
 }

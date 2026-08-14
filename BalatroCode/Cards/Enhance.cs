@@ -15,11 +15,9 @@ public class Enhance() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        
     }
 
     protected override void OnUpgrade()
     {
-
     }
 }

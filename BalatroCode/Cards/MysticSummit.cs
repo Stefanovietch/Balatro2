@@ -11,7 +11,8 @@ public class MysticSummit() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(24, ValueProp.Move)
     ];
 
@@ -22,7 +23,7 @@ public class MysticSummit() : BalatroCard(1,
         if (NoDiscardPile())
         {
             ArgumentNullException.ThrowIfNull(play.Target);
-            await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
                 .Targeting(play.Target)
                 .WithHitFx("vfx/vfx_attack_slash")
                 .Execute(choiceContext);
@@ -31,9 +32,13 @@ public class MysticSummit() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(9);
+        DynamicVars.Damage.UpgradeValueBy(9);
     }
 
     protected override bool ShouldGlowGoldInternal => NoDiscardPile();
-    private bool NoDiscardPile() => PileType.Discard.GetPile(this.Owner).IsEmpty;
+
+    private bool NoDiscardPile()
+    {
+        return PileType.Discard.GetPile(Owner).IsEmpty;
+    }
 }

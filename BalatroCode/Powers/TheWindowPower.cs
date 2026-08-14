@@ -16,11 +16,11 @@ public class TheWindowPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheWindow;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        await PowerCmd.Apply<ThornsPower>(new ThrowingPlayerChoiceContext(), this.Owner, 4, applier, cardSource);
+        await PowerCmd.Apply<ThornsPower>(new ThrowingPlayerChoiceContext(), Owner, 4, applier, cardSource);
     }
 }

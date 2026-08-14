@@ -13,9 +13,9 @@ public class Liquidation() : BalatroRelic
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (this.Owner.Creature.IsDead || !(room is MerchantRoom))
+        if (Owner.Creature.IsDead || !(room is MerchantRoom))
             return;
-        this.Flash();
-        await PlayerCmd.GainGold(150, this.Owner);
+        Flash();
+        await PlayerCmd.GainGold(150, Owner);
     }
 }

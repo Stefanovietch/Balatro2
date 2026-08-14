@@ -6,5 +6,4 @@ namespace Balatro.BalatroCode.UI;
 
 public class BalatroAfflictions : AfflictionModel
 {
-    
 }

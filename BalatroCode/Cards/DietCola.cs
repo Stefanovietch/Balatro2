@@ -14,18 +14,18 @@ public class DietCola() : BalatroCard(1,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
+
     public override bool CanBeGeneratedInCombat => false;
-    
+
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Ethereal);
+        AddKeyword(CardKeyword.Ethereal);
     }
-    
+
     public override async Task BeforeCardRemoved(CardModel card)
     {
-        await RelicCmd.Obtain(RelicFactory.PullNextRelicFromFront(this.Owner, RelicRarity.Common), this.Owner);
+        await RelicCmd.Obtain(RelicFactory.PullNextRelicFromFront(Owner, RelicRarity.Common), Owner);
     }
 }

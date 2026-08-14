@@ -17,75 +17,80 @@ public class CeremonialDagger() : BalatroCard(1,
 {
     private int _currentDmg = 7;
     private int _increasedDmg;
-    
+
     [SavedProperty]
     public int CurrentDamage
     {
-        get => this._currentDmg;
+        get => _currentDmg;
         set
         {
-            this.AssertMutable();
-            this._currentDmg = value;
-            this.DynamicVars.Damage.BaseValue = this._currentDmg;
+            AssertMutable();
+            _currentDmg = value;
+            DynamicVars.Damage.BaseValue = _currentDmg;
         }
     }
 
     [SavedProperty]
     public int IncreasedDamage
     {
-        get => this._increasedDmg;
+        get => _increasedDmg;
         set
         {
-            this.AssertMutable();
-            this._increasedDmg = value;
+            AssertMutable();
+            _increasedDmg = value;
         }
     }
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(this.CurrentDamage, ValueProp.Move),
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(CurrentDamage, ValueProp.Move)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
 
         CardModel? card;
-        if (this.IsUpgraded)
+        if (IsUpgraded)
         {
-            CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
-            card = (await CardSelectCmd.FromHand(choiceContext, this.Owner, prefs, null, this)).FirstOrDefault();
+            var prefs = new CardSelectorPrefs(CardSelectorPrefs.ExhaustSelectionPrompt, 1);
+            card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs, null, this)).FirstOrDefault();
         }
         else
         {
-            CardPile pile = PileType.Hand.GetPile(this.Owner);
-            card = this.Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
+            var pile = PileType.Hand.GetPile(Owner);
+            card = Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
         }
+
         if (card == null)
             return;
         await CardCmd.Exhaust(choiceContext, card);
-            
-        int intValue = card.EnergyCost.GetAmountToSpend();
-        this.BuffFromExhaust(intValue * 2);
-        if (this.DeckVersion is not CeremonialDagger deckVersion)
+
+        var intValue = card.EnergyCost.GetAmountToSpend();
+        BuffFromExhaust(intValue * 2);
+        if (DeckVersion is not CeremonialDagger deckVersion)
             return;
         deckVersion.BuffFromExhaust(intValue);
     }
 
     protected override void OnUpgrade()
     {
-
     }
-    
+
     private void BuffFromExhaust(int extradmg)
     {
-        this.IncreasedDamage += extradmg;
-        this.UpdateDmg();
+        IncreasedDamage += extradmg;
+        UpdateDmg();
     }
 
-    private void UpdateDmg() => this.CurrentDamage = 7 + this.IncreasedDamage;
+    private void UpdateDmg()
+    {
+        CurrentDamage = 7 + IncreasedDamage;
+    }
 }

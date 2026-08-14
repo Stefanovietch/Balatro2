@@ -13,7 +13,8 @@ public class Hologram() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(4, ValueProp.Move)
     ];
 
@@ -22,21 +23,23 @@ public class Hologram() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
-    
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource != this || this.Owner.Character is not Character.Balatro balatro) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return 1M + Character.Balatro.CardsAdded.Get(this.Owner) * 0.25M;
+        if (cardSource != this || Owner.Character is not Character.Balatro balatro)
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return 1M + Character.Balatro.CardsAdded.Get(Owner) * 0.25M;
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

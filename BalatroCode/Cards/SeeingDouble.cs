@@ -13,7 +13,8 @@ public class SeeingDouble() : BalatroCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<SeeingDoublePower>(1),
         new PowerVar<ConfusedPower>(1)
     ];
@@ -22,12 +23,14 @@ public class SeeingDouble() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<SeeingDoublePower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<SeeingDoublePower>().BaseValue, this.Owner.Creature, this);
-        await PowerCmd.Apply<ConfusedPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<ConfusedPower>().BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<SeeingDoublePower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<SeeingDoublePower>().BaseValue, Owner.Creature, this);
+        await PowerCmd.Apply<ConfusedPower>(choiceContext, Owner.Creature, DynamicVars.Power<ConfusedPower>().BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

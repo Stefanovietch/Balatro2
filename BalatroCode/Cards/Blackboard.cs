@@ -14,13 +14,15 @@ public class Blackboard() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<VulnerablePower>(1)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
         HoverTipFactory.FromPower<VulnerablePower>()
     ];
 
@@ -30,20 +32,20 @@ public class Blackboard() : BalatroCard(1,
     {
         ArgumentNullException.ThrowIfNull(play.Target);
         var amount = AllUncommonOrCommon() ? 3 : 1;
-        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, this.DynamicVars.Power<VulnerablePower>().BaseValue * amount, this.Owner.Creature,  this);
-
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target,
+            DynamicVars.Power<VulnerablePower>().BaseValue * amount, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Vulnerable.UpgradeValueBy(1);
+        DynamicVars.Vulnerable.UpgradeValueBy(1);
     }
 
     protected override bool ShouldGlowGoldInternal => AllUncommonOrCommon();
 
     private bool AllUncommonOrCommon()
     {
-        return PileType.Hand.GetPile(this.Owner).Cards.Count(c =>
+        return PileType.Hand.GetPile(Owner).Cards.Count(c =>
             c.Rarity is not CardRarity.Common and not CardRarity.Uncommon) == 0;
     }
 }

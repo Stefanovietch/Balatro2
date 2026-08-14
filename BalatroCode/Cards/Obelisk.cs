@@ -13,118 +13,123 @@ public class Obelisk() : BalatroCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    
     private int _currentDamage = 4;
     private int _currentBlock = 8;
 
     private int _increasedDamage;
     private int _increasedBlock;
-    
+
     [SavedProperty]
     public int CurrentDamage
     {
-        get => this._currentDamage;
+        get => _currentDamage;
         set
         {
-            this.AssertMutable();
-            this._currentDamage = value;
-            this.DynamicVars.Damage.BaseValue = this._currentDamage;
+            AssertMutable();
+            _currentDamage = value;
+            DynamicVars.Damage.BaseValue = _currentDamage;
         }
     }
 
     [SavedProperty]
     public int IncreasedDamage
     {
-        get => this._increasedDamage;
+        get => _increasedDamage;
         set
         {
-            this.AssertMutable();
-            this._increasedDamage = value;
+            AssertMutable();
+            _increasedDamage = value;
         }
     }
-    
+
     [SavedProperty]
     public int CurrentBlock
     {
-        get => this._currentBlock;
+        get => _currentBlock;
         set
         {
-            this.AssertMutable();
-            this._currentBlock = value;
-            this.DynamicVars.Block.BaseValue = this._currentBlock;
+            AssertMutable();
+            _currentBlock = value;
+            DynamicVars.Block.BaseValue = _currentBlock;
         }
     }
 
     [SavedProperty]
     public int IncreasedBlock
     {
-        get => this._increasedBlock;
+        get => _increasedBlock;
         set
         {
-            this.AssertMutable();
-            this._increasedBlock = value;
+            AssertMutable();
+            _increasedBlock = value;
         }
     }
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(this.CurrentDamage, ValueProp.Move),
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(CurrentDamage, ValueProp.Move),
         new IntVar("DamageIncrease", 1M),
-        new BlockVar(this.CurrentBlock, ValueProp.Move),
-        new IntVar("BlockIncrease", 2M),
+        new BlockVar(CurrentBlock, ValueProp.Move),
+        new IntVar("BlockIncrease", 2M)
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        IReadOnlyList<CardModel> options = [    
+        ArgumentNullException.ThrowIfNull(CombatState);
+        IReadOnlyList<CardModel> options =
+        [
             ModelDb.Card<Blockade>(),
             ModelDb.Card<Assault>(),
             ModelDb.Card<Enhance>()
         ];
-        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, this.Owner);
-        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, this.Owner);
-        foreach (var option in (List<CardModel?>) [option1, option2])
-        {
+        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
+        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
+        foreach (var option in (List<CardModel?>)[option1, option2])
             switch (option)
             {
                 case Blockade:
-                    await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+                    await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
                     break;
                 case Assault:
-                    await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
-                        .TargetingAllOpponents(this.CombatState)
+                    await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+                        .TargetingAllOpponents(CombatState)
                         .WithHitFx("vfx/vfx_attack_slash")
                         .Execute(choiceContext);
                     break;
                 case Enhance:
-                    this.Buff();
-                    if (this.DeckVersion is not Obelisk deckVersion)
+                    Buff();
+                    if (DeckVersion is not Obelisk deckVersion)
                         return;
                     deckVersion.Buff();
                     break;
             }
-        }
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["DamageIncrease"].UpgradeValueBy(1);
-        this.DynamicVars["BlockIncrease"].UpgradeValueBy(1);
+        DynamicVars["DamageIncrease"].UpgradeValueBy(1);
+        DynamicVars["BlockIncrease"].UpgradeValueBy(1);
     }
-    
+
     private void Buff()
     {
-        this.IncreasedBlock += this.DynamicVars["BlockIncrease"].IntValue;;
-        this.IncreasedBlock += this.DynamicVars["BlockIncrease"].IntValue;;
-        this.UpdateDamageBlock();
+        IncreasedBlock += DynamicVars["BlockIncrease"].IntValue;
+        ;
+        IncreasedBlock += DynamicVars["BlockIncrease"].IntValue;
+        ;
+        UpdateDamageBlock();
     }
-    protected override void AfterDowngraded() => this.UpdateDamageBlock();
+
+    protected override void AfterDowngraded()
+    {
+        UpdateDamageBlock();
+    }
 
     private void UpdateDamageBlock()
     {
-        this.CurrentDamage = 4 + this.IncreasedDamage;
-        this.CurrentBlock = 8 + this.IncreasedBlock;
+        CurrentDamage = 4 + IncreasedDamage;
+        CurrentBlock = 8 + IncreasedBlock;
     }
 }

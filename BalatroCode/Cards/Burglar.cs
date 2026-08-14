@@ -10,7 +10,8 @@ public class Burglar() : BalatroCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(3)
     ];
 
@@ -20,11 +21,11 @@ public class Burglar() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext,this.DynamicVars.Cards.BaseValue, this.Owner);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Innate);
+        AddKeyword(CardKeyword.Innate);
     }
 }

@@ -15,23 +15,23 @@ public class Illusion() : BalatroRelic
 
     public override async Task AfterObtained()
     {
-        List<Reward> rewards = new List<Reward>();
-        CardRarity[] cardRarityArray = new CardRarity[3]
+        var rewards = new List<Reward>();
+        var cardRarityArray = new CardRarity[3]
         {
             CardRarity.Common,
             CardRarity.Uncommon,
             CardRarity.Rare
         };
-        foreach (CardRarity cardRarity in cardRarityArray)
+        foreach (var cardRarity in cardRarityArray)
         {
-            CardRarity rarity = cardRarity;
-            CardCreationOptions options = CardCreationOptions.
-                ForNonCombatWithUniformOdds(
-                    new List<CardPoolModel> { this.Owner.Character.CardPool} , 
-                    (Func<CardModel, bool>) (c => c.Rarity == rarity))
+            var rarity = cardRarity;
+            var options = CardCreationOptions.ForNonCombatWithUniformOdds(
+                    new List<CardPoolModel> { Owner.Character.CardPool },
+                    (Func<CardModel, bool>)(c => c.Rarity == rarity))
                 .WithFlags(CardCreationFlags.NoRarityModification);
-            rewards.Add((Reward) new CardReward(options, 3, this.Owner));
+            rewards.Add((Reward)new CardReward(options, 3, Owner));
         }
-        await RewardsCmd.OfferCustom(this.Owner, rewards);
+
+        await RewardsCmd.OfferCustom(Owner, rewards);
     }
 }

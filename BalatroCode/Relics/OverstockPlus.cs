@@ -7,6 +7,4 @@ public class OverstockPlus() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Rare;
-
-    
 }

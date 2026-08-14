@@ -11,7 +11,8 @@ public class BaseballCard() : BalatroCard(1,
     CardType.Power, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<BaseballCardPower>(15)
     ];
 
@@ -19,11 +20,12 @@ public class BaseballCard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<BaseballCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars["BaseballCardPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<BaseballCardPower>(choiceContext, Owner.Creature,
+            DynamicVars["BaseballCardPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

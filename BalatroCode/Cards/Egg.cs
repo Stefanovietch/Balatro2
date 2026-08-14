@@ -11,7 +11,8 @@ public class Egg() : BalatroCard(1,
     CardType.Power, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<EggPower>(5)
     ];
 
@@ -19,11 +20,12 @@ public class Egg() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<EggPower>(choiceContext, this.Owner.Creature, this.DynamicVars["EggPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<EggPower>(choiceContext, Owner.Creature, DynamicVars["EggPower"].BaseValue, Owner.Creature,
+            this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["EggPower"].UpgradeValueBy(2);
+        DynamicVars["EggPower"].UpgradeValueBy(2);
     }
 }

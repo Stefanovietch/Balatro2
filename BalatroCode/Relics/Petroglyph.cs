@@ -14,7 +14,8 @@ public class Petroglyph() : BalatroRelic
 
     public override async Task AfterCreatureAddedToCombat(Creature creature)
     {
-        this.Flash();
-        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), creature, (decimal) (creature.MaxHp*0.1), false);
+        Flash();
+        await CreatureCmd.LoseMaxHp(new ThrowingPlayerChoiceContext(), creature, (decimal)(creature.MaxHp * 0.1),
+            false);
     }
 }

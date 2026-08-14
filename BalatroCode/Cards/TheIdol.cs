@@ -13,26 +13,30 @@ public class TheIdol() : BalatroCard(1,
     TargetType.Self), IRandomType
 {
     private int _cost = -1;
-    
+
     public int CurrentCost
     {
-        get => this._cost;
+        get => _cost;
         set
         {
-            this.AssertMutable();
-            this._cost = value;
+            AssertMutable();
+            _cost = value;
         }
     }
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DisplayVar<TheIdol>("Type", card =>  ((IRandomType) card).GetTypeString()),
-        new DisplayVar<TheIdol>("Cost", card =>  card.GetCostString())
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DisplayVar<TheIdol>("Type", card => ((IRandomType)card).GetTypeString()),
+        new DisplayVar<TheIdol>("Cost", card => card.GetCostString())
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var card = PileType.Draw.GetPile(this.Owner).Cards.Where(c => c.Type == CurrentType && c.EnergyCost.GetAmountToSpend() == CurrentCost).TakeRandom(1, this.Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
+        var card = PileType.Draw.GetPile(Owner).Cards
+            .Where(c => c.Type == CurrentType && c.EnergyCost.GetAmountToSpend() == CurrentCost)
+            .TakeRandom(1, Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
         if (card == null) return;
         card.EnergyCost.SetThisTurnOrUntilPlayed(0);
         await CardPileCmd.Add(card, PileType.Hand);
@@ -40,12 +44,15 @@ public class TheIdol() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Retain);
+        AddKeyword(CardKeyword.Retain);
     }
 
     public void SetRandomType()
     {
-        var card = PileType.Draw.GetPile(this.Owner).Cards.Where(c => (c.Type is CardType.Attack or CardType.Skill or CardType.Power) && (c.EnergyCost.GetAmountToSpend() is >=1 and <= 3)).TakeRandom(1, this.Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
+        var card = PileType.Draw.GetPile(Owner).Cards
+            .Where(c => c.Type is CardType.Attack or CardType.Skill or CardType.Power &&
+                        c.EnergyCost.GetAmountToSpend() is >= 1 and <= 3)
+            .TakeRandom(1, Owner.RunState.Rng.CombatCardSelection).FirstOrDefault();
         if (card == null)
         {
             CurrentCost = -1;
@@ -58,7 +65,7 @@ public class TheIdol() : BalatroCard(1,
         }
     }
 
-    public CardType CurrentType { get; set; } =  CardType.None;
+    public CardType CurrentType { get; set; } = CardType.None;
 
     private string GetCostString()
     {

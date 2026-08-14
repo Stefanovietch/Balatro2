@@ -12,7 +12,8 @@ public class MadJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Basic,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(12, ValueProp.Move)
     ];
 
@@ -22,19 +23,21 @@ public class MadJoker() : BalatroCard(1,
     {
         ArgumentNullException.ThrowIfNull(play.Target);
         if (!LastCardIsAttack()) return;
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(4);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 
     protected override bool ShouldGlowGoldInternal => LastCardIsAttack();
 
     private bool LastCardIsAttack()
     {
-        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == this.Owner);
+        var yourCardPlayed =
+            CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner);
         return yourCardPlayed?.CardPlay.Card.Type == CardType.Attack;
     }
 }

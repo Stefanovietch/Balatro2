@@ -17,13 +17,13 @@ public class WalkieTalkiePower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
+
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner != this.Owner.Player || cardPlay.Card.EnergyCost.GetAmountToSpend() != 1) return;
-        await CreatureCmd.GainBlock(this.Owner, Amount, ValueProp.Move, cardPlay);
-        Creature? target = this.Owner.Player.RunState.Rng.CombatTargets.NextItem(this.CombatState.HittableEnemies);
+        if (cardPlay.Card.Owner != Owner.Player || cardPlay.Card.EnergyCost.GetAmountToSpend() != 1) return;
+        await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, cardPlay);
+        var target = Owner.Player.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
         if (target == null) return;
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, this.Owner, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, Owner, null);
     }
 }

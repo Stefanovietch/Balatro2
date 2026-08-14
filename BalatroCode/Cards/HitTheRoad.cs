@@ -11,7 +11,8 @@ public class HitTheRoad() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CalculationBaseVar(0),
         new CalculationExtraVar(1),
         new CalculatedVar("StrengthPower").WithMultiplier((c, _) =>
@@ -28,13 +29,13 @@ public class HitTheRoad() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<StrengthPower>(choiceContext, this.Owner.Creature, 
-            (int)((CalculatedVar)base.DynamicVars["StrengthPower"]).Calculate(play.Target), 
-            this.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,
+            (int)((CalculatedVar)DynamicVars["StrengthPower"]).Calculate(play.Target),
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.RemoveKeyword(CardKeyword.Exhaust);
+        RemoveKeyword(CardKeyword.Exhaust);
     }
 }

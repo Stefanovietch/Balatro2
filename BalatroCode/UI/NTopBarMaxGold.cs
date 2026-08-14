@@ -1,10 +1,8 @@
 ﻿using Godot;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Nodes.Screens.Capstones;
 
 namespace Balatro.BalatroCode.UI;
-
 
 [GlobalClass]
 public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
@@ -19,11 +17,8 @@ public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
 
     public override void _Ready()
     {
-        base._Ready();
-
-        // Recreate what the .tscn had
         var container = new Control();
-        container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+        container.SetAnchorsPreset(LayoutPreset.FullRect);
         AddChild(container);
 
         var icon = new TextureRect();
@@ -43,17 +38,20 @@ public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
         label.AddThemeConstantOverride("outline_size", 12);
         label.AddThemeFontSizeOverride("font_size", 34);
         AddChild(label);
+
+        base._Ready();
     }
 
     protected override int? GetGoldEarned()
     {
-        if (Player?.Character is not Character.Balatro balatro) return null;
+        if (Player?.Character is not Character.Balatro) return null;
         if (Player.PlayerCombatState == null) return 0;
         return Character.Balatro.CombatGoldEarned.Get(Player.PlayerCombatState);
     }
+
     protected override int? GetMaxGold()
     {
-        if (Player?.Character is not Character.Balatro balatro) return null;
+        if (Player?.Character is not Character.Balatro) return null;
         return Character.Balatro.MaxCombatGold.Get(Player);
     }
 }

@@ -12,7 +12,8 @@ public class Luchador() : BalatroCard(2,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<StrengthPower>(8)
     ];
 
@@ -21,15 +22,16 @@ public class Luchador() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<StrengthPower>(choiceContext, play.Target, -this.DynamicVars.Strength.BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<StrengthPower>(choiceContext, play.Target, -DynamicVars.Strength.BaseValue, Owner.Creature,
+            this);
         await CardPileCmd.RemoveFromCombat(this);
-        if (this.DeckVersion is not Luchador deckVersion)
+        if (DeckVersion is not Luchador deckVersion)
             return;
         await CardPileCmd.RemoveFromDeck(deckVersion);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Strength.UpgradeValueBy(3);
+        DynamicVars.Strength.UpgradeValueBy(3);
     }
 }

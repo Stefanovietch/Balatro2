@@ -14,8 +14,9 @@ public class AbstractJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(3M, ValueProp.Move),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(3M, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
@@ -24,8 +25,8 @@ public class AbstractJoker() : BalatroCard(1,
     {
         ArgumentNullException.ThrowIfNull(play.Target);
         ArgumentNullException.ThrowIfNull(play.Card.Owner.PlayerCombatState);
-        int hitAmount = PileType.Hand.GetPile(this.Owner).Cards.Count;
-        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        var hitAmount = PileType.Hand.GetPile(Owner).Cards.Count;
+        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount(hitAmount)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
@@ -34,6 +35,6 @@ public class AbstractJoker() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(1M);
+        DynamicVars.Damage.UpgradeValueBy(1M);
     }
 }

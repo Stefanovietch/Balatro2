@@ -41,7 +41,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     public override void _Ready()
     {
         ConnectSignals();
-        _icon = GetNode<Control>(IconNodePath);
+        _icon = GetNodeOrNull<Control>(IconNodePath);
         _countLabel = GetNodeOrNull<MegaLabel>(CountLabelNodePath);
     }
 
@@ -49,6 +49,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
 
     /// <summary>Returns the value to show on the badge, or null to hide it.</summary>
     protected abstract int? GetGoldEarned();
+
     protected abstract int? GetMaxGold();
 
     public void RefreshCount()
@@ -56,7 +57,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         if (_countLabel == null) return;
         var goldEarned = GetGoldEarned();
         var maxGold = GetMaxGold();
-        
+
         if (goldEarned == null || maxGold == null)
         {
             _countLabel.Visible = false;
@@ -79,12 +80,12 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         _previousCount = goldEarned.Value;
         _countLabel.SetTextAutoSize(goldEarned.Value.ToString() + " / " + maxGold.Value.ToString());
     }
-    
+
     public override void _Process(double delta)
     {
-        if (!IsFocused) return;
+        if (!IsFocused || _icon == null) return;
         _elapsedTime += (float)delta * 4f;
-        _icon!.Rotation = 0.12f * Mathf.Sin(_elapsedTime);
+        _icon.Rotation = 0.12f * Mathf.Sin(_elapsedTime);
     }
 
     protected override void OnFocus()
@@ -96,7 +97,8 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     protected override void OnUnfocus()
     {
         base.OnUnfocus();
-        _icon!.Rotation = 0f;
+        if (_icon == null) return;
+        _icon.Rotation = 0f;
     }
 
     public static void RefreshDisplay()

@@ -11,7 +11,8 @@ public class SmearedJoker() : BalatroCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new EnergyVar(2)
     ];
 
@@ -19,10 +20,10 @@ public class SmearedJoker() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PlayerCmd.GainEnergy(this.DynamicVars.Energy.IntValue, this.Owner);
-        foreach (var card in PileType.Hand.GetPile(this.Owner).Cards.Where(c => c.EnergyCost.Canonical >= 0))
+        await PlayerCmd.GainEnergy(DynamicVars.Energy.IntValue, Owner);
+        foreach (var card in PileType.Hand.GetPile(Owner).Cards.Where(c => c.EnergyCost.Canonical >= 0))
         {
-            int cost = this.Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
+            var cost = Owner.RunState.Rng.CombatEnergyCosts.NextInt(4);
             card.EnergyCost.SetThisCombat(cost);
             NCard.FindOnTable(card)?.PlayRandomizeCostAnim();
         }
@@ -30,7 +31,6 @@ public class SmearedJoker() : BalatroCard(0,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Energy.UpgradeValueBy(1);
+        DynamicVars.Energy.UpgradeValueBy(1);
     }
-    
 }

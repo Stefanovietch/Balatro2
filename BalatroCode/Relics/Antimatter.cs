@@ -16,10 +16,10 @@ public class Antimatter() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Uncommon;
-    
+
     public override bool IsAllowed(IRunState runState)
     {
-        return RelicModel.IsBeforeAct3TreasureChest(runState);
+        return IsBeforeAct3TreasureChest(runState);
     }
 
     public override bool TryModifyCardRewardOptions(
@@ -27,27 +27,31 @@ public class Antimatter() : BalatroRelic
         List<CardCreationResult> options,
         CardCreationOptions creationOptions)
     {
-        if (this.Owner != player) return false;
-        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c => options.TrueForAll((Predicate<CardCreationResult>) (o => o.originalCard.Id != c.Id))).ToArray();
+        if (Owner != player) return false;
+        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c =>
+            options.TrueForAll((Predicate<CardCreationResult>)(o => o.originalCard.Id != c.Id))).ToArray();
         if (!cardModels.Any()) cardModels = creationOptions.GetPossibleCards(player).ToArray();
         if (!cardModels.Any()) return false;
-        CardModel? card = CardFactory.CreateForReward(this.Owner, 1, new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications)).FirstOrDefault<CardCreationResult>()?.Card;
+        var card = CardFactory.CreateForReward(Owner, 1,
+                new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
+                    CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications))
+            .FirstOrDefault<CardCreationResult>()?.Card;
         if (card == null) return false;
-        CardCreationResult cardCreationResult = new CardCreationResult(card);
+        var cardCreationResult = new CardCreationResult(card);
         cardCreationResult.ModifyCard(card, this);
         options.Add(cardCreationResult);
         return true;
     }
-    
+
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        TaskHelper.RunSafely(this.ActivateVisuals());
+        TaskHelper.RunSafely(ActivateVisuals());
         return Task.CompletedTask;
     }
-    
+
     private async Task ActivateVisuals()
     {
-        this.Flash();
+        Flash();
         await Cmd.Wait(1f);
     }
 }

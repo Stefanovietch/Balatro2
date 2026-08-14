@@ -11,7 +11,8 @@ public class Juggler() : BalatroCard(1,
     CardType.Power, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<JugglerPower>(1)
     ];
 
@@ -19,11 +20,12 @@ public class Juggler() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<JugglerPower>(choiceContext, this.Owner.Creature, this.DynamicVars["JugglerPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<JugglerPower>(choiceContext, Owner.Creature, DynamicVars["JugglerPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.AddKeyword(CardKeyword.Innate);
+        AddKeyword(CardKeyword.Innate);
     }
 }

@@ -13,8 +13,9 @@ public class LuckyCat() : BalatroCard(2,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 4),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 4),
         new DisplayVar<LuckyCat>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<LuckyCatPower>(10)
@@ -24,11 +25,12 @@ public class LuckyCat() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<LuckyCatPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<LuckyCatPower>().BaseValue, this.Owner.Creature, this); 
+        await PowerCmd.Apply<LuckyCatPower>(choiceContext, Owner.Creature, DynamicVars.Power<LuckyCatPower>().BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

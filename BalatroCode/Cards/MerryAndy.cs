@@ -13,7 +13,8 @@ public class MerryAndy() : BalatroCard(0,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(3),
         new CardsVar("Discard", 1),
         new PowerVar<DrawCardsNextTurnPower>(1)
@@ -23,15 +24,18 @@ public class MerryAndy() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, this.DynamicVars["Discard"].IntValue), null, this)).ToList();
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, DynamicVars["Discard"].IntValue), null,
+            this)).ToList();
         await CardCmd.Discard(choiceContext, cards);
-        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, this.Owner.Creature, -this.DynamicVars["DrawCardsNextTurnPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<DrawCardsNextTurnPower>(choiceContext, Owner.Creature,
+            -DynamicVars["DrawCardsNextTurnPower"].BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
-        this.DynamicVars["Discard"].UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars["Discard"].UpgradeValueBy(1);
     }
 }

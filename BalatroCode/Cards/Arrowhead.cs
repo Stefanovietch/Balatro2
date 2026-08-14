@@ -18,11 +18,13 @@ public class Arrowhead() : BalatroCard(1,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<ArrowheadPower>(1)
     ];
 
-    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
         HoverTipFactory.FromCard<StoneCard>()
     ];
 
@@ -30,11 +32,12 @@ public class Arrowhead() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<ArrowheadPower>(choiceContext, this.Owner.Creature, this.DynamicVars["ArrowheadPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<ArrowheadPower>(choiceContext, Owner.Creature, DynamicVars["ArrowheadPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["ArrowheadPower"].UpgradeValueBy(1M);
+        DynamicVars["ArrowheadPower"].UpgradeValueBy(1M);
     }
 }

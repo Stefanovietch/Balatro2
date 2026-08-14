@@ -17,25 +17,26 @@ public class MrBonesPower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Counter;
-    
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new HealVar(50)
     ];
 
     public override bool ShouldDieLate(Creature creature)
     {
-        return creature != this.Owner;
+        return creature != Owner;
     }
-    
+
     public override async Task AfterPreventingDeath(Creature creature)
     {
-        this.Flash();
+        Flash();
         await PowerCmd.Decrement(this);
-        await CreatureCmd.Heal(creature, Math.Max(1M, creature.MaxHp * (this.DynamicVars.Heal.BaseValue / 100M)));
+        await CreatureCmd.Heal(creature, Math.Max(1M, creature.MaxHp * (DynamicVars.Heal.BaseValue / 100M)));
 
-        if (this.Owner.Player == null) return;
-        var mrBonesCards = PileType.Deck.GetPile(this.Owner.Player).Cards.Where(c => c is MrBones).ToList();
-        var unUpgradedMrBones =  mrBonesCards.Where(c => !c.IsUpgraded).ToList();
+        if (Owner.Player == null) return;
+        var mrBonesCards = PileType.Deck.GetPile(Owner.Player).Cards.Where(c => c is MrBones).ToList();
+        var unUpgradedMrBones = mrBonesCards.Where(c => !c.IsUpgraded).ToList();
         var mrBonesCard = unUpgradedMrBones.Count != 0 ? unUpgradedMrBones.First() : mrBonesCards.FirstOrDefault();
         if (mrBonesCard != null) await CardPileCmd.RemoveFromDeck(mrBonesCard);
     }

@@ -12,15 +12,15 @@ public class Swashbuckler() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    private Decimal _extraDamageFromDraw;
-    
-    private Decimal ExtraDamageFromDraw
+    private decimal _extraDamageFromDraw;
+
+    private decimal ExtraDamageFromDraw
     {
-        get => this._extraDamageFromDraw;
+        get => _extraDamageFromDraw;
         set
         {
-            this.AssertMutable();
-            this._extraDamageFromDraw = value;
+            AssertMutable();
+            _extraDamageFromDraw = value;
         }
     }
 
@@ -36,29 +36,28 @@ public class Swashbuckler() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
-
     }
 
     public override Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        this.DynamicVars.Damage.BaseValue += card.EnergyCost.GetAmountToSpend();
-        this.ExtraDamageFromDraw += card.EnergyCost.GetAmountToSpend();
+        DynamicVars.Damage.BaseValue += card.EnergyCost.GetAmountToSpend();
+        ExtraDamageFromDraw += card.EnergyCost.GetAmountToSpend();
         return base.AfterCardDrawn(choiceContext, card, fromHandDraw);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(3);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
-    
+
     protected override void AfterDowngraded()
     {
         base.AfterDowngraded();
-        DamageVar damage = this.DynamicVars.Damage;
-        damage.BaseValue += this.ExtraDamageFromDraw;
+        var damage = DynamicVars.Damage;
+        damage.BaseValue += ExtraDamageFromDraw;
     }
 }

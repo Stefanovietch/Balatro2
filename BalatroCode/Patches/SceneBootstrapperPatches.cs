@@ -12,7 +12,7 @@ public class SceneBootstrapperPatches
     {
         public static bool Prefix(Character.Balatro __instance, ref IEnumerable<RelicModel> __result)
         {
-            RelicModel relic = MainFile.GetRelic(BalatroConfig.SelectedDeck);
+            var relic = MainFile.GetRelic(BalatroConfig.SelectedDeck);
 
             __result = new List<RelicModel>
             {

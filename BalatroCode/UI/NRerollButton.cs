@@ -9,7 +9,6 @@ namespace Balatro.BalatroCode.UI;
 
 public partial class NRerollButton : NButton
 {
-
     private MerchantInventory? _inventory;
     public int RerollCost { get; set; } = 100;
 
@@ -21,6 +20,7 @@ public partial class NRerollButton : NButton
         _inventory = inventory;
         UpdateLabel();
     }
+
     protected override void ConnectSignals()
     {
         base.ConnectSignals();
@@ -34,7 +34,7 @@ public partial class NRerollButton : NButton
 
             var player = _inventory.Player;
             if (player.Gold < RerollCost) return;
-        
+
             await PlayerCmd.LoseGold(RerollCost, player, GoldLossType.Spent);
 
             // Repopulate each card entry

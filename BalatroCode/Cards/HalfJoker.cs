@@ -11,7 +11,8 @@ public class HalfJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(15, ValueProp.Move)
     ];
 
@@ -19,9 +20,9 @@ public class HalfJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (PileType.Hand.GetPile(this.Owner).Cards.Count > 2) return;
+        if (PileType.Hand.GetPile(Owner).Cards.Count > 2) return;
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
@@ -29,8 +30,8 @@ public class HalfJoker() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(5);
     }
 
-    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(this.Owner).Cards.Count <= 3;
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 3;
 }

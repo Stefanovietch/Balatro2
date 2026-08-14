@@ -18,13 +18,14 @@ public class InvisibleJoker() : BalatroCard(3,
     [SavedProperty]
     public int Counter
     {
-        get => this._counter;
+        get => _counter;
         set
         {
-            this.AssertMutable();
-            this._counter = value;
+            AssertMutable();
+            _counter = value;
         }
     }
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -38,17 +39,18 @@ public class InvisibleJoker() : BalatroCard(3,
         Counter++;
         if (Counter >= 2)
         {
-            CardModel? newCard = this.Owner.PlayerRng.Transformations.NextItem(PileType.Deck.GetPile(this.Owner).Cards.Where(c => c.Id != this.Id));
+            var newCard =
+                Owner.PlayerRng.Transformations.NextItem(PileType.Deck.GetPile(Owner).Cards.Where(c => c.Id != Id));
             if (newCard == null) return;
             newCard = newCard.CreateClone();
             newCard.EnergyCost.SetCustomBaseCost(0);
-            CardModel thisCard = PileType.Deck.GetPile(this.Owner).Cards.Single(c => c.Id == this.Id);
+            var thisCard = PileType.Deck.GetPile(Owner).Cards.Single(c => c.Id == Id);
             await CardCmd.Transform(thisCard, newCard);
         }
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

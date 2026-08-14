@@ -7,6 +7,4 @@ public class HighStakes() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
-
-    
 }

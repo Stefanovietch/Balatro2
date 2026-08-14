@@ -13,7 +13,8 @@ public class Vagabond() : BalatroCard(1,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(1)
     ];
 
@@ -23,13 +24,16 @@ public class Vagabond() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        if (this.Owner.Character is not Character.Balatro balatro || this.Owner.PlayerCombatState == null) return;
-        if (Character.Balatro.CombatGoldEarned.Get(this.Owner.PlayerCombatState) <= 100) await PotionCmd.TryToProcure(PotionFactory.CreateRandomPotionInCombat(this.Owner, this.Owner.RunState.Rng.CombatPotionGeneration).ToMutable(), this.Owner);
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        if (Owner.Character is not Character.Balatro balatro || Owner.PlayerCombatState == null) return;
+        if (Character.Balatro.CombatGoldEarned.Get(Owner.PlayerCombatState) <= 100)
+            await PotionCmd.TryToProcure(
+                PotionFactory.CreateRandomPotionInCombat(Owner, Owner.RunState.Rng.CombatPotionGeneration).ToMutable(),
+                Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

@@ -11,7 +11,8 @@ public class BlueJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         ..MakeCalculatedBlock(0, (card, target) => PileType.Discard.GetPile(card.Owner).Cards.Count)
     ];
 
@@ -19,11 +20,12 @@ public class BlueJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(this.Owner.Creature), ValueProp.Move, play);
+        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.CalculatedBlock.Calculate(Owner.Creature),
+            ValueProp.Move, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.CalculatedBlock.UpgradeValueBy(4);
+        DynamicVars.CalculatedBlock.UpgradeValueBy(4);
     }
 }

@@ -8,7 +8,7 @@ namespace Balatro.BalatroCode.Powers;
 
 public class RocketPower : TemporaryStrengthPower, ICustomPower
 {
-    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<Rocket>();
-    
+    public override AbstractModel OriginModel => (AbstractModel)ModelDb.Card<Rocket>();
+
     protected override bool IsPositive => false;
 }

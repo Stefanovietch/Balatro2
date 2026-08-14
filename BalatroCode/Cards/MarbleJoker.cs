@@ -17,15 +17,14 @@ public class MarbleJoker() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        IEnumerable<CardModel> inHand = await StoneCard.CreateInHand(this.Owner, 1, this.CombatState);
-        if (!this.IsUpgraded) return;
-        foreach (CardModel card in inHand)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        var inHand = await StoneCard.CreateInHand(Owner, 1, CombatState);
+        if (!IsUpgraded) return;
+        foreach (var card in inHand)
             CardCmd.Upgrade(card);
     }
 
     protected override void OnUpgrade()
     {
-
     }
 }

@@ -14,40 +14,43 @@ public class GlassJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AllEnemies)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(6, ValueProp.Move)
     ];
-    
+
     public override bool CanBeGeneratedInCombat => false;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        AttackCommand attackCommand = await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
-            .TargetingAllOpponents(this.CombatState)
+        ArgumentNullException.ThrowIfNull(CombatState);
+        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
         if (attackCommand.Results.SelectMany(r => r).Any(r =>
                 r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))
         {
             await CardPileCmd.RemoveFromCombat(this);
-            if (this.DeckVersion is not GlassJoker deckVersion)
+            if (DeckVersion is not GlassJoker deckVersion)
                 return;
             await CardPileCmd.RemoveFromDeck(deckVersion);
         }
     }
-    
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource != this || this.Owner.Character is not Character.Balatro balatro) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return 1M + Character.Balatro.CardsRemoved.Get(this.Owner) * 0.75M;
+        if (cardSource != this || Owner.Character is not Character.Balatro balatro)
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return 1M + Character.Balatro.CardsRemoved.Get(Owner) * 0.75M;
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

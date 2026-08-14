@@ -18,13 +18,14 @@ public class Drunkard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,0, 10), null, this)).ToList();
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 0, 10), null, this)).ToList();
         await CardCmd.DiscardAndDraw(choiceContext, cards, cards.Count);
         //await CardPileCmd.Draw(choiceContext, cards.Count, this.Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

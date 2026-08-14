@@ -17,24 +17,25 @@ public class TheFlintPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheFlint;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return;
         foreach (var player in players)
         {
             if (player.Character is not Character.Balatro) continue;
-            await PowerCmd.Apply<FlintVulnerablePower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
+            await PowerCmd.Apply<FlintVulnerablePower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null,
+                null);
             await PowerCmd.Apply<FlintWeakPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
-        } 
+        }
     }
-    
+
     public override async Task AfterRemoved(Creature oldOwner)
     {
-        var players = this.Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.RunState.Players;
         if (players is null) return;
         foreach (var player in players)
         {

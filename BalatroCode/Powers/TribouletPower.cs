@@ -15,17 +15,19 @@ public class TribouletPower() : BalatroPower
     public override PowerStackType StackType =>
         PowerStackType.Single;
 
-    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props, CardModel? cardSource,
+    public override decimal ModifyBlockMultiplicative(Creature target, decimal block, ValueProp props,
+        CardModel? cardSource,
         CardPlay? cardPlay)
     {
-        if (cardSource?.Owner == this.Owner.Player && cardSource?.EnergyCost.GetAmountToSpend() == 2) return 2;
+        if (cardSource?.Owner == Owner.Player && cardSource?.EnergyCost.GetAmountToSpend() == 2) return 2;
         return base.ModifyBlockMultiplicative(target, block, props, cardSource, cardPlay);
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource?.Owner == this.Owner.Player && cardSource?.EnergyCost.GetAmountToSpend() == 2) return 2;
+        if (cardSource?.Owner == Owner.Player && cardSource?.EnergyCost.GetAmountToSpend() == 2) return 2;
         return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
     }
 }

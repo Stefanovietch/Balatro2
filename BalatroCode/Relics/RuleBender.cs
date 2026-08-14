@@ -19,13 +19,13 @@ public class RuleBender() : BalatroRelic
     {
         await CreatureCmd.SetMaxAndCurrentHp(creature, creature.MaxHp * 2);
     }
-    
+
     public override async Task AfterDamageGiven(PlayerChoiceContext choiceContext, Creature? dealer,
         DamageResult result, ValueProp props,
         Creature target, CardModel? cardSource)
     {
-        if (dealer == null || dealer != this.Owner.Creature) return;
+        if (dealer == null || dealer != Owner.Creature) return;
         if (cardSource is not { Type: CardType.Attack }) return;
-        await CreatureCmd.GainBlock(this.Owner.Creature, (decimal) result.TotalDamage, ValueProp.Move, null);
+        await CreatureCmd.GainBlock(Owner.Creature, (decimal)result.TotalDamage, ValueProp.Move, null);
     }
 }

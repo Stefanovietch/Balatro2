@@ -8,7 +8,7 @@ namespace Balatro.BalatroCode.Powers;
 
 public class EBallPower : TemporaryStrengthPower, ICustomPower
 {
-    public override AbstractModel OriginModel => (AbstractModel) ModelDb.Card<EBall>();
-    
+    public override AbstractModel OriginModel => (AbstractModel)ModelDb.Card<EBall>();
+
     protected override bool IsPositive => false;
 }

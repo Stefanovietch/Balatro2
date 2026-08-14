@@ -12,11 +12,13 @@ public class JollyJoker() : BalatroCard(1,
     CardType.Attack, CardRarity.Basic,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(6, ValueProp.Move)
     ];
 
-    protected override HashSet<CardTag> CanonicalTags => [
+    protected override HashSet<CardTag> CanonicalTags =>
+    [
         CardTag.Strike
     ];
 
@@ -25,11 +27,12 @@ public class JollyJoker() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target).WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(3);
+        DynamicVars.Damage.UpgradeValueBy(3);
     }
 }

@@ -12,22 +12,27 @@ public class OddTodd() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new BlockVar(4, ValueProp.Move),
         new CalculationBaseVar(0M),
         new CalculationExtraVar(1M),
-        new CalculatedVar("OddCostPlayed").WithMultiplier((card, _) => CombatManager.Instance.History.CardPlaysFinished.Count(c => c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 1 && c.CardPlay.Card.Owner == card.Owner))
+        new CalculatedVar("OddCostPlayed").WithMultiplier((card, _) =>
+            CombatManager.Instance.History.CardPlaysFinished.Count(c =>
+                c.HappenedThisTurn(card.CombatState) && c.CardPlay.Card.EnergyCost.Canonical % 2 == 1 &&
+                c.CardPlay.Card.Owner == card.Owner))
     ];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        for (var _ = 0; _ < (int)((CalculatedVar)base.DynamicVars["OddCostPlayed"]).Calculate(play.Target); _++) await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.Block, play);
+        for (var _ = 0; _ < (int)((CalculatedVar)DynamicVars["OddCostPlayed"]).Calculate(play.Target); _++)
+            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Block.UpgradeValueBy(1);
+        DynamicVars.Block.UpgradeValueBy(1);
     }
 }

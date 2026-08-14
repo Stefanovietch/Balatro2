@@ -14,7 +14,8 @@ public class GiftCard() : BalatroCard(1,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new PowerVar<ArtifactPower>(1),
         new PowerVar<GiftCardPower>(1)
     ];
@@ -25,13 +26,14 @@ public class GiftCard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<ArtifactPower>(choiceContext, this.Owner.Creature, this.DynamicVars["ArtifactPower"].BaseValue, this.Owner.Creature, this);
-        await PowerCmd.Apply<GiftCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars["GiftCardPower"].BaseValue, this.Owner.Creature, this);
+        await PowerCmd.Apply<ArtifactPower>(choiceContext, Owner.Creature, DynamicVars["ArtifactPower"].BaseValue,
+            Owner.Creature, this);
+        await PowerCmd.Apply<GiftCardPower>(choiceContext, Owner.Creature, DynamicVars["GiftCardPower"].BaseValue,
+            Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["ArtifactPower"].UpgradeValueBy(1);
+        DynamicVars["ArtifactPower"].UpgradeValueBy(1);
     }
-    
 }

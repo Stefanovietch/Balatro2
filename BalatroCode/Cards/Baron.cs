@@ -14,7 +14,8 @@ public class Baron() : BalatroCard(2,
     CardType.Attack, CardRarity.Rare,
     TargetType.AnyEnemy)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(6, ValueProp.Move)
     ];
 
@@ -23,21 +24,23 @@ public class Baron() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(this.DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource)
     {
         if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-        return (decimal) Math.Pow(1.5, PileType.Hand.GetPile(this.Owner).Cards.Count(c => c.Type == CardType.Attack && !c.Equals(this)));
+        return (decimal)Math.Pow(1.5,
+            PileType.Hand.GetPile(Owner).Cards.Count(c => c.Type == CardType.Attack && !c.Equals(this)));
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(2);
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

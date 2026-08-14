@@ -10,10 +10,11 @@ public class ShouldDiscardPatches
     [HarmonyPatch(typeof(CardCmd), nameof(CardCmd.DiscardAndDraw))]
     public static class DiscardAndDrawPatch
     {
-        static void Prefix(ref IEnumerable<CardModel> cardsToDiscard)
+        private static void Prefix(ref IEnumerable<CardModel> cardsToDiscard)
         {
             cardsToDiscard = cardsToDiscard.Where(card =>
-                card.CombatState != null && card.CombatState.Creatures.All(c => c.Powers.OfType<BalatroPower>().All(p => p.ShouldDiscard(card)))
+                card.CombatState != null && card.CombatState.Creatures.All(c =>
+                    c.Powers.OfType<BalatroPower>().All(p => p.ShouldDiscard(card)))
             ).ToList();
         }
     }

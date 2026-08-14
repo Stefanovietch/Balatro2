@@ -17,14 +17,14 @@ public class SockAndBuskin() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        ArgumentNullException.ThrowIfNull(this.CombatState);
-        await Hook.AfterPlayerTurnStart(this.CombatState, choiceContext, this.Owner);
-        await Hook.BeforeSideTurnStart(this.CombatState, CombatSide.Player, [this.Owner.Creature]);
-        await Hook.AfterSideTurnStart(this.CombatState, CombatSide.Player, [this.Owner.Creature]);
+        ArgumentNullException.ThrowIfNull(CombatState);
+        await Hook.AfterPlayerTurnStart(CombatState, choiceContext, Owner);
+        await Hook.BeforeSideTurnStart(CombatState, CombatSide.Player, [Owner.Creature]);
+        await Hook.AfterSideTurnStart(CombatState, CombatSide.Player, [Owner.Creature]);
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
 }

@@ -11,8 +11,9 @@ public class Bull() : BalatroCard(2,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("blockPerGold", 10),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("blockPerGold", 10),
         ..MakeCalculatedBlock(0, (card, target) => card.Owner.Gold / card.DynamicVars["blockPerGold"].BaseValue)
     ];
 
@@ -20,11 +21,12 @@ public class Bull() : BalatroCard(2,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        Decimal num = await CreatureCmd.GainBlock(this.Owner.Creature, this.DynamicVars.CalculatedBlock.Calculate(this.Owner.Creature),ValueProp.Move, play);
+        var num = await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.CalculatedBlock.Calculate(Owner.Creature),
+            ValueProp.Move, play);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars["blockPerGold"].UpgradeValueBy(-2);
+        DynamicVars["blockPerGold"].UpgradeValueBy(-2);
     }
 }

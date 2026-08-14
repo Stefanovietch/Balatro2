@@ -17,18 +17,19 @@ public class Brainstorm() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (this.Owner.PlayerCombatState?.PlayPile.Cards.Count > 1)
+        if (Owner.PlayerCombatState?.PlayPile.Cards.Count > 1)
         {
-            var card = CombatManager.Instance.History.CardPlaysFinished.FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
+            var card = CombatManager.Instance.History.CardPlaysFinished
+                .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
             if (card != null) await CardCmd.AutoPlay(choiceContext, card, null);
         }
     }
 
     protected override void OnUpgrade()
     {
-        this.EnergyCost.UpgradeBy(-1);
+        EnergyCost.UpgradeBy(-1);
     }
-    
+
     protected override bool IsPlayable => CanPlay();
 
     protected override bool ShouldGlowGoldInternal => CanPlay();

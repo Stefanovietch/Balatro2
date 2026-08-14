@@ -16,17 +16,19 @@ public class TheClubPower() : BalatroPower, IBlindPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-    
+
     public BlindType BlindType => BlindType.TheClub;
 
-    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    public override async Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
+        IEnumerable<Creature> participants)
     {
         var enumerable = participants.ToList();
         if (side != CombatSide.Player) return;
-        foreach (var p in enumerable.Where(c => c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
-        {
-            if (p.Player != null) CardCmd.PreviewCardPileAdd(
-                    await CardPileCmd.AddGeneratedCardToCombat(this.CombatState.CreateCard<Wound>(p.Player), PileType.Draw, null));
-        }
+        foreach (var p in enumerable.Where(c => c is
+                     { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
+            if (p.Player != null)
+                CardCmd.PreviewCardPileAdd(
+                    await CardPileCmd.AddGeneratedCardToCombat(CombatState.CreateCard<Wound>(p.Player), PileType.Draw,
+                        null));
     }
 }

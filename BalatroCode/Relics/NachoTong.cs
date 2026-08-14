@@ -10,11 +10,13 @@ public class NachoTong() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Event;
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new EnergyVar(1)
     ];
+
     public override decimal ModifyMaxEnergy(Player player, decimal amount)
     {
-        return player != this.Owner ? amount : amount + this.DynamicVars.Energy.BaseValue;
+        return player != Owner ? amount : amount + DynamicVars.Energy.BaseValue;
     }
 }

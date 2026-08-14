@@ -7,5 +7,4 @@ public class RerollGlut() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Shop;
-    
 }

@@ -12,7 +12,8 @@ public class FacelessJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new CardsVar(3),
         new GoldVar(50)
     ];
@@ -21,14 +22,16 @@ public class FacelessJoker() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, this.DynamicVars.Cards.BaseValue, this.Owner);
-        List<CardModel> cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, this.Owner, new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt,2), null, this)).ToList();
+        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
+        var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, Owner,
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();
         await CardCmd.Discard(choiceContext, cards);
-        if (cards.Count(c => c.Type == CardType.Power) == 2) await PlayerCmd.GainGold(this.DynamicVars.Gold.BaseValue, this.Owner);
+        if (cards.Count(c => c.Type == CardType.Power) == 2)
+            await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Cards.UpgradeValueBy(1);
+        DynamicVars.Cards.UpgradeValueBy(1);
     }
 }

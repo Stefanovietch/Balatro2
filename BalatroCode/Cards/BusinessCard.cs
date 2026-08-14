@@ -13,8 +13,9 @@ public class BusinessCard() : BalatroCard(1,
     CardType.Power, CardRarity.Common,
     TargetType.Self), IChance
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("Chance", 4),
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new("Chance", 4),
         new DisplayVar<BusinessCard>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString()),
         new PowerVar<BusinessCardPower>(20)
@@ -24,11 +25,12 @@ public class BusinessCard() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<BusinessCardPower>(choiceContext, this.Owner.Creature, this.DynamicVars.Power<BusinessCardPower>().BaseValue, this.Owner.Creature, this); 
+        await PowerCmd.Apply<BusinessCardPower>(choiceContext, Owner.Creature,
+            DynamicVars.Power<BusinessCardPower>().BaseValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Power<BusinessCardPower>().UpgradeValueBy(5);
+        DynamicVars.Power<BusinessCardPower>().UpgradeValueBy(5);
     }
 }

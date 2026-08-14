@@ -24,13 +24,13 @@ public class MerchantPatches
             try
             {
                 if (!__instance.Player.Relics.Contains(ModelDb.Relic<OverstockPlus>())) return;
-                RelicRarity[] relicRarityArray = new RelicRarity[3]
+                var relicRarityArray = new RelicRarity[3]
                 {
                     RelicFactory.RollRarity(__instance.Player),
                     RelicFactory.RollRarity(__instance.Player),
                     RelicRarity.Shop
                 };
-                foreach (RelicRarity rarity in relicRarityArray)
+                foreach (var rarity in relicRarityArray)
                     __instance.AddRelicEntry(new MerchantRelicEntry(rarity, __instance.Player));
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ public class MerchantPatches
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(NMerchantInventory), "Initialize")]
     public static class MerchantRerollPatch
     {
@@ -66,7 +66,7 @@ public class MerchantPatches
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(MerchantInventory), "PopulatePotionEntries")]
     public static class MerchantCharacterCardPatch
     {
@@ -76,11 +76,12 @@ public class MerchantPatches
             try
             {
                 IReadOnlyList<MerchantPotionEntry> newPotionEntries = new List<MerchantPotionEntry>();
-                foreach (PotionModel potionModel in PotionFactory.CreateRandomPotionsOutOfCombat(__instance.Player, 3, __instance.Player.PlayerRng.Shops))
+                foreach (var potionModel in PotionFactory.CreateRandomPotionsOutOfCombat(__instance.Player, 3,
+                             __instance.Player.PlayerRng.Shops))
                     newPotionEntries.AddItem(new MerchantPotionEntry(potionModel.ToMutable(), __instance.Player));
-                
+
                 var method = AccessTools.Method(typeof(MerchantInventory), "PopulatePotionEntries");
-                method?.Invoke(__instance, new object[] { newPotionEntries , false });
+                method?.Invoke(__instance, new object[] { newPotionEntries, false });
             }
             catch (Exception ex)
             {
