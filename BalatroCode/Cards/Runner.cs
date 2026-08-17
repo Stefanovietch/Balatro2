@@ -86,6 +86,6 @@ public class Runner() : BalatroCard(1,
 
     private void UpdateBlock()
     {
-        CurrentBlock = 1 + IncreasedBlock;
+        CurrentBlock = 4 + IncreasedBlock;
     }
 }

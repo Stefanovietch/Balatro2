@@ -21,7 +21,12 @@ public class Mime() : BalatroCard(3,
         ArgumentNullException.ThrowIfNull(CombatState);
         var cards = PileType.Hand.GetPile(Owner);
         cards.RandomizeOrderInternal(Owner, Owner.RunState.Rng.CombatCardSelection, (CombatState)CombatState);
-        foreach (var card in cards.Cards.ToList()) await CardCmd.AutoPlay(choiceContext, card, null);
+        foreach (var card in cards.Cards.ToList())
+        {
+            card.ExhaustOnNextPlay = true;
+            await CardCmd.AutoPlay(choiceContext, card, null);
+            //await CardCmd.Exhaust(choiceContext, card);
+        }
     }
 
     protected override void OnUpgrade()

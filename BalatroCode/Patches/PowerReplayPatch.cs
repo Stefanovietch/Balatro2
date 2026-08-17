@@ -13,7 +13,7 @@ public static class PowerReplayPatch
     {
         if (!__instance.IsMutable) return;
         if (__instance.Owner is not { } owner) return;
-        if (PileType.Play.GetPile(__instance.Owner).Cards.LastOrDefault() is (Blueprint or Brainstorm) && __result == null)
+        if (PileType.Play.GetPile(owner).Cards.LastOrDefault() is (Blueprint or Brainstorm) && __result == null)
         {
             __result = owner.Creature.CombatState;;
         }

@@ -65,7 +65,7 @@
 
   "BALATRO-SCARY_FACE_POWER.title": "Scary Face",
   "BALATRO-SCARY_FACE_POWER.description": "Whenever you play a Power, gain Block",
-  "BALATRO-SCARY_FACE_POWER.smartDescription": "Whenever you play a Power, gain {Amount} Block",
+  "BALATRO-SCARY_FACE_POWER.smartDescription": "Whenever you play a Power, gain [blue]{Amount}[/blue] Block",
   
   "BALATRO-SEEING_DOUBLE_POWER.title": "Seeing Double",
   "BALATRO-SEEING_DOUBLE_POWER.description": "Deal double damage",
@@ -77,11 +77,11 @@
 
   "BALATRO-TO_DO_LIST_POWER.title": "To Do List",
   "BALATRO-TO_DO_LIST_POWER.description": "Gain Gold whenever a (Skill|Attack|Power) is played. Changes at the end of each turn.",
-  "BALATRO-TO_DO_LIST_POWER.smartDescription": "Gain {Amount} Gold whenever a {Type} is played. Changes at the end of each turn.",
+  "BALATRO-TO_DO_LIST_POWER.smartDescription": "Gain [blue]{Amount}[/blue] Gold whenever a {Type} is played. Changes at the end of each turn.",
   
   "BALATRO-TRADING_CARD_POWER.title": "Trading Card",
   "BALATRO-TRADING_CARD_POWER.description": "At the start of your turn, Exhaust a card and gain Gold.",
-  "BALATRO-TRADING_CARD_POWER.smartDescription": "At the start of your turn, Exhaust a card and gain {Amount} Gold.",
+  "BALATRO-TRADING_CARD_POWER.smartDescription": "At the start of your turn, Exhaust a card and gain [blue]{Amount}[/blue] Gold.",
   
   "BALATRO-TRIBOULET_POWER.title": "Triboulet",
   "BALATRO-TRIBOULET_POWER.description": "Double the damage and Block of all 2 Cost cards.",
@@ -89,7 +89,7 @@
 
   "BALATRO-WALKIE_TALKIE_POWER.title": "WalkieTalkiePower",
   "BALATRO-WALKIE_TALKIE_POWER.description": "When playing a cost 1 Card gain Block and deal damage to a random enemy.",
-  "BALATRO-WALKIE_TALKIE_POWER.smartDescription": "When playing a cost 1 Card gain {Amount} Block and deal {Amount} damage to a random enemy.",
+  "BALATRO-WALKIE_TALKIE_POWER.smartDescription": "When playing a cost 1 Card gain [blue]{Amount}[/blue] Block and deal [blue]{Amount}[/blue] damage to a random enemy.",
   
   "BALATRO-THE_ARM_POWER.title": "The Arm",
   "BALATRO-THE_ARM_POWER.description": "Your upgraded cards cost 1 more this fight.",
@@ -113,7 +113,7 @@
 
   "BALATRO-THE_GOAD_POWER.title": "The Goad",
   "BALATRO-THE_GOAD_POWER.description": "At the end of your turn, lose 2 HP.",
-  "BALATRO-THE_GOAD_POWER.smartDescription": "At the end of your turn, lose 2 HP.",
+  "BALATRO-THE_GOAD_POWER.smartDescription": "At the end of your turn, lose [blue]2[/blue] HP.",
 
   "BALATRO-THE_HEAD_POWER.title": "The Head",
   "BALATRO-THE_HEAD_POWER.description": "You take 10% more damage for each card you played this turn.",
@@ -121,19 +121,19 @@
 
   "BALATRO-THE_HOOK_POWER.title": "The Hook",
   "BALATRO-THE_HOOK_POWER.description": "Start of your turn, discard 2 cards.",
-  "BALATRO-THE_HOOK_POWER.smartDescription": "Start of your turn, discard 2 cards.",
+  "BALATRO-THE_HOOK_POWER.smartDescription": "Start of your turn, discard [blue]2[/blue] cards.",
 
   "BALATRO-THE_HOUSE_POWER.title": "The House",
   "BALATRO-THE_HOUSE_POWER.description": "All cards in your first hand cost 3 for the turn.",
-  "BALATRO-THE_HOUSE_POWER.smartDescription": "All cards in your first hand cost 3 for the turn.",
+  "BALATRO-THE_HOUSE_POWER.smartDescription": "All cards in your first hand cost [blue]3[/blue] for the turn.",
 
   "BALATRO-THE_MANACLE_POWER.title": "The Manacle",
   "BALATRO-THE_MANACLE_POWER.description": "You draw 1 card less each turn.",
-  "BALATRO-THE_MANACLE_POWER.smartDescription": "You draw 1 card less each turn.",
+  "BALATRO-THE_MANACLE_POWER.smartDescription": "You draw [blue]1[/blue] card less each turn.",
 
   "BALATRO-THE_MARK_POWER.title": "The Mark",
   "BALATRO-THE_MARK_POWER.description": "All your Powers cost 3.",
-  "BALATRO-THE_MARK_POWER.smartDescription": "All your Powers cost 3.",
+  "BALATRO-THE_MARK_POWER.smartDescription": "All your Powers cost [blue]3[/blue].",
 
   "BALATRO-THE_MOUTH_POWER.title": "The Mouth",
   "BALATRO-THE_MOUTH_POWER.description": "You can only play two card types each turn.",
@@ -141,11 +141,11 @@
 
   "BALATRO-THE_NEEDLE_POWER.title": "The Needle",
   "BALATRO-THE_NEEDLE_POWER.description": "You die after 10 turns.",
-  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {DeathCounter} turns.",
+  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in [blue]{DeathCounter}[/blue] turns.",
 
   "BALATRO-THE_OX_POWER.title": "The Ox",
   "BALATRO-THE_OX_POWER.description": "At the start of your turn, makes one card in hand set your Gold to 0.",
-  "BALATRO-THE_OX_POWER.smartDescription": "At the start of your turn, makes one card in hand set your Gold to 0.",
+  "BALATRO-THE_OX_POWER.smartDescription": "At the start of your turn, makes one card in hand set your Gold to [blue]0[/blue].",
 
   "BALATRO-THE_PLANT_POWER.title": "The Plant",
   "BALATRO-THE_PLANT_POWER.description": "All Powers have ethereal.",
@@ -153,7 +153,7 @@
 
   "BALATRO-THE_PSYCHIC_POWER.title": "The Psychic",
   "BALATRO-THE_PSYCHIC_POWER.description": "Can't play more than 5 cards each turn.",
-  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {CardCounter} cards each turn.",
+  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than [blue]{CardCounter}[/blue] cards each turn.",
 
   "BALATRO-THE_SERPENT_POWER.title": "The Serpent",
   "BALATRO-THE_SERPENT_POWER.description": "Cannot be Debuffed.",
@@ -161,7 +161,7 @@
 
   "BALATRO-THE_TOOTH_POWER.title": "The Tooth",
   "BALATRO-THE_TOOTH_POWER.description": "Whenever you play a card, lose 10 Gold.",
-  "BALATRO-THE_TOOTH_POWER.smartDescription": "Whenever you play a card, lose 10 Gold.",
+  "BALATRO-THE_TOOTH_POWER.smartDescription": "Whenever you play a card, lose [blue]10[/blue] Gold.",
 
   "BALATRO-THE_WALL_POWER.title": "The Wall",
   "BALATRO-THE_WALL_POWER.description": "Has double the Health.",
@@ -173,11 +173,11 @@
 
   "BALATRO-THE_WHEEL_POWER.title": "The Wheel",
   "BALATRO-THE_WHEEL_POWER.description": "When drawing a card have 1 in 7 Chance to set its cost to 3 for the turn.",
-  "BALATRO-THE_WHEEL_POWER.smartDescription": "When drawing a card have {Numerator} in 7 Chance to set its cost to 3 for the turn.",
+  "BALATRO-THE_WHEEL_POWER.smartDescription": "When drawing a card have [blue]{Numerator}[/blue] in [blue]7[/blue] Chance to set its cost to 3 for the turn.",
 
   "BALATRO-THE_WINDOW_POWER.title": "The Window",
   "BALATRO-THE_WINDOW_POWER.description": "Has 4 Thorns.",
-  "BALATRO-THE_WINDOW_POWER.smartDescription": "Has 4 Thorns.",
+  "BALATRO-THE_WINDOW_POWER.smartDescription": "Has [blue]4[/blue] Thorns.",
   
   "BALATRO-AMBER_ACORN_POWER.title": "Amber Acorn",
   "BALATRO-AMBER_ACORN_POWER.description": "At the end of your turn, shuffle your discard pile into your draw pile.",

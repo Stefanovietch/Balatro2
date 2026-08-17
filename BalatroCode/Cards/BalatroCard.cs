@@ -28,7 +28,7 @@ public abstract class BalatroCard(int cost, CardType type, CardRarity rarity, Ta
 
     public override void AfterCreated()
     {
-        if (this is IRandomType randomType) randomType.SetRandomType();
+        if (this is IRandomType randomType && randomType.CurrentType == CardType.None) randomType.SetRandomType();
         base.AfterCreated();
     }
 }

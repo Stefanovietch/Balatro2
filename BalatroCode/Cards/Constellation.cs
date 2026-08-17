@@ -35,7 +35,7 @@ public class Constellation() : BalatroCard(1,
         Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource != null && !cardSource.Equals(this)) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource == null || !cardSource.Equals(this)) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
         return 0.1M * CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.IsUpgraded) + 1M;
     }
 
