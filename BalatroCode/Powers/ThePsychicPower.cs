@@ -1,10 +1,12 @@
 using Balatro.BalatroCode.Powers;
+using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
@@ -18,6 +20,11 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
         PowerStackType.Counter;
 
     public BlindType BlindType => BlindType.ThePsychic;
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DisplayVar<ThePsychicPower>("CardCounter", card => (card.Amount - 1).ToString()),
+    ];
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {

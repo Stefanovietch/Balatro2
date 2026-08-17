@@ -46,6 +46,6 @@ public class Blackboard() : BalatroCard(1,
     private bool AllUncommonOrCommon()
     {
         return PileType.Hand.GetPile(Owner).Cards.Count(c =>
-            c.Rarity is not CardRarity.Common and not CardRarity.Uncommon) == 0;
+            c.Rarity is not (CardRarity.Common or CardRarity.Uncommon)) == 0;
     }
 }

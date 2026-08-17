@@ -46,8 +46,12 @@ public partial class MainFile : Node
     {
     }
 
+    private static IRunState? _activeCombatRunState;
     private static IEnumerable<AbstractModel> GetRunStateHooks(RunState runState)
     {
+        if (ReferenceEquals(runState, _activeCombatRunState))
+            yield break;
+        
         foreach (var player in runState.Players)
             if (player.Character is Character.Balatro balatro)
                 yield return balatro;
@@ -56,6 +60,15 @@ public partial class MainFile : Node
     private static IEnumerable<AbstractModel> GetCombatStateHooks(
         CombatState combatState)
     {
+        if (!combatState.IsLiveCombat())
+        {
+            if (ReferenceEquals(_activeCombatRunState, combatState.RunState))
+                _activeCombatRunState = null;
+            yield break;
+        }
+        
+        _activeCombatRunState = combatState.RunState;
+        
         foreach (var player in combatState.Players)
             if (player.Character is Character.Balatro balatro)
                 yield return balatro;

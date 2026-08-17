@@ -1,7 +1,10 @@
-﻿using Balatro.BalatroCode.Powers;
+﻿using System.Globalization;
+using Balatro.BalatroCode.Powers;
+using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -14,7 +17,12 @@ public class BaseballCardPower() : BalatroPower
         PowerType.Buff;
 
     public override PowerStackType StackType =>
-        PowerStackType.None;
+        PowerStackType.Counter;
+    
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DisplayVar<BaseballCardPower>("Multiplier", card => (card.Amount/10f).ToString(CultureInfo.InvariantCulture)),
+    ];
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer,
@@ -22,10 +30,6 @@ public class BaseballCardPower() : BalatroPower
     {
         if (cardSource?.Rarity != CardRarity.Uncommon)
             return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
-
-        var multiplier = (decimal)(Amount * 0.1);
-        return base.ModifyDamageMultiplicative(target, amount * multiplier, props, dealer, cardSource);
+        return (decimal)(Amount * 0.1);
     }
-
-    public override int DisplayAmount => (int)(Amount * 0.1);
 }

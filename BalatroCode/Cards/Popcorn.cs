@@ -19,7 +19,7 @@ public class Popcorn() : BalatroCard(1,
     [
         new CalculationBaseVar(20M),
         new ExtraDamageVar(3),
-        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((c, _) => -c.Owner.PlayerCombatState?.TurnNumber ?? 0)
+        new CalculatedDamageVar(ValueProp.Move).WithMultiplier((c, _) => -c.Owner.PlayerCombatState?.TurnNumber+1 ?? 0)
     ];
 
     protected override async Task OnPlay(

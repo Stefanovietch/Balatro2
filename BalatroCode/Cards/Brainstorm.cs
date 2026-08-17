@@ -17,12 +17,14 @@ public class Brainstorm() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (Owner.PlayerCombatState?.PlayPile.Cards.Count > 1)
-        {
-            var card = CombatManager.Instance.History.CardPlaysFinished
-                .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
-            if (card != null) await CardCmd.AutoPlay(choiceContext, card, null);
-        }
+        var card = CombatManager.Instance.History.CardPlaysFinished
+            .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
+        if (card == null) return;
+        var model = choiceContext.LastInvolvedModel;
+        if (model is null) return;
+        choiceContext.PopModel(model);
+        await CardCmd.AutoPlay(choiceContext, card, null);
+        choiceContext.PushModel(model);
     }
 
     protected override void OnUpgrade()
@@ -36,6 +38,6 @@ public class Brainstorm() : BalatroCard(1,
 
     private new bool CanPlay()
     {
-        return CombatManager.Instance.History.CardPlaysFinished.FirstOrDefault(c => c.HappenedThisTurn(null)) != null;
+        return CombatManager.Instance.History.CardPlaysFinished.FirstOrDefault(c => c.HappenedThisTurn(this.CombatState)) != null;
     }
 }

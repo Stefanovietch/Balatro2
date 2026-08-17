@@ -9,7 +9,7 @@
 
   "BALATRO-BASEBALL_CARD_POWER.title": "Baseball Card",
   "BALATRO-BASEBALL_CARD_POWER.description": "All [gold]Uncommon[/gold] card's damage is increased.",
-  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [gold]Uncommon[/gold] card's damage is increased by x[blue]{Amount}[/blue].",
+  "BALATRO-BASEBALL_CARD_POWER.smartDescription": "All [gold]Uncommon[/gold] card's damage is increased by x[blue]{Multiplier}[/blue].",
   
   "BALATRO-BUSINESS_CARD_POWER.title": "Business Card",
   "BALATRO-BUSINESS_CARD_POWER.description": "Whenever you play a Power, you have a Chance to gain Gold.",
@@ -141,7 +141,7 @@
 
   "BALATRO-THE_NEEDLE_POWER.title": "The Needle",
   "BALATRO-THE_NEEDLE_POWER.description": "You die after 10 turns.",
-  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {Amount - 1} turns.",
+  "BALATRO-THE_NEEDLE_POWER.smartDescription": "You die in {DeathCounter} turns.",
 
   "BALATRO-THE_OX_POWER.title": "The Ox",
   "BALATRO-THE_OX_POWER.description": "At the start of your turn, makes one card in hand set your Gold to 0.",
@@ -153,7 +153,7 @@
 
   "BALATRO-THE_PSYCHIC_POWER.title": "The Psychic",
   "BALATRO-THE_PSYCHIC_POWER.description": "Can't play more than 5 cards each turn.",
-  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {Amount - 1} cards each turn.",
+  "BALATRO-THE_PSYCHIC_POWER.smartDescription": "Can't play more than {CardCounter} cards each turn.",
 
   "BALATRO-THE_SERPENT_POWER.title": "The Serpent",
   "BALATRO-THE_SERPENT_POWER.description": "Cannot be Debuffed.",

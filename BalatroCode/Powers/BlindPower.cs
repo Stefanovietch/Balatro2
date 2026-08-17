@@ -1,6 +1,7 @@
 using Balatro.BalatroCode.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Extensions;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Random;
 
 namespace Balatro.BalatroCode.Powers;
@@ -83,34 +84,34 @@ public static class BlindMethods
 
     private static readonly Dictionary<BlindType, Func<BalatroPower>> Factory = new()
     {
-        [BlindType.TheArm] = () => new TheArmPower(),
-        [BlindType.TheClub] = () => new TheClubPower(),
-        [BlindType.TheEye] = () => new TheEyePower(),
-        [BlindType.TheFish] = () => new TheFishPower(),
-        [BlindType.TheHook] = () => new TheHookPower(),
-        [BlindType.TheHouse] = () => new TheHousePower(),
-        [BlindType.TheOx] = () => new TheOxPower(),
-        [BlindType.ThePsychic] = () => new ThePsychicPower(),
-        [BlindType.TheWall] = () => new TheWallPower(),
-        [BlindType.TheWheel] = () => new TheWheelPower(),
-        [BlindType.TheWater] = () => new TheWaterPower(),
-        [BlindType.TheManacle] = () => new TheManaclePower(),
-        [BlindType.TheMouth] = () => new TheMouthPower(),
-        [BlindType.ThePlant] = () => new ThePlantPower(),
-        [BlindType.TheNeedle] = () => new TheNeedlePower(),
-        [BlindType.TheHead] = () => new TheHeadPower(),
-        [BlindType.TheTooth] = () => new TheToothPower(),
-        [BlindType.TheFlint] = () => new TheFlintPower(),
-        [BlindType.TheMark] = () => new TheMarkPower(),
-        [BlindType.TheGoad] = () => new TheGoadPower(),
-        [BlindType.TheSerpent] = () => new TheSerpentPower(),
-        [BlindType.TheWindow] = () => new TheWindowPower(),
+        [BlindType.TheArm] = ModelDb.Power<TheArmPower>,
+        [BlindType.TheClub] = ModelDb.Power<TheClubPower>,
+        [BlindType.TheEye] = ModelDb.Power<TheArmPower>,
+        [BlindType.TheFish] = ModelDb.Power<TheEyePower>,
+        [BlindType.TheHook] = ModelDb.Power<TheHookPower>,
+        [BlindType.TheHouse] = ModelDb.Power<TheHousePower>,
+        [BlindType.TheOx] = ModelDb.Power<TheOxPower>,
+        [BlindType.ThePsychic] = ModelDb.Power<ThePsychicPower>,
+        [BlindType.TheWall] = ModelDb.Power<TheWallPower>,
+        [BlindType.TheWheel] = ModelDb.Power<TheWheelPower>,
+        [BlindType.TheWater] = ModelDb.Power<TheWaterPower>,
+        [BlindType.TheManacle] = ModelDb.Power<TheManaclePower>,
+        [BlindType.TheMouth] = ModelDb.Power<TheMouthPower>,
+        [BlindType.ThePlant] = ModelDb.Power<ThePlantPower>,
+        [BlindType.TheNeedle] = ModelDb.Power<TheNeedlePower>,
+        [BlindType.TheHead] = ModelDb.Power<TheHeadPower>,
+        [BlindType.TheTooth] = ModelDb.Power<TheToothPower>,
+        [BlindType.TheFlint] = ModelDb.Power<TheFlintPower>,
+        [BlindType.TheMark] = ModelDb.Power<TheMarkPower>,
+        [BlindType.TheGoad] = ModelDb.Power<TheGoadPower>,
+        [BlindType.TheSerpent] = ModelDb.Power<TheSerpentPower>,
+        [BlindType.TheWindow] = ModelDb.Power<TheWindowPower>,
 
-        [BlindType.AmberAcorn] = () => new AmberAcornPower(),
-        [BlindType.VerdantLeaf] = () => new VerdantLeafPower(),
-        [BlindType.VioletVessel] = () => new VioletVesselPower(),
-        [BlindType.CrimsonHeart] = () => new CrimsonHeartPower(),
-        [BlindType.CeruleanBell] = () => new CeruleanBellPower()
+        [BlindType.AmberAcorn] = ModelDb.Power<AmberAcornPower>,
+        [BlindType.VerdantLeaf] = ModelDb.Power<VerdantLeafPower>,
+        [BlindType.VioletVessel] = ModelDb.Power<VioletVesselPower>,
+        [BlindType.CrimsonHeart] = ModelDb.Power<CrimsonHeartPower>,
+        [BlindType.CeruleanBell] = ModelDb.Power<CeruleanBellPower>,
     };
 
     private static BalatroPower CreatePower(BlindType type)
@@ -127,8 +128,7 @@ public static class BlindMethods
     {
         if (creature.CombatState == null) return BlindType.TheArm;
         if (exclude == null) exclude = [];
-        return (isBoss ? BossTypes : Types).Where(exclude.Contains)
-            .TakeRandom(1, creature.CombatState.RunState.Rng.MonsterAi).First();
+        return creature.CombatState.RunState.Rng.MonsterAi.NextItem((isBoss ? BossTypes : Types));
     }
 
     public static BalatroPower GetRandomBlindPower(Creature creature, bool isBoss = false,

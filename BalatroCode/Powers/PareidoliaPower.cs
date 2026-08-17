@@ -13,15 +13,5 @@ public class PareidoliaPower() : BalatroPower
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-
-    public override Task BeforeCardPlayed(CardPlay cardPlay)
-    {
-        var field = typeof(CardModel).GetField(
-            "<Type>k__BackingField",
-            BindingFlags.Instance | BindingFlags.NonPublic);
-
-        field?.SetValue(cardPlay.Card, CardType.Power);
-
-        return base.BeforeCardPlayed(cardPlay);
-    }
+    
 }

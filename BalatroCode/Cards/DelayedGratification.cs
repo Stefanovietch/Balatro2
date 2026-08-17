@@ -28,7 +28,7 @@ public class DelayedGratification() : BalatroCard(-1,
         if (side != CombatSide.Player || Owner.PlayerCombatState == null ||
             Owner.Character is not Character.Balatro balatro) return;
         if (Character.Balatro.CardsDiscardedThisTurn.Get(Owner.PlayerCombatState) != 0) return;
-        await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        if (PileType.Hand.GetPile(this.Owner).Cards.Contains(this)) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()

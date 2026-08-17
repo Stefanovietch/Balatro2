@@ -13,7 +13,7 @@ public class BlueJoker() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        ..MakeCalculatedBlock(0, (card, target) => PileType.Discard.GetPile(card.Owner).Cards.Count)
+        ..MakeCalculatedBlock(0, (card, target) => PileType.Draw.GetPile(card.Owner).Cards.Count)
     ];
 
     protected override async Task OnPlay(

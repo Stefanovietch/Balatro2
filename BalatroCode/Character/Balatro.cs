@@ -3,7 +3,6 @@ using BaseLib.Abstracts;
 using BaseLib.Utils.NodeFactories;
 using Balatro.BalatroCode.Extensions;
 using Balatro.BalatroCode.Powers;
-using BaseLib.Extensions;
 using BaseLib.Utils;
 using Godot;
 using HarmonyLib;
@@ -15,9 +14,8 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Cards;
 using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
+using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using static MegaCrit.Sts2.Core.Rooms.RoomType;
@@ -41,7 +39,8 @@ public class Balatro : PlaceholderCharacterModel
     public static readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
-
+    public static event Action<Player>? CombatGoldEarnedChanged;
+    
     public static readonly Color Color = new("ffffff");
 
     public override Color NameColor => Color;
@@ -84,18 +83,17 @@ public class Balatro : PlaceholderCharacterModel
             return icon;
         }
     }
-
+    
     public override decimal ModifyGoldGained(Player player, decimal amount)
     {
         if (player.PlayerCombatState == null || !BalatroConfig.GoldCap) return base.ModifyGoldGained(player, amount);
-
         var maxCombatGold = MaxCombatGold.Get(player);
         var earned = CombatGoldEarned.Get(player.PlayerCombatState);
         var remaining = maxCombatGold - earned;
-
         if (remaining <= 0) return base.ModifyGoldGained(player, 0);
         var goldToGain = Math.Min(amount, remaining);
         CombatGoldEarned.Set(player.PlayerCombatState, earned + (int)goldToGain);
+        CombatGoldEarnedChanged?.Invoke(player);
         return base.ModifyGoldGained(player, goldToGain);
     }
 
@@ -176,8 +174,14 @@ public class Balatro : PlaceholderCharacterModel
         var enemy = combatState.Enemies.FirstOrDefault(creature =>
             creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
         if (enemy == null) return;
-        await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss), enemy, 1, null,
+        await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss).ToMutable(), enemy, 1, null,
             null);
+    }
+    
+    public override NCreatureVisuals CreateCustomVisuals()
+    {
+        var visual = NodeFactory<NCreatureVisuals>.CreateFromResource("res://Balatro/images/decks/"+ BalatroConfig.SelectedDeck +".png");
+        return visual;
     }
 
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
@@ -185,4 +189,5 @@ public class Balatro : PlaceholderCharacterModel
     public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();
     public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectBg => "char_select_bg_balatro.tscn".CharacterUiPath();
+    public override Color MapDrawingColor => Color.Color8(100, 100, 100);
 }

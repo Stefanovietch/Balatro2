@@ -9,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class DNA() : BalatroCard(1,
+public class DNA() : BalatroCard(0,
     CardType.Skill, CardRarity.Rare,
     TargetType.Self)
 {
@@ -24,8 +24,8 @@ public class DNA() : BalatroCard(1,
         if (CanPlay())
         {
             var newCard = CombatManager.Instance.History.CardPlaysFinished
-                .Last(c => c.HappenedThisTurn(play.Card.CombatState)).CardPlay.Card;
-            if (DeckVersion is not DNA deckVersion)
+                .LastOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
+            if (DeckVersion is not DNA deckVersion || newCard == null)
                 return;
             await CardCmd.Transform(deckVersion, newCard.CreateClone());
         }

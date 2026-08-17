@@ -30,8 +30,7 @@ public class Seance() : BalatroCard(1,
         {
             card.SetToFreeThisCombat();
             if (IsUpgraded) CardCmd.Upgrade(card);
-            CardCmd.PreviewCardPileAdd(
-                await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner, CardPilePosition.Random));
+            await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner, CardPilePosition.Random);
         }
     }
 

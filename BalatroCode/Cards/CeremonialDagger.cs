@@ -13,7 +13,7 @@ namespace Balatro.BalatroCode.Cards;
 
 public class CeremonialDagger() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
-    TargetType.Self)
+    TargetType.AnyEnemy)
 {
     private int _currentDmg = 7;
     private int _increasedDmg;

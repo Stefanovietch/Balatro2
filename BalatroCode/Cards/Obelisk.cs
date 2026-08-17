@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -64,6 +65,9 @@ public class Obelisk() : BalatroCard(2,
             _increasedBlock = value;
         }
     }
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -80,12 +84,14 @@ public class Obelisk() : BalatroCard(2,
         ArgumentNullException.ThrowIfNull(CombatState);
         IReadOnlyList<CardModel> options =
         [
-            ModelDb.Card<Blockade>(),
-            ModelDb.Card<Assault>(),
-            ModelDb.Card<Enhance>()
+            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
+            CombatState.CreateCard(ModelDb.Card<Assault>(), this.Owner),
+            CombatState.CreateCard(ModelDb.Card<Enhance>(), this.Owner),
         ];
-        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
-        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
+        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
+        //await Task.Yield();
+        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
+
         foreach (var option in (List<CardModel?>)[option1, option2])
             switch (option)
             {
@@ -116,9 +122,7 @@ public class Obelisk() : BalatroCard(2,
     private void Buff()
     {
         IncreasedBlock += DynamicVars["BlockIncrease"].IntValue;
-        ;
-        IncreasedBlock += DynamicVars["BlockIncrease"].IntValue;
-        ;
+        IncreasedDamage += DynamicVars["DamageIncrease"].IntValue;
         UpdateDamageBlock();
     }
 

@@ -7,7 +7,6 @@ namespace Balatro.BalatroCode.UI;
 
 public abstract partial class NCustomTopBarDisplayElement : NClickableControl, ITopBarElement
 {
-    private static NCustomTopBarDisplayElement? _instance;
     private Tween? _bumpTween;
     private MegaLabel? _countLabel;
     private float _elapsedTime;
@@ -15,18 +14,9 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     private Control? _icon;
     private float _previousCount;
     protected Player? Player;
-
-
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
-
-    /// <summary>Node path to the icon Control that wobbles on hover.</summary>
+    
     protected abstract string IconNodePath { get; }
-
-    /// <summary>Node path to the MegaLabel showing the count badge.</summary>
     protected abstract string CountLabelNodePath { get; }
-
-    // ── ITopBarElement ────────────────────────────────────────────────────────
-
     public abstract string ScenePath { get; }
     public abstract float Width { get; }
     public abstract Func<Player, bool> CanUse { get; }
@@ -34,15 +24,17 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     public void Initialize(Player player)
     {
         Player = player;
-        _instance = this;
-        RefreshCount();
+        UpdateGoldDisplay();
     }
-
+    
     public override void _Ready()
     {
         ConnectSignals();
         _icon = GetNodeOrNull<Control>(IconNodePath);
         _countLabel = GetNodeOrNull<MegaLabel>(CountLabelNodePath);
+        Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;
+        Character.Balatro.CombatGoldEarnedChanged += OnCombatGoldChanged;
+
     }
 
     // ── Count badge ───────────────────────────────────────────────────────────
@@ -51,34 +43,30 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     protected abstract int? GetGoldEarned();
 
     protected abstract int? GetMaxGold();
-
-    public void RefreshCount()
+    
+    private void OnCombatGoldChanged(Player player)
     {
-        if (_countLabel == null) return;
+        if (Player != player)
+            return;
+        UpdateGoldDisplay();
+    }
+
+    public void UpdateGoldDisplay()
+    {    
         var goldEarned = GetGoldEarned();
         var maxGold = GetMaxGold();
-
-        if (goldEarned == null || maxGold == null)
-        {
-            _countLabel.Visible = false;
-            return;
-        }
-
-        _countLabel.Visible = true;
-
-        if (goldEarned > _previousCount)
-        {
-            _bumpTween?.Kill();
-            _bumpTween = CreateTween();
-            _bumpTween.TweenProperty(_countLabel, "scale", Vector2.One, 0.5f)
-                .From(Vector2.One * 1.5f)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Expo);
-            _countLabel.PivotOffset = _countLabel.Size * 0.5f;
-        }
-
+        if (_countLabel == null) return;
+        if (goldEarned == null || maxGold == null) return;
+        
+        _bumpTween?.Kill();
+        _bumpTween = CreateTween();
+        _bumpTween.TweenProperty(_countLabel, "scale", Vector2.One, 0.5f)
+            .From(Vector2.One * 1.1f)
+            .SetEase(Tween.EaseType.Out)
+            .SetTrans(Tween.TransitionType.Expo);
+        _countLabel.PivotOffset = _countLabel.Size * 0.5f;
         _previousCount = goldEarned.Value;
-        _countLabel.SetTextAutoSize(goldEarned.Value.ToString() + " / " + maxGold.Value.ToString());
+        _countLabel.SetText(goldEarned.Value.ToString() + " / " + maxGold.Value.ToString());
     }
 
     public override void _Process(double delta)
@@ -100,15 +88,10 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         if (_icon == null) return;
         _icon.Rotation = 0f;
     }
-
-    public static void RefreshDisplay()
-    {
-        _instance?.RefreshCount();
-    }
-
+    
     public override void _ExitTree()
     {
+        Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;
         base._ExitTree();
-        if (_instance == this) _instance = null;
     }
 }

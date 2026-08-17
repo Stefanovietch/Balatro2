@@ -21,7 +21,7 @@ public class Dusk() : BalatroCard(3,
     {
         if (!PileType.Hand.GetPile(Owner).IsEmpty) return;
         foreach (var cardPlayed in CombatManager.Instance.History.CardPlaysFinished.Where(c =>
-                     c.CardPlay.Card.Id != Id && c.HappenedThisTurn(play.Card.CombatState) &&
+                     !c.CardPlay.Card.Equals(this) && c.HappenedThisTurn(play.Card.CombatState) &&
                      c.CardPlay.Card.Owner == play.Card.Owner))
             await CardCmd.AutoPlay(choiceContext, cardPlayed.CardPlay.Card, null);
     }

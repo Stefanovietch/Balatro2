@@ -18,7 +18,7 @@ public class Castle() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(5, ValueProp.Move),
-        new("Increase", 2),
+        new("Increase", 3),
         new DisplayVar<Castle>("Type", card => ((IRandomType)card).GetTypeString())
     ];
 
@@ -47,13 +47,13 @@ public class Castle() : BalatroCard(1,
     {
         if (card.Type == CurrentType)
         {
-            var baseValue = card.DynamicVars["Increase"].BaseValue;
+            var baseValue = this.DynamicVars["Increase"].BaseValue;
             BuffFromDiscard(baseValue);
         }
 
         return base.AfterCardDiscarded(choiceContext, card);
     }
-
+    
     private void BuffFromDiscard(decimal extraBlock)
     {
         var block = DynamicVars.Block;

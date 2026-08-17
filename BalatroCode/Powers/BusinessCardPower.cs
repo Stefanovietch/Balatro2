@@ -22,7 +22,7 @@ public class BusinessCardPower() : BalatroPower, IChance
         new DisplayVar<BusinessCardPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString())
     ];
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if (cardPlay.Card.Type != CardType.Power || Owner.Player != cardPlay.Card.Owner) return;
         if (this.RollChance(Owner.Player, 4)) await PlayerCmd.GainGold(Amount, Owner.Player);

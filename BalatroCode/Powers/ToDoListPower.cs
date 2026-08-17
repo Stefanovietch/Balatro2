@@ -22,7 +22,7 @@ public class ToDoListPower() : BalatroPower, IRandomType
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<AncientJoker>("Type", card => ((IRandomType)card).GetTypeString())
+        new DisplayVar<ToDoListPower>("Type", card => ((IRandomType)card).GetTypeString())
     ];
 
     public CardType CurrentType { get; set; } = CardType.None;

@@ -18,18 +18,19 @@ public class Certificate() : BalatroCard(1,
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Innate, CardKeyword.Unplayable];
-
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+    
+    public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        foreach (var card in CardFactory.GetDistinctForCombat(Owner,
+        if (!card.Equals(this)) return;
+        
+        foreach (var generatedCard in CardFactory.GetDistinctForCombat(Owner,
                      Owner.Character.CardPool.GetUnlockedCards(Owner.UnlockState,
                          Owner.RunState.CardMultiplayerConstraint), DynamicVars.Cards.IntValue,
                      Owner.RunState.Rng.CombatCardGeneration).ToList<CardModel>())
         {
-            var combat = await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, Owner);
+            await CardPileCmd.AddGeneratedCardToCombat(generatedCard, PileType.Hand, Owner);
         }
+        await CardCmd.Exhaust(choiceContext, this);
     }
 
     protected override void OnUpgrade()
