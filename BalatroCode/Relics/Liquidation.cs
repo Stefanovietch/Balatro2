@@ -13,7 +13,7 @@ public class Liquidation() : BalatroRelic
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {
-        if (Owner.Creature.IsDead || !(room is MerchantRoom))
+        if (room is not MerchantRoom)
             return;
         Flash();
         await PlayerCmd.GainGold(150, Owner);

@@ -23,32 +23,27 @@ public class DNA() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (CanPlay())
+        if (!CanPlay()) return;
+        var newCard = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card is not DNA && c.HappenedThisTurn(play.Card.CombatState ?? this.CombatState))?.CardPlay.Card;
+        if (newCard == null) return;
+        
+        await CardPileCmd.RemoveFromCombat(this, true);
+        await CardPileCmd.AddGeneratedCardToCombat(newCard.CreateClone(), PileType.Discard, this.Owner);
+        
+        CardModel deckVersion;
+        if (DeckVersion is DNA)
         {
-            var newCard = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
-            
-            if (newCard == null) return;
-            var newCombatCard = await CardCmd.Transform(this, newCard);
-            if (newCombatCard != null) await CardPileCmd.Add(newCombatCard.Value.cardAdded, PileType.Discard);
-
-            CardModel deckVersion;
-            if (DeckVersion is DNA)
-            {
-                deckVersion = DeckVersion;
-            }
-            else
-            {
-                var deckCard = this.Owner.Deck.Cards.FirstOrDefault(c => c is DNA);
-                if (deckCard is not DNA) return;
-                deckVersion = deckCard;
-            }
-            var cardClone = this.Owner.RunState.CloneCard(newCard);
-
-            await CardCmd.Transform(deckVersion, cardClone, CardPreviewStyle.None);
-            
-            await CardPileCmd.RemoveFromCombat(this);
-
+            deckVersion = DeckVersion;
         }
+        else
+        {
+            var deckCard = this.Owner.Deck.Cards.FirstOrDefault(c => c is DNA);
+            if (deckCard is not DNA) return;
+            deckVersion = deckCard;
+        }
+        var cardClone = this.Owner.RunState.CloneCard(newCard);
+        await CardCmd.Transform(deckVersion, cardClone);
+        
     }
 
     protected override void OnUpgrade()

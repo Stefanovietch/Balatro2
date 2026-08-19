@@ -11,7 +11,7 @@ public static class PowerReplayPatch
 {
     public static void Postfix(CardModel __instance, ref ICombatState? __result)
     {
-        if (!__instance.IsMutable) return;
+        if (!__instance.IsMutable || !__instance.IsInCombat) return;
         if (__instance.Owner is not { } owner) return;
         if (PileType.Play.GetPile(owner).Cards.LastOrDefault() is (Blueprint or Brainstorm) && __result == null)
         {

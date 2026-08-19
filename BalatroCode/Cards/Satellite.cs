@@ -7,7 +7,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class Satellite() : BalatroCard(1,
+public class Satellite() : BalatroCard(3,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
@@ -15,6 +15,9 @@ public class Satellite() : BalatroCard(1,
     [
         new("GoldPerCard", 2)
     ];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

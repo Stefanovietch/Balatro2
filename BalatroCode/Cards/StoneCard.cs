@@ -11,8 +11,8 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class StoneCard() : BalatroCard(1,
-    CardType.Skill, CardRarity.Token,
+public class StoneCard() : BalatroTokenCard(1,
+    CardType.Skill,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>

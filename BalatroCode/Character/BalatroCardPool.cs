@@ -1,6 +1,8 @@
 ﻿using BaseLib.Abstracts;
 using Balatro.BalatroCode.Extensions;
 using Godot;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Character;
 
@@ -31,4 +33,8 @@ public class BalatroCardPool : CustomCardPoolModel
     public override Color DeckEntryCardColor => new("ffffff");
 
     public override bool IsColorless => false;
+    
+    public override IEnumerable<CardModel> AllCards =>
+        base.AllCards.Where(card => card.Rarity != CardRarity.Token);
+    
 }

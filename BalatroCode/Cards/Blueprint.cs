@@ -22,11 +22,7 @@ public class Blueprint() : BalatroCard(1,
         var card = CombatManager.Instance.History.CardPlaysFinished
             .LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not Blueprint)?.CardPlay.Card;
         if (card == null) return;
-        var model = choiceContext.LastInvolvedModel;
-        if (model is null) return;
-        choiceContext.PopModel(model);
         await CardCmd.AutoPlay(choiceContext, card, null);
-        choiceContext.PushModel(model);
     }
 
     protected override void OnUpgrade()

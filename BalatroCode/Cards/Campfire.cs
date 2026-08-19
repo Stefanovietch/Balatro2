@@ -15,7 +15,7 @@ public class Campfire() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         ..MakeCalculatedVar("StrengthPower", 0,
-            (c, _) => c.Owner.Character is Character.Balatro balatro
+            (c, _) => c.Owner.Character is Character.Balatro
                 ? Character.Balatro.RestSitesVisitedThisAct.Get(c.Owner)
                 : 0)
     ];
@@ -37,6 +37,6 @@ public class Campfire() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars["StrengthPower"].UpgradeValueBy(1);
+        DynamicVars["StrengthPowerBase"].UpgradeValueBy(1);
     }
 }

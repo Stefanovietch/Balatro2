@@ -13,6 +13,7 @@ using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.Combat;
@@ -42,11 +43,10 @@ public class Balatro : PlaceholderCharacterModel
     public static event Action<Player>? CombatGoldEarnedChanged;
     
     public static readonly Color Color = new("ffffff");
-
+    
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Neutral;
     public override int StartingHp => 70;
-
     public override IEnumerable<CardModel> StartingDeck =>
     [
         ModelDb.Card<JollyJoker>(),

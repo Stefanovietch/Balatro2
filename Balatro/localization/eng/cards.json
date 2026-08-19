@@ -198,7 +198,7 @@
   "BALATRO-RUNNER.title": "Runner",
   "BALATRO-RUNNER.description": "Gain {Block:diff()} Block. If you are holding a cost 0, 1 and 2 card, permanently increase this card's Block by {BlockIncrease:diff()}.",
   "BALATRO-SATELLITE.title": "Satellite",
-  "BALATRO-SATELLITE.description": "Upgrade a random card in your deck permanently.\nGain {GoldPerCard:diff()} Gold for each upgraded card in your deck.\nExhaust.",
+  "BALATRO-SATELLITE.description": "Upgrade a random card in your deck permanently.\nGain {GoldPerCard:diff()} Gold for each upgraded card in your deck.",
   "BALATRO-SCARY_FACE.title": "Scary Face",
   "BALATRO-SCARY_FACE.description": "Whenever you play a Power, gain {ScaryFacePower:diff()} Block.",
   "BALATRO-SCHOLAR.title": "Scholar",

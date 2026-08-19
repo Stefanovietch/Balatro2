@@ -4,15 +4,13 @@
   "BALATRO-BALATRO.banter.dead.endTurnPing": "...",
   "BALATRO-BALATRO.cardsModifierDescription": "The Deck's cards will now appear in rewards and shops.",
   "BALATRO-BALATRO.cardsModifierTitle": "The Deck's Cards",
-  "BALATRO-BALATRO.description": "Character Selection\nScreen Description",
+  "BALATRO-BALATRO.description": "A pile off different decks, each ready to deal with anything.\nA larger pool of powerful cards, but the stronger enemies come prepared.",
   "BALATRO-BALATRO.eventDeathPrevention": "Co-op survival line",
   "BALATRO-BALATRO.goldMonologue": "Line spoken when obtaining a large amount of gold",
   "BALATRO-BALATRO.possessiveAdjective": "its",
   "BALATRO-BALATRO.pronounObject": "it",
   "BALATRO-BALATRO.pronounPossessive": "its",
   "BALATRO-BALATRO.pronounSubject": "it",
-  "BALATRO-BALATRO.title": "The Base Deck",
-  "BALATRO-BALATRO.titleObject": "The Base Deck",
-  
-  "BALATRO-BALATRO.ui.decks.abandoned": "Abandoned Deck"
+  "BALATRO-BALATRO.title": "The Decks",
+  "BALATRO-BALATRO.titleObject": "The Decks"
 }

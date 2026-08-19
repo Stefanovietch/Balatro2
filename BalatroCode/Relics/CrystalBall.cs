@@ -2,6 +2,8 @@
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
+using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.Rewards;
 
@@ -12,13 +14,15 @@ public class CrystalBall() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
 
-    public override Task AfterObtained()
+    public override async Task AfterObtained()
     {
-        Owner.AddToMaxPotionCount(1);
+        await PlayerCmd.GainMaxPotionCount(1, this.Owner);
+        _ = TaskHelper.RunSafely(ObtainPotions());
+    }
 
-        Owner.Potions.AddItem(new Duplicator());
-        Owner.Potions.AddItem(new Duplicator());
-
-        return Task.CompletedTask;
+    private async Task ObtainPotions()
+    {
+        await PotionCmd.TryToProcure(ModelDb.Potion<Duplicator>().ToMutable(), this.Owner);
+        await PotionCmd.TryToProcure(ModelDb.Potion<Duplicator>().ToMutable(), this.Owner);
     }
 }

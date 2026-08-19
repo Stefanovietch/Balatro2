@@ -6,6 +6,7 @@ using Balatro.BalatroCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace Balatro.BalatroCode.Cards;
 
@@ -31,4 +32,13 @@ public abstract class BalatroCard(int cost, CardType type, CardRarity rarity, Ta
         if (this is IRandomType randomType && randomType.CurrentType == CardType.None) randomType.SetRandomType();
         base.AfterCreated();
     }
+}
+
+[Pool(typeof(ColorlessCardPool))]
+public abstract class BalatroTokenCard(
+    int cost,
+    CardType type,
+    TargetType target
+) : CustomCardModel(cost, type, CardRarity.Token, target)
+{
 }

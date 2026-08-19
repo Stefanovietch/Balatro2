@@ -21,27 +21,27 @@
 
   "BALATRO-CRYSTAL_BALL.title": "Crystal Ball",
   "BALATRO-CRYSTAL_BALL.flavor": "Everybody needs a little bit of magic.",
-  "BALATRO-CRYSTAL_BALL.description": "Gain an extra [yellow]Potion[/yellow] slot and [blue]2[/blue] [yellow]Duplication Potions[/yellow].",
+  "BALATRO-CRYSTAL_BALL.description": "Gain an extra [gold]Potion[/gold] slot and [blue]2[/blue] [gold]Duplication Potions[/gold].",
 
   "BALATRO-ASTRONOMY.title": "Astronomy",
   "BALATRO-ASTRONOMY.flavor": "You'll end up grading everything with stickers.",
-  "BALATRO-ASTRONOMY.description": "After you play a card, [yellow]Upgrade[/yellow] it for this combat. Lose a [yellow]Potion[/yellow] slot.",
+  "BALATRO-ASTRONOMY.description": "After you play a card, [gold]Upgrade[/gold] it for this combat. Lose a [gold]Potion[/gold] slot.",
 
   "BALATRO-CLAIRVOYANCE.title": "Clairvoyance",
   "BALATRO-CLAIRVOYANCE.flavor": "Don't turn as gray as a ghost.",
-  "BALATRO-CLAIRVOYANCE.description": "Combat rewards can now contain [yellow]Colorless[/yellow] cards. Choose a [yellow]Rare Colorless[/yellow] card at the start of the run.",
+  "BALATRO-CLAIRVOYANCE.description": "Combat rewards can now contain [gold]Colorless[/gold] cards. Choose a [gold]Rare Colorless[/gold] card at the start of the run.",
 
   "BALATRO-FLUSHED.title": "Flushed",
   "BALATRO-FLUSHED.flavor": "",
-  "BALATRO-FLUSHED.description": "If you have not played any [yellow]Powers[/yellow] during your turn, gain an extra {Energy:energyIcons()} next turn.",
+  "BALATRO-FLUSHED.description": "If you have not played any [gold]Powers[/gold] during your turn, gain an extra {Energy:energyIcons()} next turn.",
 
   "BALATRO-RETROGRADE.title": "Retrograde",
   "BALATRO-RETROGRADE.flavor": "Quick check if everything is ready.",
-  "BALATRO-RETROGRADE.description": "[yellow]Upgrade[/yellow] half of your deck at start of combat.",
+  "BALATRO-RETROGRADE.description": "[gold]Upgrade[/gold] half of your deck at start of combat.",
 
   "BALATRO-R_O_I.title": "ROI",
   "BALATRO-R_O_I.flavor": "Lift the shop to new heights.",
-  "BALATRO-R_O_I.description": "Cards in shops are [yellow]Upgraded[/yellow]. [yellow]Potions[/yellow] in the shops are at least [yellow]Uncommon[/yellow]. Guarantee one [yellow]Rare[/yellow] card in the shop.",
+  "BALATRO-R_O_I.description": "Cards in shops are [gold]Upgraded[/gold]. [gold]Potions[/gold] in the shops are at least [gold]Uncommon[/gold]. Guarantee one [gold]Rare[/gold] card in the shop.",
 
   "BALATRO-BIG_HANDS.title": "Big Hands",
   "BALATRO-BIG_HANDS.flavor": "Believe in the hands of fate.",
@@ -53,7 +53,7 @@
 
   "BALATRO-RULE_BENDER.title": "Rule Bender",
   "BALATRO-RULE_BENDER.flavor": "How balanced will this be?.",
-  "BALATRO-RULE_BENDER.description": "Whenever an [yellow]Attack[/yellow] is played, gain half of the damage as [yellow]Block[/yellow]. [blue]ALL[/blue] enemies have double their health.",
+  "BALATRO-RULE_BENDER.description": "Whenever an [gold]Attack[/gold] is played, gain half of the damage as [gold]Block[/gold]. [blue]ALL[/blue] enemies have double their health.",
 
   "BALATRO-SHATTERED.title": "Shattered",
   "BALATRO-SHATTERED.flavor": "It broke.",
@@ -70,7 +70,7 @@
 
   "BALATRO-GLOW_UP.title": "Glow Up",
   "BALATRO-GLOW_UP.flavor": "What a beauty.",
-  "BALATRO-GLOW_UP.description": "Add a random [yellow]Legendary[yellow] card to your deck.",
+  "BALATRO-GLOW_UP.description": "Add a random [gold]Legendary[gold] card to your deck.",
 
   "BALATRO-REROLL_GLUT.title": "Reroll Glut",
   "BALATRO-REROLL_GLUT.flavor": "The secret to a big deck.",
@@ -78,7 +78,7 @@
 
   "BALATRO-OMEN_GLOBE.title": "Omen Globe",
   "BALATRO-OMEN_GLOBE.flavor": "All this drinking is making me see things.",
-  "BALATRO-OMEN_GLOBE.description": "Whenever you use a potion in combat, create a random [yellow]Colorless[/yellow] card.",
+  "BALATRO-OMEN_GLOBE.description": "Whenever you use a potion in combat, create a random [gold]Colorless[/gold] card.",
 
   "BALATRO-OBSERVATORY.title": "Observatory",
   "BALATRO-OBSERVATORY.flavor": "Only the best get to go twice.",
@@ -90,7 +90,7 @@
 
   "BALATRO-RECYCLOMANCY.title": "Recyclomancy",
   "BALATRO-RECYCLOMANCY.flavor": "Ignore the imperfections makes perfect.",
-  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard [blue]7[/blue] cards, gain [blue]2[/blue] [yellow]Strength[/yellow].",
+  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard [blue]7[/blue] cards, gain [blue]2[/blue] [gold]Strength[/gold].",
 
   "BALATRO-TAROT_TYCOON.title": "Tarot Tycoon",
   "BALATRO-TAROT_TYCOON.flavor": "Drink and grow forever, little one.",
@@ -98,7 +98,7 @@
 
   "BALATRO-PLANET_TYCOON.title": "Planet Tycoon",
   "BALATRO-PLANET_TYCOON.flavor": "Rarity doesn't determine somethings usefulness.",
-  "BALATRO-PLANET_TYCOON.description": "Whenever you add a [yellow]Common[/yellow] card to your deck, it is [yellow]Upgraded[/yellow].",
+  "BALATRO-PLANET_TYCOON.description": "Whenever you add a [gold]Common[/gold] card to your deck, it is [gold]Upgraded[/gold].",
 
   "BALATRO-MONEY_TREE.title": "Money Tree",
   "BALATRO-MONEY_TREE.flavor": "You believed them when they said money doesn't grow on trees?",
@@ -110,7 +110,7 @@
 
   "BALATRO-ILLUSION.title": "Illusion",
   "BALATRO-ILLUSION.flavor": "Your reality is an illusion for others.",
-  "BALATRO-ILLUSION.description": "Choose and add a [yellow]Common, Uncommon[/yellow] and [yellow]Rare[/yellow] card to your deck.",
+  "BALATRO-ILLUSION.description": "Choose and add a [gold]Common, Uncommon[/gold] and [gold]Rare[/gold] card to your deck.",
   "BALATRO-ILLUSION.description2": "Magic!",
 
   "BALATRO-PETROGLYPH.title": "Petroglyph",

@@ -1,4 +1,5 @@
-﻿using MegaCrit.Sts2.Core.Assets;
+﻿using Godot;
+using MegaCrit.Sts2.Core.Assets;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Gold;
 using MegaCrit.Sts2.Core.Entities.Merchant;
@@ -13,19 +14,37 @@ public partial class NRerollButton : NButton
     public int RerollCost { get; set; } = 100;
 
     protected override string[] Hotkeys => ["r"];
+    private Label? _label;
+
     protected override string? ClickedSfx => "event:/sfx/ui/clicks/ui_click";
 
     public void Initialize(MerchantInventory inventory)
     {
+        Name = "RerollButton";
+        CustomMinimumSize = new Vector2(160, 48);
+        MouseFilter = MouseFilterEnum.Stop;
+        FocusMode = FocusModeEnum.All;
         _inventory = inventory;
-        UpdateLabel();
     }
-
-    protected override void ConnectSignals()
+    
+    public override void _Ready()
     {
-        base.ConnectSignals();
-    }
 
+        _label = new Label
+        {
+            Text = $"Reroll ({RerollCost}g)",
+            HorizontalAlignment = HorizontalAlignment.Center,
+            VerticalAlignment = VerticalAlignment.Center,
+            MouseFilter = MouseFilterEnum.Ignore,
+            Modulate = Colors.Red
+        };
+
+        _label.SetAnchorsAndOffsetsPreset(LayoutPreset.FullRect);
+        AddChild(_label);
+        
+        ConnectSignals();
+    }
+    
     protected override async void OnRelease()
     {
         try
@@ -42,18 +61,11 @@ public partial class NRerollButton : NButton
                 entry.Populate();
             foreach (var entry in _inventory.ColorlessCardEntries)
                 entry.Populate();
-
-            UpdateLabel();
+            
         }
         catch (Exception ex)
         {
             MainFile.Logger.Warn($"NRerollButton OnRelease error: {ex.Message}");
         }
-    }
-
-    private void UpdateLabel()
-    {
-        // If you add a Label child node, update it here
-        // e.g.: GetNode<Label>("%Label").Text = $"Reroll ({RerollCost}g)";
     }
 }

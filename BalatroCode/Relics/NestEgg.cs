@@ -11,7 +11,6 @@ public class NestEgg() : BalatroRelic
 
     public override async Task AfterObtained()
     {
-        var nestEgg = this;
-        await PlayerCmd.GainGold(300, nestEgg.Owner);
+        await PlayerCmd.GainGold(300, this.Owner);
     }
 }
