@@ -29,7 +29,7 @@ public class PopulateStartingRelicsPatches
 
                 var method = AccessTools.Method(typeof(Player), "PopulateRelics");
                 method?.Invoke(__instance, new object[] { new List<RelicModel> { mutable }, false });
-                MainFile.Logger.Warn($"Starting relic: {relic.Id.Entry} added for {BalatroConfig.SelectedDeck}");
+                MainFile.Logger.Info($"Starting relic: {relic.Id.Entry} added for {BalatroConfig.SelectedDeck}");
                 
                 return false;
             }

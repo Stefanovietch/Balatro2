@@ -26,8 +26,8 @@
   "BALATRO-EGG_POWER.smartDescription": "Gain [blue]{Amount}[/blue] [gold]Gold[/gold] at the end of the turn if you didn't take damage.",
 
   "BALATRO-GIFT_CARD_POWER.title": "Gift Card",
-  "BALATRO-GIFT_CARD_POWER.description": "Increase card [gold]Rarity[/gold] for this combat reward",
-  "BALATRO-GIFT_CARD_POWER.smartDescription": "Increase card [gold]Rarity[/gold] for this combat reward",
+  "BALATRO-GIFT_CARD_POWER.description": "Enchant a random card in your rewards with Sharp or Nimble.",
+  "BALATRO-GIFT_CARD_POWER.smartDescription": "[gold]Enchant[/gold] a random card in your rewards with [gold]Sharp[/gold] or [gold]Nimble[/gold] [blue]{Amount}[/blue].",
 
   "BALATRO-JUGGLER_POWER.title": "Juggler",
   "BALATRO-JUGGLER_POWER.description": "Draw more cards at the start of your turn",

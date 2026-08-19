@@ -84,6 +84,9 @@ public class MerchantPatches
                     );
                 }
             }
+            
+            var slotsContainer = __instance.GetNode<Control>("%SlotsContainer");
+
             //if (inventory.Player.GetRelic<RerollGlut>() != null) {
             var button = new NRerollButton();
             button.SetAnchorsAndOffsetsPreset(
@@ -91,13 +94,12 @@ public class MerchantPatches
                 Control.LayoutPresetMode.KeepSize,
                 10);
 
-            button.Position = new Vector2(20, 20);
-            button.Size = new Vector2(160, 48);
+            button.Position = new Vector2(200, 200);
+            button.Size = new Vector2(100, 100);
             button.ZIndex = 100;
-            button.TopLevel = true;
             
-            __instance.AddChild(button);
-            button.Initialize(inventory);
+            slotsContainer.AddChild(button);
+            button.Initialize(inventory, __instance);
             //}
         }
     }

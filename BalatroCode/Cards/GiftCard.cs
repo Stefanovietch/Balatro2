@@ -17,7 +17,7 @@ public class GiftCard() : BalatroCard(1,
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<ArtifactPower>(1),
-        new PowerVar<GiftCardPower>(1)
+        new PowerVar<GiftCardPower>(2)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
@@ -35,5 +35,7 @@ public class GiftCard() : BalatroCard(1,
     protected override void OnUpgrade()
     {
         DynamicVars["ArtifactPower"].UpgradeValueBy(1);
+        DynamicVars["GiftCardPower"].UpgradeValueBy(1);
+
     }
 }

@@ -5,6 +5,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
@@ -23,20 +24,13 @@ public class AncientEventModelPatches
         [HarmonyPostfix]
         public static async void Postfix(AncientEventModel __instance)
         {
-            try
-            {
-                if (__instance.Owner == null) return;
-                if (!__instance.Owner.Relics.Contains(ModelDb.Relic<HighStakes>())) return;
-                IEnumerable<EventOption> options = __instance.AllPossibleOptions.ToList();
-                var relic = options.ElementAt(Random.Shared.Next(0, options.Count())).Relic;
-                while (__instance.Owner.Relics.Contains(relic) || relic == null)
-                    relic = options.ElementAt(Random.Shared.Next(0, options.Count())).Relic;
-                await RelicCmd.Obtain(relic, __instance.Owner);
-            }
-            catch (Exception ex)
-            {
-                MainFile.Logger.Warn($"_Ready postfix error: {ex.Message}");
-            }
+            if (__instance.Owner is not { } player) return;
+            if (player.GetRelic<HighStakes>() == null) return;
+            var pickedRelic = player.Relics.LastOrDefault();
+            List<RelicModel?> options = __instance.AllPossibleOptions.Select(o => o.Relic).Where(r => r?.GetType() != pickedRelic?.GetType()).ToList();
+            var relic = player.PlayerRng.Rewards.NextItem(options);
+            if (relic == null) return;
+            await RelicCmd.Obtain(relic, player);
         }
     }
 }

@@ -104,7 +104,7 @@
   "BALATRO-FOUR_FINGERS.title": "Four Fingers",
   "BALATRO-FOUR_FINGERS.description": "Deal {Damage1:diff()}, {Damage2:diff()}, {Damage3:diff()} and {Damage4:diff()} damage to {IfUpgraded:show:an|a random } enemy.",
   "BALATRO-GIFT_CARD.title": "Gift Card",
-  "BALATRO-GIFT_CARD.description": "Gain {ArtifactPower:diff()} Artifact.\nIncrease card rarity for this combat reward.",
+  "BALATRO-GIFT_CARD.description": "Gain {ArtifactPower:diff()} Artifact.\n[gold]Enchant[/gold] a random card in your rewards with [gold]Sharp[/gold] or [gold]Nimble[/gold] {GiftCardPower:diff()}.",
   "BALATRO-GLASS_JOKER.title": "Glass Joker",
   "BALATRO-GLASS_JOKER.description": "Deal {Damage:diff()} damage to ALL enemies.\nIncreased by +75% for each card removed this run.\nRemoved from deck if Fatal.",
   "BALATRO-GOLDEN_JOKER.title": "Golden Joker",

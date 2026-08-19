@@ -24,23 +24,23 @@
   "BALATRO-CRYSTAL_BALL.description": "Gain an extra [gold]Potion[/gold] slot and [blue]2[/blue] [gold]Duplication Potions[/gold].",
 
   "BALATRO-ASTRONOMY.title": "Astronomy",
-  "BALATRO-ASTRONOMY.flavor": "You'll end up grading everything with stickers.",
+  "BALATRO-ASTRONOMY.flavor": "Reach for the stars and beyond.",
   "BALATRO-ASTRONOMY.description": "After you play a card, [gold]Upgrade[/gold] it for this combat. Lose a [gold]Potion[/gold] slot.",
 
   "BALATRO-CLAIRVOYANCE.title": "Clairvoyance",
-  "BALATRO-CLAIRVOYANCE.flavor": "Don't turn as gray as a ghost.",
+  "BALATRO-CLAIRVOYANCE.flavor": "Ghost usually drain the color out faces.",
   "BALATRO-CLAIRVOYANCE.description": "Combat rewards can now contain [gold]Colorless[/gold] cards. Choose a [gold]Rare Colorless[/gold] card at the start of the run.",
 
   "BALATRO-FLUSHED.title": "Flushed",
-  "BALATRO-FLUSHED.flavor": "",
-  "BALATRO-FLUSHED.description": "If you have not played any [gold]Powers[/gold] during your turn, gain an extra {Energy:energyIcons()} next turn.",
+  "BALATRO-FLUSHED.flavor": "Red cheeks and can't look at your face, what could this be?",
+  "BALATRO-FLUSHED.description": "If you have not played any [gold]Powers[/gold] during your turn, gain [blue]1[/blue] [gold]Dexterity[/gold] and [blue]1[/blue] [gold]Strength[/gold] next turn.",
 
   "BALATRO-RETROGRADE.title": "Retrograde",
   "BALATRO-RETROGRADE.flavor": "Quick check if everything is ready.",
   "BALATRO-RETROGRADE.description": "[gold]Upgrade[/gold] half of your deck at start of combat.",
 
   "BALATRO-R_O_I.title": "ROI",
-  "BALATRO-R_O_I.flavor": "Lift the shop to new heights.",
+  "BALATRO-R_O_I.flavor": "Lift the shop to new heights and become a star trader.",
   "BALATRO-R_O_I.description": "Cards in shops are [gold]Upgraded[/gold]. [gold]Potions[/gold] in the shops are at least [gold]Uncommon[/gold]. Guarantee one [gold]Rare[/gold] card in the shop.",
 
   "BALATRO-BIG_HANDS.title": "Big Hands",
@@ -65,7 +65,7 @@
   "BALATRO-OVERSTOCK_PLUS.description": "Future shops have three additional relics.",
 
   "BALATRO-LIQUIDATION.title": "Liquidation",
-  "BALATRO-LIQUIDATION.flavor": "Don't ask how I got this money.",
+  "BALATRO-LIQUIDATION.flavor": "Don't ask where I got this money from.",
   "BALATRO-LIQUIDATION.description": "Gain [blue]150[/blue] [gold]Gold[/gold] when entering a shop!",
 
   "BALATRO-GLOW_UP.title": "Glow Up",
@@ -74,7 +74,7 @@
 
   "BALATRO-REROLL_GLUT.title": "Reroll Glut",
   "BALATRO-REROLL_GLUT.flavor": "The secret to a big deck.",
-  "BALATRO-REROLL_GLUT.description": "Click to reroll the cards in the shop, costs [blue]50[/blue] [gold]Gold[/gold] per roll.",
+  "BALATRO-REROLL_GLUT.description": "Can reroll the cards in the shop, costs [blue]50[/blue] [gold]Gold[/gold] per roll.",
 
   "BALATRO-OMEN_GLOBE.title": "Omen Globe",
   "BALATRO-OMEN_GLOBE.flavor": "All this drinking is making me see things.",
@@ -90,14 +90,14 @@
 
   "BALATRO-RECYCLOMANCY.title": "Recyclomancy",
   "BALATRO-RECYCLOMANCY.flavor": "Ignore the imperfections makes perfect.",
-  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard [blue]7[/blue] cards, gain [blue]2[/blue] [gold]Strength[/gold].",
+  "BALATRO-RECYCLOMANCY.description": "Whenever you manually discard [blue]4[/blue] cards, gain [blue]2[/blue] [gold]Strength[/gold].",
 
   "BALATRO-TAROT_TYCOON.title": "Tarot Tycoon",
   "BALATRO-TAROT_TYCOON.flavor": "Drink and grow forever, little one.",
   "BALATRO-TAROT_TYCOON.description": "Whenever you obtain a potion, gain [blue]1[/blue] maximum Health.",
 
   "BALATRO-PLANET_TYCOON.title": "Planet Tycoon",
-  "BALATRO-PLANET_TYCOON.flavor": "Rarity doesn't determine somethings usefulness.",
+  "BALATRO-PLANET_TYCOON.flavor": "Rarity doesn't determine something's usefulness.",
   "BALATRO-PLANET_TYCOON.description": "Whenever you add a [gold]Common[/gold] card to your deck, it is [gold]Upgraded[/gold].",
 
   "BALATRO-MONEY_TREE.title": "Money Tree",
@@ -119,7 +119,7 @@
 
   "BALATRO-RETCON.title": "Retcon",
   "BALATRO-RETCON.flavor": "Predicting your enemy is half the battle.",
-  "BALATRO-RETCON.description": "Click to reroll a Blind, costs [blue]50[/blue] [gold]Gold[/gold] per roll. (Only usable on first turn before playing a card)",
+  "BALATRO-RETCON.description": "Can reroll a Blind, costs [blue]50[/blue] [gold]Gold[/gold] per roll. (Only usable on first turn before playing a card)",
 
   "BALATRO-PALETTE.title": "Palette",
   "BALATRO-PALETTE.flavor": "Remember what you sacrificed.",

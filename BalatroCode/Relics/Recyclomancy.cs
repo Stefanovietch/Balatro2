@@ -22,7 +22,7 @@ public class Recyclomancy() : BalatroRelic
     public override async Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
     {
         if (card.Owner == Owner) ++_cardsDiscarded;
-        if (_cardsDiscarded < 7) return;
+        if (_cardsDiscarded < 4) return;
         _cardsDiscarded = 0;
         await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
     }
