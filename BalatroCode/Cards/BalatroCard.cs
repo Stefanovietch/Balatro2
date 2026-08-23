@@ -34,11 +34,20 @@ public abstract class BalatroCard(int cost, CardType type, CardRarity rarity, Ta
     }
 }
 
-[Pool(typeof(ColorlessCardPool))]
+[Pool(typeof(TokenCardPool))]
 public abstract class BalatroTokenCard(
     int cost,
     CardType type,
     TargetType target
 ) : CustomCardModel(cost, type, CardRarity.Token, target)
+{
+}
+
+[Pool(typeof(CurseCardPool))]
+public abstract class BalatroCurseCard(
+    int cost,
+    CardType type,
+    TargetType target
+) : CustomCardModel(cost, type, CardRarity.Curse, target)
 {
 }

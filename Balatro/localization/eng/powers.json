@@ -57,7 +57,7 @@
   
   "BALATRO-PHOTOGRAPH_POWER.title": "Photograph",
   "BALATRO-PHOTOGRAPH_POWER.description": "Your next Power is played twice.",
-  "BALATRO-PHOTOGRAPH_POWER.smartDescription": "Your next {Amount:plural:Power is| [blue]{Amount}[/blue] Powers are} played twice.",
+  "BALATRO-PHOTOGRAPH_POWER.smartDescription": "Your next {Amount:plural:Power is|[blue]{Amount}[/blue] Powers are} played twice.",
 
   "BALATRO-RAISED_FIST_POWER.title": "Raised Fist",
 

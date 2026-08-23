@@ -30,7 +30,7 @@ public class CleverJoker() : BalatroCard(1,
         DynamicVars.Block.UpgradeValueBy(4);
     }
 
-    protected override bool ShouldGlowGoldInternal => LastCardIsSkill();
+    protected override bool ShouldGlowRedInternal => !LastCardIsSkill();
 
     private bool LastCardIsSkill()
     {

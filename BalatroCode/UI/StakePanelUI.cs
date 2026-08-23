@@ -33,8 +33,8 @@ public static class StakePanelUI
                 CustomMinimumSize = new Vector2(420, 56),
                 Columns = 8
             };
-            _stakePanel.AddThemeConstantOverride("h_separation", 20);
-            _stakePanel.AddThemeConstantOverride("v_separation", 20);
+            _stakePanel.AddThemeConstantOverride("h_separation", 30);
+            _stakePanel.AddThemeConstantOverride("v_separation", 30);
 
             PositionHbox(_stakePanel);
 

@@ -117,8 +117,14 @@ public class Balatro : PlaceholderCharacterModel
         {
             var enemy = combatState.Enemies.FirstOrDefault(creature =>
                 creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
-            if (enemy != null) await PowerCmd.Apply(choiceContext, BlindMethods.GetRandomBlindPower(enemy, roomType == Boss).ToMutable(),
-                enemy, 1, null, null);
+            if (enemy != null)
+            {
+                var blindPowers = enemy.Powers.Where(p => p is IBlindPower).Select(p => ((IBlindPower)p).BlindType)
+                    .ToList();
+                await PowerCmd.Apply(choiceContext,
+                    BlindMethods.GetRandomBlindPower(enemy, roomType == Boss, blindPowers).ToMutable(),
+                    enemy, 1, null, null);
+            }
         }
         if (Stakes.CurrentStake() <= 1) return;
         foreach (var creature in combatState.Enemies)

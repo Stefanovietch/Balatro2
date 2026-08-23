@@ -20,7 +20,7 @@ public class MidasMask() : BalatroCard(-1,
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Pile?.Type == PileType.Hand) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        if (cardPlay.Card.Owner == this.Owner) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)

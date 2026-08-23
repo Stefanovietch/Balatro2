@@ -82,16 +82,18 @@ public class Obelisk() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
+        
         IReadOnlyList<CardModel> options =
         [
             CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Assault>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Enhance>(), this.Owner),
+            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
+            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner)
         ];
+        foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
+        
         var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
-        //await Task.Yield();
         var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
-
+        
         foreach (var option in (List<CardModel?>)[option1, option2])
             switch (option)
             {
@@ -136,4 +138,9 @@ public class Obelisk() : BalatroCard(2,
         CurrentDamage = 4 + IncreasedDamage;
         CurrentBlock = 8 + IncreasedBlock;
     }
+}
+
+public interface IObeliskOption
+{
+    public void UpdateValue(CardModel card) { }
 }

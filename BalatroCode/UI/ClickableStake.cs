@@ -32,7 +32,7 @@ public partial class ClickableStake : NButton
         _image = new TextureRect();
         _image.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
         _image.ExpandMode = TextureRect.ExpandModeEnum.KeepSize;
-        _image.CustomMinimumSize = new Vector2(64, 64f);
+        _image.CustomMinimumSize = new Vector2(64, 64);
         _image.Texture = GD.Load<Texture2D>("res://Balatro/images/ui/stakes/" + Name + ".png");
         _image.SetAnchorsPreset(LayoutPreset.Center);
         AddChild(_image);

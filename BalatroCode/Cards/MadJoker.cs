@@ -32,7 +32,7 @@ public class MadJoker() : BalatroCard(1,
         DynamicVars.Damage.UpgradeValueBy(4);
     }
 
-    protected override bool ShouldGlowGoldInternal => LastCardIsAttack();
+    protected override bool ShouldGlowRedInternal => !LastCardIsAttack();
 
     private bool LastCardIsAttack()
     {
