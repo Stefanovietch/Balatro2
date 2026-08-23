@@ -49,6 +49,11 @@ public class TheIdol() : BalatroCard(1,
 
     public void SetRandomType()
     {
+        if (!IsInCombat)
+        {
+            CurrentType = CardType.None;
+            return;
+        }
         var card = PileType.Draw.GetPile(Owner).Cards
             .Where(c => c.Type is CardType.Attack or CardType.Skill or CardType.Power &&
                         c.EnergyCost.GetAmountToSpend() is >= 1 and <= 3)
@@ -69,6 +74,6 @@ public class TheIdol() : BalatroCard(1,
 
     private string GetCostString()
     {
-        return CurrentCost == -1 ? "[1/2/3]" : CurrentCost.ToString();
+        return CurrentCost == -1 ? "(1|2|3)" : CurrentCost.ToString();
     }
 }

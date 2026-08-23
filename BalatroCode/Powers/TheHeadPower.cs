@@ -30,17 +30,17 @@ public class TheHeadPower() : BalatroPower, IBlindPower
     {
         var enumerable = participants.ToList();
         if (side != CombatSide.Player) return;
-        await PowerCmd.Apply<SlowPower>(choiceContext,
+        await PowerCmd.Apply<HeadSlowPower>(choiceContext,
             enumerable.Where(c =>
                 c is { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro } &&
-                !c.HasPower<SlowPower>()), 1, Owner, null);
+                !c.HasPower<HeadSlowPower>()), 1, Owner, null);
     }
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         var players = Owner.CombatState?.RunState.Players;
         if (players is null) return;
-        await PowerCmd.Apply<SlowPower>(new ThrowingPlayerChoiceContext(),
+        await PowerCmd.Apply<HeadSlowPower>(new ThrowingPlayerChoiceContext(),
             players.Where(p => p.Character is Character.Balatro).Select(p => p.Creature), 1, Owner, null);
     }
 
@@ -51,7 +51,7 @@ public class TheHeadPower() : BalatroPower, IBlindPower
         foreach (var player in players)
         {
             if (player.Character is not Character.Balatro) continue;
-            await PowerCmd.Remove<SlowPower>(player.Creature);
+            await PowerCmd.Remove<HeadSlowPower>(player.Creature);
         }
     }
 }

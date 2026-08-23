@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://Balatro/images/afflictions/marked/vfx_ui_card_affliction_marked.tscn" id="1"]
+
+[node name="Marked" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="vfx_ui_card_marked" parent="." instance=ExtResource("1")]
+layout_mode = 1

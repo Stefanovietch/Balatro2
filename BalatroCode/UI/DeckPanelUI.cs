@@ -7,6 +7,7 @@ using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
+using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace Balatro.BalatroCode.UI;
 
@@ -17,13 +18,13 @@ public static class DeckPanelUI
     private static TextureRect? _relicIconOutline;
     private static MegaRichTextLabel? _relicTitle;
     private static MegaRichTextLabel? _relicDescription;
-
-    public static void Attach(Node screen)
+    private static NCharacterSelectScreen? _screen;
+    public static void Attach(NCharacterSelectScreen screen)
     {
         Callable.From(() => DoAttach(screen)).CallDeferred();
     }
 
-    private static void DoAttach(Node screen)
+    private static void DoAttach(NCharacterSelectScreen screen)
     {
         try
         {
@@ -32,6 +33,8 @@ public static class DeckPanelUI
                 MainFile.Logger.Info("Overlay already attached");
                 return;
             }
+
+            _screen = screen;
 
             _deckPanel = new GridContainer
             {
@@ -115,7 +118,7 @@ public static class DeckPanelUI
             MainFile.Logger.Warn($"{selected} not in deckPanel");
             return;
         }
-
+        
         foreach (var node in _deckPanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableDeck deck) continue;
@@ -135,6 +138,7 @@ public static class DeckPanelUI
         }
 
         UpdateRelic(selected.Name);
+        _screen?.PlayerChanged(_screen.Lobby.LocalPlayer, false);
     }
 
     private static void LoadSelectDeck(StringName selected)
@@ -160,7 +164,7 @@ public static class DeckPanelUI
         _deckPanel.Visible = visible;
     }
 
-    private static void UpdateRelic(string deckName)
+    public static void UpdateRelic(string deckName)
     {
         var relic = MainFile.GetRelic(deckName);
 

@@ -3,13 +3,15 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using BaseLib.Config;
 using Godot;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Runs;
 using FileAccess = System.IO.FileAccess;
 
 namespace Balatro.BalatroCode;
 
 public static class Stakes
 {
-    public static int GetStake(string deckName)
+    public static int GetMaxStake(string deckName)
     {
         return BalatroConfig.Stakes.GetValueOrDefault(deckName, 0);
     }
@@ -18,27 +20,33 @@ public static class Stakes
     {
         BalatroConfig.Stakes[deckName] = value;
     }
+
+    private static Dictionary<string, int> StakeLevels { get;} = new()
+    {
+        { "whiteStake", 0 }, { "redStake", 1 }, { "greenStake", 2 }, { "blackStake", 3 }, 
+        { "blueStake", 4 }, { "purpleStake", 5 }, { "orangeStake", 6 }, { "goldStake", 7 }
+    };
+
+    public static int CurrentStake()
+    {
+        if (RunManager.Instance.NetService.Type != NetGameType.Singleplayer) return 0;
+        return StakeLevels.GetValueOrDefault(BalatroConfig.SelectedStake, -1);
+    }
 }
 
 [ConfigHoverTipsByDefault]
 internal class BalatroConfig : SimpleModConfig
 {
-    // Adds a hover tip for just this property, uses .hover.desc and .hover.title (optional) suffixes
-    // in localization. Not necessary with [ConfigHoverTipsByDefault] on the class.
     [ConfigHoverTip] public static bool BlindsActive { get; set; } = true;
-
     [ConfigHoverTip] public static bool GoldCap { get; set; } = true;
-
-    // the new value is written to disk.
     [ConfigHideInUI] public static string SelectedDeck { get; set; } = "redDeck";
-
     [ConfigHideInUI] public static string SelectedStake { get; set; } = "whiteStake";
 
     [ConfigHideInUI]
     [System.ComponentModel.TypeConverter(typeof(DictionaryJsonConverter))]
     public static Dictionary<string, int> Stakes { get; set; } = new()
     {
-        { "redDeck", 4 }, { "blueDeck", 2 }, { "yellowDeck", 0 },
+        { "redDeck", 7 }, { "blueDeck", 7 }, { "yellowDeck", 0 },
         { "greenDeck", 0 }, { "blackDeck", 0 }, { "magicDeck", 0 },
         { "nebulaDeck", 0 }, { "ghostDeck", 3 }, { "abandonedDeck", 0 },
         { "checkeredDeck", 0 }, { "zodiacDeck", 0 }, { "paintedDeck", 0 },

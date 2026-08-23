@@ -4,7 +4,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Runs;
 
@@ -22,6 +24,12 @@ public class GiftCard() : BalatroCard(1,
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromPower<ArtifactPower>(),
+        ..HoverTipFactory.FromEnchantment<Sharp>(),
+        ..HoverTipFactory.FromEnchantment<Nimble>()
+    ];
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

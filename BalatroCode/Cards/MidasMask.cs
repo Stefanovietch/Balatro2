@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace Balatro.BalatroCode.Cards;
 
 public class MidasMask() : BalatroCard(-1,
-    CardType.Attack, CardRarity.Uncommon,
+    CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -20,7 +20,7 @@ public class MidasMask() : BalatroCard(-1,
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Pile?.Type == PileType.Hand && cardPlay.Card.Equals(this)) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        if (cardPlay.Card.Pile?.Type == PileType.Hand) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)

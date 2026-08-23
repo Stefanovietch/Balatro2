@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.Afflictions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.Commands;
@@ -30,7 +31,7 @@ public class TheArmPower() : BalatroPower, IBlindPower
             foreach (var card in playerPlayerCombatState.AllCards)
             {
                 if (!card.IsUpgraded) continue;
-                await CardCmd.Afflict<BalatroArmed>(card, 1M);
+                await CardCmd.Afflict<Armed>(card, 1M);
             }
         }
     }
@@ -39,7 +40,7 @@ public class TheArmPower() : BalatroPower, IBlindPower
     {
         if (card.Owner.Character is not Character.Balatro || card.Affliction != null || !card.IsUpgraded)
             return;
-        await CardCmd.Afflict<BalatroArmed>(card, 1M);
+        await CardCmd.Afflict<Armed>(card, 1M);
     }
 
     public override bool TryModifyEnergyCostInCombat(
@@ -47,7 +48,7 @@ public class TheArmPower() : BalatroPower, IBlindPower
         decimal originalCost,
         out decimal modifiedCost)
     {
-        if (card.Affliction is not BalatroArmed)
+        if (card.Affliction is not Armed)
         {
             modifiedCost = originalCost;
             return false;
@@ -65,14 +66,10 @@ public class TheArmPower() : BalatroPower, IBlindPower
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroArmed))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is Armed))
                 CardCmd.ClearAffliction(card);
         }
 
         return Task.CompletedTask;
     }
-}
-
-public sealed class BalatroArmed : BalatroAfflictions
-{
 }

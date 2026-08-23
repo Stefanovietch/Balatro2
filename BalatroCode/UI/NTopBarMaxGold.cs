@@ -23,7 +23,7 @@ public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
 
         // Recreate what the .tscn had
         var container = new Control();
-        container.Position = new Vector2(-20, 0);
+        container.Position = new Vector2(0, 0);
         container.SetAnchorsPreset(Control.LayoutPreset.FullRect);
         AddChild(container);
 
@@ -38,7 +38,7 @@ public partial class NTopBarMaxGold : NCustomTopBarDisplayElement
         var label = new MegaLabel();
         label.Name = "CombatGold";
         label.Text = "0 / 200";
-        label.Position = new Vector2(40, 20);
+        label.Position = new Vector2(60, 20);
         label.HorizontalAlignment = HorizontalAlignment.Right;
         label.VerticalAlignment = VerticalAlignment.Center;
         label.AutoSizeEnabled = false; 

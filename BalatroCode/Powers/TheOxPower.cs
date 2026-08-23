@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.Afflictions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.Combat;
@@ -35,13 +36,13 @@ public class TheOxPower() : BalatroPower, IBlindPower
             var card = PileType.Hand.GetPile(p.Player).Cards.TakeRandom(1, p.Player.RunState.Rng.CombatCardSelection)
                 .FirstOrDefault();
             if (card == null) continue;
-            await CardCmd.AfflictAndPreview<BalatroOxed>([card], 1, CardPreviewStyle.None);
+            await CardCmd.AfflictAndPreview<Oxed>([card], 1, CardPreviewStyle.None);
         }
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Affliction is BalatroOxed)
+        if (cardPlay.Card.Affliction is Oxed)
         {
             await PlayerCmd.SetGold(0, cardPlay.Card.Owner);
             CardCmd.ClearAffliction(cardPlay.Card);
@@ -56,14 +57,10 @@ public class TheOxPower() : BalatroPower, IBlindPower
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroOxed))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is Oxed))
                 CardCmd.ClearAffliction(card);
         }
 
         return Task.CompletedTask;
     }
-}
-
-public sealed class BalatroOxed : BalatroAfflictions
-{
 }

@@ -26,6 +26,6 @@ public class DietCola() : BalatroCard(1,
 
     public override async Task BeforeCardRemoved(CardModel card)
     {
-        await RelicCmd.Obtain(RelicFactory.PullNextRelicFromFront(Owner, RelicRarity.Common), Owner);
+        await RelicCmd.Obtain(RelicFactory.PullNextRelicFromFront(Owner, RelicRarity.Common).ToMutable(), Owner);
     }
 }

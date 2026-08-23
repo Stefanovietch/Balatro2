@@ -98,7 +98,7 @@ public partial class ClickableStake : NButton
 
     public void LoadStakeState()
     {
-        Unlocked = Stakes.GetStake(BalatroConfig.SelectedDeck) >= StakeLevel;
+        Unlocked = Stakes.GetMaxStake(BalatroConfig.SelectedDeck) >= StakeLevel;
         if (_image == null) return;
         _image.SelfModulate = !Unlocked ? new Color(0.5f, 0.5f, 0.5f, 1f) : new Color(1f, 1f, 1f, 1f);
     }

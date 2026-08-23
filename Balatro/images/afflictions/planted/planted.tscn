@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://Balatro/images/afflictions/planted/vfx_ui_card_affliction_planted.tscn" id="1"]
+
+[node name="Planted" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="vfx_ui_card_planted" parent="." instance=ExtResource("1")]
+layout_mode = 1

@@ -23,4 +23,12 @@ public class TheWindowPower() : BalatroPower, IBlindPower
     {
         await PowerCmd.Apply<ThornsPower>(new ThrowingPlayerChoiceContext(), Owner, 4, applier, cardSource);
     }
+
+    public override async Task AfterRemoved(Creature oldOwner)
+    {
+        var thornsPower = this.Owner.GetPower<ThornsPower>();
+        if (thornsPower == null) return;
+        if (thornsPower.Amount <= 4) await PowerCmd.Remove(thornsPower);
+        else await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), thornsPower, -4, null, null);
+    }
 }

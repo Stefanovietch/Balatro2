@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.Afflictions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.CardSelection;
@@ -22,14 +23,27 @@ public class TheHousePower() : BalatroPower, IBlindPower
 
     public BlindType BlindType => BlindType.TheHouse;
 
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    {
+        var players = Owner.CombatState?.RunState.Players;
+        MainFile.Logger.Info("player: " + players);
+        if (players is null) return;
+        foreach (var player in players)
+        {
+            if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber == 1) continue;
+            foreach (var card in PileType.Hand.GetPile(player).Cards)
+                await CardCmd.Afflict<Housed>(card, 3M);
+        }
+    }
+
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
         if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber == 1)
             foreach (var card in PileType.Hand.GetPile(player).Cards)
-                await CardCmd.Afflict<BalatroHoused>(card, 3M);
+                await CardCmd.Afflict<Housed>(card, 3M);
 
         if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber > 1)
-            foreach (var card in player.PlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
+            foreach (var card in player.PlayerCombatState.AllCards.Where(c => c.Affliction is Housed))
                 CardCmd.ClearAffliction(card);
     }
 
@@ -38,7 +52,7 @@ public class TheHousePower() : BalatroPower, IBlindPower
         decimal originalCost,
         out decimal modifiedCost)
     {
-        if (card.Affliction is not BalatroHoused)
+        if (card.Affliction is not Housed)
         {
             modifiedCost = originalCost;
             return false;
@@ -56,14 +70,10 @@ public class TheHousePower() : BalatroPower, IBlindPower
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroHoused))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is Housed))
                 CardCmd.ClearAffliction(card);
         }
 
         return Task.CompletedTask;
     }
-}
-
-public sealed class BalatroHoused : BalatroAfflictions
-{
 }

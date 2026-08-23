@@ -4,12 +4,13 @@ using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class SeeingDouble() : BalatroCard(1,
+public class SeeingDouble() : BalatroCard(2,
     CardType.Power, CardRarity.Uncommon,
     TargetType.Self)
 {
@@ -17,6 +18,11 @@ public class SeeingDouble() : BalatroCard(1,
     [
         new PowerVar<SeeingDoublePower>(1),
         new PowerVar<ConfusedPower>(1)
+    ];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
+    [
+        HoverTipFactory.FromPower<ConfusedPower>()
     ];
 
     protected override async Task OnPlay(

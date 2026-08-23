@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Drawing;
+using System.Reflection;
 using Balatro.BalatroCode.Relics;
 using Balatro.BalatroCode.UI;
 using Godot;
@@ -87,20 +88,25 @@ public class MerchantPatches
             
             var slotsContainer = __instance.GetNode<Control>("%SlotsContainer");
 
-            //if (inventory.Player.GetRelic<RerollGlut>() != null) {
-            var button = new NRerollButton();
-            button.SetAnchorsAndOffsetsPreset(
-                Control.LayoutPreset.TopLeft,
-                Control.LayoutPresetMode.KeepSize,
-                10);
-
-            button.Position = new Vector2(200, 200);
-            button.Size = new Vector2(100, 100);
-            button.ZIndex = 100;
-            
-            slotsContainer.AddChild(button);
-            button.Initialize(inventory, __instance);
-            //}
+            if (inventory.Player.GetRelic<RerollGlut>() != null) {
+                var control = new Control();
+                slotsContainer.AddChild(control);
+                control.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopWide);
+                control.OffsetTop = 70;
+                control.OffsetBottom = -27;
+                control.MouseFilter = Control.MouseFilterEnum.Ignore;
+                
+                var button = new NRerollGlutButton();
+                button.CustomMinimumSize = new Vector2(276, 73);
+                button.Size = button.CustomMinimumSize;
+                button.AnchorLeft = 0.5f;
+                button.AnchorRight = 0.5f;
+                button.OffsetLeft = -276;  
+                button.OffsetRight = 276;
+                
+                control.AddChild(button);
+                button.Initialize(inventory, __instance);
+            }
         }
     }
 

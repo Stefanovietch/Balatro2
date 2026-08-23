@@ -29,7 +29,7 @@ public class ArrowheadPower() : BalatroPower
     {
         if (Owner.Player != player) return;
         var cards = (await CardSelectCmd.FromHandForDiscard(choiceContext, player,
-            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, 2), null, this)).ToList();
+            new CardSelectorPrefs(CardSelectorPrefs.DiscardSelectionPrompt, Amount), null, this)).ToList();
         if (cards.Count != 0) await CardCmd.Discard(choiceContext, cards);
         await StoneCard.CreateInHand(player, Amount, CombatState);
     }

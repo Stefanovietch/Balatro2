@@ -19,7 +19,15 @@ public class VioletVesselPower() : BalatroPower, IBlindPower
     {
         var hpDiff = Owner.MaxHp - Owner.CurrentHp;
         Owner.SetMaxHpInternal(Owner.MaxHp * 3);
-        Owner.SetCurrentHpInternal(Owner.MaxHp * 3 - hpDiff);
+        Owner.SetCurrentHpInternal(Owner.MaxHp - hpDiff);
         return base.AfterApplied(applier, cardSource);
+    }
+    
+    public override Task AfterRemoved(Creature oldOwner)
+    {
+        var hpDiff = Owner.MaxHp - Owner.CurrentHp;
+        Owner.SetMaxHpInternal(Owner.MaxHp / 3M);
+        Owner.SetCurrentHpInternal(Owner.MaxHp - hpDiff);
+        return base.AfterRemoved(oldOwner);
     }
 }

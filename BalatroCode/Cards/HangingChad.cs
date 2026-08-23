@@ -24,6 +24,7 @@ public class HangingChad() : BalatroCard(1,
         card.ExhaustOnNextPlay = true;
         for (var i = 0; i < DynamicVars.Repeat.IntValue; ++i)
             await CardCmd.AutoPlay(choiceContext, card, null);
+        //exhaust
     }
 
     protected override void OnUpgrade()

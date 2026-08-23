@@ -13,6 +13,9 @@ public class GlowUp() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Rare;
+    
+    public override bool HasUponPickupEffect => true;
+
 
     public override async Task AfterObtained()
     {

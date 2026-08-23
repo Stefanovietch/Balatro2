@@ -9,6 +9,8 @@ public class NestEgg() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
 
+    public override bool HasUponPickupEffect => true;
+
     public override async Task AfterObtained()
     {
         await PlayerCmd.GainGold(300, this.Owner);

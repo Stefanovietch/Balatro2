@@ -25,14 +25,18 @@ public class FourFingers() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        ArgumentNullException.ThrowIfNull(play.Target);
 
-        foreach (var damageVar in CanonicalVars.OfType<DamageVar>())
+        List<DynamicVar> damageList = [DynamicVars["Damage1"], DynamicVars["Damage2"], DynamicVars["Damage3"], DynamicVars["Damage4"]];
+        
+        foreach (var damageVar in damageList)
             if (IsUpgraded)
+            {
+                ArgumentNullException.ThrowIfNull(play.Target);
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
                     .Targeting(play.Target)
                     .WithHitFx("vfx/vfx_attack_slash")
                     .Execute(choiceContext);
+            }
             else
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
                     .TargetingRandomOpponents(CombatState)

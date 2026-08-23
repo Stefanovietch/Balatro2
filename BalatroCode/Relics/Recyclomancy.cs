@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Powers;
 
@@ -16,6 +17,10 @@ public class Recyclomancy() : BalatroRelic
     private int _cardsDiscarded;
 
     public override bool ShowCounter => CombatManager.Instance.IsInProgress;
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPower<StrengthPower>()
+    ];
 
     public override int DisplayAmount => !IsCanonical ? _cardsDiscarded : 0;
 

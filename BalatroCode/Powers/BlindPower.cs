@@ -127,8 +127,10 @@ public static class BlindMethods
     private static BlindType GetRandomBlind(Creature creature, bool isBoss = false, List<BlindType>? exclude = null)
     {
         if (creature.CombatState == null) return BlindType.TheArm;
-        if (exclude == null) exclude = [];
-        return creature.CombatState.RunState.Rng.MonsterAi.NextItem((isBoss ? BossTypes : Types));
+        exclude ??= [];
+        var possibleBlinds = isBoss ? BossTypes : Types;
+        foreach (var type in exclude) possibleBlinds.Remove(type);
+        return creature.CombatState.RunState.Rng.MonsterAi.NextItem(possibleBlinds);
     }
 
     public static BalatroPower GetRandomBlindPower(Creature creature, bool isBoss = false,

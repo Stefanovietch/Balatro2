@@ -3,19 +3,22 @@ using Balatro.BalatroCode.UI;
 using BaseLib.Config;
 using Godot;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Multiplayer.Game;
+using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace Balatro.BalatroCode.UI;
 
 public static class StakePanelUI
 {
     private static Control? _stakePanel;
+    private static NCharacterSelectScreen? _screen;
 
-    public static void Attach(Node screen)
+    public static void Attach(NCharacterSelectScreen screen)
     {
         Callable.From(() => DoAttach(screen)).CallDeferred();
     }
 
-    private static void DoAttach(Node screen)
+    private static void DoAttach(NCharacterSelectScreen screen)
     {
         try
         {
@@ -24,7 +27,7 @@ public static class StakePanelUI
                 MainFile.Logger.Info("Overlay already attached");
                 return;
             }
-
+            _screen = screen;
             _stakePanel = new GridContainer
             {
                 CustomMinimumSize = new Vector2(420, 56),
@@ -149,6 +152,6 @@ public static class StakePanelUI
     public static void SetVisibility(bool visible)
     {
         if (_stakePanel == null) return;
-        _stakePanel.Visible = visible;
+        _stakePanel.Visible = _screen?.Lobby.NetService.Type == NetGameType.Singleplayer && visible;
     }
 }

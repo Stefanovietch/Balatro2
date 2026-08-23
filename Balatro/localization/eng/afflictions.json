@@ -1,16 +1,19 @@
 {
-  "BALATRO_ARMED.title": "Armed",
-  "BALATRO_ARMED.description": "Costs an additional {Amount:energyIcons()}.",
+  "BALATRO-ARMED.title": "Armed",
+  "BALATRO-ARMED.description": "Costs an additional {Amount:energyIcons()}.",
 
-  "BALATRO_HOUSED.title": "Housed",
-  "BALATRO_HOUSED.description": "Costs {Amount:energyIcons()}.",
+  "BALATRO-HOUSED.title": "Housed",
+  "BALATRO-HOUSED.description": "Costs {Amount:energyIcons()}.",
 
-  "BALATRO_MARKED.title": "Marked",
-  "BALATRO_MARKED.description": "Costs {Amount:energyIcons()}.",
+  "BALATRO-MARKED.title": "Marked",
+  "BALATRO-MARKED.description": "Costs {Amount:energyIcons()}.",
 
-  "BALATRO_OXED.title": "Oxed",
-  "BALATRO_OXED.description": "Sets [gold]Gold[/gold] to [blue]0[/blue].",
+  "BALATRO-WHEELED.title": "Wheeled",
+  "BALATRO-WHEELED.description": "Costs {Amount:energyIcons()}.",
+  
+  "BALATRO-OXED.title": "Oxed",
+  "BALATRO-OXED.description": "Sets [gold]Gold[/gold] to [blue]0[/blue].",
 
-  "BALATRO_PLANTED.title": "Planted",
-  "BALATRO_PLANTED.description": "Add [gold]Ethereal[/gold] to this card."
+  "BALATRO-PLANTED.title": "Planted",
+  "BALATRO-PLANTED.description": "Add [gold]Ethereal[/gold] to this card."
 }

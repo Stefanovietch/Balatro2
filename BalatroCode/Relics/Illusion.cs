@@ -12,6 +12,8 @@ public class Illusion() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Shop;
+    
+    public override bool HasUponPickupEffect => true;
 
     public override async Task AfterObtained()
     {

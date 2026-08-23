@@ -12,6 +12,7 @@ using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Runs;
+using MegaCrit.Sts2.Core.Saves;
 
 namespace Balatro.BalatroCode.Relics;
 
@@ -20,17 +21,26 @@ public class Shattered() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
     
+    public override bool HasUponPickupEffect => true;
+
+    private bool _usedUp = false;
+
+    public override async Task AfterActEntered()
+    {
+        if (this._usedUp) return;
+        await ShatterDeck();
+        _usedUp = true;
+    }
     public override async Task AfterObtained()
     {
         this.Owner.RelicGrabBag.Remove<PandorasBox>();
-        _ = TaskHelper.RunSafely(ShatterDeck());
+        if (this._usedUp || this.Owner.Relics.Count <= 1) return;
+        await ShatterDeck();
+        _usedUp = true;
     }
     
     private async Task ShatterDeck()
     {
-        while (!LocalContext.IsMe(Owner))
-            await Cmd.Wait(1);
-        
         await CardPileCmd.RemoveFromDeck(PileType.Deck.GetPile(this.Owner).Cards.Where(c => c is not AscendersBane).ToList(), false);
         List<CardPileAddResult> results = new List<CardPileAddResult>();
         for (int i = 0; i < 20; ++i)
@@ -44,5 +54,7 @@ public class Shattered() : BalatroRelic
             CardCmd.PreviewCardPileAdd(result, style: CardPreviewStyle.MessyLayout);
             await Cmd.CustomScaledWait(0.1f, 0.2f);
         }
+        await SaveManager.Instance.SaveRun(this.Owner.RunState.CurrentRoom);
+
     }
 }

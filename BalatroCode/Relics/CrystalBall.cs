@@ -3,6 +3,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Helpers;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Potions;
 using MegaCrit.Sts2.Core.Rewards;
@@ -13,6 +14,12 @@ public class CrystalBall() : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
+    
+    public override bool HasUponPickupEffect => true;
+
+    protected override IEnumerable<IHoverTip> ExtraHoverTips => [
+        HoverTipFactory.FromPotion<Duplicator>()
+    ];
 
     public override async Task AfterObtained()
     {

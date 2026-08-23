@@ -34,7 +34,9 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         _countLabel = GetNodeOrNull<MegaLabel>(CountLabelNodePath);
         Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;
         Character.Balatro.CombatGoldEarnedChanged += OnCombatGoldChanged;
-
+        
+        Character.Balatro.CombatStart -= ResetGoldDisplay;
+        Character.Balatro.CombatStart += ResetGoldDisplay;
     }
 
     // ── Count badge ───────────────────────────────────────────────────────────
@@ -51,7 +53,13 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         UpdateGoldDisplay();
     }
 
-    public void UpdateGoldDisplay()
+    private void ResetGoldDisplay()
+    {
+        if (_countLabel == null) return;
+        _countLabel.SetText("0 / 200");
+    }
+    
+    private void UpdateGoldDisplay()
     {    
         var goldEarned = GetGoldEarned();
         var maxGold = GetMaxGold();
@@ -66,7 +74,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
             .SetTrans(Tween.TransitionType.Expo);
         _countLabel.PivotOffset = _countLabel.Size * 0.5f;
         _previousCount = goldEarned.Value;
-        _countLabel.SetText(goldEarned.Value.ToString() + " / " + maxGold.Value.ToString());
+        _countLabel.SetText(goldEarned.Value + " / " + maxGold.Value);
     }
 
     public override void _Process(double delta)
@@ -92,6 +100,8 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     public override void _ExitTree()
     {
         Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;
+        Character.Balatro.CombatStart -= ResetGoldDisplay;
+
         base._ExitTree();
     }
 }

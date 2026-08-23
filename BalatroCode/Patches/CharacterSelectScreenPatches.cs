@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Patches;
 
@@ -41,6 +42,7 @@ public class CharacterSelectScreenPatches
                 if (string.IsNullOrEmpty(id)) return;
 
                 var isBalatro = id is "BALATRO-BALATRO";
+                DeckPanelUI.UpdateRelic(BalatroConfig.SelectedDeck);
                 DeckPanelUI.SetVisibility(isBalatro);
                 StakePanelUI.SetVisibility(isBalatro);
             }

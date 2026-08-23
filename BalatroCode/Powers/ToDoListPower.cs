@@ -27,7 +27,7 @@ public class ToDoListPower() : BalatroPower, IRandomType
 
     public CardType CurrentType { get; set; } = CardType.None;
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if (Owner.Player == null) return;
         if (cardPlay.Card.Type == CurrentType) await PlayerCmd.GainGold(Amount, Owner.Player);

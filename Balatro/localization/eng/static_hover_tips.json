@@ -59,27 +59,28 @@
   "BALATRO-BALATRO.erraticDeck.description": "Don't look for a pattern, be the pattern.",
   "BALATRO-BALATRO.erraticDeck.adjective": "erratic",
 
+  
   "BALATRO-BALATRO.whiteStake.title": "White Stake",
   "BALATRO-BALATRO.whiteStake.description": "Base difficulty.",
   
   "BALATRO-BALATRO.redStake.title": "Red Stake",
-  "BALATRO-BALATRO.redStake.description": "Normal enemies drop half the #yGold.",
+  "BALATRO-BALATRO.redStake.description": "Chests give no [gold]Gold[/gold].",
   
   "BALATRO-BALATRO.greenStake.title": "Green Stake",
-  "BALATRO-BALATRO.greenStake.description": "Enemies have more maximum #yHP.",
+  "BALATRO-BALATRO.greenStake.description": "Enemies have more maximum HP.",
   
   "BALATRO-BALATRO.blackStake.title": "Black Stake",
-  "BALATRO-BALATRO.blackStake.description": "Cannot remove basic cards from your deck.",
+  "BALATRO-BALATRO.blackStake.description": "Cannot remove Basic cards from your [gold]Deck[/gold].",
   
   "BALATRO-BALATRO.blueStake.title": "Blue Stake",
-  "BALATRO-BALATRO.blueStake.description": "At start of combat draw #b1 less card.",
+  "BALATRO-BALATRO.blueStake.description": "At start of combat draw [blue]2[/blue] less cards.",
   
   "BALATRO-BALATRO.purpleStake.title": "Purple Stake",
-  "BALATRO-BALATRO.purpleStake.description": "Enemies start combat with #yTop-Up.",
+  "BALATRO-BALATRO.purpleStake.description": "Enemies start combat with Top-Up.",
   
   "BALATRO-BALATRO.orangeStake.title": "Orange Stake",
-  "BALATRO-BALATRO.orangeStake.description": "Some jokers perish after #b10 uses.",
+  "BALATRO-BALATRO.orangeStake.description": "Some cards have [gold]Perishable[/gold] [blue]10[/blue].",
   
   "BALATRO-BALATRO.goldStake.title": "Gold Stake",
-  "BALATRO-BALATRO.goldStake.description": "Playing a card costs #b2 #yGold."
+  "BALATRO-BALATRO.goldStake.description": "Playing a card costs [blue]2[/blue] [gold]Deck[/gold]."
 }

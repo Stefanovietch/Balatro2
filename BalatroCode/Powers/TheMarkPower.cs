@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.Afflictions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.Commands;
@@ -29,7 +30,7 @@ public class TheMarkPower() : BalatroPower, IBlindPower
             foreach (var card in playerPlayerCombatState.AllCards)
             {
                 if (card.Type != CardType.Power) continue;
-                await CardCmd.Afflict<BalatroMarked>(card, 3M);
+                await CardCmd.Afflict<Marked>(card, 3M);
             }
         }
     }
@@ -38,7 +39,7 @@ public class TheMarkPower() : BalatroPower, IBlindPower
     {
         if (card.Owner.Character is not Character.Balatro || card.Affliction != null || card.Type != CardType.Power)
             return;
-        await CardCmd.Afflict<BalatroMarked>(card, 3M);
+        await CardCmd.Afflict<Marked>(card, 3M);
     }
 
     public override bool TryModifyEnergyCostInCombat(
@@ -46,7 +47,7 @@ public class TheMarkPower() : BalatroPower, IBlindPower
         decimal originalCost,
         out decimal modifiedCost)
     {
-        if (card.Affliction is not BalatroMarked)
+        if (card.Affliction is not Marked)
         {
             modifiedCost = originalCost;
             return false;
@@ -64,14 +65,10 @@ public class TheMarkPower() : BalatroPower, IBlindPower
         {
             var playerPlayerCombatState = player.PlayerCombatState;
             if (playerPlayerCombatState is null || player.Character is not Character.Balatro) continue;
-            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is BalatroMarked))
+            foreach (var card in playerPlayerCombatState.AllCards.Where(c => c.Affliction is Marked))
                 CardCmd.ClearAffliction(card);
         }
 
         return Task.CompletedTask;
     }
-}
-
-public sealed class BalatroMarked : BalatroAfflictions
-{
 }
