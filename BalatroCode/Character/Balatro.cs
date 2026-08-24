@@ -50,7 +50,7 @@ public class Balatro : PlaceholderCharacterModel
     public static event Action? CardPlayed;
     
 
-    public static readonly Color Color = new("ffffff");
+    public static readonly Color Color = new("f0f0f0");
     
     public override Color NameColor => Color;
     public override CharacterGender Gender => CharacterGender.Neutral;
@@ -87,10 +87,10 @@ public class Balatro : PlaceholderCharacterModel
             return icon;
         }
     }
-    
+
     public override decimal ModifyGoldGained(Player player, decimal amount)
     {
-        if (Stakes.CurrentStake() >= 1 && player.RunState.CurrentRoom?.RoomType is Treasure) return 0;
+        if (Stakes.CurrentStake(player) >= 1 && player.RunState.CurrentRoom?.RoomType is Treasure) return 0;
         
         if (player.PlayerCombatState == null || 
             !BalatroConfig.GoldCap || 
@@ -106,14 +106,57 @@ public class Balatro : PlaceholderCharacterModel
         CombatGoldEarnedChanged?.Invoke(player);
         return base.ModifyGoldGained(player, goldToGain);
     }
-    
+
+    public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    {
+        if (player.PlayerCombatState?.TurnNumber > 1 || player.Character is not Balatro) return;
+        var combatState = player.Creature.CombatState;
+        if (combatState == null) return;
+        var roomType = combatState.RunState.CurrentRoom?.RoomType;
+        if (roomType is Elite or Boss && BalatroConfig.BlindsActive)
+        {
+            var enemy = combatState.Enemies.FirstOrDefault(creature =>
+                creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
+            if (enemy != null)
+            {
+                var blindPowers = enemy.Powers.Where(p => p is IBlindPower).Select(p => ((IBlindPower)p).BlindType)
+                    .ToList();
+                await PowerCmd.Apply(choiceContext,
+                    BlindMethods.GetRandomBlindPower(enemy, roomType == Boss, blindPowers).ToMutable(),
+                    enemy, 1, null, null);
+            }
+        }
+        
+        if (Stakes.CurrentStake(player) <= 1) return;
+        foreach (var creature in combatState.Enemies)
+        {
+            if (Stakes.CurrentStake(player) > 1)
+            {
+                var extraHp = creature.MaxHp + creature.CombatState?.RunState.TotalFloor * 2;
+                if (extraHp != null)
+                {
+                    var hpDiff = creature.MaxHp - creature.CurrentHp;
+                    creature.SetMaxHpInternal((decimal)extraHp);
+                    creature.SetCurrentHpInternal((decimal)extraHp - hpDiff);
+                }
+            }
+            if (Stakes.CurrentStake(player) > 4)
+            {
+                decimal? amount = 1;
+                var typeMult = creature.CombatState?.RunState.CurrentRoom?.RoomType;
+                if (typeMult != null) amount = (creature.CombatState?.RunState.CurrentActIndex + 1) * (decimal) typeMult;
+                await PowerCmd.Apply<TopUpPower>(new ThrowingPlayerChoiceContext(), creature, amount ?? 1, null, null);
+            }
+        }
+    }
+/*
     public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
         IReadOnlyList<Creature> participants,
         ICombatState combatState)
     {
         if (combatState.RoundNumber > 1 || side != CombatSide.Player) return;
         var roomType = combatState.RunState.CurrentRoom?.RoomType;
-        if (roomType is Elite or Boss)
+        if (roomType is Elite or Boss && BalatroConfig.BlindsActive)
         {
             var enemy = combatState.Enemies.FirstOrDefault(creature =>
                 creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
@@ -148,7 +191,7 @@ public class Balatro : PlaceholderCharacterModel
             }
         }
     }
-
+    */
     
     
     public override Task BeforeCombatStart()
@@ -160,13 +203,13 @@ public class Balatro : PlaceholderCharacterModel
 
     public override decimal ModifyHandDraw(Player player, decimal count)
     {
-        if (Stakes.CurrentStake() < 4) return count;
+        if (Stakes.CurrentStake(player) < 4) return count;
         return player.PlayerCombatState?.TurnNumber > 1 ? count : count - 2;
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
-        if (Stakes.CurrentStake() < 7) return;
+        if (Stakes.CurrentStake(cardPlay.Card.Owner) < 7) return;
         await PlayerCmd.LoseGold(2, cardPlay.Card.Owner);
     }
 
@@ -177,111 +220,6 @@ public class Balatro : PlaceholderCharacterModel
         return base.AfterCardPlayed(choiceContext, cardPlay);
     }
     
-    public override Task AfterCombatEnd(CombatRoom room)
-    {
-        if (Stakes.CurrentStake() < 6) return base.AfterCombatEnd(room);
-
-        var rewardsSetSynchronizer = Traverse.Create(RunManager.Instance).Property("RewardsSetSynchronizer").GetValue<RewardsSetSynchronizer>();
-        var localPlayer = Traverse.Create(rewardsSetSynchronizer).Property("LocalPlayer").GetValue<Player>();
-        var playerRewardState = Traverse.Create(rewardsSetSynchronizer).Method("GetRewardStateForPlayer", localPlayer).GetValue();
-        var rewardsStack = Traverse.Create(playerRewardState).Field("rewardsStack").GetValue<System.Collections.IList>();
-        _ = TaskHelper.RunSafely(ApplyPerishable(rewardsStack, localPlayer, room));
-        return base.AfterCombatEnd(room);
-    }
-    
-    private async Task ApplyPerishable(System.Collections.IList rewardsStack, Player player, CombatRoom room)
-    {
-        var attempts = 0;
-        while (rewardsStack.Count == 0 && attempts++ < 30) await Cmd.Wait(1);
-        if (rewardsStack.Count == 0) return;
-        
-        var perishable = ModelDb.Enchantment<Perishable>();
-        
-        foreach (var setStateObj in rewardsStack)
-        {
-            var set = Traverse.Create(setStateObj).Field("set").GetValue<RewardsSet>();
-            if (set.Room != room) continue;
-            foreach (var reward in set.Rewards)
-            {
-                if (reward is not CardReward cardReward) continue;
-                foreach (var card in cardReward.Cards.Where(perishable.CanEnchant))
-                {
-                    MainFile.Logger.Info("test 4: " + card);
-                    if (player.PlayerRng.Rewards.NextFloat() < 0.3) CardCmd.Enchant<Perishable>(card, 10);
-                }
-            }
-        }
-    }
-    
-    /*
-    public override Task AfterRoomEntered(AbstractRoom room)
-    {
-        var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
-        if (state == null || room is not (RestSiteRoom or EventRoom)) return base.AfterRoomEntered(room);
-        {
-            var counter = room is RestSiteRoom ? RestSitesVisitedThisAct : QuestionMarksVisited;
-            foreach (var player in state.Players)
-                if (player.Character == this)
-                    counter.Set(player, counter.Get(player) + 1);
-        }
-        return base.AfterRoomEntered(room);
-    }
-
-    public override Task AfterActEntered()
-    {
-        var state = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
-        if (state == null) return base.AfterActEntered();
-        foreach (var player in state.Players)
-            if (player.Character == this)
-                RestSitesVisitedThisAct.Set(player, 0);
-        return base.AfterActEntered();
-    }
-
-
-    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
-    {
-        if (player.PlayerCombatState != null) CardsDiscardedThisTurn.Set(player.PlayerCombatState, 0);
-        player.PlayerCombatState?.AllCards
-            .OfType<IRandomType>()
-            .ToList()
-            .ForEach(card => card.SetRandomType());
-        return base.AfterPlayerTurnStart(choiceContext, player);
-    }
-
-    public override Task BeforeCardRemoved(CardModel card)
-    {
-        CardsRemoved.Set(card.Owner, CardsRemoved.Get(card.Owner) + 1);
-        return base.BeforeCardRemoved(card);
-    }
-
-    public override Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
-    {
-        var pile = card.Pile;
-        if (pile is { Type: PileType.Deck }) CardsAdded.Set(card.Owner, CardsAdded.Get(card.Owner) + 1);
-        return base.AfterCardChangedPiles(card, oldPileType, clonedBy);
-    }
-
-
-    public override Task AfterPotionUsed(PotionModel potion, Creature? target)
-    {
-        PotionsUsed.Set(potion.Owner, PotionsUsed.Get(potion.Owner) + 1);
-        return base.AfterPotionUsed(potion, target);
-    }
-
-    public override Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
-    {
-        if (card.Owner.PlayerCombatState != null)
-        {
-            CardsDiscardedThisTurn.Set(card.Owner.PlayerCombatState,
-                1 + CardsDiscardedThisTurn.Get(card.Owner.PlayerCombatState));
-            CardsDiscardedThisCombat.Set(card.Owner.PlayerCombatState,
-                1 + CardsDiscardedThisCombat.Get(card.Owner.PlayerCombatState));
-        }
-
-        return base.AfterCardDiscarded(choiceContext, card);
-    }
-    */
-    
     public override NCreatureVisuals CreateCustomVisuals()
     {
         var visual = NodeFactory<NCreatureVisuals>.CreateFromResource($"decks/{BalatroConfig.SelectedDeck}.png".ImagePath());
@@ -291,8 +229,8 @@ public class Balatro : PlaceholderCharacterModel
 
     public override string CustomRestSiteAnimPath => "scenes/rest_site.tscn".ImagePath();
     
-    //public override string CustomEnergyCounterPath { get; }
-
+    public override string CustomEnergyCounterPath => "scenes/energy_counter.tscn".ImagePath();
+    public override Color EnergyLabelOutlineColor => new (68/255f, 107/255f, 235/255f);
     public override string CustomIconTexturePath => "character_icon_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectIconPath => "char_select_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectLockedIconPath => "char_select_char_name_locked.png".CharacterUiPath();

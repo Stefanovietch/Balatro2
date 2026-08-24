@@ -123,5 +123,8 @@
 
   "BALATRO-PALETTE.title": "Palette",
   "BALATRO-PALETTE.flavor": "Remember what you sacrificed.",
-  "BALATRO-PALETTE.description": "At the start of your turn, draw [blue]1[/blue] additional card."
+  "BALATRO-PALETTE.description": "At the start of your turn, draw [blue]1[/blue] additional card.",
+
+  "BALATRO-ARCHAIC-TOOTH.description": "Upon pickup, [gold]Transform[/gold] [blue]2[/blue] starter cards into an Ancient card.",
+  "BALATRO-ARCHAIC-TOOTH.eventDescription": "[gold]Transform Clever Joker[/gold] and [gold]Mad Joker[/gold] into [gold]Evolved Joker[/gold]"
 }

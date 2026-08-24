@@ -1,4 +1,5 @@
-﻿using Balatro.BalatroCode.Relics;
+﻿using Balatro.BalatroCode.Cards;
+using Balatro.BalatroCode.Relics;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -16,9 +17,14 @@ public class GlowUp() : BalatroRelic
     
     public override bool HasUponPickupEffect => true;
 
-
+    private List<CardModel> AncientCards =>
+    [
+        ModelDb.Card<Canio>(), ModelDb.Card<Chicot>(), ModelDb.Card<Perkeo>(), 
+        ModelDb.Card<Triboulet>(), ModelDb.Card<Yorick>()
+    ];
+    
     public override async Task AfterObtained()
     {
-        CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(Owner.RunState.CreateCard(ModelDb.Card<SeekerStrike>(), Owner), PileType.Deck), 2f);
+        CardCmd.PreviewCardPileAdd(await CardPileCmd.Add(Owner.RunState.CreateCard(Owner.PlayerRng.Rewards.NextItem(AncientCards) ?? ModelDb.Card<Perkeo>(), Owner), PileType.Deck), 2f);
     }
 }

@@ -37,7 +37,7 @@
   "BALATRO-BRAINSTORM.title": "Brainstorm",
   "BALATRO-BRAINSTORM.description": "[gold]Replay[/gold] the first card played this turn.",
   "BALATRO-BULL.title": "Bull",
-  "BALATRO-BULL.description": "Gain 1 [gold]Block[/gold] for every {[gold]Block[/gold]PerGold} [gold]Gold[/gold] you have.",
+  "BALATRO-BULL.description": "Gain 1 [gold]Block[/gold] for every {blockPerGold} [gold]Gold[/gold] you have.",
   "BALATRO-BURGLAR.title": "Burglar",
   "BALATRO-BURGLAR.description": "Draw 3 Cards.",
   "BALATRO-BURNT_JOKER.title": "Burnt Joker",
@@ -75,7 +75,7 @@
   "BALATRO-DIET_COLA.title": "Diet Cola",
   "BALATRO-DIET_COLA.description": "When removed from deck, obtain a random common relic.",
   "BALATRO-D_N_A.title": "DNA",
-  "BALATRO-D_N_A.description": "This card transforms into a permanent copy of the last card played this combat.",
+  "BALATRO-D_N_A.description": "This card [gold]Transforms[/gold] into a permanent copy of the last card played this combat.",
   "BALATRO-DRIVERS_LICENSE.title": "Driver's License",
   "BALATRO-DRIVERS_LICENSE.description": "If your deck has at least 4 [gold]Rare[/gold] cards, gain {StrengthPower:diff()} [gold]Strength[/gold] and {DexterityPower:diff()} [gold]Dexterity[/gold].",
   "BALATRO-DRUNKARD.title": "Drunkard",
@@ -298,6 +298,6 @@
   "BALATRO-ASSAULT.title": "Assault",
   "BALATRO-ASSAULT.description": "Deal {Damage:diff()} damage to ALL enemies.",
   "BALATRO-ENHANCE.title": "Enhance",
-  "BALATRO-ENHANCE.description": "Permanently increase [gold]Block[/gold] by {BlockIncrease:diff()} and damage by {DamageIncrease:diff()}.",
+  "BALATRO-ENHANCE.description": "Permanently increase [gold]Block[/gold] by {BlockIncrease:diff()} and damage by {DamageIncrease:diff()}."
     
 }

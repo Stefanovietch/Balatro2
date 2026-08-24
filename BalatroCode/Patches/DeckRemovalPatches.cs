@@ -18,8 +18,19 @@ public class DeckRemovalPatches
     {
         static void Prefix(Player player, CardSelectorPrefs prefs, ref Func<CardModel, bool>? filter)
         {
-            if (Stakes.CurrentStake() < 3) return;
+            if (Stakes.CurrentStake(player) < 3) return;
             filter = c => c.Rarity != CardRarity.Basic;
+        }
+    }
+    
+    [HarmonyPatch(typeof(CardPileCmd), nameof(CardPileCmd.RemoveFromDeck), [typeof(IReadOnlyList<CardModel>), typeof(bool)])] 
+    public static class BalatroRemoveFromDeckPatch
+    {
+        [HarmonyPostfix]
+        static void Postfix(ref IReadOnlyList<CardModel> cards)
+        {
+            if (Stakes.CurrentStake(cards.FirstOrDefault()?.Owner) < 3) return;
+            cards = cards.Where(c => c.Rarity != CardRarity.Basic).ToList();
         }
     }
 }

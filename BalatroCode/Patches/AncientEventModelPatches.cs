@@ -33,4 +33,26 @@ public class AncientEventModelPatches
             await RelicCmd.Obtain(relic, player);
         }
     }
+    
+    [HarmonyPatch(typeof(Neow), "get_PositiveOptions")]
+    public static class NeowPreciseScissorsPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> options)
+        {
+            if (Stakes.CurrentStake() < 3) return;
+            options = options.Where(e => e.Relic is not PreciseScissors);
+        }
+    }
+    
+    [HarmonyPatch(typeof(Neow), "get_CurseOptions")]
+    public static class NeowPrecariousShearsPatch
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> options)
+        {
+            if (Stakes.CurrentStake() < 3) return;
+            options = options.Where(e => e.Relic is not PrecariousShears);
+        }
+    }
 }

@@ -1,4 +1,5 @@
 using Balatro.BalatroCode.Cards;
+using Balatro.BalatroCode.Enchantments;
 using Balatro.BalatroCode.Powers;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
@@ -21,13 +22,16 @@ public class HookPatches
     {
         public static readonly HashSet<AbstractModel> ProcessedThisCall = new();
 
+        [HarmonyPrefix]
         static void Prefix() => ProcessedThisCall.Clear();
+        [HarmonyPostfix]
         static void Postfix() => ProcessedThisCall.Clear();
     }
     
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterPlayerTurnStart))]
     public static class BalatroAfterPlayerTurnStartPatch
     {
+        [HarmonyPrefix]
         static void Prefix(ICombatState combatState, PlayerChoiceContext choiceContext, Player player)
         {
             if (player.Character is not Character.Balatro) return;
@@ -45,6 +49,7 @@ public class HookPatches
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterCardDiscarded))]
     public static class BalatroAfterCardDiscardedPatch
     {
+        [HarmonyPrefix]
         static void Prefix(CardModel card)
         {
             var owner = card.Owner;
@@ -61,6 +66,7 @@ public class HookPatches
     [HarmonyPatch(typeof(Hook), nameof(Hook.BeforeCardRemoved))]
     public static class BalatroBeforeCardRemovedPatch
     {
+        [HarmonyPrefix]
         static void Prefix(CardModel card)
         {
             var owner = card.Owner;
@@ -73,6 +79,7 @@ public class HookPatches
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterCardChangedPiles))]
     public static class BalatroAfterCardChangedPilesPatch
     {
+        [HarmonyPrefix]
         static void Prefix(CardModel card)
         {
             var owner = card.Owner;
@@ -86,6 +93,7 @@ public class HookPatches
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterPotionUsed))]
     public static class BalatroAfterPotionUsedPatch
     {
+        [HarmonyPrefix]
         static void Prefix(PotionModel potion)
         {
             var owner = potion.Owner;
@@ -97,7 +105,8 @@ public class HookPatches
     
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterRoomEntered))]
     public static class BalatroAfterRoomEnteredPatch
-    {
+    {        
+        [HarmonyPrefix]
         static void Prefix(IRunState runState, AbstractRoom room)
         {
             if (room is not (RestSiteRoom or EventRoom)) return;
@@ -111,11 +120,28 @@ public class HookPatches
     [HarmonyPatch(typeof(Hook), nameof(Hook.AfterActEntered))]
     public static class BalatroAfterActEnteredPatch
     {
+        [HarmonyPrefix]
         static void Prefix(IRunState runState)
         {
             foreach (var player in runState.Players)
-                if (player.Character is Character.Balatro)
+                if (player.Character is Character.Balatro) 
                     Character.Balatro.RestSitesVisitedThisAct.Set(player, 0);
+                
+        }
+    }
+    
+    [HarmonyPatch(typeof(Hook), nameof(Hook.TryModifyCardRewardOptions))]
+    public static class BalatroTryModifyCardRewardOptionsPatch
+    {
+        [HarmonyPostfix]
+        static void Postfix(IRunState runState, Player player, List<CardCreationResult> cardRewardOptions,
+            CardCreationOptions creationOptions)
+        {
+            if (Stakes.CurrentStake(player) < 6) return;
+            foreach (var card in cardRewardOptions.Select(r => r.Card))
+            {
+                if (player.PlayerRng.Rewards.NextFloat() < 1) CardCmd.Enchant<Perishable>(card, 10);
+            }
         }
     }
 }

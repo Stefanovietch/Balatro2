@@ -3,6 +3,8 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using BaseLib.Config;
 using Godot;
+using MegaCrit.Sts2.Core.Context;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Runs;
 using FileAccess = System.IO.FileAccess;
@@ -27,9 +29,9 @@ public static class Stakes
         { "blueStake", 4 }, { "purpleStake", 5 }, { "orangeStake", 6 }, { "goldStake", 7 }
     };
 
-    public static int CurrentStake()
+    public static int CurrentStake(Player? player)
     {
-        if (RunManager.Instance.NetService.Type != NetGameType.Singleplayer) return 0;
+        if (RunManager.Instance.NetService.Type != NetGameType.Singleplayer || player?.Character is not Character.Balatro) return -1;
         return StakeLevels.GetValueOrDefault(BalatroConfig.SelectedStake, -1);
     }
 }

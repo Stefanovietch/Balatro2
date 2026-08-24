@@ -14,7 +14,7 @@ public class DeckOverlay
         var texRect = new TextureRect
         {
             Texture = GD.Load<Texture2D>("res://Balatro/images/decks/" + BalatroConfig.SelectedDeck + ".png"),
-            Modulate = new Color(1f, 1f, 1f, 0.05f),
+            Modulate = new Color(1f, 1f, 1f, 0.08f),
             MouseFilter = Control.MouseFilterEnum.Ignore,
             Size = frame.Size,
             Position = frame.Position,
