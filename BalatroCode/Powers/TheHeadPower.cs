@@ -43,6 +43,16 @@ public class TheHeadPower() : BalatroPower, IBlindPower
         await PowerCmd.Apply<HeadSlowPower>(new ThrowingPlayerChoiceContext(),
             players.Where(p => p.Character is Character.Balatro).Select(p => p.Creature), 1, Owner, null);
     }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
+    }
 
     public override async Task AfterRemoved(Creature oldOwner)
     {

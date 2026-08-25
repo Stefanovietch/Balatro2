@@ -1,4 +1,26 @@
 {
+  "BALATRO-BLUE_SEAL.title": "Blue Seal",
+  "BALATRO-BLUE_SEAL.description": "This card can be upgraded any amount of times.",
+  
+  "BALATRO-GLASS.title": "Glass",
+  "BALATRO-GLASS.description": "This cards attack damage is doubled, but has a [blue]{Numerator}[/blue] in [blue]{Chance:diff()}[/blue] [gold]Chance[/gold] to [gold]Exhaust[/gold].",
+  "BALATRO-GLASS.extraCardText": "[blue]{Numerator}[/blue] in [blue]{Chance:diff()}[/blue] [gold]Chance[/gold] to [gold]Exhaust[/gold].",
+  
+  "BALATRO-GOLD_SEAL.title": "Gold Seal",
+  "BALATRO-GOLD_SEAL.description": "This card gives [blue]5[/blue] [gold]Gold[/gold] when played.",
+  
+  "BALATRO-LUCKY.title": "Lucky",
+  "BALATRO-LUCKY.description": "This card has a [blue]{Numerator}[/blue] in [blue]{Chance:diff()}[/blue] [gold]Chance[/gold] to gain [blue]6[/blue] [gold]Vigor[/gold] and a [blue]{Numerator}[/blue] in [blue]{ChanceMoney:diff()}[/blue] [gold]Chance[/gold] to gain [blue]20[/blue] [gold]Gold[/gold].",
+
   "BALATRO-PERISHABLE.title": "Perishable",
-  "BALATRO-PERISHABLE.description": "This card is removed from your [gold]Deck[/gold] after [blue]{Amount}[/blue] combats."
+  "BALATRO-PERISHABLE.description": "This card is removed from your [gold]Deck[/gold] after [blue]{Amount}[/blue] combats.",
+
+  "BALATRO-PURPLE_SEAL.title": "Purple Seal",
+  "BALATRO-PURPLE_SEAL.description": "This card has [gold]Sly[/gold].",
+
+  "BALATRO-STEEL.title": "Steel",
+  "BALATRO-STEEL.description": "This card adds a [gold]Stone Card[/gold] to your [gold]Hand[/gold] when played.",
+  
+  "BALATRO-WILD.title": "Wild",
+  "BALATRO-WILD.description": "Add a random card from any color into your [gold]Hand[/gold] when played, it's free to play this turn."
 }

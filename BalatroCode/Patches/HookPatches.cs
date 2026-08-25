@@ -11,6 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Map;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace Balatro.BalatroCode.Patches;
@@ -109,11 +110,29 @@ public class HookPatches
         [HarmonyPrefix]
         static void Prefix(IRunState runState, AbstractRoom room)
         {
-            if (room is not (RestSiteRoom or EventRoom)) return;
-
-            var counter = room is RestSiteRoom
-                ? Character.Balatro.RestSitesVisitedThisAct
-                : Character.Balatro.QuestionMarksVisited;
+            if (room is not RestSiteRoom) return;
+            
+            foreach (var player in runState.Players)
+                if (player.Character is Character.Balatro) 
+                    Character.Balatro.RestSitesVisitedThisAct.Set(player, Character.Balatro.RestSitesVisitedThisAct.Get(player) + 1);
+        }
+    }
+    
+    [HarmonyPatch(typeof(RunManager), nameof(RunManager.EnterMapPointInternal))]
+    public static class BalatroEnterMapPointInternalPatch
+    {        
+        
+        [HarmonyPrefix]
+        static void Prefix(MapPointType pointType)
+        {
+            MainFile.Logger.Info("test 1");
+            if (pointType is not MapPointType.Unknown) return;
+            MainFile.Logger.Info("test 2");
+            var runState = Traverse.Create(RunManager.Instance).Property("State").GetValue<RunState>();
+            if (runState == null) return;
+            foreach (var player in runState.Players)
+                if (player.Character is Character.Balatro) 
+                    Character.Balatro.QuestionMarksVisited.Set(player, Character.Balatro.QuestionMarksVisited.Get(player) + 1);
         }
     }
     
@@ -138,9 +157,9 @@ public class HookPatches
             CardCreationOptions creationOptions)
         {
             if (Stakes.CurrentStake(player) < 6) return;
-            foreach (var card in cardRewardOptions.Select(r => r.Card))
+            foreach (var card in cardRewardOptions.Select(r => r.Card).Where(c => c.Enchantment == null && ModelDb.Enchantment<Perishable>().CanEnchant(c)))
             {
-                if (player.PlayerRng.Rewards.NextFloat() < 1) CardCmd.Enchant<Perishable>(card, 10);
+                if (player.PlayerRng.Rewards.NextFloat() < 0.3) CardCmd.Enchant<Perishable>(card, 10);
             }
         }
     }

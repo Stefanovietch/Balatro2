@@ -24,7 +24,7 @@ public class AncientEventModelPatches
         [HarmonyPostfix]
         public static async void Postfix(AncientEventModel __instance)
         {
-            if (__instance.Owner is not { } player) return;
+            if (!__instance.IsMutable || __instance.Owner is not { } player) return;
             if (player.GetRelic<HighStakes>() == null) return;
             var pickedRelic = player.Relics.LastOrDefault();
             List<RelicModel?> options = __instance.AllPossibleOptions.Select(o => o.Relic).Where(r => r?.GetType() != pickedRelic?.GetType()).ToList();
@@ -38,21 +38,32 @@ public class AncientEventModelPatches
     public static class NeowPreciseScissorsPatch
     {
         [HarmonyPostfix]
-        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> options)
+        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
-            if (Stakes.CurrentStake() < 3) return;
-            options = options.Where(e => e.Relic is not PreciseScissors);
+            if (!__instance.IsMutable || Stakes.CurrentStake(__instance.Owner) < 3) return;
+            __result = __result.Where(e => e.Relic is not PreciseScissors);
         }
     }
     
     [HarmonyPatch(typeof(Neow), "get_CurseOptions")]
-    public static class NeowPrecariousShearsPatch
+    public static class NeowPrecariousShearsPatch 
     {
         [HarmonyPostfix]
-        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> options)
+        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
-            if (Stakes.CurrentStake() < 3) return;
-            options = options.Where(e => e.Relic is not PrecariousShears);
+            if (!__instance.IsMutable || Stakes.CurrentStake(__instance.Owner) < 3) return;
+            __result = __result.Where(e => e.Relic is not PrecariousShears);
+        }
+    }
+    
+    [HarmonyPatch(typeof(Orobas), "get_OptionPool3")]
+    public static class TouchOfOrobasPatch 
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
+        {
+            if (!__instance.IsMutable) return;
+            __result = __result.Where(e => e.Relic is not TouchOfOrobas);
         }
     }
 }

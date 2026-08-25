@@ -36,6 +36,8 @@ public class MysticSummit() : BalatroCard(1,
     }
 
     protected override bool ShouldGlowGoldInternal => NoDiscardPile();
+    protected override bool ShouldGlowRedInternal => !NoDiscardPile();
+
 
     private bool NoDiscardPile()
     {

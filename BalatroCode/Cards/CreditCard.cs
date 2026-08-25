@@ -15,6 +15,8 @@ public class CreditCard() : BalatroCard(1,
         new GoldVar(15)
     ];
 
+    public override bool CanBeGeneratedInCombat => false;
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(

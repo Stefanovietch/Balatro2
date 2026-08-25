@@ -8,6 +8,7 @@ public class DeckOverlay
 {
     public static readonly AddedNode<NCard, TextureRect> Node = new((card) =>
     {
+        if (!BalatroConfig.CardOverlay) return new TextureRect();
         var cardContainer = card.GetChild(0)!;
         var frame = cardContainer.GetNode<Control>("Frame");
         

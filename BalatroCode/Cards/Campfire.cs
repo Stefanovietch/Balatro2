@@ -31,7 +31,7 @@ public class Campfire() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, DynamicVars["StrengthPower"].BaseValue,
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, ((CalculatedVar)DynamicVars["StrengthPower"]).Calculate(null),
             Owner.Creature, this);
     }
 

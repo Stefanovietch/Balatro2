@@ -32,7 +32,10 @@ public class TheOxPower() : BalatroPower, IBlindPower
         foreach (var p in enumerable.Where(c => c is
                      { IsPlayer: true, IsAlive: true, Player.Character: Character.Balatro }))
         {
-            if (p.Player == null) continue;
+            if (p.Player == null || p.Player.PlayerCombatState == null) continue;
+            foreach (var oxed in p.Player.PlayerCombatState.AllCards.Where(c => c.Affliction is Oxed))
+                CardCmd.ClearAffliction(oxed);
+            
             var card = PileType.Hand.GetPile(p.Player).Cards.TakeRandom(1, p.Player.RunState.Rng.CombatCardSelection)
                 .FirstOrDefault();
             if (card == null) continue;
@@ -47,6 +50,16 @@ public class TheOxPower() : BalatroPower, IBlindPower
             await PlayerCmd.SetGold(0, cardPlay.Card.Owner);
             CardCmd.ClearAffliction(cardPlay.Card);
         }
+    }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
     }
 
     public override Task AfterRemoved(Creature oldOwner)

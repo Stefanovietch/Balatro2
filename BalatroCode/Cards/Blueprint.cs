@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using Balatro.BalatroCode.Cards;
+using Balatro.BalatroCode.Patches;
 using BaseLib.Commands;
+using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -29,7 +31,9 @@ public class Blueprint() : BalatroCard(1,
         var card = CombatManager.Instance.History.CardPlaysFinished
             .LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not Blueprint)?.CardPlay.Card;
         if (card == null) return;
+        PowerReplayPatch.IsReplaying = true;
         await CardCmd.AutoPlay(choiceContext, card, null);
+        PowerReplayPatch.IsReplaying = false;
     }
 
     protected override void OnUpgrade()

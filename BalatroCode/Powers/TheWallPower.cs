@@ -27,9 +27,11 @@ public class TheWallPower() : BalatroPower, IBlindPower
 
     public override Task AfterRemoved(Creature oldOwner)
     {
+        if (this.Owner.IsDead) return base.AfterRemoved(oldOwner);;
         var hpDiff = Owner.MaxHp - Owner.CurrentHp;
         Owner.SetMaxHpInternal(Owner.MaxHp / 2M);
-        Owner.SetCurrentHpInternal(Owner.MaxHp - hpDiff);
+        var newHp = Owner.MaxHp - hpDiff < 0 ? 0 : Owner.MaxHp - hpDiff;
+        Owner.SetCurrentHpInternal(newHp);
         return base.AfterRemoved(oldOwner);
     }
 }

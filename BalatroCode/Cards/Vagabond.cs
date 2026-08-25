@@ -17,7 +17,7 @@ public class Vagabond() : BalatroCard(1,
     [
         new CardsVar(1)
     ];
-
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override async Task OnPlay(

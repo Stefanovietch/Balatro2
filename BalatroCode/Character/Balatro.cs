@@ -78,6 +78,12 @@ public class Balatro : PlaceholderCharacterModel
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<BalatroRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<BalatroPotionPool>();
 
+    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
+    {
+        
+        return base.AfterDeath(choiceContext, creature, wasRemovalPrevented, deathAnimLength);
+    }
+
     public override Control CustomIcon
     {
         get

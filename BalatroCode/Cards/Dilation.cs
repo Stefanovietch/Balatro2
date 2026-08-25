@@ -12,7 +12,11 @@ public class Dilation() : BalatroCurseCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal,CardKeyword.Exhaust];
+    
+    public override bool CanBeGeneratedByModifiers => false;
+
+    public override int MaxUpgradeLevel => 0;
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {

@@ -50,6 +50,16 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
         return true;
     }
     
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
+    }
+    
     public override Task AfterRemoved(Creature oldOwner)
     {
         var players = Owner.CombatState?.RunState.Players;

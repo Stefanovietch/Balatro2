@@ -18,7 +18,7 @@ public static class Stakes
         return BalatroConfig.Stakes.GetValueOrDefault(deckName, 0);
     }
 
-    public static void SetStake(string deckName, int value)
+    public static void SetMaxStake(string deckName, int value)
     {
         BalatroConfig.Stakes[deckName] = value;
     }
@@ -41,9 +41,11 @@ internal class BalatroConfig : SimpleModConfig
 {
     [ConfigHoverTip] public static bool BlindsActive { get; set; } = true;
     [ConfigHoverTip] public static bool GoldCap { get; set; } = true;
+    [ConfigHoverTip] public static bool CardOverlay { get; set; } = true;
+
     [ConfigHideInUI] public static string SelectedDeck { get; set; } = "redDeck";
     [ConfigHideInUI] public static string SelectedStake { get; set; } = "whiteStake";
-
+    
     [ConfigHideInUI]
     [System.ComponentModel.TypeConverter(typeof(DictionaryJsonConverter))]
     public static Dictionary<string, int> Stakes { get; set; } = new()

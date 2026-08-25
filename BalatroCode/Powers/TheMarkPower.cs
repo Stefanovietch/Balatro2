@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
@@ -55,6 +56,16 @@ public class TheMarkPower() : BalatroPower, IBlindPower
 
         modifiedCost = card.Affliction.Amount;
         return true;
+    }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
     }
 
     public override Task AfterRemoved(Creature oldOwner)

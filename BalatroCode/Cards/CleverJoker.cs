@@ -38,8 +38,7 @@ public class CleverJoker() : BalatroCard(1,
 
     private bool LastCardIsSkill()
     {
-        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c =>
-            c.HappenedThisTurn(CombatState) && c.CardPlay.Card.Owner == Owner);
+        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner);
         return yourCardPlayed?.CardPlay.Card.Type == CardType.Skill;
     }
 }

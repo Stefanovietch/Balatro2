@@ -68,6 +68,7 @@ public class Obelisk() : BalatroCard(2,
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    public override bool CanBeGeneratedInCombat => false;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -85,9 +86,9 @@ public class Obelisk() : BalatroCard(2,
         
         IReadOnlyList<CardModel> options =
         [
+            CombatState.CreateCard(ModelDb.Card<Assault>(), this.Owner),
             CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner)
+            CombatState.CreateCard(ModelDb.Card<Enhance>(), this.Owner)
         ];
         foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
         

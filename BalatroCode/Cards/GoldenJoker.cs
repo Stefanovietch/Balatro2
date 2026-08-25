@@ -15,6 +15,8 @@ public class GoldenJoker() : BalatroCard(1,
         new GoldVar(40)
     ];
 
+    public override bool CanBeGeneratedInCombat => false;
+    
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust, CardKeyword.Ethereal];
 
 

@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Afflictions;
 
@@ -34,6 +35,16 @@ public class TheArmPower() : BalatroPower, IBlindPower
                 await CardCmd.Afflict<Armed>(card, 1M);
             }
         }
+    }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
     }
 
     public override async Task AfterCardEnteredCombat(CardModel card)

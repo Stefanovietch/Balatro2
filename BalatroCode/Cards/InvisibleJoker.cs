@@ -36,17 +36,35 @@ public class InvisibleJoker() : BalatroCard(3,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        Counter++;
+        InvisibleJoker deckVersion;
+        if (DeckVersion is InvisibleJoker invisibleJoker)
+        {
+            deckVersion = invisibleJoker;
+        }
+        else
+        {
+            var deckCard = this.Owner.Deck.Cards.FirstOrDefault(c => c is InvisibleJoker);
+            if (deckCard is not InvisibleJoker invisibleJoker2) return;
+            deckVersion = invisibleJoker2;
+        }
+        CountUp();
+        deckVersion.CountUp();
+        
         if (Counter >= 2)
         {
             var newCard =
                 Owner.PlayerRng.Transformations.NextItem(PileType.Deck.GetPile(Owner).Cards.Where(c => c.Id != Id));
             if (newCard == null) return;
-            newCard = newCard.CreateClone();
+            newCard =  this.Owner.RunState.CloneCard(newCard);
             newCard.EnergyCost.SetCustomBaseCost(0);
-            var thisCard = PileType.Deck.GetPile(Owner).Cards.Single(c => c.Id == Id);
-            await CardCmd.Transform(thisCard, newCard);
+
+            await CardCmd.Transform(deckVersion, newCard);
         }
+    }
+
+    public void CountUp()
+    {
+        Counter++;
     }
 
     protected override void OnUpgrade()

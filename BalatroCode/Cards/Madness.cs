@@ -10,7 +10,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 namespace Balatro.BalatroCode.Cards;
 
 public class Madness() : BalatroCard(1,
-    CardType.Attack, CardRarity.Uncommon,
+    CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>

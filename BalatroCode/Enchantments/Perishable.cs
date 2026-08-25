@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.Extensions;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -23,6 +24,5 @@ public class Perishable : CustomEnchantmentModel
         }
         ModifyCard(); }
     
-    public override bool CanEnchant(CardModel card) => true;
     public override bool CanEnchantCardType(CardType cardType) => true;
 }

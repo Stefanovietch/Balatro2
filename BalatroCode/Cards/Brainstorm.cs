@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using Balatro.BalatroCode.Patches;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -23,9 +24,11 @@ public class Brainstorm() : BalatroCard(1,
         CardPlay play)
     {
         var card = CombatManager.Instance.History.CardPlaysFinished
-            .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState))?.CardPlay.Card;
+            .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState) && c.CardPlay.Card is not Brainstorm)?.CardPlay.Card;
         if (card == null) return;
+        PowerReplayPatch.IsReplaying = true;
         await CardCmd.AutoPlay(choiceContext, card, null);
+        PowerReplayPatch.IsReplaying = false;
     }
 
     protected override void OnUpgrade()

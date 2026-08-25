@@ -22,6 +22,8 @@ public class GiftCard() : BalatroCard(1,
         new PowerVar<GiftCardPower>(2)
     ];
 
+    public override bool CanBeGeneratedInCombat => false;
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>

@@ -6,7 +6,7 @@ namespace Balatro.BalatroCode.Scenes;
 
 public partial class StaticRestSiteCharacter : NRestSiteCharacter
 {
-    private Sprite2D _sprite;
+    private Sprite2D? _sprite;
 
     public override void _Ready()
     {
@@ -19,6 +19,6 @@ public partial class StaticRestSiteCharacter : NRestSiteCharacter
 
     public void SetImage(Texture2D texture)
     {
-        _sprite.Texture = texture;
+        if (_sprite != null) _sprite.Texture = texture;
     }
 }

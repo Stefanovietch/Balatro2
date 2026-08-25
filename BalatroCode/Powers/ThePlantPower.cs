@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
@@ -44,6 +45,16 @@ public class ThePlantPower() : BalatroPower, IBlindPower
     public override bool TryModifyKeywordsInCombat(CardModel card, ISet<CardKeyword> keywords)
     {
         return card.Affliction is Planted && keywords.Add(CardKeyword.Ethereal);
+    }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
     }
 
     public override Task AfterRemoved(Creature oldOwner)

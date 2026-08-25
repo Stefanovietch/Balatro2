@@ -33,14 +33,14 @@ public class Throwback() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, DynamicVars["QuestionMarks"].BaseValue,
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
             Owner.Creature, this);
-        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, DynamicVars["QuestionMarks"].BaseValue,
+        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
             Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["QuestionMarks"].UpgradeValueBy(1);
+        DynamicVars["QuestionMarksBase"].UpgradeValueBy(1);
     }
 }

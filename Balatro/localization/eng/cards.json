@@ -4,9 +4,9 @@
   "BALATRO-SLY_JOKER.title": "Sly Joker",
   "BALATRO-SLY_JOKER.description": "Gain {Block:diff()} Block.",
   "BALATRO-MAD_JOKER.title": "Mad Joker",
-  "BALATRO-MAD_JOKER.description": "If the last card you played this combat was an Attack, deal {Damage:diff()} damage.",
+  "BALATRO-MAD_JOKER.description": "If the last card you played was an Attack, deal {Damage:diff()} damage.",
   "BALATRO-CLEVER_JOKER.title": "Clever Joker",
-  "BALATRO-CLEVER_JOKER.description": "If the last card you played this combat was a Skill, gain {Block:diff()} Block.",
+  "BALATRO-CLEVER_JOKER.description": "If the last card you played was a Skill, gain {Block:diff()} Block.",
   
   "BALATRO-ABSTRACT_JOKER.title": "Abstract Joker",
   "BALATRO-ABSTRACT_JOKER.description": "Deal {Damage:diff()} for each card in your [gold]Hand[/gold].",
@@ -282,10 +282,7 @@
   "BALATRO-YORICK.title": "Yorick",
   "BALATRO-YORICK.description": "Deal {Damage:diff()} damage.\nIncreased by +100% for every {CardsToDiscard:diff()} cards manually discarded this combat.",
   "BALATRO-EVOLVED_JOKER.title": "Evolved Joker",
-  "BALATRO-EVOLVED_JOKER.description": "If the last card you played was: An Attack, deal {Damage:diff()} damage. A Skill, gain {Block:diff()} [gold]Block[/gold]. A Power, gain {Gold:diff} [gold]Gold[/gold].{InCombat:\n({ExtraText})|}",
-  "BALATRO-EVOLVED_JOKER.attack": "Deal {Damage:diff()} damage",
-  "BALATRO-EVOLVED_JOKER.skill": "Gain {Block:diff()} [gold]Block[/gold]",
-  "BALATRO-EVOLVED_JOKER.power": "Gain {Gold:diff} [gold]Gold[/gold]",
+  "BALATRO-EVOLVED_JOKER.description": "If the last card you played was: An Attack, deal {Damage:diff()} damage. A Skill, gain {Block:diff()} [gold]Block[/gold]. A Power, gain {Gold:diff} [gold]Gold[/gold].{InCombat:\n{ExtraText}|}",
 
   "BALATRO-STONE_CARD.title": "Stone Card",
   "BALATRO-STONE_CARD.description": "Gain {Block:diff()} Block.",

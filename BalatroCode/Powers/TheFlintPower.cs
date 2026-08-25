@@ -32,6 +32,17 @@ public class TheFlintPower() : BalatroPower, IBlindPower
             await PowerCmd.Apply<FlintWeakPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
         }
     }
+    
+    public override async Task AfterDeath(
+        PlayerChoiceContext choiceContext,
+        Creature creature,
+        bool wasRemovalPrevented,
+        float deathAnimLength)
+    {
+        if (wasRemovalPrevented || creature != this.Owner) return;
+        await PowerCmd.Remove(this);
+    }
+    
 
     public override async Task AfterRemoved(Creature oldOwner)
     {

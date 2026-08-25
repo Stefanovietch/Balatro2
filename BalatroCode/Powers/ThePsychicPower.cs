@@ -51,7 +51,7 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
         if (side != CombatSide.Player) return;
         var countBalatro = participants.Count(c => c.Player?.Character is Character.Balatro && c.IsAlive);
         if (countBalatro == 0) return;
-        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro, null, null, true);
+        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro - Amount + 1, null, null, true);
     }
 
     public override int DisplayAmount => Amount - 1;

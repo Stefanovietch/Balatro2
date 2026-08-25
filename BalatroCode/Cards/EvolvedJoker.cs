@@ -18,8 +18,10 @@ public class EvolvedJoker() : BalatroCard(1,
         new DamageVar(20, ValueProp.Move),
         new BlockVar(20, ValueProp.Move),
         new GoldVar(20),
-        new DisplayVar<EvolvedJoker>("ExtraText", e => LastCardPlayedType() is (CardType.Power or CardType.Skill or CardType.Attack) ? 
-            new LocString("static_hover_tips", "BALATRO-EVOLVED." + LastCardPlayedType().ToString().ToLower()).ToString() : "")
+        new DisplayVar<EvolvedJoker>("ExtraText", e => 
+            e.LastCardPlayedType() is (CardType.Power or CardType.Skill or CardType.Attack) 
+                ? $"({e.LastCardPlayedType().ToString()})"
+                : "")
     ];
     
     public override TargetType TargetType => LastCardPlayedType() == CardType.Attack ? TargetType.AnyEnemy : TargetType.Self;
@@ -57,7 +59,8 @@ public class EvolvedJoker() : BalatroCard(1,
     
     private CardType LastCardPlayedType()
     {
-        return CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(this.CombatState))
+        if (this.IsCanonical) return CardType.None;
+        return CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner)
             ?.CardPlay.Card.Type ?? CardType.None;
     }
     

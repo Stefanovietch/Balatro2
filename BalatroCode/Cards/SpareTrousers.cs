@@ -58,17 +58,38 @@ public class SpareTrousers() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        
-        
-        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
-            .WithHitCount(2)
-            .TargetingRandomOpponents(CombatState, false)
-            .WithHitFx("vfx/vfx_attack_slash")
-            .Execute(choiceContext);
 
-        if (!attackCommand.Results.SelectMany(r => r).Any(r =>
-                r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))
-            return;
+        List<Creature> targets = [];
+        switch (CombatState.HittableEnemies.Count)
+        {
+            case 0:
+                return;
+            case <= 2:
+                targets = CombatState.HittableEnemies.ToList();
+                break;
+            default:
+            {
+                var target1 = this.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
+                var target2 = this.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies.Where(c => c != target1));
+                targets = [target1!, target2!];
+                break;
+            }
+        }
+
+        bool triggeredFatal = false;
+        foreach (var target in targets)
+        {
+            var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+                .Targeting(target)
+                .WithHitFx("vfx/vfx_attack_slash")
+                .Execute(choiceContext);
+            
+            triggeredFatal |= attackCommand.Results
+                .SelectMany(r => r)
+                .Any(r => r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal()));
+
+        }
+        if (!triggeredFatal) return;
         var intValue = DynamicVars["DamageIncrease"].IntValue;
         BuffFromFatal(intValue);
         if (DeckVersion is not SpareTrousers deckVersion)
@@ -94,6 +115,6 @@ public class SpareTrousers() : BalatroCard(1,
 
     private void UpdateDamage()
     {
-        CurrentDamage = 13 + IncreasedDamage;
+        CurrentDamage = 6 + IncreasedDamage;
     }
 }

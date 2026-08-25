@@ -41,6 +41,9 @@ public abstract class BalatroTokenCard(
     TargetType target
 ) : CustomCardModel(cost, type, CardRarity.Token, target)
 {
+    public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
+    public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+    public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 }
 
 [Pool(typeof(CurseCardPool))]
@@ -50,4 +53,7 @@ public abstract class BalatroCurseCard(
     TargetType target
 ) : CustomCardModel(cost, type, CardRarity.Curse, target)
 {
+    public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
+    public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+    public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
 }
