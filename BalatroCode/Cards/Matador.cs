@@ -28,7 +28,7 @@ public class Matador() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_coin_explosion_regular")
             .Execute(choiceContext);
         if (Owner.Creature.CombatState?.Encounter?.RoomType is RoomType.Boss or RoomType.Elite)
         {

@@ -18,7 +18,6 @@ public class Assault() : BalatroTokenCard(1,
 
     public void UpdateValue(CardModel card)
     {
-        DynamicVars["DamageIncrease"].BaseValue = card.DynamicVars["DamageIncrease"].BaseValue;
-        DynamicVars["BlockIncrease"].BaseValue = card.DynamicVars["BlockIncrease"].BaseValue;
+        this.DynamicVars.Damage.BaseValue = card.DynamicVars.Damage.BaseValue;
     }
 }

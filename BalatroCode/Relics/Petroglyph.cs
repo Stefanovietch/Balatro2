@@ -9,7 +9,7 @@ namespace Balatro.BalatroCode.Relics;
 public class Petroglyph() : BalatroRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Uncommon;
+        RelicRarity.Common;
 
 
     public override async Task AfterCreatureAddedToCombat(Creature creature)

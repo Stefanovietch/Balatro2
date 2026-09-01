@@ -28,12 +28,18 @@ public class Blueprint() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var card = CombatManager.Instance.History.CardPlaysFinished
-            .LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not Blueprint)?.CardPlay.Card;
-        if (card == null) return;
+        var cardPlayEntry = CombatManager.Instance.History.CardPlaysFinished
+            .LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not Blueprint);
+        if (cardPlayEntry == null) return;
         PowerReplayPatch.IsReplaying = true;
-        await CardCmd.AutoPlay(choiceContext, card, null);
-        PowerReplayPatch.IsReplaying = false;
+        try
+        {
+            await CardCmd.AutoPlay(choiceContext, cardPlayEntry.CardPlay.Card, cardPlayEntry.CardPlay.Target);
+        }
+        finally
+        {
+            PowerReplayPatch.IsReplaying = false;
+        }
     }
 
     protected override void OnUpgrade()

@@ -34,7 +34,7 @@ public class EvenSteven() : BalatroCard(2,
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount((int)((CalculatedVar)DynamicVars["EvenCostPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
-            .WithHitFx(null, null, "blunt_attack.mp3")
+            .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
     }
 

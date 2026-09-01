@@ -30,12 +30,12 @@ public class GrosMichel() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(CombatState);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .Execute(choiceContext);
         if (this.RollChance(Owner, DynamicVars["Chance"].IntValue))
         {
             await CardPileCmd.RemoveFromCombat(this);
-            if (DeckVersion is not Cavendish deckVersion)
+            if (DeckVersion is not GrosMichel deckVersion)
                 return;
             await CardPileCmd.RemoveFromDeck(deckVersion);
             ModelDb.CardPool<BalatroCardPool>().GrosMichelExtinct = true;

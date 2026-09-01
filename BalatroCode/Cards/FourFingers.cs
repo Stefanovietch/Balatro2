@@ -34,13 +34,13 @@ public class FourFingers() : BalatroCard(1,
                 ArgumentNullException.ThrowIfNull(play.Target);
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
                     .Targeting(play.Target)
-                    .WithHitFx("vfx/vfx_attack_slash")
+                    .WithHitFx("vfx/vfx_scratch")
                     .Execute(choiceContext);
             }
             else
                 await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
                     .TargetingRandomOpponents(CombatState)
-                    .WithHitFx("vfx/vfx_attack_slash")
+                    .WithHitFx("vfx/vfx_scratch")
                     .Execute(choiceContext);
     }
 

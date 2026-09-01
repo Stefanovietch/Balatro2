@@ -1,4 +1,5 @@
 ﻿using Balatro.BalatroCode.Cards;
+using Balatro.BalatroCode.Patches;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -20,10 +21,22 @@ public class Dusk() : BalatroCard(3,
         CardPlay play)
     {
         if (!PileType.Hand.GetPile(Owner).IsEmpty) return;
-        foreach (var cardPlayed in CombatManager.Instance.History.CardPlaysFinished.Where(c =>
-                     !c.CardPlay.Card.Equals(this) && c.HappenedThisTurn(play.Card.CombatState) &&
-                     c.CardPlay.Card.Owner == play.Card.Owner))
-            await CardCmd.AutoPlay(choiceContext, cardPlayed.CardPlay.Card, null);
+        var cardsPlayedEntry = CombatManager.Instance.History.CardPlaysFinished.Where(c =>
+            c.CardPlay.Card is not Dusk && c.HappenedThisTurn(play.Card.CombatState) &&
+            c.CardPlay.Card.Owner == play.Card.Owner).Select(entry => entry).ToList();
+
+        foreach (var cardPlayEntry in cardsPlayedEntry)
+        {
+            PowerReplayPatch.IsReplaying = true;
+            try
+            {
+                await CardCmd.AutoPlay(choiceContext, cardPlayEntry.CardPlay.Card, cardPlayEntry.CardPlay.Target);
+            }
+            finally
+            {
+                PowerReplayPatch.IsReplaying = false;
+            }
+        }
     }
 
     protected override void OnUpgrade()

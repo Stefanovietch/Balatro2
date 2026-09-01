@@ -20,20 +20,14 @@ public class Superposition() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1)
     ];
-    
-    protected override IEnumerable<IHoverTip> ExtraHoverTips =>
-    [
-        HoverTipFactory.FromPower<WeakPower>(),
-        HoverTipFactory.FromPower<RegenPower>()
-    ];
+
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Draw(choiceContext, DynamicVars.Cards.BaseValue, Owner);
         if (HaveStraight())
             await PotionCmd.TryToProcure(
                 PotionFactory.CreateRandomPotionInCombat(Owner, Owner.RunState.Rng.CombatPotionGeneration).ToMutable(),
@@ -42,7 +36,7 @@ public class Superposition() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(1);
+        this.EnergyCost.UpgradeBy(-1);
     }
 
     protected override bool ShouldGlowGoldInternal => HaveStraight();

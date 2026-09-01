@@ -13,7 +13,9 @@ public class Mime() : BalatroCard(3,
     CardType.Skill, CardRarity.Uncommon,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [
+        new MaxHpVar(2)
+    ];
     
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
@@ -25,6 +27,7 @@ public class Mime() : BalatroCard(3,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
+        await CreatureCmd.LoseMaxHp(choiceContext, Owner.Creature, DynamicVars.MaxHp.BaseValue, true);
         var cards = PileType.Hand.GetPile(Owner);
         cards.RandomizeOrderInternal(Owner, Owner.RunState.Rng.CombatCardSelection, (CombatState)CombatState);
         foreach (var card in cards.Cards.ToList())
@@ -37,6 +40,6 @@ public class Mime() : BalatroCard(3,
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        this.DynamicVars.MaxHp.UpgradeValueBy(-1);
     }
 }

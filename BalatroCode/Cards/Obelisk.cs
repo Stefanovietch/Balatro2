@@ -91,8 +91,8 @@ public class Obelisk() : BalatroCard(2,
             CombatState.CreateCard(ModelDb.Card<Enhance>(), this.Owner)
         ];
         foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
-        
         var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
+        foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
         var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
         
         foreach (var option in (List<CardModel?>)[option1, option2])
@@ -104,7 +104,7 @@ public class Obelisk() : BalatroCard(2,
                 case Assault:
                     await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
                         .TargetingAllOpponents(CombatState)
-                        .WithHitFx("vfx/vfx_attack_slash")
+                        .WithHitFx("vfx/vfx_giant_horizontal_slash")
                         .Execute(choiceContext);
                     break;
                 case Enhance:

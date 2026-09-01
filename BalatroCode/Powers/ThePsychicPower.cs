@@ -36,7 +36,7 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
-        if (Amount <= 2) return false;
+        if (Amount <= 1) return false;
         return base.ShouldPlay(card, autoPlayType);
     }
 

@@ -60,7 +60,7 @@ public class AncientEventModelPatches
     public static class TouchOfOrobasPatch 
     {
         [HarmonyPostfix]
-        public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
+        public static void Postfix(Orobas __instance, ref IEnumerable<EventOption> __result)
         {
             if (!__instance.IsMutable) return;
             __result = __result.Where(e => e.Relic is not TouchOfOrobas);

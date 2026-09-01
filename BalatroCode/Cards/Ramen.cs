@@ -31,7 +31,7 @@ public class Ramen() : BalatroCard(2,
         await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .WithHitCount(2)
             .TargetingAllOpponents(CombatState)
-            .WithHitFx(null, null, "blunt_attack.mp3")
+            .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .Execute(choiceContext);
     }
 

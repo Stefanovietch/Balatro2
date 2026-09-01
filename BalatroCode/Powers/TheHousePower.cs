@@ -26,13 +26,14 @@ public class TheHousePower() : BalatroPower, IBlindPower
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         var players = Owner.CombatState?.RunState.Players;
-        MainFile.Logger.Info("player: " + players);
         if (players is null) return;
         foreach (var player in players)
         {
-            if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber == 1) continue;
+            if (player.Character is not Character.Balatro || player.PlayerCombatState?.TurnNumber != 1) continue;
             foreach (var card in PileType.Hand.GetPile(player).Cards)
+            {
                 await CardCmd.Afflict<Housed>(card, 3M);
+            }
         }
     }
 

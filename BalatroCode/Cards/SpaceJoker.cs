@@ -13,7 +13,7 @@ public class SpaceJoker() : BalatroCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(1),
+        new CardsVar(2),
         new("Chance", 4),
         new DisplayVar<SpaceJoker>("Numerator", card => card
             .GetNumerator(card.IsCanonical ? null : card.Owner).ToString())

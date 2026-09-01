@@ -29,7 +29,7 @@ public class ShootTheMoon() : BalatroCard(1,
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount((int)((CalculatedVar)DynamicVars["CalculatedHits"]).Calculate(play.Target))
             .Targeting(play.Target)
-            .WithHitFx(null, null, "blunt_attack.mp3")
+            .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
     }
 

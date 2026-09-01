@@ -9,7 +9,7 @@ namespace Balatro.BalatroCode.Relics;
 public class Observatory() : BalatroRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Uncommon;
+        RelicRarity.Rare;
 
     private bool _usedThisCombat;
 

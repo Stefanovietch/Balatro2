@@ -16,6 +16,7 @@ public class Enhance() : BalatroTokenCard(1,
 
     public void UpdateValue(CardModel card)
     {
-        this.DynamicVars.Damage.BaseValue = card.DynamicVars.Damage.BaseValue;
+        DynamicVars["DamageIncrease"].BaseValue = card.DynamicVars["DamageIncrease"].BaseValue;
+        DynamicVars["BlockIncrease"].BaseValue = card.DynamicVars["BlockIncrease"].BaseValue;
     }
 }

@@ -24,7 +24,7 @@ public class HalfJoker() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
     }
 
@@ -34,4 +34,7 @@ public class HalfJoker() : BalatroCard(1,
     }
 
     protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 3;
+    
+    protected override bool ShouldGlowRedInternal => PileType.Hand.GetPile(Owner).Cards.Count > 3;
+
 }

@@ -22,17 +22,17 @@ public class SixthSense() : BalatroCard(-1,
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Innate);
+        AddKeyword(CardKeyword.Ethereal);
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (_cardPlayed) return;
+        if (_cardPlayed || this.Pile?.Type != PileType.Hand) return;
         var card = cardPlay.Card;
-        await CardPileCmd.RemoveFromCombat(card);
-        if (card.DeckVersion == null) return;
-        await CardPileCmd.RemoveFromDeck(card.DeckVersion);
-
+        if (card.Pile != null && card.Pile.Type != PileType.None)
+            await CardPileCmd.RemoveFromCombat(card);
+        if (card.DeckVersion != null && card.DeckVersion.Pile != null)
+            await CardPileCmd.RemoveFromDeck(card.DeckVersion);
         if (Owner.RunState.CurrentRoom is CombatRoom room)
             room.AddExtraReward(Owner,
                 new CardReward(

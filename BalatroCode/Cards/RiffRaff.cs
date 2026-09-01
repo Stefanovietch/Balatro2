@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class RiffRaff() : BalatroCard(1,
+public class RiffRaff() : BalatroCard(2,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
@@ -16,6 +16,9 @@ public class RiffRaff() : BalatroCard(1,
     [
         new CardsVar(2)
     ];
+    
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Sly];
+
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

@@ -14,7 +14,7 @@ public class Stuntman() : BalatroCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new BlockVar(40, ValueProp.Move),
+        new BlockVar(30, ValueProp.Move),
         new PowerVar<DrawCardsNextTurnPower>(2)
     ];
 

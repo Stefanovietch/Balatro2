@@ -12,7 +12,7 @@ public class Dilation() : BalatroCurseCard(1,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     
-    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Eternal,CardKeyword.Exhaust];
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust,CardKeyword.Eternal];
     
     public override bool CanBeGeneratedByModifiers => false;
 

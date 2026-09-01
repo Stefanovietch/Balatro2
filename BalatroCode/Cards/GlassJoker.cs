@@ -34,7 +34,7 @@ public class GlassJoker() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(CombatState);
         var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .TargetingAllOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
         if (attackCommand.Results.SelectMany(r => r).Any(r =>
                 r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal())))

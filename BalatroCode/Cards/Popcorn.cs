@@ -29,7 +29,7 @@ public class Popcorn() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx(tmpSfx: "heavy_attack.mp3")
+            .WithHitFx("vfx/vfx_sandy_impact")
             .Execute(choiceContext);
     }
 

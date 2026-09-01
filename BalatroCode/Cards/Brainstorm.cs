@@ -23,12 +23,18 @@ public class Brainstorm() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var card = CombatManager.Instance.History.CardPlaysFinished
-            .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState) && c.CardPlay.Card is not Brainstorm)?.CardPlay.Card;
-        if (card == null) return;
+        var cardPlayEntry = CombatManager.Instance.History.CardPlaysFinished
+            .FirstOrDefault(c => c.HappenedThisTurn(play.Card.CombatState) && c.CardPlay.Card is not Brainstorm);
+        if (cardPlayEntry == null) return;
         PowerReplayPatch.IsReplaying = true;
-        await CardCmd.AutoPlay(choiceContext, card, null);
-        PowerReplayPatch.IsReplaying = false;
+        try
+        {
+            await CardCmd.AutoPlay(choiceContext, cardPlayEntry.CardPlay.Card, cardPlayEntry.CardPlay.Target);
+        }
+        finally
+        {
+            PowerReplayPatch.IsReplaying = false;
+        }
     }
 
     protected override void OnUpgrade()

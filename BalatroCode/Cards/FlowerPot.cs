@@ -25,7 +25,7 @@ public class FlowerPot() : BalatroCard(2,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_rock_shatter")
             .Execute(choiceContext);
     }
 

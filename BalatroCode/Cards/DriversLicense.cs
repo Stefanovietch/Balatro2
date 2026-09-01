@@ -49,6 +49,6 @@ public class DriversLicense() : BalatroCard(1,
 
     private bool HasRareCards()
     {
-        return PileType.Deck.GetPile(Owner).Cards.Count(c => c.Rarity == CardRarity.Rare) >= 4;
+        return PileType.Deck.GetPile(Owner).Cards.Count(c => c.Rarity == CardRarity.Rare) >= 5;
     }
 }

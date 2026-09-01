@@ -26,11 +26,11 @@ public class DeckRemovalPatches
     [HarmonyPatch(typeof(CardPileCmd), nameof(CardPileCmd.RemoveFromDeck), [typeof(IReadOnlyList<CardModel>), typeof(bool)])] 
     public static class BalatroRemoveFromDeckPatch
     {
-        [HarmonyPostfix]
-        static void Postfix(ref IReadOnlyList<CardModel> cards)
+        [HarmonyPrefix]
+        static void Prefix(ref IReadOnlyList<CardModel> cards)
         {
             if (Stakes.CurrentStake(cards.FirstOrDefault()?.Owner) < 3) return;
-            cards = cards.Where(c => c.Rarity != CardRarity.Basic).ToList();
+            cards = cards.Where(c => c.Rarity != CardRarity.Basic && !c.Keywords.Contains(CardKeyword.Eternal)).ToList();
         }
     }
 }

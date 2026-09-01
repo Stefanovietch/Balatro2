@@ -81,10 +81,10 @@ public class SpareTrousers() : BalatroCard(1,
         {
             var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
                 .Targeting(target)
-                .WithHitFx("vfx/vfx_attack_slash")
+                .WithHitFx("vfx/vfx_sandy_impact")
                 .Execute(choiceContext);
             
-            triggeredFatal |= attackCommand.Results
+            triggeredFatal = attackCommand.Results
                 .SelectMany(r => r)
                 .Any(r => r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal()));
 

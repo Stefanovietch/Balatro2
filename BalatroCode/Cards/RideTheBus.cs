@@ -32,7 +32,7 @@ public class RideTheBus() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx(null, null, "blunt_attack.mp3")
+            .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
     }
 

@@ -25,7 +25,14 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<TheWheelPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString())
+        new DisplayVar<TheWheelPower>("Numerator", power =>
+        {
+            var total = 1;
+            var players = Owner.CombatState?.RunState.Players;
+            if (players is null) return "1";
+            foreach (var player in players) total *= power.GetNumerator(player);
+            return total.ToString();
+        })
     ];
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)

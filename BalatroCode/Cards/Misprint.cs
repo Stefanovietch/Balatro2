@@ -24,7 +24,7 @@ public class Misprint() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(Owner.RunState.Rng.Niche.NextInt(1, DynamicVars.Damage.IntValue)).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_dramatic_stab")
             .Execute(choiceContext);
     }
 

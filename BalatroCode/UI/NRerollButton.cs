@@ -16,7 +16,6 @@ public partial class NRerollButton : NButton
 {
     public int RerollCost { get; set; } = 50;
     
-    protected override string[] Hotkeys => ["r"];
     private Label? _label;
     private TextureRect? _image;
 

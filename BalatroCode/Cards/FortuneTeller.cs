@@ -32,7 +32,7 @@ public class FortuneTeller() : BalatroCard(1,
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount((int)((CalculatedVar)DynamicVars["PotionsUsed"]).Calculate(play.Target))
             .TargetingRandomOpponents(CombatState)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
     }
 

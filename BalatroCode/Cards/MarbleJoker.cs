@@ -24,10 +24,9 @@ public class MarbleJoker() : BalatroCard(0,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        var inHand = await StoneCard.CreateInHand(Owner, 1, CombatState);
-        if (!IsUpgraded) return;
-        foreach (var card in inHand)
-            CardCmd.Upgrade(card);
+        var card = (await StoneCard.CreateInHand(Owner, 1, CombatState)).FirstOrDefault();
+        if (IsUpgraded && card != null) CardCmd.Upgrade(card);
+        await CardPileCmd.Draw(choiceContext, this.Owner);
     }
 
     protected override void OnUpgrade()

@@ -30,7 +30,7 @@ public class SmileyFace() : BalatroCard(1,
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .WithHitCount((int)((CalculatedVar)DynamicVars["PowersPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
-            .WithHitFx()
+            .WithHitFx("vfx/vfx_flying_slash")
             .Execute(choiceContext);
     }
 

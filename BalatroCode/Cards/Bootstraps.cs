@@ -26,7 +26,7 @@ public class Bootstraps() : BalatroCard(2,
         ArgumentNullException.ThrowIfNull(play.Target);
         await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
             .Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash")
+            .WithHitFx("vfx/vfx_coin_explosion_jumbo")
             .Execute(choiceContext);
         await PlayerCmd.LoseGold(DynamicVars["GoldLose"].BaseValue, Owner);
     }

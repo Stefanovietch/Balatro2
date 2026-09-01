@@ -122,7 +122,7 @@ public class Balatro : PlaceholderCharacterModel
         if (roomType is Elite or Boss && BalatroConfig.BlindsActive)
         {
             var enemy = combatState.Enemies.FirstOrDefault(creature =>
-                creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
+                creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false, IsPrimaryEnemy: true });
             if (enemy != null)
             {
                 var blindPowers = enemy.Powers.Where(p => p is IBlindPower).Select(p => ((IBlindPower)p).BlindType)

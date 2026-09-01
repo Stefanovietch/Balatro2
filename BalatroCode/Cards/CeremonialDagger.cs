@@ -53,8 +53,6 @@ public class CeremonialDagger() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
-            .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
 
         CardModel? card;
         if (IsUpgraded)
@@ -68,15 +66,18 @@ public class CeremonialDagger() : BalatroCard(1,
             card = Owner.RunState.Rng.CombatCardSelection.NextItem(pile.Cards);
         }
 
-        if (card == null)
-            return;
-        await CardCmd.Exhaust(choiceContext, card);
-
-        var intValue = card.EnergyCost.GetAmountToSpend();
-        BuffFromExhaust(intValue * 2);
-        if (DeckVersion is not CeremonialDagger deckVersion)
-            return;
-        deckVersion.BuffFromExhaust(intValue);
+        if (card != null)
+        {
+            await CardCmd.Exhaust(choiceContext, card);
+            var intValue = card.EnergyCost.GetAmountToSpend();
+            BuffFromExhaust(intValue * 2);
+            if (DeckVersion is CeremonialDagger deckVersion) deckVersion.BuffFromExhaust(intValue);
+        }
+        
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            .Targeting(play.Target)
+            .WithHitFx("vfx/vfx_attack_slash")
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

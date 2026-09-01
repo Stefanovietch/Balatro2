@@ -53,10 +53,10 @@ public class InvisibleJoker() : BalatroCard(3,
         if (Counter >= 2)
         {
             var newCard =
-                Owner.PlayerRng.Transformations.NextItem(PileType.Deck.GetPile(Owner).Cards.Where(c => c.Id != Id));
+                Owner.PlayerRng.Transformations.NextItem(PileType.Deck.GetPile(Owner).Cards.Where(c => c.Id != Id && c.Type is not (CardType.Curse or CardType.Quest)));
             if (newCard == null) return;
-            newCard =  this.Owner.RunState.CloneCard(newCard);
-            newCard.EnergyCost.SetCustomBaseCost(0);
+            newCard = this.Owner.RunState.CloneCard(newCard);
+            newCard.EnergyCost.UpgradeBy(-100);
 
             await CardCmd.Transform(deckVersion, newCard);
         }

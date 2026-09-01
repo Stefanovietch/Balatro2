@@ -9,7 +9,7 @@ namespace Balatro.BalatroCode.Relics;
 public class Liquidation() : BalatroRelic
 {
     public override RelicRarity Rarity =>
-        RelicRarity.Starter;
+        RelicRarity.Uncommon;
 
     public override async Task AfterRoomEntered(AbstractRoom room)
     {

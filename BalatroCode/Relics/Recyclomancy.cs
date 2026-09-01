@@ -18,17 +18,21 @@ public class Recyclomancy() : BalatroRelic
 
     public override bool ShowCounter => CombatManager.Instance.IsInProgress;
     
+    
     protected override IEnumerable<IHoverTip> ExtraHoverTips => [
         HoverTipFactory.FromPower<StrengthPower>()
     ];
 
-    public override int DisplayAmount => !IsCanonical ? _cardsDiscarded : 0;
+    public override int DisplayAmount => IsCanonical ? 0 : _cardsDiscarded;
 
     public override async Task AfterCardDiscarded(PlayerChoiceContext choiceContext, CardModel card)
     {
-        if (card.Owner == Owner) ++_cardsDiscarded;
+        if (card.Owner != Owner) return;
+        _cardsDiscarded++;
+        this.InvokeDisplayAmountChanged();
         if (_cardsDiscarded < 4) return;
         _cardsDiscarded = 0;
         await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, 2, Owner.Creature, null);
+        this.InvokeDisplayAmountChanged();
     }
 }

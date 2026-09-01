@@ -23,7 +23,7 @@ public class RaisedFist() : BalatroCard(0,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        var amountList = PileType.Hand.GetPile(Owner).Cards.Where(c => !c.Equals(this))
+        var amountList = PileType.Hand.GetPile(Owner).Cards.Where(c => !c.Equals(this) && !c.Keywords.Contains(CardKeyword.Unplayable))
             .Select(c => c.EnergyCost.GetAmountToSpend()).ToList();
         var amount = 2 * (amountList.Count != 0 ? amountList.Min() : 0);
         await PowerCmd.Apply<RaisedFistPower>(choiceContext, Owner.Creature, amount, Owner.Creature, this);
