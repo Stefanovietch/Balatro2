@@ -38,7 +38,7 @@ public class GrosMichel() : BalatroCard(1,
             if (DeckVersion is not GrosMichel deckVersion)
                 return;
             await CardPileCmd.RemoveFromDeck(deckVersion);
-            ModelDb.CardPool<BalatroCardPool>().GrosMichelExtinct = true;
+            Character.Balatro.GrosMichelExtinct.Set(Owner,true);
         }
     }
 

@@ -7,13 +7,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class HalfJoker() : BalatroCard(1,
+public class HalfJoker() : BalatroCard(0,
     CardType.Attack, CardRarity.Common,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(15, ValueProp.Move)
+        new DamageVar(8, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(
@@ -30,7 +30,7 @@ public class HalfJoker() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Damage.UpgradeValueBy(5);
+        DynamicVars.Damage.UpgradeValueBy(4);
     }
 
     protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 3;

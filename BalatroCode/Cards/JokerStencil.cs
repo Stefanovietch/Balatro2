@@ -9,13 +9,13 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class JokerStencil() : BalatroCard(1,
+public class JokerStencil() : BalatroCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DamageVar(3, ValueProp.Move)
+        new DamageVar(4, ValueProp.Move)
     ];
 
     protected override async Task OnPlay(

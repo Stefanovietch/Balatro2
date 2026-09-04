@@ -8,7 +8,7 @@ using MegaCrit.Sts2.Core.Models;
 namespace Balatro.BalatroCode.Cards;
 
 public class Dilation() : BalatroCurseCard(1,
-    CardType.Skill, TargetType.Self)
+   TargetType.Self)
 {
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
     

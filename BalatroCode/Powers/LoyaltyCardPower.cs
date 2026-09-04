@@ -24,14 +24,14 @@ public class LoyaltyCardPower() : BalatroPower
         if (Amount > 1)
             await PowerCmd.Decrement(this);
         else
-            await PowerCmd.ModifyAmount(choiceContext, this, 5, null, null);
+            await PowerCmd.ModifyAmount(choiceContext, this, 5, null, null, true);
     }
-
-    public override Task BeforeCardPlayed(CardPlay cardPlay)
+    
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
-        if (Amount <= 1 && cardPlay.Card.Type == CardType.Attack)
-            cardPlay.Card.ModifyDamageMultiplicative(cardPlay.Target, 4, cardPlay.Card.DynamicVars.Damage.Props, Owner,
-                cardPlay.Card);
-        return base.BeforeCardPlayed(cardPlay);
+        if (dealer == Owner && Amount <= 1 && cardSource != null) return 4;
+        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
     }
 }

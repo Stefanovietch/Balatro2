@@ -30,6 +30,21 @@
   "BALATRO-JACK_IN_THE_BOX_EVENT.pages.HURT.description": "As you kick over the box an angry voice screams at you. A sudden spring shoots up from the box, hitting you.\nWhen recovering from the hit, you notice that some gold sprang out too.",
   "BALATRO-JACK_IN_THE_BOX_EVENT.pages.LEAVE.description": "You left.",
 
+  
+  "BALATRO-WEIRD_JOKER_EVENT.title": "Weird Joker",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.description": "As you turn a corner you spot a disheveled stall with worn out wares.\nWhen approaching, a funny looking creature pops up and asks if you are up for a trade.\n\"Ohohoh, hahaha, let's see what I got here.\nThis or that, that or this, take your pick.\nDon't worry, don't worry, nothing has been tampered with.\"",
+
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.WRAITH.title": "Wraith",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.WRAITH.description": "Add a random Rare card to your [gold]Deck[/gold]. Set your [gold]Gold[/gold] to [red]0[/red]",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.IMMOLATE.title": "Immolate",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.IMMOLATE.description": "Gain [blue]200[/blue] [gold]Gold[/gold]. Remove [red]5[/red] random cards from your [gold]Deck[/gold].",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.BLACK_HOLE.title": "Black Hole",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.BLACK_HOLE.description": "[gold]Upgrade[/gold] ALL cards in your [gold]Deck[/gold]. Gain [red]Dilation[/red]",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.FINISHED.description": "\"Eheheh, thank you dearly.\"",
+  
 
   "BALATRO-SPECTRAL_MERCHANT_EVENT.title": "Spectral Merchant",
   "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.description": "You see a familiar figure, it seems to be the Merchant.",

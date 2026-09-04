@@ -5,6 +5,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Character;
 
@@ -25,13 +26,19 @@ public class BalatroCardPool : CustomCardPoolModel
 
     //Color of small card icons
     public override Color DeckEntryCardColor => new("f0f0f0");
-
     public override bool IsColorless => false;
+    public override IEnumerable<CardModel> AllCards
+    {
+        get
+        {
+            var isExtinct = Balatro.GrosMichelExtinct.Get(base.AllCards.First().Owner);
+            var cards = base.AllCards;
+            return base.AllCards.Where(card => isExtinct
+                        ? card is not GrosMichel 
+                        : card is not Cavendish);
+        }
+    }
 
-    public bool GrosMichelExtinct = false;
-    public override IEnumerable<CardModel> AllCards => 
-        base.AllCards.Where(card => GrosMichelExtinct 
-            ? card is not GrosMichel 
-            : card is not Cavendish);
+
 
 }

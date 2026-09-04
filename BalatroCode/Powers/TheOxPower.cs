@@ -43,7 +43,7 @@ public class TheOxPower() : BalatroPower, IBlindPower
         }
     }
 
-    public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
+    public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if (cardPlay.Card.Affliction is Oxed)
         {

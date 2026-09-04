@@ -41,6 +41,7 @@ public class Balatro : PlaceholderCharacterModel
 
     public static readonly SavedSpireField<Player, int> QuestionMarksVisited = new(() => 0, "question_marks_visited");
     public static readonly SavedSpireField<Player, int> MaxCombatGold = new(() => 200, "balatro_max_combat_gold");
+    public static readonly SavedSpireField<Player, bool> GrosMichelExtinct = new(() => false, "balatro_gros_michel_extinct");
 
     public static readonly SpireField<PlayerCombatState, int> CombatGoldEarned = new(() => 0);
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisTurn = new(() => 0);
@@ -77,13 +78,7 @@ public class Balatro : PlaceholderCharacterModel
     public override CardPoolModel CardPool => ModelDb.CardPool<BalatroCardPool>();
     public override RelicPoolModel RelicPool => ModelDb.RelicPool<BalatroRelicPool>();
     public override PotionPoolModel PotionPool => ModelDb.PotionPool<BalatroPotionPool>();
-
-    public override Task AfterDeath(PlayerChoiceContext choiceContext, Creature creature, bool wasRemovalPrevented, float deathAnimLength)
-    {
-        
-        return base.AfterDeath(choiceContext, creature, wasRemovalPrevented, deathAnimLength);
-    }
-
+    
     public override Control CustomIcon
     {
         get
@@ -155,50 +150,6 @@ public class Balatro : PlaceholderCharacterModel
             }
         }
     }
-/*
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side,
-        IReadOnlyList<Creature> participants,
-        ICombatState combatState)
-    {
-        if (combatState.RoundNumber > 1 || side != CombatSide.Player) return;
-        var roomType = combatState.RunState.CurrentRoom?.RoomType;
-        if (roomType is Elite or Boss && BalatroConfig.BlindsActive)
-        {
-            var enemy = combatState.Enemies.FirstOrDefault(creature =>
-                creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
-            if (enemy != null)
-            {
-                var blindPowers = enemy.Powers.Where(p => p is IBlindPower).Select(p => ((IBlindPower)p).BlindType)
-                    .ToList();
-                await PowerCmd.Apply(choiceContext,
-                    BlindMethods.GetRandomBlindPower(enemy, roomType == Boss, blindPowers).ToMutable(),
-                    enemy, 1, null, null);
-            }
-        }
-        if (Stakes.CurrentStake() <= 1) return;
-        foreach (var creature in combatState.Enemies)
-        {
-            if (Stakes.CurrentStake() > 1)
-            {
-                var extraHp = creature.MaxHp + creature.CombatState?.RunState.TotalFloor * 2;
-                if (extraHp != null)
-                {
-                    var hpDiff = creature.MaxHp - creature.CurrentHp;
-                    creature.SetMaxHpInternal((decimal)extraHp);
-                    creature.SetCurrentHpInternal((decimal)extraHp - hpDiff);
-                }
-            }
-            if (Stakes.CurrentStake() > 4)
-            {
-                decimal? amount = 1;
-                var typeMult = creature.CombatState?.RunState.CurrentRoom?.RoomType;
-                if (typeMult != null) amount = (creature.CombatState?.RunState.CurrentActIndex + 1) * (decimal) typeMult;
-                await PowerCmd.Apply<TopUpPower>(new ThrowingPlayerChoiceContext(), creature, amount ?? 1, null, null);
-            }
-        }
-    }
-    */
-    
     
     public override Task BeforeCombatStart()
     {

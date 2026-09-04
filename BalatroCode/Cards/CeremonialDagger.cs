@@ -11,11 +11,11 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Cards;
 
-public class CeremonialDagger() : BalatroCard(1,
+public class CeremonialDagger() : BalatroCard(2,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.AnyEnemy)
 {
-    private int _currentDmg = 7;
+    private int _currentDmg = 9;
     private int _increasedDmg;
 
     [SavedProperty]

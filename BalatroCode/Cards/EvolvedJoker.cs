@@ -19,14 +19,14 @@ public class EvolvedJoker() : BalatroCard(1,
         new BlockVar(20, ValueProp.Move),
         new GoldVar(20),
         new DisplayVar<EvolvedJoker>("ExtraText", e => 
-            e.LastCardPlayedType() is (CardType.Power or CardType.Skill or CardType.Attack) 
+            e.LastCardPlayedType() is not CardType.None
                 ? $"({e.LastCardPlayedType().ToString()})"
                 : "")
     ];
     
     public override TargetType TargetType => LastCardPlayedType() == CardType.Attack ? TargetType.AnyEnemy : TargetType.Self;
     
-    protected override bool ShouldGlowRedInternal => LastCardPlayedType() is not (CardType.Power or CardType.Skill or CardType.Attack);
+    protected override bool ShouldGlowRedInternal => LastCardPlayedType() is CardType.None;
     
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -60,8 +60,9 @@ public class EvolvedJoker() : BalatroCard(1,
     private CardType LastCardPlayedType()
     {
         if (this.IsCanonical) return CardType.None;
-        return CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner)
-            ?.CardPlay.Card.Type ?? CardType.None;
+        CardType? lastCardType = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner)?.CardPlay.Card.Type;
+        if (lastCardType is CardType.Attack or CardType.Skill or CardType.Power) return (CardType) lastCardType;
+        return CardType.None;
     }
     
 }

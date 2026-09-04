@@ -49,9 +49,8 @@ public abstract class BalatroTokenCard(
 [Pool(typeof(CurseCardPool))]
 public abstract class BalatroCurseCard(
     int cost,
-    CardType type,
     TargetType target
-) : CustomCardModel(cost, type, CardRarity.Curse, target)
+) : CustomCardModel(cost, CardType.Curse, CardRarity.Curse, target)
 {
     public override string CustomPortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigCardImagePath();
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
