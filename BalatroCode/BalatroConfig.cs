@@ -13,18 +13,33 @@ namespace Balatro.BalatroCode;
 
 public static class Stakes
 {
-    private static Dictionary<string, int> _cache = 
-        JsonSerializer.Deserialize<Dictionary<string, int>>(BalatroConfig.Stakes) ?? new Dictionary<string, int>();
+    private static readonly Dictionary<string, int> Cache = LoadCache();
 
+    private static Dictionary<string, int> LoadCache()
+    {
+        try
+        {
+            var raw = BalatroConfig.Stakes;
+            if (string.IsNullOrWhiteSpace(raw))
+                return new Dictionary<string, int>();
+
+            return JsonSerializer.Deserialize<Dictionary<string, int>>(raw) 
+                   ?? new Dictionary<string, int>();
+        }
+        catch (JsonException)
+        {
+            return new Dictionary<string, int>();
+        }
+    }
     public static int GetMaxStake(string deckName)
     {
-        return _cache.GetValueOrDefault(deckName, 0);
+        return Cache.GetValueOrDefault(deckName, 0);
     }
 
     public static void SetMaxStake(string deckName, int value)
     {
-        _cache[deckName] = value;
-        BalatroConfig.Stakes = JsonSerializer.Serialize(_cache);
+        Cache[deckName] = value;
+        BalatroConfig.Stakes = JsonSerializer.Serialize(Cache);
         ModConfig.SaveDebounced<BalatroConfig>();
     }
 
