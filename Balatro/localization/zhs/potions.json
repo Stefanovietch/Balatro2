@@ -1,0 +1,26 @@
+{
+  "BALATRO-DEJA_VU.title": "Deja Vu",
+  "BALATRO-DEJA_VU.description": "Apply [gold]Glam[/gold] to a card permanently.",
+
+  "BALATRO-JUSTICE.title": "The Justice",
+  "BALATRO-JUSTICE.description": "Apply [gold]Glass[/gold] to a card permanently.",
+
+  "BALATRO-MEDIUM.title": "Medium",
+  "BALATRO-MEDIUM.description": "Apply [gold]Purple Seal[/gold] to a card permanently.",
+  
+  "BALATRO-TALISMAN.title": "Talisman",
+  "BALATRO-TALISMAN.description": "Apply [gold]Gold Seal[/gold] to a card permanently.",
+  
+  "BALATRO-THE_CHARIOT.title": "The Chariot",
+  "BALATRO-THE_CHARIOT.description": "Apply [gold]Steel[/gold] to a card permanently.",
+  
+  "BALATRO-THE_LOVERS.title": "The Lovers",
+  "BALATRO-THE_LOVERS.description": "Apply [gold]Wild[/gold] to a card permanently.",
+  
+  "BALATRO-THE_MAGICIAN.title": "The Magician",
+  "BALATRO-THE_MAGICIAN.description": "Apply [gold]Lucky[/gold] to [blue]2[/blue] cards permanently.",
+
+  "BALATRO-TRANCE.title": "Trance",
+  "BALATRO-TRANCE.description": "Apply [gold]Blue Seal[/gold] to a card permanently and [gold]Upgrade[/gold] it."
+
+}

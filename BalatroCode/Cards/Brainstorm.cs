@@ -48,6 +48,7 @@ public class Brainstorm() : BalatroCard(1,
 
     private new bool CanPlay()
     {
-        return CombatManager.Instance.History.CardPlaysFinished.FirstOrDefault(c => c.HappenedThisTurn(this.CombatState)) != null;
+        var card = CombatManager.Instance.History.CardPlaysFinished.FirstOrDefault(c => c.HappenedThisTurn(this.CombatState));
+        return card is { CardPlay.Card: not (DNA or InvisibleJoker) };
     }
 }

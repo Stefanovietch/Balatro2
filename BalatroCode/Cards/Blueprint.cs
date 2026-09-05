@@ -53,6 +53,7 @@ public class Blueprint() : BalatroCard(1,
 
     private new bool CanPlay()
     {
-        return CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not (Blueprint or Brainstorm)) != null;
+        var card = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.HappenedThisTurn(this.CombatState) && c.CardPlay.Card is not (Blueprint or Brainstorm));
+        return card is { CardPlay.Card: not (DNA or InvisibleJoker) };
     }
 }

@@ -100,7 +100,7 @@ public class SpectralMerchantEvent() : CustomEventModel()
     
     private void SetRandomCards()
     {
-        var list = this.Owner!.Deck.Cards.Where(c => c.Rarity != CardRarity.Basic).ToList();
+        var list = this.Owner!.Deck.Cards.Where(c => c.IsRemovable && c.Rarity != CardRarity.Basic).ToList();
         var randomCards = list.TakeRandom(3, Rng).ToList();
         if (randomCards.Count < 3)
         {

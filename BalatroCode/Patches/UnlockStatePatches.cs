@@ -31,6 +31,7 @@ public class UnlockStatePatches
             if (player == null) return;
             bool isExtinct = Character.Balatro.GrosMichelExtinct.Get(player);
             __result = __result.Where(c => isExtinct ? c is not GrosMichel : c is not Cavendish);
+            PlayerContext.Current = null;
         }
     }
 }

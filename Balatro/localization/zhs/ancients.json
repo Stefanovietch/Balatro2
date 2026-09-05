@@ -1,0 +1,23 @@
+{
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.char": "I am angry at the architect",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.ancient": "You die",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-attack": "Both",
+  
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.ancient": "What are you?",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.next": "Answer",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.char": "Your final hand.",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.next": "Continue",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-2r.ancient": "Let me fold you then.",
+  
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.1-0r.ancient": "Ah. A different color this time.",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.1-0r.next": "Explain",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.1-1r.char": "I'll color you red!",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.1-1r.next": "Continue",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.1-2r.ancient": "Fine, but I'll use your blood.",
+  
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-0r.ancient": "Have you started the wrong game by chance?",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-0r.next": "Reply",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-1r.char": "Everything I do is by chance.",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-1r.next": "Continue",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-2r.ancient": "You just sound lost."
+}

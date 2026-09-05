@@ -1,0 +1,86 @@
+{  
+  "BALATRO-BALATRO.redDeck.title": "Red Deck",
+  "BALATRO-BALATRO.redDeck.description": "A good starting point.",
+  "BALATRO-BALATRO.redDeck.adjective": "red",
+
+  "BALATRO-BALATRO.blueDeck.title": "Blue Deck",
+  "BALATRO-BALATRO.blueDeck.description": "A simple way to play.",
+  "BALATRO-BALATRO.blueDeck.adjective": "blue",
+
+  "BALATRO-BALATRO.yellowDeck.title": "Yellow Deck",
+  "BALATRO-BALATRO.yellowDeck.description": "For that extra money.",
+  "BALATRO-BALATRO.yellowDeck.adjective": "yellow",
+
+  "BALATRO-BALATRO.greenDeck.title": "Green Deck",
+  "BALATRO-BALATRO.greenDeck.description": "Making your own cash.",
+  "BALATRO-BALATRO.greenDeck.adjective": "green",
+
+  "BALATRO-BALATRO.blackDeck.title": "Black Deck",
+  "BALATRO-BALATRO.blackDeck.description": "More options, more ways to play.",
+  "BALATRO-BALATRO.blackDeck.adjective": "black",
+
+  "BALATRO-BALATRO.magicDeck.title": "Magic Deck",
+  "BALATRO-BALATRO.magicDeck.description": "Brewing up some magic.",
+  "BALATRO-BALATRO.magicDeck.adjective": "magical",
+
+  "BALATRO-BALATRO.nebulaDeck.title": "Nebula Deck",
+  "BALATRO-BALATRO.nebulaDeck.description": "Learn by playing, play by learning.",
+  "BALATRO-BALATRO.nebulaDeck.adjective": "nebular",
+
+  "BALATRO-BALATRO.ghostDeck.title": "Ghost Deck",
+  "BALATRO-BALATRO.ghostDeck.description": "Expect the unexpected.",
+  "BALATRO-BALATRO.ghostDeck.adjective": "ghostly",
+
+  "BALATRO-BALATRO.abandonedDeck.title": "Abandoned Deck",
+  "BALATRO-BALATRO.abandonedDeck.description": "To gain power, you need to lose it first.",
+  "BALATRO-BALATRO.abandonedDeck.adjective": "abandoned",
+
+  "BALATRO-BALATRO.checkeredDeck.title": "Checkered Deck",
+  "BALATRO-BALATRO.checkeredDeck.description": "Check and mate with precision.",
+  "BALATRO-BALATRO.checkeredDeck.adjective": "checkered",
+
+  "BALATRO-BALATRO.zodiacDeck.title": "Zodiac Deck",
+  "BALATRO-BALATRO.zodiacDeck.description": "Spend money like there are stars.",
+  "BALATRO-BALATRO.zodiacDeck.adjective": "zodiacal",
+
+  "BALATRO-BALATRO.paintedDeck.title": "Painted Deck",
+  "BALATRO-BALATRO.paintedDeck.description": "Beauty is in the hands of an artist.",
+  "BALATRO-BALATRO.paintedDeck.adjective": "painted",
+
+  "BALATRO-BALATRO.anaglyphDeck.title": "Anaglyph Deck",
+  "BALATRO-BALATRO.anaglyphDeck.description": "To see something twice, you need two eyes.",
+  "BALATRO-BALATRO.anaglyphDeck.adjective": "anaglyphic",
+
+  "BALATRO-BALATRO.plasmaDeck.title": "Plasma Deck",
+  "BALATRO-BALATRO.plasmaDeck.description": "The fourth act is what matters.",
+  "BALATRO-BALATRO.plasmaDeck.adjective": "plasmatic",
+
+  "BALATRO-BALATRO.erraticDeck.title": "Erratic Deck",
+  "BALATRO-BALATRO.erraticDeck.description": "Don't look for a pattern, be the pattern.",
+  "BALATRO-BALATRO.erraticDeck.adjective": "erratic",
+
+  
+  "BALATRO-BALATRO.whiteStake.title": "White Stake",
+  "BALATRO-BALATRO.whiteStake.description": "Base difficulty.",
+  
+  "BALATRO-BALATRO.redStake.title": "Red Stake",
+  "BALATRO-BALATRO.redStake.description": "Treasure Chests give no [gold]Gold[/gold].",
+  
+  "BALATRO-BALATRO.greenStake.title": "Green Stake",
+  "BALATRO-BALATRO.greenStake.description": "Enemies have more maximum HP.",
+  
+  "BALATRO-BALATRO.blackStake.title": "Black Stake",
+  "BALATRO-BALATRO.blackStake.description": "Cannot remove Basic cards from your [gold]Deck[/gold].",
+  
+  "BALATRO-BALATRO.blueStake.title": "Blue Stake",
+  "BALATRO-BALATRO.blueStake.description": "At start of combat draw [blue]2[/blue] less cards.",
+  
+  "BALATRO-BALATRO.purpleStake.title": "Purple Stake",
+  "BALATRO-BALATRO.purpleStake.description": "Enemies start combat with Top-Up.",
+  
+  "BALATRO-BALATRO.orangeStake.title": "Orange Stake",
+  "BALATRO-BALATRO.orangeStake.description": "Some cards have [gold]Perishable[/gold] [blue]10[/blue].",
+  
+  "BALATRO-BALATRO.goldStake.title": "Gold Stake",
+  "BALATRO-BALATRO.goldStake.description": "Playing a card costs [blue]2[/blue] [gold]Deck[/gold]."
+}

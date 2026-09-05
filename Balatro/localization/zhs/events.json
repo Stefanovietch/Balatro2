@@ -1,0 +1,72 @@
+{
+  "BALATRO-JACK_IN_THE_BOX_EVENT.title": "Jack in the Box",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.description": "You come upon a strange box just large enough to fit you in.\nIt even has a door with a sign on it that says: \"Unparalleled strength requires a sacrifice\".",
+  
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.ENTER_BOX.title": "Enter the Box",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.ENTER_BOX.description": "Lose [red]30[/red] Max HP and [red]300[/red] [gold]Gold[/gold] and gain a special reward.",
+  
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.ENTER_BOX_LOCKED.title": "[red]Locked[/red]",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.ENTER_BOX_LOCKED.description": "Requires [blue]300[/blue] [gold]Gold[/gold].",
+
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.KICK_BOX.title": "Kick the Box",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.KICK_BOX.description": "Lose [red]6[/red] HP and gain [blue]69[/blue] [gold]Gold[/gold].",
+
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.LEAVE.title": "Walk past the Box",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.INITIAL.options.LEAVE.description": "This seems too suspicious.",
+  
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.description": "The moment you close the door behind you, it feels like you are being drained while a wind up sounds starts playing.\nSuddenly the feeling and the winding up stops and you hear a click. A quiet voice whispers \"What is thy destiny?\".",
+  
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.GAIN_PALETTE.title": "Discover the Truth",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.GAIN_PALETTE.description": "Obtain [gold]Palette[/gold].",
+
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.GAIN_NACHO_TONG.title": "Journey the Abyss",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.GAIN_NACHO_TONG.description": "Obtain [gold]Nacho Tong[/gold].",
+
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.DUPLICATE.title": "Become a Cryptid",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.ENTER_BOX.options.DUPLICATE.description": "Create [blue]2[/blue] copies of any card in your [gold]Deck[/gold].",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.DUPLICATE.selectionScreenPrompt": "Choose a card to duplicate twice.",
+  
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.FINISHED.description": "When the words leave your mouth, the floor suddenly shoots up and launches you out the top of the box.\nWhile flying through the air a laughing voice continuously repeats \"Jack in the box\", but it stops as soon as you finally land.",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.HURT.description": "As you kick over the box an angry voice screams at you. A sudden spring shoots up from the box, hitting you.\nWhen recovering from the hit, you notice that some gold sprang out too.",
+  "BALATRO-JACK_IN_THE_BOX_EVENT.pages.LEAVE.description": "You left.",
+
+  
+  "BALATRO-WEIRD_JOKER_EVENT.title": "Weird Joker",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.description": "As you turn a corner you spot a disheveled stall with worn out wares.\nWhen approaching, a funny looking creature pops up and asks if you are up for a trade.\n\"Ohohoh, hahaha, let's see what I got here.\nThis or that, that or this, take your pick.\nDon't worry, don't worry, nothing has been tampered with.\"",
+
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.WRAITH.title": "Wraith",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.WRAITH.description": "Add a random Rare card to your [gold]Deck[/gold]. Set your [gold]Gold[/gold] to [red]0[/red]",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.IMMOLATE.title": "Immolate",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.IMMOLATE.description": "Gain [blue]200[/blue] [gold]Gold[/gold]. Remove [red]5[/red] random cards from your [gold]Deck[/gold].",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.BLACK_HOLE.title": "Black Hole",
+  "BALATRO-WEIRD_JOKER_EVENT.pages.INITIAL.options.BLACK_HOLE.description": "[gold]Upgrade[/gold] ALL cards in your [gold]Deck[/gold]. Gain [red]Dilation[/red]",
+  
+  "BALATRO-WEIRD_JOKER_EVENT.pages.FINISHED.description": "\"Eheheh, thank you dearly.\"",
+  
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.title": "Spectral Merchant",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.description": "You see a familiar figure, it seems to be the Merchant.",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.options.APPROACH.title": "Approach",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.options.APPROACH.description": "???",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.options.LEAVE.title": "Leave",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.INITIAL.options.LEAVE.description": "Don't trust strangers",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.description": "As you get closer, it suddenly turns around and a spectral shape flies at and through you.\nYou are unharmed but it seems like you have lost something.\nAnd when it seemed to have calmed down it apologizes and offers you some reimbursement.",
+  
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.GRIM.title": "Grim",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.GRIM.description": "Remove {RandomCardRare} from your [gold]Deck[/gold]. Add [blue]1[/blue] Rare card to your [gold]Deck[/gold].",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.FAMILIAR.title": "Familiar",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.FAMILIAR.description": "Remove {RandomCardUncommon} from your [gold]Deck[/gold]. Add [blue]2[/blue] Uncommon cards to your [gold]Deck[/gold].",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.INCANTATION.title": "Incantation",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.APPROACH.options.INCANTATION.description": "Remove {RandomCardCommon} from your [gold]Deck[/gold]. Add [blue]3[/blue] Common cards to your [gold]Deck[/gold].",
+
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.FINISHED.description": "It apologizes again and says an awkward goodbye.",
+  "BALATRO-SPECTRAL_MERCHANT_EVENT.pages.LEAVE.description": "You left."
+
+}

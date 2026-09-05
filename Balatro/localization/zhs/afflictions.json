@@ -1,0 +1,19 @@
+{
+  "BALATRO-ARMED.title": "标记",
+  "BALATRO-ARMED.description": "Costs an additional {Amount:energyIcons()}.",
+
+  "BALATRO-HOUSED.title": "Housed",
+  "BALATRO-HOUSED.description": "Costs {Amount:energyIcons()}.",
+
+  "BALATRO-MARKED.title": "Marked",
+  "BALATRO-MARKED.description": "Costs {Amount:energyIcons()}.",
+
+  "BALATRO-WHEELED.title": "Wheeled",
+  "BALATRO-WHEELED.description": "Costs {Amount:energyIcons()}.",
+  
+  "BALATRO-OXED.title": "Oxed",
+  "BALATRO-OXED.description": "Sets [gold]Gold[/gold] to [blue]0[/blue].",
+
+  "BALATRO-PLANTED.title": "Planted",
+  "BALATRO-PLANTED.description": "Add [gold]Ethereal[/gold] to this card."
+}

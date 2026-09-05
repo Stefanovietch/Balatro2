@@ -17,7 +17,7 @@ public class Hack() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Add(PileType.Draw.GetPile(Owner).Cards.Where(c => c.CurrentStarCost == 0), PileType.Hand);
+        await CardPileCmd.Add(PileType.Draw.GetPile(Owner).Cards.Where(c => c.EnergyCost.GetAmountToSpend() == 0), PileType.Hand);
     }
 
     protected override void OnUpgrade()
