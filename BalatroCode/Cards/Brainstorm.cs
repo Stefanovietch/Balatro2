@@ -29,7 +29,7 @@ public class Brainstorm() : BalatroCard(1,
         PowerReplayPatch.IsReplaying = true;
         try
         {
-            await CardCmd.AutoPlay(choiceContext, cardPlayEntry.CardPlay.Card, cardPlayEntry.CardPlay.Target);
+            await CardCmd.AutoPlay(choiceContext, cardPlayEntry.CardPlay.Card, null);
         }
         finally
         {

@@ -1,9 +1,8 @@
 {
-  
-  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.char": "Who are you?",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.char": "How will you reward me?",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.0-0r.next": "Continue",
-  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.ancient": "What are you?",
-  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.next": "Answer",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.ancient": "I'll rip you into pieces.",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.0-1r.next": "Next",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.0-attack": "Both",
   
   "THE_ARCHITECT.talk.BALATRO-BALATRO.1-0r.ancient": "What are you?",
@@ -12,7 +11,7 @@
   "THE_ARCHITECT.talk.BALATRO-BALATRO.1-1r.next": "Continue",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.1-2r.ancient": "Let me fold you then.",
 
-  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-0r.ancient": "Have you started the wrong game by chance?",
+  "THE_ARCHITECT.talk.BALATRO-BALATRO.2-0r.ancient": "Have you entered the wrong game by chance?",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.2-0r.next": "Reply",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.2-1r.char": "Everything I do is by chance.",
   "THE_ARCHITECT.talk.BALATRO-BALATRO.2-1r.next": "Continue",

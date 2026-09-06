@@ -69,8 +69,8 @@ public class CeremonialDagger() : BalatroCard(2,
         if (card != null)
         {
             await CardCmd.Exhaust(choiceContext, card);
-            var intValue = card.EnergyCost.GetAmountToSpend();
-            BuffFromExhaust(intValue * 2);
+            var intValue = 2 * card.EnergyCost.GetAmountToSpend();
+            BuffFromExhaust(intValue);
             if (DeckVersion is CeremonialDagger deckVersion) deckVersion.BuffFromExhaust(intValue);
         }
         
@@ -92,6 +92,6 @@ public class CeremonialDagger() : BalatroCard(2,
 
     private void UpdateDmg()
     {
-        CurrentDamage = 7 + IncreasedDamage;
+        CurrentDamage = 9 + IncreasedDamage;
     }
 }

@@ -21,10 +21,9 @@ public class HangingChad() : BalatroCard(1,
     {
         var card = PileType.Draw.GetPile(Owner).Cards.FirstOrDefault();
         if (card == null) return;
-        card.ExhaustOnNextPlay = true;
         for (var i = 0; i < DynamicVars.Repeat.IntValue; ++i)
             await CardCmd.AutoPlay(choiceContext, card, null);
-        //exhaust
+        await CardCmd.Exhaust(choiceContext, card);
     }
 
     protected override void OnUpgrade()
