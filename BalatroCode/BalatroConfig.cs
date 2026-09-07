@@ -69,9 +69,9 @@ internal class BalatroConfig : SimpleModConfig
     [ConfigHideInUI]
     public static string Stakes { get; set; } = JsonSerializer.Serialize(new Dictionary<string, int>
     {
-        { "redDeck", 7 }, { "blueDeck", 7 }, { "yellowDeck", 0 },
+        { "redDeck", 0 }, { "blueDeck", 0 }, { "yellowDeck", 0 },
         { "greenDeck", 0 }, { "blackDeck", 0 }, { "magicDeck", 0 },
-        { "nebulaDeck", 0 }, { "ghostDeck", 3 }, { "abandonedDeck", 0 },
+        { "nebulaDeck", 0 }, { "ghostDeck", 0 }, { "abandonedDeck", 0 },
         { "checkeredDeck", 0 }, { "zodiacDeck", 0 }, { "paintedDeck", 0 },
         { "anaglyphDeck", 0 }, { "plasmaDeck", 0 }, { "erraticDeck", 0 }
     });
