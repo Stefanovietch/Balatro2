@@ -23,7 +23,7 @@ public class TheDuo() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
@@ -35,11 +35,10 @@ public class TheDuo() : BalatroCard(1,
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource == this && HasOtherAttack()) return 2;
-        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
     }
 
     protected override bool ShouldGlowGoldInternal => HasOtherAttack();

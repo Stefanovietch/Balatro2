@@ -24,6 +24,6 @@ public class WalkieTalkiePower() : BalatroPower
         await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, cardPlay);
         var target = Owner.Player.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
         if (target == null) return;
-        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, Owner, null);
+        await CreatureCmd.Damage(new ThrowingPlayerChoiceContext(), target, Amount, ValueProp.Unpowered, Owner);
     }
 }

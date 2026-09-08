@@ -26,8 +26,8 @@ public class SockAndBuskin() : BalatroCard(1,
         await Hook.BeforeSideTurnStart(CombatState, CombatSide.Player, [Owner.Creature]);
         await Hook.AfterSideTurnStart(CombatState, CombatSide.Player, [Owner.Creature]);
 
-        await Hook.AfterTurnEnd(CombatState, CombatSide.Player, [Owner.Creature]);
-        await Hook.BeforeTurnEnd(CombatState, CombatSide.Player, [Owner.Creature]);
+        await Hook.BeforeSideTurnEnd(CombatState, CombatSide.Player, [Owner.Creature]);
+        await Hook.AfterSideTurnEnd(CombatState, CombatSide.Player, [Owner.Creature]);
         
         Decimal handDraw = Hook.ModifyHandDraw(CombatState, Owner, 0M, out _);
         await CardPileCmd.Draw(choiceContext, handDraw, Owner);

@@ -28,7 +28,7 @@ public class MadJoker() : BalatroCard(1,
     {
         ArgumentNullException.ThrowIfNull(play.Target);
         if (!LastCardIsAttack()) return;
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_blunt").Execute(choiceContext);
     }
 

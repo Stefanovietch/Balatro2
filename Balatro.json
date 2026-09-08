@@ -1,12 +1,12 @@
 {
   "id": "Balatro",
-  "name": "Balatro",
+  "name": "Balatro-beta",
   "author": "Stefanovietch",
-  "description": "Slay the Spire 2 mod",
-  "version": "v1.0.0",
+  "description": "Slay the Spire 2 mod beta",
+  "version": "beta-v1.0.0",
   "has_pck": true,
   "has_dll": true,
-  "min_game_version": "0.105.0",
+  "min_game_version": "0.111.0",
   "dependencies": [
     {"id": "BaseLib", "minVersion":"3.4.5"}
   ],

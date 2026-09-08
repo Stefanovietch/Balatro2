@@ -38,7 +38,8 @@ public class HeadSlowPower() : BalatroPower
         Decimal amount,
         ValueProp props,
         Creature? dealer,
-        CardModel? cardSource)
+        CardModel? cardSource, 
+        CardPlay? cardPlay)
     {
         return target != this.Owner || !props.IsPoweredAttack() ? 1M : 1M + 0.1M * this.DynamicVars["SlowAmount"].BaseValue;
     }

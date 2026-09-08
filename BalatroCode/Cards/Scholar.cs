@@ -24,7 +24,7 @@ public class Scholar() : BalatroCard(2,
     {
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

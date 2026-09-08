@@ -30,7 +30,7 @@ public class AncientJoker() : BalatroCard(0,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this).Targeting(play.Target)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play).Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash").Execute(choiceContext);
     }
 
@@ -40,10 +40,9 @@ public class AncientJoker() : BalatroCard(0,
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return (decimal)Math.Pow(1.5,
             CombatManager.Instance.History.CardPlaysFinished.Count(c =>
                 c.HappenedThisTurn(cardSource.CombatState) && c.CardPlay.Card.Type == CurrentType &&

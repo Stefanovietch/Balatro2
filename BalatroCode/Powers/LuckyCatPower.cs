@@ -21,7 +21,7 @@ public class LuckyCatPower() : BalatroPower, IChance
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<LuckyCatPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString())
+        new DisplayVar<LuckyCatPower>("Numerator", power => power.GetNumerator(power.Owner.Player).ToString()),
     ];
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
@@ -29,7 +29,6 @@ public class LuckyCatPower() : BalatroPower, IChance
         if (Owner.Player != player) return;
         if (this.RollChance(Owner.Player, 4)) await CreatureCmd.GainBlock(Owner, Amount, ValueProp.Move, null);
         if (this.RollChance(Owner.Player, 4))
-            await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner,
-                null);
+            await CreatureCmd.Damage(choiceContext, CombatState.HittableEnemies, Amount, ValueProp.Unpowered, Owner);
     }
 }

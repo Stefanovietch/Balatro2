@@ -33,12 +33,8 @@ public class Royale() : BalatroRelic
         CardCreationOptions creationOptions)
     {
         if (Owner != player) return false;
-        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c =>
-            options.TrueForAll((Predicate<CardCreationResult>)(o => o.originalCard.Id != c.Id))).ToArray();
-        if (!cardModels.Any()) cardModels = creationOptions.GetPossibleCards(player).ToArray();
-        if (!cardModels.Any()) return false;
         var cards = CardFactory.CreateForReward(Owner, 2,
-            new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
+            new CardCreationOptions(creationOptions.CardPools, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
                 CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications));
         foreach (var card in cards)
         {

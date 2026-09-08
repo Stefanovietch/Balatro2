@@ -74,7 +74,7 @@ public class CeremonialDagger() : BalatroCard(2,
             if (DeckVersion is CeremonialDagger deckVersion) deckVersion.BuffFromExhaust(intValue);
         }
         
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);

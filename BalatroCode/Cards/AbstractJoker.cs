@@ -26,7 +26,7 @@ public class AbstractJoker() : BalatroCard(1,
         ArgumentNullException.ThrowIfNull(play.Target);
         ArgumentNullException.ThrowIfNull(play.Card.Owner.PlayerCombatState);
         var hitAmount = PileType.Hand.GetPile(Owner).Cards.Count;
-        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .WithHitCount(hitAmount)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")

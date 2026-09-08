@@ -42,7 +42,7 @@ public class EvolvedJoker() : BalatroCard(1,
                 break;
             case CardType.Attack:
                 ArgumentNullException.ThrowIfNull(play.Target);
-                await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+                await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
                     .Targeting(play.Target)
                     .WithHitFx("vfx/vfx_dramatic_stab")
                     .Execute(choiceContext);

@@ -24,7 +24,7 @@ public class Bootstraps() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_coin_explosion_jumbo")
             .Execute(choiceContext);

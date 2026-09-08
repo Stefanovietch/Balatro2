@@ -28,10 +28,9 @@ public class LoyaltyCardPower() : BalatroPower
     }
     
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (dealer == Owner && Amount <= 1 && cardSource != null) return 4;
-        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
     }
 }

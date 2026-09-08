@@ -25,11 +25,10 @@ public class BaseballCardPower() : BalatroPower
     ];
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource?.Rarity != CardRarity.Uncommon)
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return (decimal)(Amount * 0.1);
     }
 }

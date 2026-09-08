@@ -29,7 +29,7 @@ public class FortuneTeller() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .WithHitCount((int)((CalculatedVar)DynamicVars["PotionsUsed"]).Calculate(play.Target))
             .TargetingRandomOpponents(CombatState)
             .WithHitFx("vfx/vfx_starry_impact")

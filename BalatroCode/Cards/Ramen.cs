@@ -28,7 +28,7 @@ public class Ramen() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.CalculatedDamage.Calculate(play.Target)).FromCard(this, play)
             .WithHitCount(2)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_giant_horizontal_slash")

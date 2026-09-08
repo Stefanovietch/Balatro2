@@ -37,7 +37,7 @@ public class SpectralMerchantEvent() : CustomEventModel()
     
     public override bool IsAllowed(IRunState runState)
     {
-        return runState.TotalFloor > 6 && runState.Players.All(p => p.Deck.Cards.Count(c => c.IsRemovable) >= 3) && runState.Players.Any(p => p.Character is Character.Balatro);
+        return runState.TotalFloor > 6 && runState.Players.All(p => p.Deck.Cards.Count(c => c.IsRemovable && c.Rarity != CardRarity.Basic) >= 3) && runState.Players.Any(p => p.Character is Character.Balatro);
     }
     
     public override ActModel[] Acts =>
@@ -102,12 +102,6 @@ public class SpectralMerchantEvent() : CustomEventModel()
     {
         var list = this.Owner!.Deck.Cards.Where(c => c.IsRemovable && c.Rarity != CardRarity.Basic).ToList();
         var randomCards = list.TakeRandom(3, Rng).ToList();
-        if (randomCards.Count < 3)
-        {
-            var extraCards = this.Owner.Deck.Cards.Where(c => c.IsRemovable && !randomCards.Contains(c))
-                .TakeRandom(3 - randomCards.Count, Rng);
-            randomCards.AddRange(extraCards);
-        }
         _randomCardToLoseRare = randomCards[0];
         _randomCardToLoseUncommon = randomCards[1];
         _randomCardToLoseCommon = randomCards[2];

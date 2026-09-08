@@ -23,18 +23,17 @@ public class FlowerPot() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_rock_shatter")
             .Execute(choiceContext);
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource != this || !HasDifferentCardTypes())
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 3;
     }
 

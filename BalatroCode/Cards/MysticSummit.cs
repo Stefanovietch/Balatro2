@@ -23,7 +23,7 @@ public class MysticSummit() : BalatroCard(1,
         if (NoDiscardPile())
         {
             ArgumentNullException.ThrowIfNull(play.Target);
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
                 .Targeting(play.Target)
                 .WithHitFx("vfx/vfx_rock_shatter")
                 .Execute(choiceContext);

@@ -24,17 +24,16 @@ public class Canio() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return PileType.Discard.GetPile(Owner).Cards.Count(c => c.Type == CardType.Power) + 1M;
     }
 

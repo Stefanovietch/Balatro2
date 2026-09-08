@@ -36,7 +36,7 @@ public class SixthSense() : BalatroCard(-1,
         if (Owner.RunState.CurrentRoom is CombatRoom room)
             room.AddExtraReward(Owner,
                 new CardReward(
-                    new CardCreationOptions(ModelDb.CardPool<ColorlessCardPool>().AllCards,
+                    new CardCreationOptions([ModelDb.CardPool<ColorlessCardPool>()],
                         CardCreationSource.Encounter, CardRarityOddsType.Uniform), 3, Owner));
 
         _cardPlayed = true;

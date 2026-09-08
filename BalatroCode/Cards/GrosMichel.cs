@@ -28,7 +28,7 @@ public class GrosMichel() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .Execute(choiceContext);

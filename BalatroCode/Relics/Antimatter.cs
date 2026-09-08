@@ -28,14 +28,10 @@ public class Antimatter() : BalatroRelic
         CardCreationOptions creationOptions)
     {
         if (Owner != player) return false;
-        IEnumerable<CardModel> cardModels = creationOptions.GetPossibleCards(player).Where(c =>
-            options.TrueForAll((Predicate<CardCreationResult>)(o => o.originalCard.Id != c.Id))).ToArray();
-        if (!cardModels.Any()) cardModels = creationOptions.GetPossibleCards(player).ToArray();
-        if (!cardModels.Any()) return false;
         var card = CardFactory.CreateForReward(Owner, 1,
-                new CardCreationOptions(cardModels, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
+                new CardCreationOptions(creationOptions.CardPools, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
                     CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications))
-            .FirstOrDefault<CardCreationResult>()?.Card;
+            .FirstOrDefault()?.Card;
         if (card == null) return false;
         var cardCreationResult = new CardCreationResult(card);
         cardCreationResult.ModifyCard(card, this);

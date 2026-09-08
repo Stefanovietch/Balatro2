@@ -79,7 +79,7 @@ public class SpareTrousers() : BalatroCard(1,
         bool triggeredFatal = false;
         foreach (var target in targets)
         {
-            var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+            var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
                 .Targeting(target)
                 .WithHitFx("vfx/vfx_sandy_impact")
                 .Execute(choiceContext);

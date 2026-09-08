@@ -33,7 +33,7 @@ public class Erosion() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitCount((int)((CalculatedVar)DynamicVars["CardsRemoved"]).Calculate(play.Target))
             .WithHitFx("vfx/vfx_flying_slash")

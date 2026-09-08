@@ -24,10 +24,9 @@ public class TribouletPower() : BalatroPower
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource?.Owner == Owner.Player && cardSource?.EnergyCost.GetAmountToSpend() == 2) return 2;
-        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
     }
 }

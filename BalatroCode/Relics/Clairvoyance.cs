@@ -63,20 +63,6 @@ public class Clairvoyance() : BalatroRelic
     {
         if (Owner != player || options.Flags.HasFlag(CardCreationFlags.NoCardPoolModifications))
             return options;
-        var list1 = options.GetPossibleCards(player).ToList();
-        var list2 = ModelDb.CardPool<ColorlessCardPool>()
-            .GetUnlockedCards(player.UnlockState, player.RunState.CardMultiplayerConstraint).ToList();
-        if (options.Flags.HasFlag(CardCreationFlags.NoRarityModification))
-        {
-            var allowedRarities = options.GetPossibleCards(player)
-                .Select((c => c.Rarity)).ToHashSet();
-            list2 = list2.Where((c => allowedRarities.Contains(c.Rarity)))
-                .ToList();
-        }
-
-        foreach (var cardModel in list2)
-            if (!list1.Contains(cardModel))
-                list1.Add(cardModel);
-        return options.WithCustomPool(list1);
+        return options.WithCardPools(options.CardPools.Union([ModelDb.CardPool<ColorlessCardPool>()]));
     }
 }

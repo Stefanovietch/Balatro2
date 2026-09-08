@@ -25,7 +25,7 @@ public class OopsAll6s() : BalatroCard(1,
         await PowerCmd.Apply<OopsAll6sPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
         if (IsUpgraded && Owner.RunState.CurrentRoom is CombatRoom room)
         {
-            if (!Owner.PlayerOdds.PotionReward.Roll(Owner, RunManager.Instance.AscensionManager, room.RoomType)) return;
+            if (!Owner.PlayerOdds.PotionReward.Roll(Owner, room.RoomType)) return;
             var potionReward = new PotionReward(Owner);
             potionReward.Populate();
             room.AddExtraReward(Owner, potionReward);

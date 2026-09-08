@@ -22,7 +22,7 @@ public class HalfJoker() : BalatroCard(0,
     {
         if (PileType.Hand.GetPile(Owner).Cards.Count > 2) return;
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_blunt")
             .Execute(choiceContext);

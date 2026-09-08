@@ -102,7 +102,7 @@ public class Obelisk() : BalatroCard(2,
                     await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
                     break;
                 case Assault:
-                    await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+                    await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
                         .TargetingAllOpponents(CombatState)
                         .WithHitFx("vfx/vfx_giant_horizontal_slash")
                         .Execute(choiceContext);

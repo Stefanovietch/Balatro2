@@ -31,7 +31,7 @@ public class EvenSteven() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .WithHitCount((int)((CalculatedVar)DynamicVars["EvenCostPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")

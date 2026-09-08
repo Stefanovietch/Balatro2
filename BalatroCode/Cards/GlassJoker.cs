@@ -32,7 +32,7 @@ public class GlassJoker() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_starry_impact")
             .Execute(choiceContext);
@@ -47,11 +47,10 @@ public class GlassJoker() : BalatroCard(1,
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource != this || Owner.Character is not Character.Balatro balatro)
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 1M + Character.Balatro.CardsRemoved.Get(Owner) * 0.75M;
     }
 

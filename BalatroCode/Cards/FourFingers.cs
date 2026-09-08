@@ -32,13 +32,13 @@ public class FourFingers() : BalatroCard(1,
             if (IsUpgraded)
             {
                 ArgumentNullException.ThrowIfNull(play.Target);
-                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
+                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this, play)
                     .Targeting(play.Target)
                     .WithHitFx("vfx/vfx_scratch")
                     .Execute(choiceContext);
             }
             else
-                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this)
+                await DamageCmd.Attack(damageVar.BaseValue).FromCard(this, play)
                     .TargetingRandomOpponents(CombatState)
                     .WithHitFx("vfx/vfx_scratch")
                     .Execute(choiceContext);

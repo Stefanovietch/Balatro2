@@ -66,7 +66,7 @@ public partial class NRerollRetconButton : NRerollButton
     private async Task RefreshBlinds(NCombatUi screen, CombatState combatState)
     {
         var enemy = combatState.Enemies.FirstOrDefault(creature =>
-            creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
+            creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false, IsPrimaryEnemy: true });
         if (enemy == null) return;
         var blindPowers = enemy.Powers.Where(p => p is IBlindPower).ToList();
         if (blindPowers.Count == 0) return;

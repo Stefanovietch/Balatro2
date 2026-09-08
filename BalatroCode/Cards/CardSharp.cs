@@ -24,19 +24,18 @@ public class CardSharp() : BalatroCard(3,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .TargetingAllOpponents(CombatState)
             .WithHitFx("vfx/vfx_giant_horizontal_slash")
             .Execute(choiceContext);
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource != this || CombatManager.Instance.History.CardPlaysFinished.Count(c =>
                 c.HappenedThisTurn(CombatState) && c.CardPlay.Resources.EnergySpent == 3) ==
-            0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            0) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 3;
     }
 

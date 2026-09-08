@@ -38,11 +38,10 @@ public class CavendishPower() : BalatroPower
     }
 
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+        Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
         if (Owner != dealer || !props.IsPoweredAttack())
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         ;
         var internalData = GetInternalData<Data>();
         return (internalData.commandToModify != null && cardSource != null &&

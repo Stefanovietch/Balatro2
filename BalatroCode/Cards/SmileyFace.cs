@@ -27,7 +27,7 @@ public class SmileyFace() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .WithHitCount((int)((CalculatedVar)DynamicVars["PowersPlayed"]).Calculate(play.Target))
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_flying_slash")

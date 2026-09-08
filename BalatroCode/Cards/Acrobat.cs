@@ -28,7 +28,7 @@ public class Acrobat() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this, play)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")
             .Execute(choiceContext);
@@ -38,13 +38,12 @@ public class Acrobat() : BalatroCard(1,
     {
         DynamicVars.Damage.UpgradeValueBy(3);
     }
-
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
-        Creature? dealer,
-        CardModel? cardSource)
+    
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+        CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource != this || PileType.Hand.GetPile(Owner).Cards.Count > 1)
-            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 3;
     }
 
