@@ -38,15 +38,8 @@ public partial class MainFile : Node
             ModId,
             GetCombatStateHooks
         );
-
-        Run();
     }
-
-    private static void Run()
-    {
-        
-    }
-
+    
     private static IRunState? _activeCombatRunState;
     private static IEnumerable<AbstractModel> GetRunStateHooks(RunState runState)
     {

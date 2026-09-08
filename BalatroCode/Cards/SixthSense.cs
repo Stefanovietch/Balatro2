@@ -27,7 +27,7 @@ public class SixthSense() : BalatroCard(-1,
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (_cardPlayed || this.Pile?.Type != PileType.Hand) return;
+        if (_cardPlayed || this.Pile?.Type != PileType.Hand || Owner != cardPlay.Card.Owner) return;
         var card = cardPlay.Card;
         if (card.Pile != null && card.Pile.Type != PileType.None)
             await CardPileCmd.RemoveFromCombat(card);

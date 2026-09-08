@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Random;
 
 namespace Balatro.BalatroCode.Cards;
 
@@ -13,9 +14,9 @@ public interface IRandomType
     string AllTypesString => $"({nameof(CardType.Skill)}|{nameof(CardType.Attack)}|{nameof(CardType.Power)})";
     List<CardType> AllTypes => [CardType.Attack, CardType.Skill, CardType.Power];
     
-    public void SetRandomType()
+    public void SetRandomType(Rng rng)
     {
-        CurrentType = AllTypes[Random.Shared.Next(3)];
+        CurrentType = AllTypes[rng.NextInt(3)];
     }
 
     public string GetTypeString()

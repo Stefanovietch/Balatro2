@@ -35,13 +35,13 @@ public class ToDoListPower() : BalatroPower, IRandomType
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        ((IRandomType)this).SetRandomType();
+        ((IRandomType)this).SetRandomType(this.CombatState.RunState.Rng.Niche);
         return base.AfterApplied(applier, cardSource);
     }
 
     public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        ((IRandomType)this).SetRandomType();
+        ((IRandomType)this).SetRandomType(this.CombatState.RunState.Rng.Niche);
         return base.AfterPlayerTurnStart(choiceContext, player);
     }
 }

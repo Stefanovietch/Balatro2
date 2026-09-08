@@ -10,6 +10,7 @@ using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Characters;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -110,7 +111,7 @@ public class Balatro : PlaceholderCharacterModel
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player.PlayerCombatState?.TurnNumber > 1 || player.Character is not Balatro) return;
+        if (player.PlayerCombatState?.TurnNumber > 1 || player.Character is not Balatro || !LocalContext.IsMe(player)) return;
         var combatState = player.Creature.CombatState;
         if (combatState == null) return;
         var roomType = combatState.RunState.CurrentRoom?.RoomType;

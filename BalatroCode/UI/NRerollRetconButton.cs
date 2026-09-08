@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.GameActions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.Relics;
 using HarmonyLib;
@@ -6,6 +7,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Context;
 using MegaCrit.Sts2.Core.Entities.Gold;
 using MegaCrit.Sts2.Core.Entities.Merchant;
+using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Nodes.Combat;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
@@ -56,17 +58,14 @@ public partial class NRerollRetconButton : NRerollButton
         
         if (player == null) return;
         if (player.Gold < RerollCost) return;
-
-        await PlayerCmd.LoseGold(RerollCost, player, GoldLossType.Spent);
-
-        await RefreshBlinds(_screen, combatState);
-
+        
+        RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new RefreshBlindsAction(player, RerollCost));
     }
 
     private async Task RefreshBlinds(NCombatUi screen, CombatState combatState)
     {
         var enemy = combatState.Enemies.FirstOrDefault(creature =>
-            creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false });
+            creature is { IsPet: false, CanReceivePowers: true, IsPlayer: false, IsPrimaryEnemy: true });
         if (enemy == null) return;
         var blindPowers = enemy.Powers.Where(p => p is IBlindPower).ToList();
         if (blindPowers.Count == 0) return;

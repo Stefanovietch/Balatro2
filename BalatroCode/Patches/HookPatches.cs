@@ -43,7 +43,7 @@ public class HookPatches
             player.PlayerCombatState?.AllCards
                 .OfType<IRandomType>()
                 .ToList()
-                .ForEach(card => card.SetRandomType());
+                .ForEach(card => card.SetRandomType(combatState.RunState.Rng.Niche));
         }
     }
     

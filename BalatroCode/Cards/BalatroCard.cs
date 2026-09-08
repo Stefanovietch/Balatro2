@@ -29,7 +29,7 @@ public abstract class BalatroCard(int cost, CardType type, CardRarity rarity, Ta
 
     public override void AfterCreated()
     {
-        if (this is IRandomType randomType && randomType.CurrentType == CardType.None) randomType.SetRandomType();
+        if (this is IRandomType randomType && randomType.CurrentType == CardType.None && this.CombatState != null) randomType.SetRandomType(this.CombatState.RunState.Rng.Niche);
         base.AfterCreated();
     }
 }

@@ -160,8 +160,8 @@
   "BALATRO-THE_SERPENT_POWER.smartDescription": "Cannot be Debuffed.",
 
   "BALATRO-THE_TOOTH_POWER.title": "The Tooth",
-  "BALATRO-THE_TOOTH_POWER.description": "Whenever you play a card, lose [blue]10[/blue] [gold]Gold[/gold].",
-  "BALATRO-THE_TOOTH_POWER.smartDescription": "Whenever you play a card, lose [blue]10[/blue] [gold]Gold[/gold].",
+  "BALATRO-THE_TOOTH_POWER.description": "Whenever you play a card, lose [blue]4[/blue] [gold]Gold[/gold].",
+  "BALATRO-THE_TOOTH_POWER.smartDescription": "Whenever you play a card, lose [blue]4[/blue] [gold]Gold[/gold].",
 
   "BALATRO-THE_WALL_POWER.title": "The Wall",
   "BALATRO-THE_WALL_POWER.description": "Has double the Health.",
