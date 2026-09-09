@@ -19,6 +19,6 @@ public class TheToothPower() : BalatroPower, IBlindPower
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner.Character is Character.Balatro) await PlayerCmd.LoseGold(10, cardPlay.Card.Owner);
+        if (cardPlay.Card.Owner.Character is Character.Balatro) await PlayerCmd.LoseGold(4, cardPlay.Card.Owner);
     }
 }

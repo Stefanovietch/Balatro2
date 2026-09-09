@@ -1,3 +1,4 @@
+using Balatro.BalatroCode.GameActions;
 using Balatro.BalatroCode.Powers;
 using Balatro.BalatroCode.Relics;
 using HarmonyLib;
@@ -57,10 +58,7 @@ public partial class NRerollRetconButton : NRerollButton
         if (player == null) return;
         if (player.Gold < RerollCost) return;
 
-        await PlayerCmd.LoseGold(RerollCost, player, GoldLossType.Spent);
-
-        await RefreshBlinds(_screen, combatState);
-
+        RunManager.Instance.ActionQueueSynchronizer.RequestEnqueue(new RefreshBlindsAction(player, RerollCost));
     }
 
     private async Task RefreshBlinds(NCombatUi screen, CombatState combatState)

@@ -61,7 +61,7 @@ public class Clairvoyance() : BalatroRelic
         Player player,
         CardCreationOptions options)
     {
-        if (Owner != player || options.Flags.HasFlag(CardCreationFlags.NoCardPoolModifications))
+        if (Owner != player || options.Flags.HasFlag(CardCreationFlags.NoCardPoolModifications) || !options.Flags.HasFlag(CardCreationFlags.IsCardReward))
             return options;
         return options.WithCardPools(options.CardPools.Union([ModelDb.CardPool<ColorlessCardPool>()]));
     }
