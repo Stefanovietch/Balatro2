@@ -42,12 +42,14 @@ public class CharacterSelectScreenPatches
                 if (string.IsNullOrEmpty(id)) return;
 
                 var isBalatro = id is "BALATRO-BALATRO";
-                DeckPanelUI.UpdateRelic(BalatroConfig.SelectedDeck);
+                if (isBalatro) DeckPanelUI.UpdateRelic(BalatroConfig.SelectedDeck);
                 DeckPanelUI.SetVisibility(isBalatro);
                 StakePanelUI.SetVisibility(isBalatro);
             }
             catch (Exception ex)
             {
+                DeckPanelUI.SetVisibility(false);
+                StakePanelUI.SetVisibility(false);
                 MainFile.Logger.Warn($"SelectCharacter postfix error: {ex.Message}");
             }
         }
