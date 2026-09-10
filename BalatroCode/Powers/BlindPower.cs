@@ -128,7 +128,7 @@ public static class BlindMethods
     {
         if (creature.CombatState == null) return BlindType.TheArm;
         exclude ??= [];
-        var possibleBlinds = isBoss ? BossTypes : Types;
+        var possibleBlinds = (isBoss ? BossTypes : Types).ToList();
         foreach (var type in exclude) possibleBlinds.Remove(type);
         return creature.CombatState.RunState.Rng.MonsterAi.NextItem(possibleBlinds);
     }
