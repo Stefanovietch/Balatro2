@@ -22,21 +22,14 @@ public class Shattered() : BalatroRelic
         RelicRarity.Starter;
     
     public override bool HasUponPickupEffect => true;
-
-    private bool _usedUp = false;
-
+    
     public override async Task AfterActEntered()
     {
-        if (this._usedUp) return;
-        await ShatterDeck();
-        _usedUp = true;
+        if (Owner.RunState.TotalFloor < 2) await ShatterDeck();
     }
     public override async Task AfterObtained()
     {
         this.Owner.RelicGrabBag.Remove<PandorasBox>();
-        if (this._usedUp || this.Owner.Relics.Count <= 1) return;
-        await ShatterDeck();
-        _usedUp = true;
     }
     
     private async Task ShatterDeck()
@@ -55,6 +48,5 @@ public class Shattered() : BalatroRelic
             await Cmd.CustomScaledWait(0.1f, 0.2f);
         }
         await SaveManager.Instance.SaveRun(this.Owner.RunState.CurrentRoom);
-
     }
 }
