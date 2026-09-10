@@ -204,7 +204,7 @@
   "BALATRO-SCHOLAR.title": "Scholar",
   "BALATRO-SCHOLAR.description": "Gain {Block:diff()} [gold]Block[/gold].\nDeal {Damage:diff()} damage.\nDraw {Cards:diff()} card.",
   "BALATRO-SEANCE.title": "Séance",
-  "BALATRO-SEANCE.description": "If every card in your [gold]Hand[/gold] is a Skill, add {Cards:diff()} random Colorless Skills to your [gold]Hand[/gold]. They're free to play this combat.",
+  "BALATRO-SEANCE.description": "If every card in your [gold]Hand[/gold] is a Skill, add {Cards:diff()} random {IfUpgraded:show:[gold]Upgraded[/gold] |}Colorless Skills to your [gold]Hand[/gold]. They're free to play this combat.",
   "BALATRO-SEEING_DOUBLE.title": "Seeing Double",
   "BALATRO-SEEING_DOUBLE.description": "Become [gold]Confused[/gold].\nDeal double damage.",
   "BALATRO-SELTZER.title": "Seltzer",

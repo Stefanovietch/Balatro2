@@ -33,6 +33,8 @@ public partial class NRerollRetconButton : NRerollButton
     {
         Character.Balatro.CardPlayed -= Hide;
         Character.Balatro.CardPlayed += Hide;
+        Character.Balatro.TurnEnd -= Hide;
+        Character.Balatro.TurnEnd += Hide;
         Character.Balatro.CombatStart -= CombatStartCheck;
         Character.Balatro.CombatStart += CombatStartCheck;
         base._Ready();
@@ -79,6 +81,7 @@ public partial class NRerollRetconButton : NRerollButton
     public override void _ExitTree()
     {
         Character.Balatro.CardPlayed -= Hide;
+        Character.Balatro.TurnEnd -= Hide;
         Character.Balatro.CombatStart -= CombatStartCheck;
         
         base._ExitTree();

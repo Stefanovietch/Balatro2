@@ -49,6 +49,7 @@ public class Balatro : PlaceholderCharacterModel
     public static readonly SpireField<PlayerCombatState, int> CardsDiscardedThisCombat = new(() => 0);
     public static event Action<Player>? CombatGoldEarnedChanged;
     public static event Action? CombatStart;
+    public static event Action? TurnEnd;
     public static event Action? CardPlayed;
     
 
@@ -157,6 +158,12 @@ public class Balatro : PlaceholderCharacterModel
         CombatStart?.Invoke();
         
         return base.BeforeCombatStart();
+    }
+
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        TurnEnd?.Invoke();
+        return base.AfterSideTurnEnd(choiceContext, side, participants);
     }
 
     public override decimal ModifyHandDraw(Player player, decimal count)

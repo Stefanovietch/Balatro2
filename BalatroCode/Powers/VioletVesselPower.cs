@@ -1,7 +1,13 @@
 using Balatro.BalatroCode.Powers;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Ascension;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Monsters;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Powers;
 
@@ -15,21 +21,27 @@ public class VioletVesselPower() : BalatroPower, IBlindPower
 
     public BlindType BlindType => BlindType.VioletVessel;
 
-    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         var hpDiff = Owner.MaxHp - Owner.CurrentHp;
         Owner.SetMaxHpInternal(Owner.MaxHp * 3);
         Owner.SetCurrentHpInternal(Owner.MaxHp - hpDiff);
-        return base.AfterApplied(applier, cardSource);
     }
     
-    public override Task AfterRemoved(Creature oldOwner)
+    public override async Task AfterRemoved(Creature oldOwner)
     {
-        if (this.Owner.IsDead) return base.AfterRemoved(oldOwner);;
+        if (this.Owner.IsDead) return;
         var hpDiff = Owner.MaxHp - Owner.CurrentHp;
         Owner.SetMaxHpInternal(Owner.MaxHp / 3M);
         var newHp = Owner.MaxHp - hpDiff < 0 ? 0 : Owner.MaxHp - hpDiff;
         Owner.SetCurrentHpInternal(newHp);
-        return base.AfterRemoved(oldOwner);
+    }
+
+    public override decimal ModifyPowerAmountGivenAdditive(PowerModel power, Creature giver, decimal amount, Creature? target,
+        CardModel? cardSource)
+    {
+        if (Owner.Monster is CeremonialBeast && power is PlowPower)
+            return amount * 2;
+        return base.ModifyPowerAmountGivenAdditive(power, giver, amount, target, cardSource);
     }
 }

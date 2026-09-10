@@ -2,6 +2,7 @@ using Balatro.BalatroCode.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Monsters;
 using MegaCrit.Sts2.Core.Random;
 
 namespace Balatro.BalatroCode.Powers;
