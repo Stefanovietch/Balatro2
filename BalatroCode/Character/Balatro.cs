@@ -50,7 +50,7 @@ public class Balatro : PlaceholderCharacterModel
     public static event Action<Player>? CombatGoldEarnedChanged;
     public static event Action? CombatStart;
     public static event Action? CardPlayed;
-    
+    public static event Action? TurnEnd;
 
     public static readonly Color Color = new("f0f0f0");
     
@@ -155,8 +155,13 @@ public class Balatro : PlaceholderCharacterModel
     public override Task BeforeCombatStart()
     {
         CombatStart?.Invoke();
-        
         return base.BeforeCombatStart();
+    }
+    
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
+    {
+        TurnEnd?.Invoke();
+        return base.AfterSideTurnEnd(choiceContext, side, participants);
     }
 
     public override decimal ModifyHandDraw(Player player, decimal count)
