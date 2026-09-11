@@ -21,20 +21,14 @@ public class Shattered() : BalatroRelic
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
     
-    public override bool HasUponPickupEffect => true;
-    
     public override async Task AfterActEntered()
     {
         if (Owner.RunState.TotalFloor < 2) await ShatterDeck();
     }
-    public override async Task AfterObtained()
-    {
-        this.Owner.RelicGrabBag.Remove<PandorasBox>();
-    }
     
     private async Task ShatterDeck()
     {
-        await CardPileCmd.RemoveFromDeck(PileType.Deck.GetPile(this.Owner).Cards.Where(c => c is not AscendersBane).ToList(), false);
+        foreach (var card in PileType.Deck.GetPile(this.Owner).Cards.Where(c => c is not AscendersBane).ToList()) card.RemoveFromCurrentPile();
         List<CardPileAddResult> results = new List<CardPileAddResult>();
         for (int i = 0; i < 20; ++i)
         {
