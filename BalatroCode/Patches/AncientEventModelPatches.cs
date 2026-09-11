@@ -40,8 +40,9 @@ public class AncientEventModelPatches
         [HarmonyPostfix]
         public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
-            if (!__instance.IsMutable || Stakes.CurrentStake(__instance.Owner) < 3) return;
-            __result = __result.Where(e => e.Relic is not PreciseScissors);
+            if (!__instance.IsMutable) return;
+            if (__instance.Owner?.GetRelic<Shattered>() != null) __result = __result.Where(e => e.Relic is not NeowsTalisman);
+            if (Stakes.CurrentStake(__instance.Owner) >= 3) __result = __result.Where(e => e.Relic is not PreciseScissors);
         }
     }
     
@@ -51,8 +52,9 @@ public class AncientEventModelPatches
         [HarmonyPostfix]
         public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
-            if (!__instance.IsMutable || Stakes.CurrentStake(__instance.Owner) < 3) return;
-            __result = __result.Where(e => e.Relic is not PrecariousShears);
+            if (!__instance.IsMutable) return;
+            if (__instance.Owner?.GetRelic<Shattered>() != null) __result = __result.Where(e => e.Relic is not LeafyPoultice);
+            if (Stakes.CurrentStake(__instance.Owner) >= 3) __result = __result.Where(e => e.Relic is not PrecariousShears);
         }
     }
     
@@ -64,6 +66,17 @@ public class AncientEventModelPatches
         {
             if (!__instance.IsMutable) return;
             __result = __result.Where(e => e.Relic is not TouchOfOrobas);
+        }
+    }
+    
+    [HarmonyPatch(typeof(Darv), "get_AllPossibleOptions")]
+    public static class PandorasPatch 
+    {
+        [HarmonyPostfix]
+        public static void Postfix(Darv __instance, ref IEnumerable<EventOption> __result)
+        {
+            if (!__instance.IsMutable || __instance.Owner?.GetRelic<Shattered>() != null) return;
+            __result = __result.Where(e => e.Relic is not PandorasBox);
         }
     }
 }
