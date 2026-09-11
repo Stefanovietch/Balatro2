@@ -35,5 +35,6 @@ public class ShootTheMoon() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
+        DynamicVars.Damage.UpgradeValueBy(2);
     }
 }

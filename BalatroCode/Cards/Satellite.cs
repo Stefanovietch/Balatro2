@@ -18,6 +18,7 @@ public class Satellite() : BalatroCard(3,
     
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
+    public override bool CanBeGeneratedInCombat => false;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

@@ -84,6 +84,7 @@ public class SpareTrousers() : BalatroCard(1,
                 .WithHitFx("vfx/vfx_sandy_impact")
                 .Execute(choiceContext);
             
+            if (triggeredFatal) continue;
             triggeredFatal = attackCommand.Results
                 .SelectMany(r => r)
                 .Any(r => r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal()));
