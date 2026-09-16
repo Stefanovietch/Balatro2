@@ -16,6 +16,8 @@ Let me know of any bugs or difficulties.
 
 --- Further Info ---
 
+Steam workshop: https://steamcommunity.com/sharedfiles/filedetails/?id=3797425074
+
 Portrait art is being worked on.
 Once I got a job I'm planning to commision:
 - Jimbo throwing colored cards instead of static card as character.
