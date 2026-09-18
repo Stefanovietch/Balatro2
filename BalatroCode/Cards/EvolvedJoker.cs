@@ -1,10 +1,8 @@
-using Balatro.BalatroCode.Cards;
 using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -14,20 +12,22 @@ public class EvolvedJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Ancient,
     TargetType.Self)
 {
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
         new DamageVar(20, ValueProp.Move),
         new BlockVar(20, ValueProp.Move),
         new GoldVar(20),
-        new DisplayVar<EvolvedJoker>("ExtraText", e => 
+        new DisplayVar<EvolvedJoker>("ExtraText", e =>
             e.LastCardPlayedType() is not CardType.None
                 ? $"({e.LastCardPlayedType().ToString()})"
                 : "")
     ];
-    
-    public override TargetType TargetType => LastCardPlayedType() == CardType.Attack ? TargetType.AnyEnemy : TargetType.Self;
-    
+
+    public override TargetType TargetType =>
+        LastCardPlayedType() == CardType.Attack ? TargetType.AnyEnemy : TargetType.Self;
+
     protected override bool ShouldGlowRedInternal => LastCardPlayedType() is CardType.None;
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -35,7 +35,7 @@ public class EvolvedJoker() : BalatroCard(1,
         switch (LastCardPlayedType())
         {
             case CardType.Power:
-                await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, this.Owner);
+                await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
                 break;
             case CardType.Skill:
                 await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block, play);
@@ -52,17 +52,17 @@ public class EvolvedJoker() : BalatroCard(1,
 
     protected override void OnUpgrade()
     {
-        this.DynamicVars.Damage.UpgradeValueBy(10);
-        this.DynamicVars.Block.UpgradeValueBy(10);
-        this.DynamicVars.Gold.UpgradeValueBy(10);
+        DynamicVars.Damage.UpgradeValueBy(10);
+        DynamicVars.Block.UpgradeValueBy(10);
+        DynamicVars.Gold.UpgradeValueBy(10);
     }
-    
+
     private CardType LastCardPlayedType()
     {
-        if (this.IsCanonical) return CardType.None;
-        CardType? lastCardType = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner)?.CardPlay.Card.Type;
-        if (lastCardType is CardType.Attack or CardType.Skill or CardType.Power) return (CardType) lastCardType;
+        if (IsCanonical) return CardType.None;
+        var lastCardType = CombatManager.Instance.History.CardPlaysFinished
+            .LastOrDefault(c => c.CardPlay.Card.Owner == Owner)?.CardPlay.Card.Type;
+        if (lastCardType is CardType.Attack or CardType.Skill or CardType.Power) return (CardType)lastCardType;
         return CardType.None;
     }
-    
 }

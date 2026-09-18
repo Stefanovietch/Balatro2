@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -16,7 +15,7 @@ public class Hiker() : BalatroCard(1,
     [
         new PowerVar<DexterityPower>(3)
     ];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<DexterityPower>()

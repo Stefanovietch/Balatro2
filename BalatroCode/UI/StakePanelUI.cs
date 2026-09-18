@@ -1,8 +1,5 @@
-﻿using System.Diagnostics;
-using Balatro.BalatroCode.UI;
-using BaseLib.Config;
+﻿using BaseLib.Config;
 using Godot;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
@@ -27,6 +24,7 @@ public static class StakePanelUI
                 MainFile.Logger.Info("Overlay already attached");
                 return;
             }
+
             _screen = screen;
             _stakePanel = new GridContainer
             {
@@ -78,7 +76,7 @@ public static class StakePanelUI
     {
         if (_stakePanel == null)
         {
-            MainFile.Logger.Warn($"No deckPanel");
+            MainFile.Logger.Warn("No deckPanel");
             return;
         }
 
@@ -119,7 +117,7 @@ public static class StakePanelUI
     {
         if (_stakePanel == null)
         {
-            MainFile.Logger.Warn($"could not load stakePanel");
+            MainFile.Logger.Warn("could not load stakePanel");
             return;
         }
 

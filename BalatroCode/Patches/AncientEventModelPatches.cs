@@ -1,18 +1,10 @@
-﻿using System.Collections;
-using Balatro.BalatroCode.Relics;
-using Balatro.BalatroCode.UI;
-using Godot;
+﻿using Balatro.BalatroCode.Relics;
 using HarmonyLib;
-using MegaCrit.Sts2.addons.mega_text;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Events;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Events;
 using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
-using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace Balatro.BalatroCode.Patches;
 
@@ -27,13 +19,14 @@ public class AncientEventModelPatches
             if (!__instance.IsMutable || __instance.Owner is not { } player) return;
             if (player.GetRelic<HighStakes>() == null) return;
             var pickedRelic = player.Relics.LastOrDefault();
-            List<RelicModel?> options = __instance.AllPossibleOptions.Select(o => o.Relic).Where(r => r?.GetType() != pickedRelic?.GetType()).ToList();
+            var options = __instance.AllPossibleOptions.Select(o => o.Relic)
+                .Where(r => r?.GetType() != pickedRelic?.GetType()).ToList();
             var relic = player.PlayerRng.Rewards.NextItem(options);
             if (relic == null) return;
             await RelicCmd.Obtain(relic, player);
         }
     }
-    
+
     [HarmonyPatch(typeof(Neow), "get_PositiveOptions")]
     public static class NeowPreciseScissorsPatch
     {
@@ -41,36 +34,41 @@ public class AncientEventModelPatches
         public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
             if (!__instance.IsMutable) return;
-            if (__instance.Owner?.GetRelic<Shattered>() != null) __result = __result.Where(e => e.Relic is not NeowsTalisman);
-            if (Stakes.CurrentStake(__instance.Owner) >= 3) __result = __result.Where(e => e.Relic is not PreciseScissors);
+            if (__instance.Owner?.GetRelic<Shattered>() != null)
+                __result = __result.Where(e => e.Relic is not NeowsTalisman);
+            if (Stakes.CurrentStake(__instance.Owner) >= 3)
+                __result = __result.Where(e => e.Relic is not PreciseScissors);
         }
     }
-    
+
     [HarmonyPatch(typeof(Neow), "get_CurseOptions")]
-    public static class NeowPrecariousShearsPatch 
+    public static class NeowPrecariousShearsPatch
     {
         [HarmonyPostfix]
         public static void Postfix(Neow __instance, ref IEnumerable<EventOption> __result)
         {
             if (!__instance.IsMutable) return;
-            if (__instance.Owner?.GetRelic<Shattered>() != null) __result = __result.Where(e => e.Relic is not LeafyPoultice);
-            if (Stakes.CurrentStake(__instance.Owner) >= 3) __result = __result.Where(e => e.Relic is not PrecariousShears);
+            if (__instance.Owner?.GetRelic<Shattered>() != null)
+                __result = __result.Where(e => e.Relic is not LeafyPoultice);
+            if (Stakes.CurrentStake(__instance.Owner) >= 3)
+                __result = __result.Where(e => e.Relic is not PrecariousShears);
         }
     }
-    
+
     [HarmonyPatch(typeof(Orobas), "get_OptionPool3")]
-    public static class TouchOfOrobasPatch 
+    public static class TouchOfOrobasPatch
     {
         [HarmonyPostfix]
         public static void Postfix(Orobas __instance, ref IEnumerable<EventOption> __result)
         {
             if (!__instance.IsMutable) return;
-            if (Stakes.CurrentStake(__instance.Owner) >= 0) __result = __result.Where(e => e.Relic is not TouchOfOrobas);
+            if (Stakes.CurrentStake(__instance.Owner) >= 0)
+                __result = __result.Where(e => e.Relic is not TouchOfOrobas);
         }
     }
-    
+
     [HarmonyPatch(typeof(Darv), "get_AllPossibleOptions")]
-    public static class PandorasPatch 
+    public static class PandorasPatch
     {
         [HarmonyPostfix]
         public static void Postfix(Darv __instance, ref IEnumerable<EventOption> __result)

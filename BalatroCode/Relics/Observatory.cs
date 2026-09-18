@@ -1,17 +1,16 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Entities.Creatures;
+﻿using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class Observatory() : BalatroRelic
+public class Observatory : BalatroRelic
 {
+    private bool _usedThisCombat;
+
     public override RelicRarity Rarity =>
         RelicRarity.Rare;
-
-    private bool _usedThisCombat;
 
     public override Task AfterRoomEntered(AbstractRoom room)
     {

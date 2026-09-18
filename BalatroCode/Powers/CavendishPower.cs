@@ -1,7 +1,5 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Commands.Builders;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -10,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class CavendishPower() : BalatroPower
+public class CavendishPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -62,7 +60,7 @@ public class CavendishPower() : BalatroPower
 
     private class Data
     {
-        public AttackCommand? commandToModify;
         public int amountWhenAttackStarted;
+        public AttackCommand? commandToModify;
     }
 }

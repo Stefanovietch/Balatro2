@@ -1,12 +1,6 @@
-﻿using Balatro.BalatroCode.Cards;
+﻿using Balatro.BalatroCode.Extensions;
 using BaseLib.Abstracts;
-using Balatro.BalatroCode.Extensions;
 using Godot;
-using HarmonyLib;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Runs;
-using MegaCrit.Sts2.Core.Unlocks;
 
 namespace Balatro.BalatroCode.Character;
 

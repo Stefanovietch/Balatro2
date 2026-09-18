@@ -1,7 +1,5 @@
-using Balatro.BalatroCode.Cards;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Patches;
@@ -10,7 +8,7 @@ namespace Balatro.BalatroCode.Patches;
 public static class PowerReplayPatch
 {
     public static bool IsReplaying;
-    
+
     [HarmonyPostfix]
     public static void Postfix(CardModel __instance, ref ICombatState? __result)
     {

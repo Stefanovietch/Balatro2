@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,8 +17,13 @@ public class MadJoker() : BalatroCard(1,
     [
         new DamageVar(12, ValueProp.Move)
     ];
-    
-    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<EvolvedJoker>();
+
+    protected override bool ShouldGlowRedInternal => !LastCardIsAttack();
+
+    public CardModel GetTranscendenceTransformedCard()
+    {
+        return ModelDb.Card<EvolvedJoker>();
+    }
 
 
     protected override async Task OnPlay(
@@ -36,8 +40,6 @@ public class MadJoker() : BalatroCard(1,
     {
         DynamicVars.Damage.UpgradeValueBy(4);
     }
-
-    protected override bool ShouldGlowRedInternal => !LastCardIsAttack();
 
     private bool LastCardIsAttack()
     {

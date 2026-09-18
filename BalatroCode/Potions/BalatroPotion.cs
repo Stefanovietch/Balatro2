@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
+﻿using Balatro.BalatroCode.Character;
+using BaseLib.Abstracts;
 using BaseLib.Utils;
-using Balatro.BalatroCode.Character;
 
 namespace Balatro.BalatroCode.Potions;
 

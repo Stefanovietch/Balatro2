@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -15,7 +14,7 @@ public class Satellite() : BalatroCard(3,
     [
         new("GoldPerCard", 2)
     ];
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public override bool CanBeGeneratedInCombat => false;

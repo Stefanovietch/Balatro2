@@ -1,11 +1,9 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Cards.Variables;
+﻿using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Cards;
 
@@ -19,6 +17,8 @@ public class MailInRebate() : BalatroCard(1,
         new GoldVar(10),
         new DisplayVar<MailInRebate>("Type", card => ((IRandomType)card).GetTypeString())
     ];
+
+    public CardType CurrentType { get; set; } = CardType.None;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -39,6 +39,4 @@ public class MailInRebate() : BalatroCard(1,
     {
         DynamicVars.Cards.UpgradeValueBy(1);
     }
-
-    public CardType CurrentType { get; set; } = CardType.None;
 }

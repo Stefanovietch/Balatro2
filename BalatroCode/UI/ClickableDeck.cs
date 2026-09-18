@@ -1,20 +1,18 @@
 ﻿using Godot;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
-using MegaCrit.sts2.Core.Nodes.TopBar;
 
 namespace Balatro.BalatroCode.UI;
 
 public partial class ClickableDeck : NButton
 {
-    private TextureRect? _image;
     private readonly HoverTip _hoverTip;
-    public bool Selected;
     private Control? _containingPanel;
+    private TextureRect? _image;
     private TextureRect? _selectedTexture;
+    public bool Selected;
 
     public ClickableDeck(string deckName)
     {
@@ -65,7 +63,7 @@ public partial class ClickableDeck : NButton
         var tween = CreateTween();
         tween.TweenProperty(this, "scale", new Vector2(1f, 1f), 0.1);
 
-        NHoverTipSet.Remove((Control)this);
+        NHoverTipSet.Remove(this);
     }
 
     protected override void OnPress()

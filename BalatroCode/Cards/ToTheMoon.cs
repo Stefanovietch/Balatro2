@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Extensions;
+﻿using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -24,7 +23,7 @@ public class ToTheMoon() : BalatroCard(2,
     [
         HoverTipFactory.FromPower<PlatingPower>()
     ];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

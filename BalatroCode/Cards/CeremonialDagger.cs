@@ -1,7 +1,5 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
+﻿using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -73,7 +71,7 @@ public class CeremonialDagger() : BalatroCard(2,
             BuffFromExhaust(intValue);
             if (DeckVersion is CeremonialDagger deckVersion) deckVersion.BuffFromExhaust(intValue);
         }
-        
+
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
             .Targeting(play.Target)
             .WithHitFx("vfx/vfx_attack_slash")

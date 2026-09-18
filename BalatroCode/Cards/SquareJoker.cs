@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,8 +12,8 @@ public class SquareJoker() : BalatroCard(1,
     CardType.Skill, CardRarity.Common,
     TargetType.Self)
 {
-    private int _increasedBlock;
     private int _currentBlock = 4;
+    private int _increasedBlock;
 
     [SavedProperty]
     public int CurrentBlock
@@ -45,6 +44,8 @@ public class SquareJoker() : BalatroCard(1,
         new IntVar("BlockIncrease", 2)
     ];
 
+    protected override bool ShouldGlowGoldInternal => Is4thPlay();
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -67,8 +68,6 @@ public class SquareJoker() : BalatroCard(1,
         return CombatManager.Instance.History.CardPlaysFinished.Count(c =>
             c.HappenedThisTurn(CombatState) && c.CardPlay.Card.Owner == Owner) == 3;
     }
-
-    protected override bool ShouldGlowGoldInternal => Is4thPlay();
 
     protected override void AfterDowngraded()
     {

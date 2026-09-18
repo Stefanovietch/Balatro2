@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Rewards;
@@ -20,7 +19,6 @@ public class Perkeo() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        //use power instead maybe?
         if (Owner.RunState.CurrentRoom is CombatRoom room)
             room.AddExtraReward(Owner, new CardReward(CardCreationOptions.ForRoom(Owner, RoomType.Monster), 3, Owner));
     }

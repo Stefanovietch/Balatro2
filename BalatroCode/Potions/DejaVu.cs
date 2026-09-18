@@ -16,18 +16,19 @@ public class DejaVu : BalatroPotion
     public override PotionRarity Rarity => PotionRarity.Rare;
     public override PotionUsage Usage => PotionUsage.CombatOnly;
     public override TargetType TargetType => TargetType.Self;
-    
+
     public override string CustomPackedImagePath => "/potions/deja_vu.png".ImagePath();
 
-    public override IEnumerable<IHoverTip> ExtraHoverTips => 
+    public override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         ..HoverTipFactory.FromEnchantment<Glam>()
     ];
-    
+
     protected override async Task OnUse(PlayerChoiceContext choiceContext, Creature? target)
     {
-        CardSelectorPrefs prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1);
-        CardModel? card = (await CardSelectCmd.FromHand(choiceContext, this.Owner, prefs, c => ModelDb.Enchantment<Glam>().CanEnchant(c), this)).FirstOrDefault();
+        var prefs = new CardSelectorPrefs(CardSelectorPrefs.EnchantSelectionPrompt, 1);
+        var card = (await CardSelectCmd.FromHand(choiceContext, Owner, prefs,
+            c => ModelDb.Enchantment<Glam>().CanEnchant(c), this)).FirstOrDefault();
         if (card == null) return;
         CardCmd.Enchant<Glam>(card, 1);
         if (card.DeckVersion is not { } deckVersion) return;

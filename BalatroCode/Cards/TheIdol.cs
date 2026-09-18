@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Cards.Variables;
+﻿using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Extensions;
@@ -30,6 +29,8 @@ public class TheIdol() : BalatroCard(1,
         new DisplayVar<TheIdol>("Cost", card => card.GetCostString())
     ];
 
+    public CardType CurrentType { get; set; } = CardType.None;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -54,6 +55,7 @@ public class TheIdol() : BalatroCard(1,
             CurrentType = CardType.None;
             return;
         }
+
         var card = PileType.Draw.GetPile(Owner).Cards
             .Where(c => c.Type is CardType.Attack or CardType.Skill or CardType.Power &&
                         c.EnergyCost.GetAmountToSpend() is >= 1 and <= 3)
@@ -69,8 +71,6 @@ public class TheIdol() : BalatroCard(1,
             CurrentType = card.Type;
         }
     }
-
-    public CardType CurrentType { get; set; } = CardType.None;
 
     private string GetCostString()
     {

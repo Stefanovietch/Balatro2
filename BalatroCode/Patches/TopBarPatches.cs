@@ -1,15 +1,7 @@
-﻿using Balatro.BalatroCode.Relics;
-using Balatro.BalatroCode.UI;
-using Godot;
+﻿using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Context;
-using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.HoverTips;
-using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Patches;

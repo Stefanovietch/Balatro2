@@ -1,6 +1,4 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -9,7 +7,7 @@ using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheWindowPower() : BalatroPower, IBlindPower
+public class TheWindowPower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -26,7 +24,7 @@ public class TheWindowPower() : BalatroPower, IBlindPower
 
     public override async Task AfterRemoved(Creature oldOwner)
     {
-        var thornsPower = this.Owner.GetPower<ThornsPower>();
+        var thornsPower = Owner.GetPower<ThornsPower>();
         if (thornsPower == null) return;
         if (thornsPower.Amount <= 4) await PowerCmd.Remove(thornsPower);
         else await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), thornsPower, -4, null, null);

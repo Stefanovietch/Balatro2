@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
@@ -12,7 +11,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class Royale() : BalatroRelic
+public class Royale : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;

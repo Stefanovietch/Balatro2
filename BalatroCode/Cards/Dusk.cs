@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Patches;
+﻿using Balatro.BalatroCode.Patches;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -15,6 +14,8 @@ public class Dusk() : BalatroCard(3,
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 1;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -43,6 +44,4 @@ public class Dusk() : BalatroCard(3,
     {
         EnergyCost.UpgradeBy(-1);
     }
-
-    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 1;
 }

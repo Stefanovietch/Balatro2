@@ -11,7 +11,7 @@ public partial class StaticRestSiteCharacter : NRestSiteCharacter
     public override void _Ready()
     {
         _sprite = GetNode<Sprite2D>("Sprite2D");
-        string path = $"decks/{BalatroConfig.SelectedDeck}.png".ImagePath();
+        var path = $"decks/{BalatroConfig.SelectedDeck}.png".ImagePath();
         var texture = GD.Load<Texture2D>(path);
         if (texture != null)
             _sprite.Texture = texture;

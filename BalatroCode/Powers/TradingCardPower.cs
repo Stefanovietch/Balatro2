@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -7,7 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TradingCardPower() : BalatroPower
+public class TradingCardPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;

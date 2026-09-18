@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
@@ -11,7 +10,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class ThePsychicPower() : BalatroPower, IBlindPower
+public class ThePsychicPower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -19,12 +18,14 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
     public override PowerStackType StackType =>
         PowerStackType.Counter;
 
-    public BlindType BlindType => BlindType.ThePsychic;
-    
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new DisplayVar<ThePsychicPower>("CardCounter", card => (card.Amount - 1).ToString()),
+        new DisplayVar<ThePsychicPower>("CardCounter", card => (card.Amount - 1).ToString())
     ];
+
+    public override int DisplayAmount => Amount - 1;
+
+    public BlindType BlindType => BlindType.ThePsychic;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
@@ -51,8 +52,7 @@ public class ThePsychicPower() : BalatroPower, IBlindPower
         if (side != CombatSide.Player) return;
         var countBalatro = participants.Count(c => c.Player?.Character is Character.Balatro && c.IsAlive);
         if (countBalatro == 0) return;
-        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro - Amount + 1, null, null, true);
+        await PowerCmd.ModifyAmount(new ThrowingPlayerChoiceContext(), this, 5 * countBalatro - Amount + 1, null, null,
+            true);
     }
-
-    public override int DisplayAmount => Amount - 1;
 }

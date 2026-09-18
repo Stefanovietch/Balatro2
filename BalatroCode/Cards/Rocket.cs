@@ -1,8 +1,6 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
+﻿using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -20,7 +18,7 @@ public class Rocket() : BalatroCard(1,
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<StrengthPower>()
@@ -31,7 +29,7 @@ public class Rocket() : BalatroCard(1,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        foreach (var hittableEnemy in (IEnumerable<Creature>)CombatState.HittableEnemies)
+        foreach (var hittableEnemy in CombatState.HittableEnemies)
             await PowerCmd.Apply<RocketPower>(choiceContext, hittableEnemy, DynamicVars["RocketPower"].BaseValue,
                 Owner.Creature, this);
 

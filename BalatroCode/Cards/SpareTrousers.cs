@@ -1,12 +1,9 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -16,8 +13,8 @@ public class SpareTrousers() : BalatroCard(1,
     CardType.Attack, CardRarity.Uncommon,
     TargetType.Self)
 {
-    private int _increasedDamage;
     private int _currentDamage = 6;
+    private int _increasedDamage;
 
     [SavedProperty]
     public int CurrentDamage
@@ -47,7 +44,7 @@ public class SpareTrousers() : BalatroCard(1,
         new DamageVar(CurrentDamage, ValueProp.Move),
         new IntVar("DamageIncrease", 2)
     ];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.Static(StaticHoverTip.Fatal)
@@ -69,27 +66,28 @@ public class SpareTrousers() : BalatroCard(1,
                 break;
             default:
             {
-                var target1 = this.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
-                var target2 = this.Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies.Where(c => c != target1));
+                var target1 = Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies);
+                var target2 =
+                    Owner.RunState.Rng.CombatTargets.NextItem(CombatState.HittableEnemies.Where(c => c != target1));
                 targets = [target1!, target2!];
                 break;
             }
         }
 
-        bool triggeredFatal = false;
+        var triggeredFatal = false;
         foreach (var target in targets)
         {
             var attackCommand = await DamageCmd.Attack(DynamicVars.Damage.BaseValue).FromCard(this)
                 .Targeting(target)
                 .WithHitFx("vfx/vfx_sandy_impact")
                 .Execute(choiceContext);
-            
-            if(triggeredFatal) continue;
+
+            if (triggeredFatal) continue;
             triggeredFatal = attackCommand.Results
                 .SelectMany(r => r)
                 .Any(r => r.WasTargetKilled && r.Receiver.Powers.All(p => p.ShouldOwnerDeathTriggerFatal()));
-
         }
+
         if (!triggeredFatal) return;
         var intValue = DynamicVars["DamageIncrease"].IntValue;
         BuffFromFatal(intValue);

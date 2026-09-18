@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -9,7 +8,7 @@ using MegaCrit.Sts2.Core.Models.Cards;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheClubPower() : BalatroPower, IBlindPower
+public class TheClubPower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;

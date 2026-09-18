@@ -1,7 +1,5 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -35,7 +33,8 @@ public class Constellation() : BalatroCard(1,
         Creature? dealer,
         CardModel? cardSource)
     {
-        if (cardSource == null || !cardSource.Equals(this)) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
+        if (cardSource == null || !cardSource.Equals(this))
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource);
         return 0.1M * CombatManager.Instance.History.CardPlaysFinished.Count(c => c.CardPlay.Card.IsUpgraded) + 1M;
     }
 

@@ -9,24 +9,18 @@ public class UpgradePatches
     [HarmonyPatch(typeof(CardModel), "get_IsUpgradable")]
     public static class BlueSealIsUpgradablePatch
     {
-        static void Postfix(CardModel __instance, ref bool __result)
+        private static void Postfix(CardModel __instance, ref bool __result)
         {
-            if (__instance.Enchantment is BlueSeal)
-            {
-                __result = true;
-            }
+            if (__instance.Enchantment is BlueSeal) __result = true;
         }
     }
-    
+
     [HarmonyPatch(typeof(CardModel), "get_MaxUpgradeLevel")]
     public static class BlueSealMaxUpgradePatch
     {
-        static void Postfix(CardModel __instance, ref int __result)
+        private static void Postfix(CardModel __instance, ref int __result)
         {
-            if (__instance.Enchantment is BlueSeal)
-            {
-                __result = 9999;
-            }
+            if (__instance.Enchantment is BlueSeal) __result = 9999;
         }
     }
 }

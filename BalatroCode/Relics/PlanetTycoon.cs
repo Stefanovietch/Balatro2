@@ -1,16 +1,14 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Helpers.Models;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class PlanetTycoon() : BalatroRelic
+public class PlanetTycoon : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Common;
@@ -34,7 +32,7 @@ public class PlanetTycoon() : BalatroRelic
             {
                 var card2 = Owner.RunState.CloneCard(card1);
                 CardCmd.Upgrade(card2);
-                cardReward.ModifyCard(card2, (RelicModel)this);
+                cardReward.ModifyCard(card2, this);
             }
         }
 
@@ -53,7 +51,7 @@ public class PlanetTycoon() : BalatroRelic
             {
                 var card2 = Owner.RunState.CloneCard(card1);
                 CardCmd.Upgrade(card2);
-                cardReward.ModifyCard(card2, (RelicModel)this);
+                cardReward.ModifyCard(card2, this);
             }
         }
     }

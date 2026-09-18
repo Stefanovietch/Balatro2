@@ -1,10 +1,8 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
+﻿using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Nodes.Cards;
 
 namespace Balatro.BalatroCode.Cards;
 

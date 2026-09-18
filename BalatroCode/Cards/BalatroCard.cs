@@ -1,11 +1,9 @@
-﻿using BaseLib.Abstracts;
+﻿using Balatro.BalatroCode.Character;
+using Balatro.BalatroCode.Extensions;
+using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
-using Balatro.BalatroCode.Character;
-using Balatro.BalatroCode.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.CardPools;
 
 namespace Balatro.BalatroCode.Cards;
@@ -29,7 +27,8 @@ public abstract class BalatroCard(int cost, CardType type, CardRarity rarity, Ta
 
     public override void AfterCreated()
     {
-        if (this is IRandomType randomType && randomType.CurrentType == CardType.None && this.CombatState != null) randomType.SetRandomType(this.CombatState.RunState.Rng.Niche);
+        if (this is IRandomType randomType && randomType.CurrentType == CardType.None && CombatState != null)
+            randomType.SetRandomType(CombatState.RunState.Rng.Niche);
         base.AfterCreated();
     }
 }

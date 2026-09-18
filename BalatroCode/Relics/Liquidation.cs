@@ -1,12 +1,10 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class Liquidation() : BalatroRelic
+public class Liquidation : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Uncommon;

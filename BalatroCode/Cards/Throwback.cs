@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -27,15 +26,17 @@ public class Throwback() : BalatroCard(1,
         HoverTipFactory.FromPower<VulnerablePower>(),
         HoverTipFactory.FromPower<WeakPower>()
     ];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(play.Target);
-        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target, ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
+        await PowerCmd.Apply<VulnerablePower>(choiceContext, play.Target,
+            ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
             Owner.Creature, this);
-        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target, ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
+        await PowerCmd.Apply<WeakPower>(choiceContext, play.Target,
+            ((CalculatedVar)DynamicVars["QuestionMarks"]).Calculate(null),
             Owner.Creature, this);
     }
 

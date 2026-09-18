@@ -1,10 +1,7 @@
 using Balatro.BalatroCode.Afflictions;
 using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
-using Balatro.BalatroCode.UI;
 using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -13,15 +10,13 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheWheelPower() : BalatroPower, IBlindPower, IChance
+public class TheWheelPower : BalatroPower, IBlindPower, IChance
 {
     public override PowerType Type =>
         PowerType.Buff;
 
     public override PowerStackType StackType =>
         PowerStackType.Single;
-
-    public BlindType BlindType => BlindType.TheWheel;
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
@@ -35,13 +30,15 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
         })
     ];
 
+    public BlindType BlindType => BlindType.TheWheel;
+
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
         if (card.Owner.Character is Character.Balatro)
             if (this.RollChance(card.Owner, 7))
                 await CardCmd.Afflict<Wheeled>(card, 3M);
     }
-    
+
     public override bool TryModifyEnergyCostInCombat(
         CardModel card,
         decimal originalCost,
@@ -56,17 +53,17 @@ public class TheWheelPower() : BalatroPower, IBlindPower, IChance
         modifiedCost = card.Affliction.Amount;
         return true;
     }
-    
+
     public override async Task AfterDeath(
         PlayerChoiceContext choiceContext,
         Creature creature,
         bool wasRemovalPrevented,
         float deathAnimLength)
     {
-        if (wasRemovalPrevented || creature != this.Owner) return;
+        if (wasRemovalPrevented || creature != Owner) return;
         await PowerCmd.Remove(this);
     }
-    
+
     public override Task AfterRemoved(Creature oldOwner)
     {
         var players = Owner.CombatState?.RunState.Players;

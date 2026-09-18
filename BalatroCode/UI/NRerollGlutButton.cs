@@ -11,7 +11,7 @@ public partial class NRerollGlutButton : NRerollButton
 {
     private MerchantInventory? _inventory;
     private NMerchantInventory? _screen;
-    
+
     public void Initialize(MerchantInventory inventory, NMerchantInventory screen)
     {
         Name = "RerollGlutButton";
@@ -20,7 +20,7 @@ public partial class NRerollGlutButton : NRerollButton
         _inventory = inventory;
         _screen = screen;
     }
-    
+
     protected override async void OnRelease()
     {
         if (_inventory == null || _screen == null) return;
@@ -32,23 +32,23 @@ public partial class NRerollGlutButton : NRerollButton
 
         RefreshCardSlots(_screen, _inventory);
     }
-    
+
     private static void RefreshCardSlots(NMerchantInventory node, MerchantInventory inventory)
     {
         Traverse.Create(inventory).Field("_characterCardEntries").SetValue(new List<MerchantCardEntry>());
         Traverse.Create(inventory).Field("_colorlessCardEntries").SetValue(new List<MerchantCardEntry>());
         Traverse.Create(inventory).Method("PopulateCharacterCardEntries").GetValue();
         Traverse.Create(inventory).Method("PopulateColorlessCardEntries").GetValue();
-        
+
         var charContainer = Traverse.Create(node).Field("_characterCardContainer").GetValue<Control>();
-        for (int i = 0; i < inventory.CharacterCardEntries.Count; i++)
+        for (var i = 0; i < inventory.CharacterCardEntries.Count; i++)
         {
             var child = charContainer.GetChild<NMerchantCard>(i);
             child.FillSlot(inventory.CharacterCardEntries[i]);
         }
 
         var colorlessContainer = Traverse.Create(node).Field("_colorlessCardContainer").GetValue<Control>();
-        for (int i = 0; i < inventory.ColorlessCardEntries.Count; i++)
+        for (var i = 0; i < inventory.ColorlessCardEntries.Count; i++)
         {
             var child = colorlessContainer.GetChild<NMerchantCard>(i);
             child.FillSlot(inventory.ColorlessCardEntries[i]);

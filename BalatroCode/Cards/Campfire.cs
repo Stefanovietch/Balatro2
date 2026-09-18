@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -31,7 +30,8 @@ public class Campfire() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature, ((CalculatedVar)DynamicVars["StrengthPower"]).Calculate(null),
+        await PowerCmd.Apply<StrengthPower>(choiceContext, Owner.Creature,
+            ((CalculatedVar)DynamicVars["StrengthPower"]).Calculate(null),
             Owner.Creature, this);
     }
 

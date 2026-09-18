@@ -6,7 +6,6 @@ using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Multiplayer.Serialization;
 using MegaCrit.Sts2.Core.Rooms;
 
@@ -14,13 +13,9 @@ namespace Balatro.BalatroCode.GameActions;
 
 public class RefreshBlindsAction : GameAction
 {
+    private readonly ICombatState _combatState;
     private readonly Player _player;
     private readonly int _rerollCost;
-    private readonly ICombatState _combatState;
-    
-    public override ulong OwnerId => _player.NetId;
-
-    public override GameActionType ActionType => GameActionType.CombatPlayPhaseOnly;
 
     public RefreshBlindsAction(Player player, int rerollCost)
     {
@@ -28,6 +23,10 @@ public class RefreshBlindsAction : GameAction
         _rerollCost = rerollCost;
         _combatState = player.Creature.CombatState!;
     }
+
+    public override ulong OwnerId => _player.NetId;
+
+    public override GameActionType ActionType => GameActionType.CombatPlayPhaseOnly;
 
     protected override async Task ExecuteAction()
     {

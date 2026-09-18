@@ -1,5 +1,3 @@
-using Balatro.BalatroCode.Extensions;
-
 namespace Balatro.BalatroCode.Afflictions;
 
 public class Marked : BalatroAfflictions

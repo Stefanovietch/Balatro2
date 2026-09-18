@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
+﻿using Balatro.BalatroCode.Powers;
 using BaseLib.Cards.Variables;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;

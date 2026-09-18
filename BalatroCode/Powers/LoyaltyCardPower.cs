@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Powers;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -9,7 +8,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class LoyaltyCardPower() : BalatroPower
+public class LoyaltyCardPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -26,7 +25,7 @@ public class LoyaltyCardPower() : BalatroPower
         else
             await PowerCmd.ModifyAmount(choiceContext, this, 5, null, null, true);
     }
-    
+
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer,
         CardModel? cardSource)

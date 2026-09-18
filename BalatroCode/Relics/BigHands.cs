@@ -1,14 +1,11 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Entities.Cards;
+﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Factories;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class BigHands() : BalatroRelic
+public class BigHands : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;

@@ -1,10 +1,8 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Enchantments;
 using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 
@@ -14,11 +12,11 @@ public class Obelisk() : BalatroCard(2,
     CardType.Skill, CardRarity.Rare,
     TargetType.AllEnemies)
 {
-    private int _currentDamage = 4;
     private int _currentBlock = 8;
+    private int _currentDamage = 4;
+    private int _increasedBlock;
 
     private int _increasedDamage;
-    private int _increasedBlock;
 
     [SavedProperty]
     public int CurrentDamage
@@ -65,7 +63,7 @@ public class Obelisk() : BalatroCard(2,
             _increasedBlock = value;
         }
     }
-    
+
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
 
     public override bool CanBeGeneratedInCombat => false;
@@ -83,18 +81,18 @@ public class Obelisk() : BalatroCard(2,
         CardPlay play)
     {
         ArgumentNullException.ThrowIfNull(CombatState);
-        
+
         IReadOnlyList<CardModel> options =
         [
-            CombatState.CreateCard(ModelDb.Card<Assault>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Blockade>(), this.Owner),
-            CombatState.CreateCard(ModelDb.Card<Enhance>(), this.Owner)
+            CombatState.CreateCard(ModelDb.Card<Assault>(), Owner),
+            CombatState.CreateCard(ModelDb.Card<Blockade>(), Owner),
+            CombatState.CreateCard(ModelDb.Card<Enhance>(), Owner)
         ];
         foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
-        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
+        var option1 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
         foreach (var card in options) ((IObeliskOption)card).UpdateValue(this);
-        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner, false);
-        
+        var option2 = await CardSelectCmd.FromChooseACardScreen(choiceContext, options, Owner);
+
         foreach (var option in (List<CardModel?>)[option1, option2])
             switch (option)
             {
@@ -143,5 +141,7 @@ public class Obelisk() : BalatroCard(2,
 
 public interface IObeliskOption
 {
-    public void UpdateValue(CardModel card) { }
+    public void UpdateValue(CardModel card)
+    {
+    }
 }
