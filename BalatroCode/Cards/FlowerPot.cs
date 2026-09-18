@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,6 +16,8 @@ public class FlowerPot() : BalatroCard(2,
     [
         new DamageVar(11, ValueProp.Move)
     ];
+
+    protected override bool ShouldGlowGoldInternal => HasDifferentCardTypes();
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -41,8 +42,6 @@ public class FlowerPot() : BalatroCard(2,
     {
         DynamicVars.Damage.UpgradeValueBy(3);
     }
-
-    protected override bool ShouldGlowGoldInternal => HasDifferentCardTypes();
 
     private bool HasDifferentCardTypes()
     {

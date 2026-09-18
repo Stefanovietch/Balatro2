@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Abstracts;
+﻿using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -18,8 +17,13 @@ public class CleverJoker() : BalatroCard(1,
     [
         new BlockVar(10, ValueProp.Move)
     ];
-    
-    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<EvolvedJoker>();
+
+    protected override bool ShouldGlowRedInternal => !LastCardIsSkill();
+
+    public CardModel GetTranscendenceTransformedCard()
+    {
+        return ModelDb.Card<EvolvedJoker>();
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -34,11 +38,10 @@ public class CleverJoker() : BalatroCard(1,
         DynamicVars.Block.UpgradeValueBy(4);
     }
 
-    protected override bool ShouldGlowRedInternal => !LastCardIsSkill();
-
     private bool LastCardIsSkill()
     {
-        var yourCardPlayed = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner);
+        var yourCardPlayed =
+            CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card.Owner == Owner);
         return yourCardPlayed?.CardPlay.Card.Type == CardType.Skill;
     }
 }

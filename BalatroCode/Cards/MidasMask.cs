@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -20,12 +19,14 @@ public class MidasMask() : BalatroCard(-1,
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner == this.Owner) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        if (cardPlay.Card.Owner == Owner && Pile?.Type == PileType.Hand)
+            await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     public override async Task AfterCardChangedPiles(CardModel card, PileType oldPileType, AbstractModel? clonedBy)
     {
-        if (card.Pile?.Type == PileType.Hand && card.Equals(this)) await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Owner);
+        if (card.Pile?.Type == PileType.Hand && card.Equals(this))
+            await CardPileCmd.Draw(new ThrowingPlayerChoiceContext(), Owner);
     }
 
     protected override void OnUpgrade()

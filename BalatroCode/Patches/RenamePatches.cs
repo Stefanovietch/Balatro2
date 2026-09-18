@@ -4,7 +4,6 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Patches;
 
-
 [HarmonyPatch(typeof(CharacterModel), "get_Title")]
 public class RenameTitlePatches
 {

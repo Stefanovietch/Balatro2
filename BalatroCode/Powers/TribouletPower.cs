@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -7,7 +6,7 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TribouletPower() : BalatroPower
+public class TribouletPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;

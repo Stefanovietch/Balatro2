@@ -1,12 +1,6 @@
-﻿using System.Diagnostics;
-using Balatro.BalatroCode.Relics;
-using Balatro.BalatroCode.UI;
-using BaseLib.Config;
+﻿using BaseLib.Config;
 using Godot;
 using MegaCrit.Sts2.addons.mega_text;
-using MegaCrit.Sts2.Core.Localization;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Relics;
 using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 
 namespace Balatro.BalatroCode.UI;
@@ -19,6 +13,7 @@ public static class DeckPanelUI
     private static MegaRichTextLabel? _relicTitle;
     private static MegaRichTextLabel? _relicDescription;
     private static NCharacterSelectScreen? _screen;
+
     public static void Attach(NCharacterSelectScreen screen)
     {
         Callable.From(() => DoAttach(screen)).CallDeferred();
@@ -100,7 +95,7 @@ public static class DeckPanelUI
     {
         if (_deckPanel == null)
         {
-            MainFile.Logger.Warn($"No deckPanel");
+            MainFile.Logger.Warn("No deckPanel");
             return;
         }
 
@@ -118,7 +113,7 @@ public static class DeckPanelUI
             MainFile.Logger.Warn($"{selected} not in deckPanel");
             return;
         }
-        
+
         foreach (var node in _deckPanel.FindChildren("*", owned: false))
         {
             if (node is not ClickableDeck deck) continue;
@@ -145,7 +140,7 @@ public static class DeckPanelUI
     {
         if (_deckPanel == null)
         {
-            MainFile.Logger.Warn($"Could not load selected deck");
+            MainFile.Logger.Warn("Could not load selected deck");
             return;
         }
 

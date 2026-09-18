@@ -1,20 +1,16 @@
 using Balatro.BalatroCode.Afflictions;
-using Balatro.BalatroCode.Powers;
-using Balatro.BalatroCode.UI;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheOxPower() : BalatroPower, IBlindPower
+public class TheOxPower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -35,7 +31,7 @@ public class TheOxPower() : BalatroPower, IBlindPower
             if (p.Player == null || p.Player.PlayerCombatState == null) continue;
             foreach (var oxed in p.Player.PlayerCombatState.AllCards.Where(c => c.Affliction is Oxed))
                 CardCmd.ClearAffliction(oxed);
-            
+
             var card = PileType.Hand.GetPile(p.Player).Cards.TakeRandom(1, p.Player.RunState.Rng.CombatCardSelection)
                 .FirstOrDefault();
             if (card == null) continue;
@@ -51,14 +47,14 @@ public class TheOxPower() : BalatroPower, IBlindPower
             CardCmd.ClearAffliction(cardPlay.Card);
         }
     }
-    
+
     public override async Task AfterDeath(
         PlayerChoiceContext choiceContext,
         Creature creature,
         bool wasRemovalPrevented,
         float deathAnimLength)
     {
-        if (wasRemovalPrevented || creature != this.Owner) return;
+        if (wasRemovalPrevented || creature != Owner) return;
         await PowerCmd.Remove(this);
     }
 

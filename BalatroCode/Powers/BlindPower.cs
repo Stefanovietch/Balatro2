@@ -1,8 +1,5 @@
-using Balatro.BalatroCode.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Random;
 
 namespace Balatro.BalatroCode.Powers;
 
@@ -53,7 +50,7 @@ public static class BlindMethods
         BlindType.TheClub,
         BlindType.TheFish,
         BlindType.TheHook,
-        BlindType.TheHouse,
+        //BlindType.TheHouse,
         BlindType.TheOx,
         BlindType.ThePsychic,
         BlindType.TheWall,
@@ -86,8 +83,8 @@ public static class BlindMethods
     {
         [BlindType.TheArm] = ModelDb.Power<TheArmPower>,
         [BlindType.TheClub] = ModelDb.Power<TheClubPower>,
-        [BlindType.TheEye] = ModelDb.Power<TheArmPower>,
-        [BlindType.TheFish] = ModelDb.Power<TheEyePower>,
+        [BlindType.TheEye] = ModelDb.Power<TheEyePower>,
+        [BlindType.TheFish] = ModelDb.Power<TheFishPower>,
         [BlindType.TheHook] = ModelDb.Power<TheHookPower>,
         [BlindType.TheHouse] = ModelDb.Power<TheHousePower>,
         [BlindType.TheOx] = ModelDb.Power<TheOxPower>,
@@ -111,7 +108,7 @@ public static class BlindMethods
         [BlindType.VerdantLeaf] = ModelDb.Power<VerdantLeafPower>,
         [BlindType.VioletVessel] = ModelDb.Power<VioletVesselPower>,
         [BlindType.CrimsonHeart] = ModelDb.Power<CrimsonHeartPower>,
-        [BlindType.CeruleanBell] = ModelDb.Power<CeruleanBellPower>,
+        [BlindType.CeruleanBell] = ModelDb.Power<CeruleanBellPower>
     };
 
     private static BalatroPower CreatePower(BlindType type)

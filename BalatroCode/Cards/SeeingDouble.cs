@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
+﻿using Balatro.BalatroCode.Powers;
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -19,7 +18,7 @@ public class SeeingDouble() : BalatroCard(2,
         new PowerVar<SeeingDoublePower>(1),
         new PowerVar<ConfusedPower>(1)
     ];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromPower<ConfusedPower>()

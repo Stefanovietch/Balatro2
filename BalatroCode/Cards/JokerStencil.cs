@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -32,7 +31,8 @@ public class JokerStencil() : BalatroCard(2,
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
+        if (cardSource != this)
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 11 - PileType.Hand.GetPile(Owner).Cards.Count;
     }
 

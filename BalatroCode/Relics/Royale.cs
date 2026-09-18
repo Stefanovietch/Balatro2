@@ -1,18 +1,16 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class Royale() : BalatroRelic
+public class Royale : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Starter;
@@ -34,8 +32,9 @@ public class Royale() : BalatroRelic
     {
         if (Owner != player) return false;
         var cards = CardFactory.CreateForReward(Owner, 2,
-            new CardCreationOptions(creationOptions.CardPools, CardCreationSource.Other, creationOptions.RarityOdds).WithFlags(
-                CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications));
+            new CardCreationOptions(creationOptions.CardPools, CardCreationSource.Other, creationOptions.RarityOdds)
+                .WithFlags(
+                    CardCreationFlags.NoModifyHooks | CardCreationFlags.NoCardPoolModifications));
         foreach (var card in cards)
         {
             var cardCreationResult = new CardCreationResult(card.Card);

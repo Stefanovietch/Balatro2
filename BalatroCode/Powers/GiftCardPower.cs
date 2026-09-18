@@ -1,8 +1,6 @@
-﻿using Balatro.BalatroCode.Powers;
+﻿using System.Collections;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Context;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.Helpers;
@@ -15,7 +13,7 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class GiftCardPower() : BalatroPower
+public class GiftCardPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -25,22 +23,24 @@ public class GiftCardPower() : BalatroPower
 
     public override Task AfterCombatEnd(CombatRoom room)
     {
-        if (this.Owner.Player == null) return base.AfterCombatEnd(room);
-        var rewardsSetSynchronizer = Traverse.Create(RunManager.Instance).Property("RewardsSetSynchronizer").GetValue<RewardsSetSynchronizer>();
-        var playerRewardState = Traverse.Create(rewardsSetSynchronizer).Method("GetRewardStateForPlayer", this.Owner.Player).GetValue();
-        var rewardsStack = Traverse.Create(playerRewardState).Field("rewardsStack").GetValue<System.Collections.IList>();
-        _ = TaskHelper.RunSafely(EnchantCards(rewardsStack, room, this.Owner.Player));
+        if (Owner.Player == null) return base.AfterCombatEnd(room);
+        var rewardsSetSynchronizer = Traverse.Create(RunManager.Instance).Property("RewardsSetSynchronizer")
+            .GetValue<RewardsSetSynchronizer>();
+        var playerRewardState = Traverse.Create(rewardsSetSynchronizer).Method("GetRewardStateForPlayer", Owner.Player)
+            .GetValue();
+        var rewardsStack = Traverse.Create(playerRewardState).Field("rewardsStack").GetValue<IList>();
+        _ = TaskHelper.RunSafely(EnchantCards(rewardsStack, room, Owner.Player));
         return base.AfterCombatEnd(room);
     }
 
-    private async Task EnchantCards(System.Collections.IList rewardsStack, CombatRoom room, Player player)
+    private async Task EnchantCards(IList rewardsStack, CombatRoom room, Player player)
     {
         var attempts = 0;
         while (rewardsStack.Count == 0 && attempts++ < 30) await Cmd.Wait(1);
         if (rewardsStack.Count == 0) return;
-        
-        Nimble nimble = ModelDb.Enchantment<Nimble>();
-        Sharp sharp = ModelDb.Enchantment<Sharp>();
+
+        var nimble = ModelDb.Enchantment<Nimble>();
+        var sharp = ModelDb.Enchantment<Sharp>();
         foreach (var setStateObj in rewardsStack)
         {
             var set = Traverse.Create(setStateObj).Field("set").GetValue<RewardsSet>();
@@ -54,16 +54,14 @@ public class GiftCardPower() : BalatroPower
 
                 var cardToEnchant = player.PlayerRng.Rewards.NextItem(possibleCards);
                 if (cardToEnchant is null) continue;
-                
-                bool canNimble = nimble.CanEnchant(cardToEnchant);
-                bool canSharp = sharp.CanEnchant(cardToEnchant);
-                bool useNimble = canNimble && canSharp ? player.PlayerRng.Rewards.NextBool() : canNimble;
-                
+
+                var canNimble = nimble.CanEnchant(cardToEnchant);
+                var canSharp = sharp.CanEnchant(cardToEnchant);
+                var useNimble = canNimble && canSharp ? player.PlayerRng.Rewards.NextBool() : canNimble;
+
                 if (useNimble) CardCmd.Enchant<Nimble>(cardToEnchant, Amount);
                 else if (canSharp) CardCmd.Enchant<Sharp>(cardToEnchant, Amount);
-                
             }
-            
         }
     }
 }

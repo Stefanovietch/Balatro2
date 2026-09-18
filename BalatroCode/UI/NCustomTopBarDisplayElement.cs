@@ -14,7 +14,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     private Control? _icon;
     private float _previousCount;
     protected Player? Player;
-    
+
     protected abstract string IconNodePath { get; }
     protected abstract string CountLabelNodePath { get; }
     public abstract string ScenePath { get; }
@@ -26,7 +26,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         Player = player;
         UpdateGoldDisplay();
     }
-    
+
     public override void _Ready()
     {
         ConnectSignals();
@@ -34,7 +34,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         _countLabel = GetNodeOrNull<MegaLabel>(CountLabelNodePath);
         Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;
         Character.Balatro.CombatGoldEarnedChanged += OnCombatGoldChanged;
-        
+
         Character.Balatro.CombatStart -= ResetGoldDisplay;
         Character.Balatro.CombatStart += ResetGoldDisplay;
     }
@@ -45,7 +45,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
     protected abstract int? GetGoldEarned();
 
     protected abstract int? GetMaxGold();
-    
+
     private void OnCombatGoldChanged(Player player)
     {
         if (Player != player)
@@ -58,14 +58,14 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         if (_countLabel == null) return;
         _countLabel.SetText("0 / 200");
     }
-    
+
     private void UpdateGoldDisplay()
-    {    
+    {
         var goldEarned = GetGoldEarned();
         var maxGold = GetMaxGold();
         if (_countLabel == null) return;
         if (goldEarned == null || maxGold == null) return;
-        
+
         _bumpTween?.Kill();
         _bumpTween = CreateTween();
         _bumpTween.TweenProperty(_countLabel, "scale", Vector2.One, 0.5f)
@@ -96,7 +96,7 @@ public abstract partial class NCustomTopBarDisplayElement : NClickableControl, I
         if (_icon == null) return;
         _icon.Rotation = 0f;
     }
-    
+
     public override void _ExitTree()
     {
         Character.Balatro.CombatGoldEarnedChanged -= OnCombatGoldChanged;

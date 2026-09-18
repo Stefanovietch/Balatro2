@@ -1,22 +1,20 @@
 ﻿using Godot;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.HoverTips;
-using MegaCrit.sts2.Core.Nodes.TopBar;
 
 namespace Balatro.BalatroCode.UI;
 
 public partial class ClickableStake : NButton
 {
-    private TextureRect? _image;
     private readonly HoverTip _hoverTip;
-    public bool Selected;
-    public bool Unlocked;
-    public int StakeLevel;
     private Control? _containingPanel;
+    private TextureRect? _image;
     private TextureRect? _selectedTexture;
+    public bool Selected;
+    public int StakeLevel;
+    public bool Unlocked;
 
     public ClickableStake(string stakeName, int stakeLevel)
     {
@@ -73,7 +71,7 @@ public partial class ClickableStake : NButton
             tween.TweenProperty(this, "scale", new Vector2(1f, 1f), 0.1);
         }
 
-        NHoverTipSet.Remove((Control)this);
+        NHoverTipSet.Remove(this);
     }
 
     protected override void OnPress()
@@ -100,6 +98,6 @@ public partial class ClickableStake : NButton
     {
         Unlocked = Stakes.GetMaxStake(BalatroConfig.SelectedDeck) >= StakeLevel;
         if (_image == null) return;
-        _image.SelfModulate = !Unlocked ? new Color(0.5f, 0.5f, 0.5f, 1f) : new Color(1f, 1f, 1f, 1f);
+        _image.SelfModulate = !Unlocked ? new Color(0.5f, 0.5f, 0.5f) : new Color(1f, 1f, 1f);
     }
 }

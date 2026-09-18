@@ -1,11 +1,7 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.DevConsole;
-using MegaCrit.Sts2.Core.Entities.Actions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
@@ -28,7 +24,8 @@ public class DelayedGratification() : BalatroCard(-1,
         if (side != CombatSide.Player || Owner.PlayerCombatState == null ||
             Owner.Character is not Character.Balatro balatro) return;
         if (Character.Balatro.CardsDiscardedThisTurn.Get(Owner.PlayerCombatState) != 0) return;
-        if (PileType.Hand.GetPile(this.Owner).Cards.Contains(this)) await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
+        if (PileType.Hand.GetPile(Owner).Cards.Contains(this))
+            await PlayerCmd.GainGold(DynamicVars.Gold.BaseValue, Owner);
     }
 
     protected override void OnUpgrade()

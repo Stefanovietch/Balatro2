@@ -1,12 +1,7 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
-using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Encounters;
-using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.Rooms;
 
 namespace Balatro.BalatroCode.Cards;
@@ -28,7 +23,7 @@ public class Chicot() : BalatroCard(1,
         VfxCmd.PlayOnCreatureCenter(Owner.Creature, "vfx/vfx_flying_slash");
 
         if (Owner.Creature.CombatState?.Encounter?.RoomType != RoomType.Boss) return;
-        foreach (var enemy in (IEnumerable<Creature>)CombatState.HittableEnemies)
+        foreach (var enemy in CombatState.HittableEnemies)
         {
             if (enemy.IsPet) continue;
             await CreatureCmd.Stun(enemy);

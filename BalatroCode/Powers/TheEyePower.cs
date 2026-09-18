@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -7,7 +6,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheEyePower() : BalatroPower, IBlindPower
+public class TheEyePower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -15,9 +14,9 @@ public class TheEyePower() : BalatroPower, IBlindPower
     public override PowerStackType StackType =>
         PowerStackType.Single;
 
-    public BlindType BlindType => BlindType.TheEye;
-
     private Dictionary<Player, CardType> LastCardTypePlayed { get; } = new();
+
+    public BlindType BlindType => BlindType.TheEye;
 
     public override bool ShouldPlay(CardModel card, AutoPlayType autoPlayType)
     {
@@ -29,7 +28,8 @@ public class TheEyePower() : BalatroPower, IBlindPower
 
     public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        if (cardPlay.Card.Owner.Character is Character.Balatro) LastCardTypePlayed[cardPlay.Card.Owner] = cardPlay.Card.Type;
+        if (cardPlay.Card.Owner.Character is Character.Balatro)
+            LastCardTypePlayed[cardPlay.Card.Owner] = cardPlay.Card.Type;
         return base.AfterCardPlayed(choiceContext, cardPlay);
     }
 }

@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using Balatro.BalatroCode.Extensions;
+﻿using Balatro.BalatroCode.Extensions;
 using Balatro.BalatroCode.Relics;
+using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
@@ -17,7 +17,8 @@ public class BalatroRelicPool : CustomRelicPoolModel
 
     protected override IEnumerable<RelicModel> GenerateAllRelics()
     {
-        return [
+        return
+        [
             ModelDb.Relic<Antimatter>(),
             ModelDb.Relic<GlowUp>(),
             ModelDb.Relic<Illusion>(),
@@ -30,13 +31,13 @@ public class BalatroRelicPool : CustomRelicPoolModel
             ModelDb.Relic<Recyclomancy>(),
             ModelDb.Relic<RerollGlut>(),
             ModelDb.Relic<Retcon>(),
-            ModelDb.Relic<TarotTycoon>(),
+            ModelDb.Relic<TarotTycoon>()
         ];
     }
-    
+
     public override IEnumerable<RelicModel> GetUnlockedRelics(UnlockState unlockState)
     {
-        List<RelicModel> list = this.AllRelics.Where(relic => relic is not StrikeDummy).ToList();
+        var list = AllRelics.Where(relic => relic is not StrikeDummy).ToList();
         return list;
     }
 }

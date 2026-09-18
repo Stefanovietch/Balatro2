@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,6 +14,10 @@ public class HalfJoker() : BalatroCard(0,
     [
         new DamageVar(8, ValueProp.Move)
     ];
+
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 3;
+
+    protected override bool ShouldGlowRedInternal => PileType.Hand.GetPile(Owner).Cards.Count > 3;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -32,9 +35,4 @@ public class HalfJoker() : BalatroCard(0,
     {
         DynamicVars.Damage.UpgradeValueBy(4);
     }
-
-    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 3;
-    
-    protected override bool ShouldGlowRedInternal => PileType.Hand.GetPile(Owner).Cards.Count > 3;
-
 }

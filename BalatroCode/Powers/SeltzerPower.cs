@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -6,7 +5,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class SeltzerPower() : BalatroPower
+public class SeltzerPower : BalatroPower
 {
     public override PowerType Type =>
         PowerType.Buff;

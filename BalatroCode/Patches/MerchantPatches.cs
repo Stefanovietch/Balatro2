@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.Reflection;
-using Balatro.BalatroCode.Relics;
+﻿using Balatro.BalatroCode.Relics;
 using Balatro.BalatroCode.UI;
 using Godot;
 using HarmonyLib;
@@ -8,14 +6,9 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Merchant;
 using MegaCrit.Sts2.Core.Entities.Potions;
 using MegaCrit.Sts2.Core.Entities.Relics;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.Factories;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.PotionPools;
-using MegaCrit.Sts2.Core.Models.Potions;
-using MegaCrit.Sts2.Core.Nodes.CommonUi;
-using MegaCrit.Sts2.Core.Nodes.GodotExtensions;
 using MegaCrit.Sts2.Core.Nodes.Screens.Shops;
 
 namespace Balatro.BalatroCode.Patches;
@@ -31,7 +24,7 @@ public class MerchantPatches
             List<MerchantRelicEntry> ____relicEntries)
         {
             if (__instance.Player.GetRelic<OverstockPlus>() == null) return;
-            
+
             var relicRarityArray = new RelicRarity[3]
             {
                 RelicFactory.RollRarity(__instance.Player),
@@ -45,7 +38,7 @@ public class MerchantPatches
             }
         }
     }
-    
+
 
     [HarmonyPatch(typeof(NMerchantInventory), "Initialize")]
     public static class MerchantRerollPatch
@@ -57,7 +50,6 @@ public class MerchantPatches
         {
             if (inventory.Player.GetRelic<OverstockPlus>() != null)
             {
-
                 var potionContainer = __instance.GetNode<Control>("%Potions");
 
                 potionContainer.GetChild<NMerchantPotion>(0).Position += Vector2.Down * 144;
@@ -66,7 +58,7 @@ public class MerchantPatches
 
                 var relicContainer = __instance.GetNode<Control>("%Relics");
 
-                for (int i = 0; i < 3; i++)
+                for (var i = 0; i < 3; i++)
                 {
                     var source = relicContainer.GetChild<NMerchantRelic>(i);
 
@@ -85,25 +77,26 @@ public class MerchantPatches
                     );
                 }
             }
-            
+
             var slotsContainer = __instance.GetNode<Control>("%SlotsContainer");
 
-            if (inventory.Player.GetRelic<RerollGlut>() != null) {
+            if (inventory.Player.GetRelic<RerollGlut>() != null)
+            {
                 var control = new Control();
                 slotsContainer.AddChild(control);
                 control.SetAnchorsAndOffsetsPreset(Control.LayoutPreset.TopWide);
                 control.OffsetTop = 70;
                 control.OffsetBottom = -27;
                 control.MouseFilter = Control.MouseFilterEnum.Ignore;
-                
+
                 var button = new NRerollGlutButton();
                 button.CustomMinimumSize = new Vector2(276, 73);
                 button.Size = button.CustomMinimumSize;
                 button.AnchorLeft = 0.5f;
                 button.AnchorRight = 0.5f;
-                button.OffsetLeft = -276;  
+                button.OffsetLeft = -276;
                 button.OffsetRight = 276;
-                
+
                 control.AddChild(button);
                 button.Initialize(inventory, __instance);
             }
@@ -120,16 +113,18 @@ public class MerchantPatches
         {
             if (__instance.Player.GetRelic<ROI>() == null)
                 return;
-            var potionList = __instance.Player.Character.PotionPool.GetUnlockedPotions(__instance.Player.UnlockState).Concat(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(__instance.Player.UnlockState)).Where(c => c.Rarity != PotionRarity.Common).ToList();
- 
-            for (int i = 0; i < ____potionEntries.Count; i++)
+            var potionList = __instance.Player.Character.PotionPool.GetUnlockedPotions(__instance.Player.UnlockState)
+                .Concat(ModelDb.PotionPool<SharedPotionPool>().GetUnlockedPotions(__instance.Player.UnlockState))
+                .Where(c => c.Rarity != PotionRarity.Common).ToList();
+
+            for (var i = 0; i < ____potionEntries.Count; i++)
             {
                 if (____potionEntries[i].Model?.Rarity != PotionRarity.Common)
                     continue;
-                
+
                 var potion = __instance.Player.PlayerRng.Shops.NextItem(potionList)?.ToMutable();
                 if (potion == null) continue;
-                
+
                 ____potionEntries[i] = new MerchantPotionEntry(
                     potion,
                     __instance.Player
@@ -137,7 +132,7 @@ public class MerchantPatches
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(MerchantInventory), "PopulateCharacterCardEntries")]
     public static class MerchantCardPatch
     {
@@ -147,9 +142,9 @@ public class MerchantPatches
             List<MerchantCardEntry> ____characterCardEntries)
         {
             if (__instance.Player.GetRelic<ROI>() == null) return;
-            
-            bool hasRare = false;
-            
+
+            var hasRare = false;
+
             foreach (var mce in ____characterCardEntries)
             {
                 var card = mce.CreationResult?.Card;
@@ -159,15 +154,16 @@ public class MerchantPatches
             }
 
             if (hasRare) return;
-            var toReplace=  __instance.Player.PlayerRng.Shops.NextInt(0, ____characterCardEntries.Count);
-            List<CardModel> cardPool = __instance.Player.Character.CardPool.GetUnlockedCards(__instance.Player.UnlockState, __instance.Player.RunState.CardMultiplayerConstraint).ToList();
+            var toReplace = __instance.Player.PlayerRng.Shops.NextInt(0, ____characterCardEntries.Count);
+            var cardPool = __instance.Player.Character.CardPool.GetUnlockedCards(__instance.Player.UnlockState,
+                __instance.Player.RunState.CardMultiplayerConstraint).ToList();
             var replacement = new MerchantCardEntry(__instance.Player, __instance, cardPool, CardRarity.Rare);
             replacement.Populate();
             replacement.CreationResult?.Card.UpgradeInternal();
             ____characterCardEntries[toReplace] = replacement;
         }
     }
-    
+
     [HarmonyPatch(typeof(MerchantInventory), "PopulateColorlessCardEntries")]
     public static class MerchantColorlessCardPatch
     {
@@ -177,7 +173,7 @@ public class MerchantPatches
             List<MerchantCardEntry> ____colorlessCardEntries)
         {
             if (__instance.Player.GetRelic<ROI>() == null) return;
-            
+
             foreach (var mce in ____colorlessCardEntries)
             {
                 var card = mce.CreationResult?.Card;

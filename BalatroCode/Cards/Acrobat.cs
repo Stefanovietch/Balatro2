@@ -1,9 +1,6 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Character;
-using BaseLib.Cards.Variables;
+﻿using Balatro.BalatroCode.Character;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -23,6 +20,8 @@ public class Acrobat() : BalatroCard(1,
         new DamageVar(9, ValueProp.Move)
     ];
 
+    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 1;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -38,14 +37,13 @@ public class Acrobat() : BalatroCard(1,
     {
         DynamicVars.Damage.UpgradeValueBy(3);
     }
-    
-    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props, Creature? dealer,
+
+    public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
+        Creature? dealer,
         CardModel? cardSource, CardPlay? cardPlay)
     {
         if (cardSource != this || PileType.Hand.GetPile(Owner).Cards.Count > 1)
             return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return 3;
     }
-
-    protected override bool ShouldGlowGoldInternal => PileType.Hand.GetPile(Owner).Cards.Count <= 1;
 }

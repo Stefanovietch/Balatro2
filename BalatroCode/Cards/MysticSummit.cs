@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -15,6 +14,9 @@ public class MysticSummit() : BalatroCard(1,
     [
         new DamageVar(24, ValueProp.Move)
     ];
+
+    protected override bool ShouldGlowGoldInternal => NoDiscardPile();
+    protected override bool ShouldGlowRedInternal => !NoDiscardPile();
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -34,9 +36,6 @@ public class MysticSummit() : BalatroCard(1,
     {
         DynamicVars.Damage.UpgradeValueBy(9);
     }
-
-    protected override bool ShouldGlowGoldInternal => NoDiscardPile();
-    protected override bool ShouldGlowRedInternal => !NoDiscardPile();
 
 
     private bool NoDiscardPile()

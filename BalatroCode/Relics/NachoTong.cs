@@ -1,11 +1,10 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Entities.Players;
+﻿using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class NachoTong() : BalatroRelic
+public class NachoTong : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Event;

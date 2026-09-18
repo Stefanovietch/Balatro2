@@ -1,8 +1,4 @@
 using Balatro.BalatroCode.Afflictions;
-using Balatro.BalatroCode.Powers;
-using Balatro.BalatroCode.UI;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -13,7 +9,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheHousePower() : BalatroPower, IBlindPower
+public class TheHousePower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -23,26 +19,33 @@ public class TheHousePower() : BalatroPower, IBlindPower
 
     public BlindType BlindType => BlindType.TheHouse;
 
-    public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
+    public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        var players = Owner.CombatState?.RunState.Players;
-        if (players is null) return;
+        return QueueHouseAffliction();
+    }
+
+    private async Task QueueHouseAffliction()
+    {
+        await Task.Yield();
+
+        var players = Owner.CombatState?.Players;
+        if (players is null)
+            return;
+
         foreach (var player in players)
         {
-            if (player.Character is not Character.Balatro || player.PlayerCombatState?.TurnNumber != 1) continue;
-            foreach (var card in PileType.Hand.GetPile(player).Cards)
-            {
+            if (player.Character is not Character.Balatro)
+                continue;
+
+            var cards = PileType.Hand.GetPile(player).Cards.ToList();
+
+            foreach (var card in cards)
                 await CardCmd.Afflict<Housed>(card, 3M);
-            }
         }
     }
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber == 1)
-            foreach (var card in PileType.Hand.GetPile(player).Cards)
-                await CardCmd.Afflict<Housed>(card, 3M);
-
         if (player.Character is Character.Balatro && player.PlayerCombatState?.TurnNumber > 1)
             foreach (var card in player.PlayerCombatState.AllCards.Where(c => c.Affliction is Housed))
                 CardCmd.ClearAffliction(card);
@@ -62,20 +65,20 @@ public class TheHousePower() : BalatroPower, IBlindPower
         modifiedCost = card.Affliction.Amount;
         return true;
     }
-    
+
     public override async Task AfterDeath(
         PlayerChoiceContext choiceContext,
         Creature creature,
         bool wasRemovalPrevented,
         float deathAnimLength)
     {
-        if (wasRemovalPrevented || creature != this.Owner) return;
+        if (wasRemovalPrevented || creature != Owner) return;
         await PowerCmd.Remove(this);
     }
 
     public override Task AfterRemoved(Creature oldOwner)
     {
-        var players = Owner.CombatState?.RunState.Players;
+        var players = Owner.CombatState?.Players;
         if (players is null) return Task.CompletedTask;
         foreach (var player in players)
         {

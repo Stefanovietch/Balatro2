@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -17,6 +16,8 @@ public class TheOrder() : BalatroCard(1,
     [
         new DamageVar(9, ValueProp.Move)
     ];
+
+    protected override bool ShouldGlowGoldInternal => Has012Cards();
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -40,8 +41,6 @@ public class TheOrder() : BalatroCard(1,
         if (cardSource == this && Has012Cards()) return 3;
         return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
     }
-
-    protected override bool ShouldGlowGoldInternal => Has012Cards();
 
     private bool Has012Cards()
     {

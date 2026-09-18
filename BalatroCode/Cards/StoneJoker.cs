@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
@@ -23,7 +22,7 @@ public class StoneJoker() : BalatroCard(1,
             + PileType.Discard.GetPile(card.Owner).Cards.Count(c => c is StoneCard)
             + PileType.Exhaust.GetPile(card.Owner).Cards.Count(c => c is StoneCard))
     ];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips =>
     [
         HoverTipFactory.FromCard<StoneCard>()

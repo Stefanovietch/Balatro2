@@ -1,6 +1,3 @@
-using Balatro.BalatroCode.Extensions;
-using Balatro.BalatroCode.UI;
-
 namespace Balatro.BalatroCode.Afflictions;
 
 public class Housed : BalatroAfflictions

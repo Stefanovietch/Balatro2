@@ -1,6 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
@@ -17,7 +15,8 @@ public class Hack() : BalatroCard(1,
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await CardPileCmd.Add(PileType.Draw.GetPile(Owner).Cards.Where(c => c.EnergyCost.GetAmountToSpend() == 0), PileType.Hand);
+        await CardPileCmd.Add(PileType.Draw.GetPile(Owner).Cards.Where(c => c.EnergyCost.GetAmountToSpend() == 0),
+            PileType.Hand);
     }
 
     protected override void OnUpgrade()

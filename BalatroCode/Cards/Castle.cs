@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Cards.Variables;
+﻿using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -24,6 +23,8 @@ public class Castle() : BalatroCard(1,
 
     public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Retain];
 
+    public CardType CurrentType { get; set; } = CardType.None;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -47,19 +48,17 @@ public class Castle() : BalatroCard(1,
     {
         if (card.Type == CurrentType)
         {
-            var baseValue = this.DynamicVars["Increase"].BaseValue;
+            var baseValue = DynamicVars["Increase"].BaseValue;
             BuffFromDiscard(baseValue);
         }
 
         return base.AfterCardDiscarded(choiceContext, card);
     }
-    
+
     private void BuffFromDiscard(decimal extraBlock)
     {
         var block = DynamicVars.Block;
         block.BaseValue = block.BaseValue + extraBlock;
         _extraBlockFromDiscard += extraBlock;
     }
-
-    public CardType CurrentType { get; set; } = CardType.None;
 }

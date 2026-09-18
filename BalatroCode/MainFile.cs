@@ -1,15 +1,14 @@
 using Balatro.BalatroCode.Relics;
-using Balatro.BalatroCode.UI;
 using BaseLib.Config;
 using Godot;
 using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
-using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.Logging;
 using MegaCrit.Sts2.Core.Modding;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
 using MegaCrit.Sts2.Core.Runs;
+using Logger = MegaCrit.Sts2.Core.Logging.Logger;
 
 namespace Balatro.BalatroCode;
 
@@ -19,8 +18,10 @@ public partial class MainFile : Node
     public const string ModId = "Balatro"; //Used for resource filepath
     public const string ResPath = $"res://{ModId}";
 
-    public static MegaCrit.Sts2.Core.Logging.Logger Logger { get; } =
-        new(ModId, MegaCrit.Sts2.Core.Logging.LogType.Generic);
+    private static IRunState? _activeCombatRunState;
+
+    public static Logger Logger { get; } =
+        new(ModId, LogType.Generic);
 
     public static void Initialize()
     {
@@ -40,12 +41,11 @@ public partial class MainFile : Node
         );
     }
 
-    private static IRunState? _activeCombatRunState;
     private static IEnumerable<AbstractModel> GetRunStateHooks(RunState runState)
     {
         if (ReferenceEquals(runState, _activeCombatRunState))
             yield break;
-        
+
         foreach (var player in runState.Players)
             if (player.Character is Character.Balatro balatro)
                 yield return balatro;
@@ -60,9 +60,9 @@ public partial class MainFile : Node
                 _activeCombatRunState = null;
             yield break;
         }
-        
+
         _activeCombatRunState = combatState.RunState;
-        
+
         foreach (var player in combatState.Players)
             if (player.Character is Character.Balatro balatro)
                 yield return balatro;

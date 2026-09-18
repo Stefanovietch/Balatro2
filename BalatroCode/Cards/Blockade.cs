@@ -1,6 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -17,6 +15,6 @@ public class Blockade() : BalatroTokenCard(1,
 
     public void UpdateValue(CardModel card)
     {
-        this.DynamicVars.Block.BaseValue = card.DynamicVars.Block.BaseValue;
+        DynamicVars.Block.BaseValue = card.DynamicVars.Block.BaseValue;
     }
 }

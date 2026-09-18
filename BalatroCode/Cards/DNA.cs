@@ -1,11 +1,7 @@
-﻿using Balatro.BalatroCode.Cards;
-using MegaCrit.Sts2.Core.CardSelection;
-using MegaCrit.Sts2.Core.Combat;
+﻿using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
-using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Nodes.CommonUi;
@@ -19,16 +15,21 @@ public class DNA() : BalatroCard(0,
     protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
     public override bool CanBeGeneratedInCombat => false;
-    
+
+    protected override bool IsPlayable => CanPlay();
+
+    protected override bool ShouldGlowGoldInternal => CanPlay();
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         if (!CanPlay()) return;
-        var newCard = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card is not DNA)?.CardPlay.Card;
+        var newCard = CombatManager.Instance.History.CardPlaysFinished.LastOrDefault(c => c.CardPlay.Card is not DNA)
+            ?.CardPlay.Card;
         if (newCard == null) return;
-        
-        await CardPileCmd.AddGeneratedCardToCombat(newCard.CreateClone(), PileType.Discard, this.Owner);
+
+        await CardPileCmd.AddGeneratedCardToCombat(newCard.CreateClone(), PileType.Discard, Owner);
 
         CardModel deckVersion;
         if (DeckVersion is DNA)
@@ -37,11 +38,12 @@ public class DNA() : BalatroCard(0,
         }
         else
         {
-            var deckCard = this.Owner.Deck.Cards.FirstOrDefault(c => c is DNA);
+            var deckCard = Owner.Deck.Cards.FirstOrDefault(c => c is DNA);
             if (deckCard is not DNA) return;
             deckVersion = deckCard;
         }
-        var cardClone = this.Owner.RunState.CloneCard(newCard);
+
+        var cardClone = Owner.RunState.CloneCard(newCard);
         await CardCmd.Transform(deckVersion, cardClone, CardPreviewStyle.None);
         await CardPileCmd.Add(this, PileType.Exhaust);
     }
@@ -55,10 +57,6 @@ public class DNA() : BalatroCard(0,
     {
         AddKeyword(CardKeyword.Retain);
     }
-
-    protected override bool IsPlayable => CanPlay();
-
-    protected override bool ShouldGlowGoldInternal => CanPlay();
 
     private new bool CanPlay()
     {

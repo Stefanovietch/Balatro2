@@ -1,5 +1,4 @@
 using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Powers;
 using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -12,7 +11,7 @@ using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class ToDoListPower() : BalatroPower, IRandomType
+public class ToDoListPower : BalatroPower, IRandomType
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -35,13 +34,13 @@ public class ToDoListPower() : BalatroPower, IRandomType
 
     public override Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
-        ((IRandomType)this).SetRandomType(this.CombatState.RunState.Rng.Niche);
+        ((IRandomType)this).SetRandomType(CombatState.RunState.Rng.Niche);
         return base.AfterApplied(applier, cardSource);
     }
 
     public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        ((IRandomType)this).SetRandomType(this.CombatState.RunState.Rng.Niche);
+        ((IRandomType)this).SetRandomType(CombatState.RunState.Rng.Niche);
         return base.AfterPlayerTurnStart(choiceContext, player);
     }
 }

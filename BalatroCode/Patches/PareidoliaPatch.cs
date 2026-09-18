@@ -1,4 +1,3 @@
-using Balatro.BalatroCode.Cards;
 using Balatro.BalatroCode.Powers;
 using BaseLib.Extensions;
 using HarmonyLib;
@@ -15,10 +14,7 @@ public static class PareidoliaTypePatch
     {
         if (!__instance.IsMutable) return;
         if (__instance.Owner is not { } owner) return;
-        if (owner.HasPower<PareidoliaPower>())
-        {
-            __result = CardType.Power;
-        }
+        if (owner.HasPower<PareidoliaPower>()) __result = CardType.Power;
     }
 }
 
@@ -31,7 +27,8 @@ public static class PareidoliaCombatPatch
         if (__instance.Owner is not { } owner) return;
         if (owner.HasPower<PareidoliaPower>() && __result == null)
         {
-            __result = owner.Creature.CombatState;;
+            __result = owner.Creature.CombatState;
+            ;
         }
     }
 }

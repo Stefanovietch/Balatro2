@@ -1,10 +1,8 @@
-﻿using Balatro.BalatroCode.Cards;
-using Balatro.BalatroCode.Character;
+﻿using Balatro.BalatroCode.Character;
 using BaseLib.Cards.Variables;
 using BaseLib.Utils;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Commands.Builders;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -25,6 +23,8 @@ public class AncientJoker() : BalatroCard(0,
         new DisplayVar<AncientJoker>("Type", card => ((IRandomType)card).GetTypeString())
     ];
 
+    public CardType CurrentType { get; set; } = CardType.None;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
@@ -42,12 +42,11 @@ public class AncientJoker() : BalatroCard(0,
     public override decimal ModifyDamageMultiplicative(Creature? target, decimal amount, ValueProp props,
         Creature? dealer, CardModel? cardSource, CardPlay? cardPlay)
     {
-        if (cardSource != this) return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
+        if (cardSource != this)
+            return base.ModifyDamageMultiplicative(target, amount, props, dealer, cardSource, cardPlay);
         return (decimal)Math.Pow(1.5,
             CombatManager.Instance.History.CardPlaysFinished.Count(c =>
                 c.HappenedThisTurn(cardSource.CombatState) && c.CardPlay.Card.Type == CurrentType &&
                 c.CardPlay.Card.Owner == cardSource.Owner));
     }
-
-    public CardType CurrentType { get; set; } = CardType.None;
 }

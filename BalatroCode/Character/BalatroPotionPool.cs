@@ -1,6 +1,6 @@
-﻿using BaseLib.Abstracts;
-using Balatro.BalatroCode.Extensions;
+﻿using Balatro.BalatroCode.Extensions;
 using Balatro.BalatroCode.Potions;
+using BaseLib.Abstracts;
 using Godot;
 using MegaCrit.Sts2.Core.Models;
 
@@ -12,10 +12,11 @@ public class BalatroPotionPool : CustomPotionPoolModel
 
     public override string BigEnergyIconPath => "charui/big_energy.png".ImagePath();
     public override string TextEnergyIconPath => "charui/text_energy.png".ImagePath();
-    
+
     protected override IEnumerable<PotionModel> GenerateAllPotions()
     {
-        return [
+        return
+        [
             ModelDb.Potion<DejaVu>(),
             ModelDb.Potion<Justice>(),
             ModelDb.Potion<Medium>(),

@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Relics;
-using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
@@ -8,11 +7,11 @@ using MegaCrit.Sts2.Core.Runs;
 
 namespace Balatro.BalatroCode.Relics;
 
-public class Illusion() : BalatroRelic
+public class Illusion : BalatroRelic
 {
     public override RelicRarity Rarity =>
         RelicRarity.Shop;
-    
+
     public override bool HasUponPickupEffect => true;
 
     public override async Task AfterObtained()
@@ -31,7 +30,7 @@ public class Illusion() : BalatroRelic
                     new List<CardPoolModel> { Owner.Character.CardPool },
                     (Func<CardModel, bool>)(c => c.Rarity == rarity))
                 .WithFlags(CardCreationFlags.NoRarityModification);
-            rewards.Add((Reward)new CardReward(options, 3, Owner));
+            rewards.Add(new CardReward(options, 3, Owner));
         }
 
         await RewardsCmd.OfferCustom(Owner, rewards);

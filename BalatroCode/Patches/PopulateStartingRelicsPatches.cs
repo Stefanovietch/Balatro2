@@ -1,11 +1,6 @@
-﻿using Balatro.BalatroCode.Relics;
-using Balatro.BalatroCode.UI;
-using HarmonyLib;
+﻿using HarmonyLib;
 using MegaCrit.Sts2.Core.Entities.Players;
-using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Relics;
-using MegaCrit.Sts2.Core.Nodes.Screens.CharacterSelect;
 using MegaCrit.Sts2.Core.Saves;
 
 namespace Balatro.BalatroCode.Patches;
@@ -30,7 +25,7 @@ public class PopulateStartingRelicsPatches
                 var method = AccessTools.Method(typeof(Player), "PopulateRelics");
                 method?.Invoke(__instance, new object[] { new List<RelicModel> { mutable }, false });
                 MainFile.Logger.Info($"Starting relic: {relic.Id.Entry} added for {BalatroConfig.SelectedDeck}");
-                
+
                 return false;
             }
             catch (Exception ex)

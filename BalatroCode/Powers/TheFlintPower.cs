@@ -1,16 +1,12 @@
-using Balatro.BalatroCode.Powers;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace Balatro.BalatroCode.Powers;
 
-public class TheFlintPower() : BalatroPower, IBlindPower
+public class TheFlintPower : BalatroPower, IBlindPower
 {
     public override PowerType Type =>
         PowerType.Buff;
@@ -32,17 +28,17 @@ public class TheFlintPower() : BalatroPower, IBlindPower
             await PowerCmd.Apply<FlintWeakPower>(new ThrowingPlayerChoiceContext(), player.Creature, 1, null, null);
         }
     }
-    
+
     public override async Task AfterDeath(
         PlayerChoiceContext choiceContext,
         Creature creature,
         bool wasRemovalPrevented,
         float deathAnimLength)
     {
-        if (wasRemovalPrevented || creature != this.Owner) return;
+        if (wasRemovalPrevented || creature != Owner) return;
         await PowerCmd.Remove(this);
     }
-    
+
 
     public override async Task AfterRemoved(Creature oldOwner)
     {

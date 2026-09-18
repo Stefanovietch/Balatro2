@@ -1,5 +1,4 @@
-﻿using Balatro.BalatroCode.Cards;
-using BaseLib.Cards.Variables;
+﻿using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -26,7 +25,7 @@ public class Bloodstone() : BalatroCard(1,
     [
         HoverTipFactory.Static(StaticHoverTip.ReplayStatic)
     ];
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
