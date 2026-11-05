@@ -1,9 +1,11 @@
 ﻿using BaseLib.Cards.Variables;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Extensions;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 
 namespace Balatro.BalatroCode.Cards;
 
@@ -75,5 +77,17 @@ public class TheIdol() : BalatroCard(1,
     private string GetCostString()
     {
         return CurrentCost == -1 ? "(1|2|3)" : CurrentCost.ToString();
+    }
+
+    public override Task AfterCardGeneratedForCombat(CardModel card, Player? creator)
+    {
+        SetRandomType();
+        return base.AfterCardGeneratedForCombat(card, creator);
+    }
+
+    public override Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
+    {
+        SetRandomType();
+        return base.AfterPlayerTurnStart(choiceContext, player);
     }
 }
