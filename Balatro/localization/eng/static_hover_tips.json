@@ -73,7 +73,7 @@
   "BALATRO-BALATRO.blackStake.description": "Cannot remove Basic cards from your [gold]Deck[/gold].",
   
   "BALATRO-BALATRO.blueStake.title": "Blue Stake",
-  "BALATRO-BALATRO.blueStake.description": "At start of combat draw [blue]2[/blue] less cards.",
+  "BALATRO-BALATRO.blueStake.description": "At start of combat draw [blue]1[/blue] less cards.",
   
   "BALATRO-BALATRO.purpleStake.title": "Purple Stake",
   "BALATRO-BALATRO.purpleStake.description": "Enemies start combat with Top-Up.",
@@ -82,5 +82,5 @@
   "BALATRO-BALATRO.orangeStake.description": "Some cards have [gold]Perishable[/gold] [blue]10[/blue].",
   
   "BALATRO-BALATRO.goldStake.title": "Gold Stake",
-  "BALATRO-BALATRO.goldStake.description": "Playing a card costs [blue]2[/blue] [gold]Deck[/gold]."
+  "BALATRO-BALATRO.goldStake.description": "Playing a card costs [blue]1[/blue] [gold]Deck[/gold]."
 }

@@ -16,7 +16,7 @@ public partial class ClickableDeck : NButton
 
     public ClickableDeck(string deckName)
     {
-        Name = (StringName)(deckName + "Deck");
+        Name = deckName;
         CustomMinimumSize = new Vector2(64, 64);
         _hoverTip = new HoverTip(new LocString("static_hover_tips", "BALATRO-BALATRO." + Name + ".title"),
             new LocString("static_hover_tips", "BALATRO-BALATRO." + Name + ".description"));
