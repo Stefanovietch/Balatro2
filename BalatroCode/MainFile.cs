@@ -19,6 +19,24 @@ public partial class MainFile : Node
     public const string ResPath = $"res://{ModId}";
 
     private static IRunState? _activeCombatRunState;
+    public static readonly string[] AllDecks =
+    [
+        "redDeck",
+        "blueDeck",
+        "yellowDeck",
+        "greenDeck",
+        "blackDeck",
+        "magicDeck",
+        "nebulaDeck",
+        "ghostDeck",
+        "abandonedDeck",
+        "checkeredDeck",
+        "zodiacDeck",
+        "paintedDeck",
+        "anaglyphDeck",
+        "plasmaDeck",
+        "erraticDeck"
+    ];
 
     public static Logger Logger { get; } =
         new(ModId, LogType.Generic);
