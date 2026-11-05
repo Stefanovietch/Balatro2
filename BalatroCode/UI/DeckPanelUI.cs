@@ -40,21 +40,10 @@ public static class DeckPanelUI
             _deckPanel.AddThemeConstantOverride("v_separation", 20);
 
             PositionHbox(_deckPanel);
-            _deckPanel.AddChild(new ClickableDeck("red"));
-            _deckPanel.AddChild(new ClickableDeck("blue"));
-            _deckPanel.AddChild(new ClickableDeck("yellow"));
-            _deckPanel.AddChild(new ClickableDeck("green"));
-            _deckPanel.AddChild(new ClickableDeck("black"));
-            _deckPanel.AddChild(new ClickableDeck("magic"));
-            _deckPanel.AddChild(new ClickableDeck("nebula"));
-            _deckPanel.AddChild(new ClickableDeck("ghost"));
-            _deckPanel.AddChild(new ClickableDeck("abandoned"));
-            _deckPanel.AddChild(new ClickableDeck("checkered"));
-            _deckPanel.AddChild(new ClickableDeck("zodiac"));
-            _deckPanel.AddChild(new ClickableDeck("painted"));
-            _deckPanel.AddChild(new ClickableDeck("anaglyph"));
-            _deckPanel.AddChild(new ClickableDeck("plasma"));
-            _deckPanel.AddChild(new ClickableDeck("erratic"));
+            foreach (var deckName in MainFile.AllDecks)
+            {
+                _deckPanel.AddChild(new ClickableDeck(deckName));
+            }
 
             LayoutDecks();
 

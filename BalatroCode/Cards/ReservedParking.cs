@@ -24,7 +24,7 @@ public class ReservedParking() : BalatroCard(1,
         CardPlay play)
     {
         var powers = PileType.Draw.GetPile(Owner).Cards.Where(c => c.Type == CardType.Power)
-            .TakeRandom(2, Owner.RunState.Rng.CombatCardSelection).ToList();
+            .TakeRandom(DynamicVars.Cards.IntValue, Owner.RunState.Rng.CombatCardSelection).ToList();
         if (powers.Count != 0)
             foreach (var power in powers)
                 await CardPileCmd.Add(power, PileType.Hand);

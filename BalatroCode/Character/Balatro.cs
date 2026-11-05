@@ -128,7 +128,7 @@ public class Balatro : PlaceholderCharacterModel
         {
             if (Stakes.CurrentStake(player) > 1)
             {
-                var extraHp = creature.MaxHp + creature.CombatState?.RunState.TotalFloor * 2;
+                var extraHp = creature.MaxHp + creature.CombatState?.RunState.TotalFloor;
                 if (extraHp != null)
                 {
                     var hpDiff = creature.MaxHp - creature.CurrentHp;
@@ -164,13 +164,13 @@ public class Balatro : PlaceholderCharacterModel
     public override decimal ModifyHandDraw(Player player, decimal count)
     {
         if (Stakes.CurrentStake(player) < 4) return count;
-        return player.PlayerCombatState?.TurnNumber > 1 ? count : count - 2;
+        return player.PlayerCombatState?.TurnNumber > 1 ? count : count - 1;
     }
 
     public override async Task BeforeCardPlayed(CardPlay cardPlay)
     {
         if (Stakes.CurrentStake(cardPlay.Card.Owner) < 7) return;
-        await PlayerCmd.LoseGold(2, cardPlay.Card.Owner);
+        await PlayerCmd.LoseGold(1, cardPlay.Card.Owner);
     }
 
     public override Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
